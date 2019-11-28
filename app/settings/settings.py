@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+from .settings_database import (
+    LocationKey,
+    get_docker_host,
+    get_database_key,
+    OVERRIDE_HOST_ENV_VAR,
+    OVERRIDE_PORT_ENV_VAR,
+)
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5flfx)ktfvy^^!_cp2#fo7568jjhd2=_0o@z#s=yp$=b7kc4)9'
+SECRET_KEY = os.getenv("SECRET_KEY", "insecure")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'files'
 ]
 
 MIDDLEWARE = [
@@ -71,13 +81,39 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+DATABASE_OPTIONS = {
+    LocationKey.docker: {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": os.getenv("DATABASE_NAME", "vlog"),
+        "USER": os.getenv("DATABASE_USER", "vlog"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "insecure"),
+        "HOST": "database",
+        "PORT": "5432",
+        "CONN_MAX_AGE": 20,
+    },
+    LocationKey.local: {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": os.getenv("DATABASE_NAME", "vlog"),
+        "USER": os.getenv("DATABASE_USER", "vlog"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "insecure"),
+        "HOST": get_docker_host(),
+        "PORT": "5432",
+        "CONN_MAX_AGE": 20,
+    },
+    LocationKey.override: {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": os.getenv("DATABASE_NAME", "vlog"),
+        "USER": os.getenv("DATABASE_USER", "vlog"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "insecure"),
+        "HOST": os.getenv(OVERRIDE_HOST_ENV_VAR),
+        "PORT": os.getenv(OVERRIDE_PORT_ENV_VAR, "5432"),
+        "CONN_MAX_AGE": 20,
+    }
+}
+
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    "default": DATABASE_OPTIONS[get_database_key()]
 }
 
 
