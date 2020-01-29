@@ -1,0 +1,68 @@
+from rest_framework import mixins, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.request import Request
+from rest_framework.response import Response
+
+from vlog.models import Vlog
+from vlog.utils import parse_vlog_lines
+
+from .serializers import VlogSerializer
+
+
+class VlogViewSet(
+    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
+    viewsets.GenericViewSet
+):
+    """
+    A viewset for viewing and editing user instances.
+    """
+    """
+    A viewset that provides default `create()`, `retrieve()`, `update()`,
+    `partial_update()`, `destroy()` and `list()` actions.
+    """
+    serializer_class = VlogSerializer
+    queryset = Vlog.objects.all()
+
+    def create(self, request: Request, **kwargs):
+        # If we receive a string of data we expect it to be
+        # a bulk of V-log messages
+        data = request.data
+        many = False
+        if isinstance(data, bytes):
+            data = parse_vlog_lines(data.decode())
+            many = True
+
+            serializer = self.get_serializer(data=data, many=many)
+            serializer.is_valid(raise_exception=True)
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(
+                '',
+                status=status.HTTP_201_CREATED,
+                headers=headers,
+            )
+
+        return super().create(request)
+
+    def list(self, request: Request, **kwargs):
+        return super().list(request)
+
+    def retrieve(self, request: Request, **kwargs):
+        return super().retrieve(request)
+
+    @action(methods=['GET'], detail=False)
+    def env(self, request: Request, **kwargs):
+        """
+        Export method, has no pagination and will dump the complete collection.
+        """
+        headers = {
+            x: request.META.get(x)
+            for x in request.META if x.startswith('HTTP_')
+        }
+        return Response(
+            dict(
+                version=kwargs.get('version'),
+                format=kwargs.get('format'),
+                headers=headers,
+            )
+        )
