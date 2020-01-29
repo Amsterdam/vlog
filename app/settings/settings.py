@@ -21,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", 'insecure')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', True)
+DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'socket_consumer',
+    'django_extensions',
+    'contrib.timescale',
+    'vlog',
 ]
 
 MIDDLEWARE = [
@@ -75,13 +77,13 @@ WSGI_APPLICATION = 'settings.wsgi.application'
 # Database
 DATABASES = {
     "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": os.getenv("DATABASE_NAME", "vlog"),
-        "USER": os.getenv("DATABASE_USER", "postgres"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD", ""),
-        "HOST": "localhost",
-        "PORT": "5432",
-        "CONN_MAX_AGE": 20,
+        "ENGINE": "contrib.timescale.db.backend",
+        "NAME": os.getenv("DATABASE_NAME", "dev"),
+        "USER": os.getenv("DATABASE_USER", "dev"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
+        "HOST": os.getenv("DATABASE_HOST", "database"),
+        "PORT": os.getenv("DATABASE_PORT", "5432"),
+        "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
     }
 }
 

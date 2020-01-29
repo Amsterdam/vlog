@@ -1,0 +1,33 @@
+version: '3.5'
+
+volumes:
+  db_data:
+  db_wal:
+
+services:
+  app:
+    build: .
+    image: repo.data.amsterdam.nl/ois/vlog-api:${VERSION:-latest}
+    ports:
+      - 8000:8000
+    environment:
+      DEBUG: "true"
+      SECRET_KEY: "dev"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - database
+
+  database:
+    image: timescale/timescaledb-postgis:1.4.2-pg11
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      PGDATA: /data
+      POSTGRES_INITDB_WALDIR: /wal
+    volumes:
+      - db_data:/data
+      - db_wal:/wal
