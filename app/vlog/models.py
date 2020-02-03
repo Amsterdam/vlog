@@ -5,7 +5,7 @@ from django_extensions.db.models import TimeStampedModel
 from contrib.timescale.fields import TimescaleDateTimeField
 
 
-class VlogRecord(TimeStampedModel):
+class Vlog(TimeStampedModel):
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['vri_id', 'time'], name='vri_time')

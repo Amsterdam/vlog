@@ -3,22 +3,39 @@
 
 COMPOSE_PROJECT_NAME ?= vlog
 dc = docker-compose -p $(COMPOSE_PROJECT_NAME)
-testcommand = $(dc) run --rm test $(TESTARGS)
 
-help:                                   ## Show this help.
+help:                               ## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-install:                                ## Install requirements and sync venv with expected state as defined in requirements.txt
-	pip install -r requirements_dev.txt
+pip-tools:
+	pip install pip-tools
+
+install: pip-tools                  ## Install requirements and sync venv with expected state as defined in requirements.txt
 	pip-sync requirements.txt requirements_dev.txt
 
-requirements:                           ## Upgrade requirements (in requirements.in) to latest versions and compile requirements.txt
+requirements: pip-tools             ## Upgrade requirements (in requirements.in) to latest versions and compile requirements.txt
 	pip-compile --upgrade --output-file requirements.txt requirements.in
+	pip-compile --upgrade --output-file requirements_dev.txt requirements_dev.in
 
-upgrade: requirements install           ## Run 'requirements' and 'install' targets
+upgrade: requirements install       ## Run 'requirements' and 'install' targets
 
 migrations:
 	$(dc) run --rm app python manage.py makemigrations
 
 migrate:
 	$(dc) run --rm app python manage.py migrate
+
+build:
+	$(dc) build
+
+run:
+	$(dc) up
+
+test:
+	$(dc) run --rm test pytest $(ARGS)
+
+clean:
+	$(dc) down -v
+
+env:
+	env | sort

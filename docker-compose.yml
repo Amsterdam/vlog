@@ -5,19 +5,6 @@ volumes:
   db_wal:
 
 services:
-  app:
-    build: .
-    image: repo.data.amsterdam.nl/ois/vlog-api:${VERSION:-latest}
-    ports:
-      - 8000:8000
-    environment:
-      DEBUG: "true"
-      SECRET_KEY: "dev"
-    volumes:
-      - ./app:/app
-    depends_on:
-      - database
-
   database:
     image: timescale/timescaledb-postgis:1.4.2-pg11
     ports:
@@ -31,3 +18,34 @@ services:
     volumes:
       - db_data:/data
       - db_wal:/wal
+
+  app:
+    build:
+      context: .
+      target: app
+    image: repo.data.amsterdam.nl/ois/vlog-api:${VERSION:-latest}
+    ports:
+      - 8000:8000
+    environment:
+      DEBUG: "true"
+      SECRET_KEY: "dev"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - database
+    entrypoint: ./wait-for-it.sh database:5432 --
+    command: python manage.py runserver 0.0.0.0:8000
+
+  test:
+    build:
+      context: .
+      target: tests
+    volumes:
+      - ./app:/app
+    environment:
+      SECRET_KEY: "tests"
+      DJANGO_SETTINGS_MODULE: "settings.settings"
+      PYTEST_ADDOPTS:
+    depends_on:
+      - database
+    entrypoint: ./wait-for-it.sh database:5432 --
