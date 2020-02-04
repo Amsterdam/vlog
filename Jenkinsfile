@@ -1,6 +1,9 @@
 #!groovy
 def PROJECT_NAME = "VLOG-API"
 def SLACK_CHANNEL = '#niels-test'
+def PLAYBOOK = 'deploy-vlog.yml'
+def PLAYBOOK_INVENTORY = 'acceptance'
+def PLAYBOOK_BRANCH = 'feature/deploy-vlog'
 def SLACK_MESSAGE = [
     "title_link": BUILD_URL,
     "fields": [
@@ -61,8 +64,9 @@ pipeline {
                     steps {
                         sh 'echo Deploy acceptance'
                         build job: 'Subtask_Openstack_Playbook', parameters: [
-                            string(name: 'INVENTORY', value: 'acceptance'),
-                            string(name: 'PLAYBOOK', value: 'deploy-vlog.yml'),
+                            string(name: 'PLAYBOOK', value: PLAYBOOK),
+                            string(name: 'INVENTORY', value: PLAYBOOK_INVENTORY),
+                            string(name: 'BRANCH', value: PLAYBOOK_BRANCH),
                             string(
                                 name: 'PLAYBOOKPARAMS', 
                                 value: "-e deployversion=${VERSION}"

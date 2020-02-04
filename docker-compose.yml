@@ -23,7 +23,7 @@ services:
     build:
       context: .
       target: app
-    image: repo.data.amsterdam.nl/ois/vlog-api:${VERSION:-latest}
+    image: repo.data.amsterdam.nl/datapunt/vlog-api:${VERSION:-latest}
     ports:
       - 8000:8000
     environment:
