@@ -1,9 +1,9 @@
 #!groovy
-def PROJECT_NAME = "VLOG-API"
+def PROJECT_NAME = "waarnemingen-voertuigen"
 def SLACK_CHANNEL = '#niels-test'
-def PLAYBOOK = 'deploy-vlog.yml'
+def PLAYBOOK = 'deploy-waarnemingen-voertuigen.yml'
 def PLAYBOOK_INVENTORY = 'acceptance'
-def PLAYBOOK_BRANCH = 'feature/deploy-vlog'
+def PLAYBOOK_BRANCH = 'feature/deploy-waarnemingen-voertuigen'
 def SLACK_MESSAGE = [
     "title_link": BUILD_URL,
     "fields": [

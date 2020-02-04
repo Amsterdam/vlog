@@ -5,15 +5,14 @@
 #    pip-compile --output-file=requirements.txt requirements.in
 #
 asgiref==3.2.3            # via django
+certifi==2019.11.28       # via sentry-sdk
 django-extensions==2.2.6
 django==3.0.3
 djangorestframework==3.11.0
-gunicorn==20.0.4
 psycopg2==2.8.4
 python-dateutil==2.8.1
 pytz==2019.3              # via django
+sentry-sdk==0.14.1
 six==1.14.0               # via django-extensions, python-dateutil
 sqlparse==0.3.0           # via django
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
+urllib3==1.25.8           # via sentry-sdk

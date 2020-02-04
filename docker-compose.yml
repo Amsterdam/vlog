@@ -23,7 +23,7 @@ services:
     build:
       context: .
       target: app
-    image: repo.data.amsterdam.nl/datapunt/vlog-api:${VERSION:-latest}
+    image: repo.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
     ports:
       - 8000:8000
     environment:
@@ -35,6 +35,7 @@ services:
       - database
     entrypoint: ./wait-for-it.sh database:5432 --
     command: python manage.py runserver 0.0.0.0:8000
+    command: uwsgi --ini uwsgi.ini
 
   test:
     build:

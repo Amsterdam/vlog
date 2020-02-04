@@ -2,5 +2,5 @@ Django
 psycopg2
 django_extensions
 djangorestframework
-gunicorn
 python-dateutil
+sentry-sdk

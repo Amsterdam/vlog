@@ -7,7 +7,11 @@ RUN pip install -r requirements.txt
 WORKDIR /app
 ADD app .
 
-CMD ["gunicorn", "settings.wsgi"]
+RUN SECRET_KEY=collectstatic python manage.py collectstatic --no-input
+
+USER datapunt
+
+CMD ["uwsgi", "--ini", "settings/uwsgi.ini"]
 
 # stage 2, tests
 FROM app as tests
