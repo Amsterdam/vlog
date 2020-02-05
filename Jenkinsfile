@@ -1,6 +1,6 @@
 #!groovy
 def PROJECT_NAME = "waarnemingen-voertuigen"
-def SLACK_CHANNEL = '#niels-test'
+def SLACK_CHANNEL = '#waarnemingen'
 def PLAYBOOK = 'deploy-waarnemingen-voertuigen.yml'
 def PLAYBOOK_INVENTORY = 'acceptance'
 def PLAYBOOK_BRANCH = 'feature/deploy-waarnemingen-voertuigen'
