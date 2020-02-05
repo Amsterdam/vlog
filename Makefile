@@ -28,6 +28,9 @@ migrate:
 build:
 	$(dc) build
 
+push:
+	$(dc) push
+
 run:
 	$(dc) up
 
