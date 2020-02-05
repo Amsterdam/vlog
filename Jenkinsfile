@@ -19,37 +19,36 @@ pipeline {
     agent any
 
     environment {
+        SHORT_UUID = sh( script: "uuidgen | cut -d '-' -f1", returnStdout: true).trim()
+        COMPOSE_PROJECT_NAME = "${PROJECT_NAME}-${env.SHORT_UUID}"
         VERSION = env.BRANCH_NAME.replace('/', '-').toLowerCase().replace(
             'master', 'latest'
         )
-        SHORT_UUID = sh( script: "uuidgen | cut -d '-' -f1", returnStdout: true).trim()
-        COMPOSE_PROJECT_NAME = "${PROJECT_NAME}-${env.SHORT_UUID}"
     }
 
     stages {
         stage('Test') {
             steps {
+                sh 'env | sort'
                 sh 'make test'
             }
         }
 
-        stage('Build, push and deploy') {
+        stage('Build') {
+            steps {
+                sh 'env | sort'
+                sh 'make build'
+            }
+        }
+
+        stage('Push and deploy') {
             when { 
                 anyOf {
                     branch 'master'
                     buildingTag()
                 }
             }
-            environment {
-                TNO_CI_KEY = credentials('TNO_CI_KEY')
-            }
             stages {
-                stage('Build') {
-                    steps {
-                        sh 'make build'
-                    }
-                }
-
                 stage('Push') {
                     steps {
                         retry(3) {
@@ -59,7 +58,7 @@ pipeline {
                 }
 
                 stage('Deploy to acceptance') {
-                    when { tag pattern: "[\\d+\\.]+-RC.*", comparator: "REGEXP"}
+                    when { branch pattern: "release/.*", comparator: "REGEXP"}
                     steps {
                         sh 'echo Deploy acceptance'
                         build job: 'Subtask_Openstack_Playbook', parameters: [
@@ -88,22 +87,22 @@ pipeline {
         always {
             sh 'make clean'
         }
-        success {
-            slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
-                [
-                    "color": "#36a64f",
-                    "title": "Build succeeded :rocket:",
-                ]
-            ])
-        }
-        failure {
-            slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
-                [
-                    "color": "#D53030",
-                    "title": "Build failed :fire:",
-                ]
-            ])
-        }
+        /* success { */
+            /* slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE <<  */
+                /* [ */
+                    /* "color": "#36a64f", */
+                    /* "title": "Build succeeded :rocket:", */
+                /* ] */
+            /* ]) */
+        /* } */
+        /* failure { */
+            /* slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE <<  */
+                /* [ */
+                    /* "color": "#D53030", */
+                    /* "title": "Build failed :fire:", */
+                /* ] */
+            /* ]) */
+        /* } */
     }
 }
 
