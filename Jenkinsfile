@@ -29,7 +29,6 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'make build/test'
                 sh 'make test'
             }
         }
