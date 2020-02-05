@@ -17,6 +17,8 @@ def parse_vlog_line(data: str, vri_id: int = 101):
     """
     date, message_type, message = data.split(',')
     date = parse(date)
+    if not date.tzinfo:
+        date.replace(tzinfo=pytz.timezone('CET'))
     date = date.astimezone(pytz.utc)
     return dict(
         time=date,

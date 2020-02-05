@@ -29,12 +29,12 @@ class TestVlogParser:
         assert line['time'].isoformat() == '2020-02-23T14:00:00.399000+00:00'
 
     def test_timezone_cet(self):
-        line = parse_vlog_line('2020-02-23 14:00:00.399 CET,6,0600A10500')
-        assert line['time'].isoformat() == '2020-02-23T13:00:00.399000+00:00'
+        line = parse_vlog_line('2020-02-23T16:00:00.399000+01:00,6,0600A10500')
+        assert line['time'].isoformat() == '2020-02-23T15:00:00.399000+00:00'
 
     def test_timezone_cet_dst(self):
-        line = parse_vlog_line('2020-08-23 14:00:00.399 CET,6,0600A10500')
-        assert line['time'].isoformat() == '2020-08-23T12:00:00.399000+00:00'
+        line = parse_vlog_line('2020-08-23T16:00:00.399000+02:00,6,0600A10500')
+        assert line['time'].isoformat() == '2020-08-23T14:00:00.399000+00:00'
 
     def test_multiple_lines(self):
 
