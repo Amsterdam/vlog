@@ -23,8 +23,9 @@ WORKDIR /app_install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
 
-USER datapunt
+RUN chmod -R a+r /app_install
 
+USER datapunt
 WORKDIR /tests
 ADD tests .
 

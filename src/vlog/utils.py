@@ -15,7 +15,6 @@ def parse_vlog_line(data: str):
     Example:
         2020-01-23 00:00:02.220,102,10,0A0171010063
     """
-    print(data)
     date, vri_id, message_type, message = data.split(',')
     date = parse(date.strip())
     if not date.tzinfo:
