@@ -22,7 +22,6 @@ USER root
 WORKDIR /app_install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
-
 RUN chmod -R a+r /app_install
 
 USER datapunt

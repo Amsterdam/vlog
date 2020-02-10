@@ -1,5 +1,4 @@
-import datetime
-
+import pytest
 import pytz
 from django.test import override_settings
 
@@ -33,7 +32,9 @@ class TestVlogParser:
         line = parse_vlog_line('2020-08-23 14:00:00.399,102,6,0600A10500')
         assert line['time'].isoformat() == '2020-08-23T12:00:00.399000+00:00'
 
-    def test_multiple_lines(self):
+    @pytest.mark.parametrize("separator", [',', ' , ', ', ', ' ,'])
+    @pytest.mark.parametrize("newlines", ['\n', '\r', '\r\n'])
+    def test_multiple_lines(self, newlines, separator):
 
         dates = (
             "2020-01-23 14:00:00.399",
@@ -52,8 +53,8 @@ class TestVlogParser:
             '2002810110',
         ]
 
-        data = '\n'.join([
-            ','.join(map(str, x))
+        data = newlines.join([
+            separator.join(map(str, x))
             for x in zip(dates, vri_ids, types, messages)
         ])
         lines = parse_vlog_lines(data, strict=True)

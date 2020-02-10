@@ -39,5 +39,8 @@ test:
 clean:
 	$(dc) down -v
 
+bash:
+	$(dc) run --rm app bash
+
 env:
 	env | sort
