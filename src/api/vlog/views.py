@@ -44,12 +44,6 @@ class VlogViewSet(
 
         return super().create(request)
 
-    def list(self, request: Request, **kwargs):
-        return super().list(request)
-
-    def retrieve(self, request: Request, **kwargs):
-        return super().retrieve(request)
-
     @action(methods=['GET'], detail=False)
     def env(self, request: Request, **kwargs):
         """
