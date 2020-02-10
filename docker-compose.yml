@@ -30,11 +30,11 @@ services:
       DEBUG: "true"
       SECRET_KEY: "dev"
     volumes:
-      - ./app:/app
+      - ./src:/src
       - ./deploy:/deploy
     depends_on:
       - database
-    entrypoint: ./wait-for-it.sh database:5432 --
+    entrypoint: /deploy/wait-for-it.sh database:5432 --
     command: python manage.py runserver 0.0.0.0:8000
 
   test:
@@ -42,11 +42,13 @@ services:
       context: .
       target: tests
     volumes:
-      - ./app:/app
+      - ./src:/src
+      - ./tests:/tests
+      - ./deploy:/deploy
     environment:
       SECRET_KEY: "tests"
       DJANGO_SETTINGS_MODULE: "settings.settings"
       PYTEST_ADDOPTS:
     depends_on:
       - database
-    entrypoint: ./wait-for-it.sh database:5432 --
+    entrypoint: /deploy/wait-for-it.sh database:5432 --

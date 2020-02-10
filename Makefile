@@ -1,7 +1,7 @@
 # This Makefile is based on the Makefile defined in the Python Best Practices repository:
 # https://git.datapunt.amsterdam.nl/Datapunt/python-best-practices/blob/master/dependency_management/
 .PHONY: app
-COMPOSE_PROJECT_NAME ?= vlog
+COMPOSE_PROJECT_NAME ?= ""
 dc = docker-compose -p $(COMPOSE_PROJECT_NAME)
 
 help:                               ## Show this help.
