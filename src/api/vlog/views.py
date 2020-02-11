@@ -14,11 +14,7 @@ class VlogViewSet(
     viewsets.GenericViewSet
 ):
     """
-    A viewset for viewing and editing user instances.
-    """
-    """
-    A viewset that provides default `create()`, `retrieve()`, `update()`,
-    `partial_update()`, `destroy()` and `list()` actions.
+    A viewset for handling VRI V-log's
     """
     serializer_class = VlogSerializer
     queryset = Vlog.objects.all()
