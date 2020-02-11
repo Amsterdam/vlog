@@ -69,13 +69,6 @@ pipeline {
                         ], wait: true
                     }
                 }
-
-                stage('Deploy to production') {
-                    when { tag pattern: "[\\d+\\.]+-RC.*", comparator: "REGEXP"}
-                    steps {
-                        sh 'echo Deploy prod'
-                    }
-                }
             }
         }
 
