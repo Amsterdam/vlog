@@ -33,6 +33,9 @@ push:
 app:
 	$(dc) run --service-ports app
 
+dev:
+	$(dc) run --service-ports dev
+
 test:
 	$(dc) run --rm test pytest $(ARGS)
 

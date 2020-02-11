@@ -15,14 +15,26 @@ USER datapunt
 
 CMD ["/deploy/docker-run.sh"]
 
-# stage 2, tests
-FROM app as tests
+# devserver
+FROM app as dev
 
 USER root
 WORKDIR /app_install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
 RUN chmod -R a+r /app_install
+
+WORKDIR /src
+USER datapunt
+
+# Any process that requires to write in the home dir
+# we write to /tmp since we have no home dir
+ENV HOME /tmp
+
+CMD ["python manage.py runserver 0.0.0.0"]
+
+# tests
+FROM dev as tests
 
 USER datapunt
 WORKDIR /tests
