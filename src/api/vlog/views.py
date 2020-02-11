@@ -4,7 +4,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from vlog.models import Vlog
-from vlog.utils import parse_vlog_lines
+from vlog.parsers import parse_vlog_lines
 
 from .serializers import VlogSerializer
 

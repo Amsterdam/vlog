@@ -2,7 +2,7 @@ import pytest
 import pytz
 from django.test import override_settings
 
-from vlog.utils import parse_vlog_line, parse_vlog_lines
+from vlog.parsers import parse_vlog_line, parse_vlog_lines
 
 
 class TestVlogParser:

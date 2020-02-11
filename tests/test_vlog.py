@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 
 from vlog.models import Vlog
-from vlog.utils import parse_vlog_line
+from vlog.parsers import parse_vlog_line
 
 
 @pytest.mark.django_db

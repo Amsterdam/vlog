@@ -10,7 +10,7 @@ def parse_vlog_line(data: str):
     """
     Parse a single line of V-Log data
     Expected format is:
-       date, message_type, message
+       date, vri_id, message_type, message
 
     Example:
         2020-01-23 00:00:02.220,102,10,0A0171010063
