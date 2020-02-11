@@ -16,3 +16,5 @@ pytest-django
 pytest-cov
 pytest-factoryboy
 ipython
+ipdb
+jedi

@@ -6,7 +6,7 @@
 #
 asgiref==3.2.3            # via django
 certifi==2019.11.28       # via sentry-sdk
-django-extensions==2.2.7
+django-extensions==2.2.8
 django==3.0.3
 djangorestframework==3.11.0
 psycopg2==2.8.4
