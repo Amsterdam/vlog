@@ -1,0 +1,54 @@
+version: '3.5'
+
+volumes:
+  db_data:
+  db_wal:
+
+services:
+  database:
+    image: timescale/timescaledb-postgis:1.4.2-pg11
+    ports:
+      - 5432
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      PGDATA: /data
+      POSTGRES_INITDB_WALDIR: /wal
+    volumes:
+      - db_data:/data
+      - db_wal:/wal
+
+  app:
+    build:
+      context: .
+      target: app
+    image: repo.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
+    ports:
+      - 8000:8000
+    environment:
+      DEBUG: "true"
+      SECRET_KEY: "dev"
+    volumes:
+      - ./src:/src
+      - ./deploy:/deploy
+    depends_on:
+      - database
+    entrypoint: /deploy/wait-for-it.sh database:5432 --
+    command: python manage.py runserver 0.0.0.0:8000
+
+  test:
+    build:
+      context: .
+      target: tests
+    volumes:
+      - ./src:/src
+      - ./tests:/tests
+      - ./deploy:/deploy
+    environment:
+      SECRET_KEY: "tests"
+      DJANGO_SETTINGS_MODULE: "settings.settings"
+      PYTEST_ADDOPTS:
+    depends_on:
+      - database
+    entrypoint: /deploy/wait-for-it.sh database:5432 --
