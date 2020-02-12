@@ -57,7 +57,7 @@ class TestVlogParser:
             separator.join(map(str, x))
             for x in zip(dates, vri_ids, types, messages)
         ])
-        lines = parse_vlog_lines(data, strict=True)
+        lines = parse_vlog_lines(data)
         assert len(lines) == 5
 
         # Assert dates
@@ -71,3 +71,35 @@ class TestVlogParser:
         # Assert messages
         for i, val in enumerate(messages):
             assert lines[i]['message'] == val
+
+    def test_parse_strict_true(self):
+        data = """
+            2020-08-23 14:00:00.399,102,6,0600A10500
+            2020-08-23 14:00:00.399,102,6,0600A10500
+            2020-08-23 14:00:00.399,102,6,0600A10500
+        """
+
+        lines = parse_vlog_lines(data, strict=True)
+        assert len(lines) == 3
+
+    def test_parse_strict_true_fail(self):
+        data = """
+            2020-08-23 14:00:00.399,102,6,0600A10500
+            2020-08-23 14:00:00.399,xxx,6,0600A10500
+            2020-08-23 14:00:00.399,102,6,0600A10500
+        """
+
+        with pytest.raises(ValueError):
+            parse_vlog_lines(data, strict=True)
+
+    def test_parse_strict_false(self):
+        data = """
+            2020-08-23 14:00:00.399,102,6,0600A10500
+            2020-08-23 14:00:00.399,xxx,6,0600A10500
+            2020-08-23 14:00:00.399,102,6,0600A10500
+            2020-08-23 14:00:00.399,102,x,0600A10500
+            2020-08-23 14:00:00.399,102,6,0600A10500
+        """
+
+        lines = parse_vlog_lines(data, strict=False)
+        assert len(lines) == 3
