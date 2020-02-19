@@ -43,7 +43,7 @@ clean:
 	$(dc) down -v
 
 bash:
-	$(dc) run --rm app bash
+	$(dc) run --rm dev bash
 
 env:
 	env | sort
