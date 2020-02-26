@@ -31,7 +31,7 @@ push:
 	$(dc) push
 
 app:
-	$(dc) run --service-ports app
+	$(dc) up app
 
 dev:
 	$(dc) run --service-ports dev

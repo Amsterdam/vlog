@@ -20,6 +20,7 @@ from django.urls import include, path, re_path
 urlpatterns = [
     path('status/', include('health.urls')),
     re_path(r'api/(?P<version>v[0-9]+)/', include('api.urls')),
+    path('', include('contrib.prometheus.urls')),
 ]
 
 if settings.DEBUG:

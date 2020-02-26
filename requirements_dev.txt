@@ -16,7 +16,7 @@ django==3.0.3
 djangorestframework==3.11.0
 entrypoints==0.3          # via flake8
 factory-boy==2.12.0       # via pytest-factoryboy
-faker==4.0.0              # via factory-boy
+faker==4.0.1              # via factory-boy
 flake8==3.7.9
 inflection==0.3.1         # via pytest-factoryboy
 ipdb==0.12.3
@@ -32,6 +32,7 @@ pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
 pip-tools==4.4.1
 pluggy==0.13.1            # via pytest
+prometheus-client==0.7.1
 prompt-toolkit==3.0.3     # via ipython
 psycopg2==2.8.4
 ptyprocess==0.6.0         # via pexpect
