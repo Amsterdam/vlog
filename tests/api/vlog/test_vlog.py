@@ -80,8 +80,8 @@ class TestLineTestCase:
         body = '\n'.join(data)
         with django_assert_num_queries(1):
             response = api_client.post(url, body, format='txt')
+            assert response.status_code == status.HTTP_201_CREATED
 
-        assert response.status_code == status.HTTP_201_CREATED
         assert Vlog.objects.count() == row_count
 
         # Validate the database

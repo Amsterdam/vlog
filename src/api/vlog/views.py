@@ -9,10 +9,7 @@ from vlog.parsers import parse_vlog_lines
 from .serializers import VlogSerializer
 
 
-class VlogViewSet(
-    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
-    viewsets.GenericViewSet
-):
+class VlogViewSet(viewsets.ModelViewSet):
     """
     A viewset for handling VRI V-log's
     """
