@@ -5,3 +5,4 @@ djangorestframework
 python-dateutil
 sentry-sdk
 prometheus_client
+django_prometheus
