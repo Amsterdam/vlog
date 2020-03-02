@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'settings.urls'
+FORCE_SCRIPT_NAME = os.getenv('BASE_URL')
 
 TEMPLATES = [
     {
