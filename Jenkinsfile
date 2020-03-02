@@ -1,6 +1,6 @@
 #!groovy
 def PROJECT_NAME = "waarnemingen-voertuigen"
-def SLACK_CHANNEL = '#waarnemingen'
+def SLACK_CHANNEL = '#waarnemingen-deployments'
 def PLAYBOOK = 'deploy-waarnemingen-voertuigen.yml'
 def PLAYBOOK_INVENTORY = 'acceptance'
 def SLACK_MESSAGE = [
@@ -23,6 +23,7 @@ pipeline {
         VERSION = env.BRANCH_NAME.replace('/', '-').toLowerCase().replace(
             'master', 'latest'
         )
+        IS_RELEASE = "${env.BRANCH_NAME ==~ "release/.*"}"
     }
 
     stages {
@@ -43,7 +44,7 @@ pipeline {
                 anyOf {
                     branch 'master'
                     buildingTag()
-                    branch pattern: "release/.*", comparator: "REGEXP"
+                    environment name: 'IS_RELEASE', value: 'true'
                 }
             }
             stages {
@@ -56,7 +57,7 @@ pipeline {
                 }
 
                 stage('Deploy to acceptance') {
-                    when { branch pattern: "release/.*", comparator: "REGEXP"}
+                    when { environment name: 'IS_RELEASE', value: 'true' }
                     steps {
                         sh 'echo Deploy acceptance'
                         build job: 'Subtask_Openstack_Playbook', parameters: [
@@ -84,6 +85,7 @@ pipeline {
                     "title": "Build succeeded :rocket:",
                 ]
             ])
+            sh 'env | sort'
         }
         failure {
             slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 

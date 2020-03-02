@@ -1,4 +1,4 @@
-from rest_framework import mixins, status, viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -9,10 +9,7 @@ from vlog.parsers import parse_vlog_lines
 from .serializers import VlogSerializer
 
 
-class VlogViewSet(
-    mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin,
-    viewsets.GenericViewSet
-):
+class VlogViewSet(viewsets.ModelViewSet):
     """
     A viewset for handling VRI V-log's
     """

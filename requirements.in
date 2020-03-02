@@ -4,3 +4,4 @@ django_extensions
 djangorestframework
 python-dateutil
 sentry-sdk
+prometheus_client

@@ -25,7 +25,7 @@ services:
       target: app
     image: repo.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
     ports:
-      - 8000:8000
+      - 8000
     environment:
       DEBUG: "true"
       SECRET_KEY: "dev"
@@ -34,15 +34,13 @@ services:
       - ./deploy:/deploy
     depends_on:
       - database
-    entrypoint: /deploy/wait-for-it.sh database:5432 --
-    command: python manage.py runserver 0.0.0.0:8000
 
   dev:
     build:
       context: .
       target: dev
     ports:
-      - 8000:8000
+      - 8000
     environment:
       DEBUG: "true"
       SECRET_KEY: "dev"

@@ -31,7 +31,7 @@ push:
 	$(dc) push
 
 app:
-	$(dc) run --service-ports app
+	$(dc) up app
 
 dev:
 	$(dc) run --service-ports dev
@@ -43,7 +43,7 @@ clean:
 	$(dc) down -v
 
 bash:
-	$(dc) run --rm app bash
+	$(dc) run --rm dev bash
 
 env:
 	env | sort
