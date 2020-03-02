@@ -10,31 +10,34 @@ from vlog.parsers import parse_vlog_line
 
 
 @pytest.mark.django_db
-class TestLineTestCase:
-    def test_create_json(self, api_client):
-        """
-        Ensure we can create new objects
-        """
-        url = reverse('api:vlog-list', kwargs={'version': 'v1'})
+@pytest.mark.parametrize(
+    "route, route_kwargs", [
+        ('api:vlog-list', {
+            'version': 'v1'
+        }),
+        ('api:vlog-detail', {
+            'pk': 1,
+            'version': 'v1'
+        }),
+    ]
+)
+@pytest.mark.parametrize("method", ['get', 'post', 'put', 'patch', 'delete'])
+class TestVlogApiPermissionDenied:
+    def test_unauthenticated(self, api_client, route, route_kwargs, method):
+        url = reverse(route, kwargs=route_kwargs)
+        fnc = getattr(api_client, method)
+        response = fnc(url)
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-        data = dict(
-            time='2020-01-23 00:00:03.521',
-            vri_id=102,
-            message_type=12,
-            message='0600A10500'
-        )
+    def test_unauthorized(self, authd_api_client, route, route_kwargs, method):
+        url = reverse(route, kwargs=route_kwargs)
+        fnc = getattr(authd_api_client, method)
+        response = fnc(url)
+        assert response.status_code == status.HTTP_403_FORBIDDEN
 
-        response = api_client.post(url, data, format='json')
 
-        assert response.status_code == status.HTTP_201_CREATED
-        vlog = Vlog.objects.get()
-        assert vlog.time == datetime.datetime(
-            2020, 1, 23, 0, 0, 3, 521000, tzinfo=pytz.utc
-        )
-        assert vlog.vri_id == 102
-        assert vlog.message_type == 12
-        assert vlog.message == '0600A10500'
-
+@pytest.mark.django_db
+class TestVlogApi:
     @pytest.mark.parametrize(
         "data, row_count", [
             pytest.param(
@@ -68,8 +71,9 @@ class TestLineTestCase:
             ),
         ]
     )
+    @pytest.mark.parametrize("user__permissions", [["vlog.add_vlog"]])
     def test_create_vlog_bulk(
-        self, django_assert_num_queries, api_client, data, row_count
+        self, django_assert_num_queries, token_api_client, data, row_count
     ):
         """
         Ensure we can create new objects
@@ -78,8 +82,13 @@ class TestLineTestCase:
 
         # Validate the insert was in bulk
         body = '\n'.join(data)
-        with django_assert_num_queries(1):
-            response = api_client.post(url, body, format='txt')
+        # 4 queries:
+        # - get token
+        # - get user permissions
+        # - get user group permissions
+        # - insert vlog data
+        with django_assert_num_queries(4):
+            response = token_api_client.post(url, body, format='txt')
             assert response.status_code == status.HTTP_201_CREATED
 
         assert Vlog.objects.count() == row_count
@@ -92,6 +101,9 @@ class TestLineTestCase:
             assert row.message_type == vlog['message_type']
             assert row.message == vlog['message']
 
-    def test_list_vlog(self, api_client):
+    @pytest.mark.parametrize("user__permissions", [["vlog.view_vlog"]])
+    def test_list_vlog(self, token_api_client):
         url = reverse('api:vlog-list', kwargs={'version': 'v1'})
-        api_client.get(url, format='txt')
+        response = token_api_client.get(url, format='txt')
+
+        assert response.status_code == status.HTTP_200_OK
