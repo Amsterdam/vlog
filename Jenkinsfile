@@ -85,7 +85,6 @@ pipeline {
                     "title": "Build succeeded :rocket:",
                 ]
             ])
-            sh 'env | sort'
         }
         failure {
             slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 

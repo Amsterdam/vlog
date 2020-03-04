@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from distutils.util import strtobool
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -42,12 +43,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_extensions',
     'contrib.timescale',
-    'contrib.prometheus',
+    'django_prometheus',
     'vlog',
     'api',
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,9 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
+FORCE_SCRIPT_NAME = os.getenv('BASE_URL')
 
 TEMPLATES = [
     {
@@ -78,17 +82,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'settings.wsgi.application'
 
 # Database
-DATABASES = {
-    "default": {
-        "ENGINE": "contrib.timescale.db.backend",
-        "NAME": os.getenv("DATABASE_NAME", "dev"),
-        "USER": os.getenv("DATABASE_USER", "dev"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
-        "HOST": os.getenv("DATABASE_HOST", "database"),
-        "PORT": os.getenv("DATABASE_PORT", "5432"),
-        "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
+
+if strtobool(os.getenv('DATABASE_ENABLED', 'true')):
+    DATABASES = {
+        "default": {
+            "ENGINE": "contrib.timescale.db.backend",
+            "NAME": os.getenv("DATABASE_NAME", "dev"),
+            "USER": os.getenv("DATABASE_USER", "dev"),
+            "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
+            "HOST": os.getenv("DATABASE_HOST", "database"),
+            "PORT": os.getenv("DATABASE_PORT", "5432"),
+            "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -114,7 +120,7 @@ REST_FRAMEWORK = {
         'contrib.rest_framework.permissions.DjangoModelPermissionsWithRead'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -150,3 +156,8 @@ if SENTRY_DSN:
         integrations=[DjangoIntegration()],
         ignore_errors=['ExpiredSignatureError'],
     )
+
+# Prometheus
+prometheus_dir = os.getenv("prometheus_multiproc_dir")
+if prometheus_dir and not os.path.exists(prometheus_dir):
+    os.makedirs(prometheus_dir)

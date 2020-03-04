@@ -9,7 +9,9 @@ ADD deploy /deploy
 WORKDIR /src
 ADD src .
 
-RUN SECRET_KEY=collectstatic python manage.py collectstatic --no-input
+ARG DATABASE_ENABLED=false 
+ARG SECRET_KEY=collectstatic 
+RUN python manage.py collectstatic --no-input
 
 USER datapunt
 
