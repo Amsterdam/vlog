@@ -11,17 +11,13 @@ from vlog.parsers import parse_vlog_line
 
 @pytest.mark.django_db
 @pytest.mark.parametrize(
-    "route, route_kwargs", [
-        ('api:vlog-list', {
-            'version': 'v1'
-        }),
-        ('api:vlog-detail', {
-            'pk': 1,
-            'version': 'v1'
-        }),
-    ]
+    "route, route_kwargs",
+    [
+        ("api:vlog-list", {"version": "v1"}),
+        ("api:vlog-detail", {"pk": 1, "version": "v1"}),
+    ],
 )
-@pytest.mark.parametrize("method", ['get', 'post', 'put', 'patch', 'delete'])
+@pytest.mark.parametrize("method", ["get", "post", "put", "patch", "delete"])
 class TestVlogApiPermissionDenied:
     def test_unauthenticated(self, api_client, route, route_kwargs, method):
         url = reverse(route, kwargs=route_kwargs)
@@ -29,29 +25,14 @@ class TestVlogApiPermissionDenied:
         response = fnc(url)
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-    def test_unauthorized(self, authd_api_client, route, route_kwargs, method):
-        url = reverse(route, kwargs=route_kwargs)
-        fnc = getattr(authd_api_client, method)
-        response = fnc(url)
-        assert response.status_code == status.HTTP_403_FORBIDDEN
-
 
 @pytest.mark.django_db
 class TestVlogApi:
     @pytest.mark.parametrize(
-        "data, row_count", [
-            pytest.param(
-                [
-                    ("2020-1-23 00:00,101,6,0600A10500"),
-                ],
-                1,
-            ),
-            pytest.param(
-                [
-                    (" 2020-01-23 00:00:03.521 , 101,10, 0A0281010465 "),
-                ],
-                1,
-            ),
+        "data, row_count",
+        [
+            pytest.param([("2020-1-23 00:00,101,6,0600A10500"),], 1,),
+            pytest.param([(" 2020-01-23 00:00:03.521 , 101,10, 0A0281010465 "),], 1,),
             pytest.param(
                 [
                     ("2020-01-23 00:00:00.399 ,101, 6, 0600A10500"),
@@ -69,26 +50,20 @@ class TestVlogApi:
                 ],
                 3,
             ),
-        ]
+        ],
     )
-    @pytest.mark.parametrize("user__permissions", [["vlog.add_vlog"]])
     def test_create_vlog_bulk(
-        self, django_assert_num_queries, token_api_client, data, row_count
+        self, django_assert_num_queries, authd_api_client, data, row_count
     ):
         """
         Ensure we can create new objects
         """
-        url = reverse('api:vlog-list', kwargs={'version': 'v1'})
+        url = reverse("api:vlog-list", kwargs={"version": "v1"})
 
         # Validate the insert was in bulk
-        body = '\n'.join(data)
-        # 4 queries:
-        # - get token
-        # - get user permissions
-        # - get user group permissions
-        # - insert vlog data
-        with django_assert_num_queries(4):
-            response = token_api_client.post(url, body, format='txt')
+        body = "\n".join(data)
+        with django_assert_num_queries(1):
+            response = authd_api_client.post(url, body, format="txt")
             assert response.status_code == status.HTTP_201_CREATED
 
         assert Vlog.objects.count() == row_count
@@ -96,14 +71,13 @@ class TestVlogApi:
         # Validate the database
         for i, line in enumerate(data):
             vlog = parse_vlog_line(line)
-            row = Vlog.objects.get(vri_id=vlog['vri_id'], time=vlog['time'])
-            assert row.vri_id == vlog['vri_id']
-            assert row.message_type == vlog['message_type']
-            assert row.message == vlog['message']
+            row = Vlog.objects.get(vri_id=vlog["vri_id"], time=vlog["time"])
+            assert row.vri_id == vlog["vri_id"]
+            assert row.message_type == vlog["message_type"]
+            assert row.message == vlog["message"]
 
-    @pytest.mark.parametrize("user__permissions", [["vlog.view_vlog"]])
-    def test_list_vlog(self, token_api_client):
-        url = reverse('api:vlog-list', kwargs={'version': 'v1'})
-        response = token_api_client.get(url, format='txt')
+    def test_list_vlog(self, authd_api_client):
+        url = reverse("api:vlog-list", kwargs={"version": "v1"})
+        response = authd_api_client.get(url, format="txt")
 
         assert response.status_code == status.HTTP_200_OK
