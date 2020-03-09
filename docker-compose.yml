@@ -29,6 +29,7 @@ services:
     environment:
       DEBUG: "true"
       SECRET_KEY: "dev"
+      AUTHORIZATION_TOKEN: "dev"
     volumes:
       - ./src:/src
       - ./deploy:/deploy
@@ -44,6 +45,7 @@ services:
     environment:
       DEBUG: "true"
       SECRET_KEY: "dev"
+      AUTHORIZATION_TOKEN: "dev"
       PYTHONBREAKPOINT:
     volumes:
       - ./src:/src
@@ -63,6 +65,7 @@ services:
       - ./deploy:/deploy
     environment:
       SECRET_KEY: "tests"
+      AUTHORIZATION_TOKEN: "dev"
       DJANGO_SETTINGS_MODULE: "settings.settings"
       PYTEST_ADDOPTS:
     depends_on:

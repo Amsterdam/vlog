@@ -14,7 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.contrib import admin
 from django.urls import include, path, re_path
 
 urlpatterns = [
@@ -22,6 +21,3 @@ urlpatterns = [
     re_path(r'^api/(?P<version>v[0-9]+)/', include('api.urls')),
     re_path('', include('django_prometheus.urls')),
 ]
-
-if settings.DEBUG:
-    urlpatterns = [re_path('^admin/', admin.site.urls)] + urlpatterns
