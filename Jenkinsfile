@@ -80,6 +80,13 @@ pipeline {
                                 value: "-e deployversion=${VERSION}"
                             )
                         ], wait: true
+
+                        slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
+                            [
+                                "color": "#36a64f",
+                                "title": "Deploy to production succeeded :rocket:",
+                            ]
+                        ])
                     }
                 }
             }
@@ -89,14 +96,6 @@ pipeline {
     post {
         always {
             sh 'make clean'
-        }
-        success {
-            slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
-                [
-                    "color": "#36a64f",
-                    "title": "Build succeeded :rocket:",
-                ]
-            ])
         }
         failure {
             slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
