@@ -2,7 +2,6 @@
 def PROJECT_NAME = "waarnemingen-voertuigen"
 def SLACK_CHANNEL = '#waarnemingen-deployments'
 def PLAYBOOK = 'deploy-waarnemingen-voertuigen.yml'
-def PLAYBOOK_INVENTORY = 'acceptance'
 def SLACK_MESSAGE = [
     "title_link": BUILD_URL,
     "fields": [
@@ -59,10 +58,23 @@ pipeline {
                 stage('Deploy to acceptance') {
                     when { environment name: 'IS_RELEASE', value: 'true' }
                     steps {
-                        sh 'echo Deploy acceptance'
                         build job: 'Subtask_Openstack_Playbook', parameters: [
                             string(name: 'PLAYBOOK', value: PLAYBOOK),
-                            string(name: 'INVENTORY', value: PLAYBOOK_INVENTORY),
+                            string(name: 'INVENTORY', value: "acceptance"),
+                            string(
+                                name: 'PLAYBOOKPARAMS', 
+                                value: "-e deployversion=${VERSION}"
+                            )
+                        ], wait: true
+                    }
+                }
+
+                stage('Deploy to production') {
+                    when { buildingTag() }
+                    steps {
+                        build job: 'Subtask_Openstack_Playbook', parameters: [
+                            string(name: 'PLAYBOOK', value: PLAYBOOK),
+                            string(name: 'INVENTORY', value: "production"),
                             string(
                                 name: 'PLAYBOOKPARAMS', 
                                 value: "-e deployversion=${VERSION}"
