@@ -14,7 +14,7 @@ def SLACK_MESSAGE = [
 
 
 pipeline {
-    agent any
+    agent { label 'BS16||BS17' }
 
     environment {
         SHORT_UUID = sh( script: "uuidgen | cut -d '-' -f1", returnStdout: true).trim()
