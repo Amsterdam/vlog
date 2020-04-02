@@ -1,5 +1,10 @@
 version: '3.5'
 
 services:
-  app:
+  app: &app
     user: 1000:1000
+    ports:
+      - "8000:8000"
+
+  dev:
+    <<: *app
