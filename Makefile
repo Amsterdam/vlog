@@ -27,7 +27,7 @@ migrate:
 build:
 	$(dc) build
 
-push:
+push: build
 	$(dc) push
 
 app:
