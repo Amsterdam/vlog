@@ -4,17 +4,17 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-asgiref==3.2.7            # via django
-certifi==2020.4.5.1       # via sentry-sdk
+asgiref==3.2.10           # via django
+certifi==2020.6.20        # via sentry-sdk
 django-extensions==2.2.9  # via -r requirements.in
 django-prometheus==2.0.0  # via -r requirements.in
-django==3.0.6             # via -r requirements.in, djangorestframework
+django==3.0.7             # via -r requirements.in, djangorestframework
 djangorestframework==3.11.0  # via -r requirements.in
-prometheus-client==0.7.1  # via -r requirements.in, django-prometheus
+prometheus-client==0.8.0  # via -r requirements.in, django-prometheus
 psycopg2==2.8.5           # via -r requirements.in
 python-dateutil==2.8.1    # via -r requirements.in
 pytz==2020.1              # via django
-sentry-sdk==0.14.4        # via -r requirements.in
+sentry-sdk==0.15.1        # via -r requirements.in
 six==1.15.0               # via django-extensions, python-dateutil
 sqlparse==0.3.1           # via django
 urllib3==1.25.9           # via sentry-sdk
