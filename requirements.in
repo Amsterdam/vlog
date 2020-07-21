@@ -1,8 +1,13 @@
 Django
-psycopg2
 django_extensions
+django_filter
+django_prometheus
 djangorestframework
+djangorestframework-xml
+drf_amsterdam
+prometheus_client
+psycopg2
+pyhumps
 python-dateutil
 sentry-sdk
-prometheus_client
-django_prometheus
+xmltodict

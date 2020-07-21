@@ -4,58 +4,67 @@
 #
 #    pip-compile --output-file=requirements_dev.txt requirements_dev.in
 #
-asgiref==3.2.5            # via -r ./requirements.txt, django
+asgiref==3.2.10           # via -r ./requirements.txt, django
 attrs==19.3.0             # via pytest
-backcall==0.1.0           # via ipython
-certifi==2019.11.28       # via -r ./requirements.txt, sentry-sdk
-click==7.1.1              # via pip-tools
-coverage==5.0.4           # via pytest-cov
+backcall==0.2.0           # via ipython
+certifi==2020.6.20        # via -r ./requirements.txt, sentry-sdk
+click==7.1.2              # via pip-tools
+coverage==5.2             # via pytest-cov
 decorator==4.4.2          # via ipython, traitlets
-django-extensions==2.2.8  # via -r ./requirements.txt
+defusedxml==0.6.0         # via -r ./requirements.txt, djangorestframework-xml
+django-extensions==3.0.3  # via -r ./requirements.txt
+django-filter==2.3.0      # via -r ./requirements.txt
 django-prometheus==2.0.0  # via -r ./requirements.txt
-django==3.0.4             # via -r ./requirements.txt, djangorestframework
-djangorestframework==3.11.0  # via -r ./requirements.txt
-entrypoints==0.3          # via flake8
+django==3.0.8             # via -r ./requirements.txt, django-filter, djangorestframework
+djangorestframework-csv==2.1.0  # via -r ./requirements.txt, drf-amsterdam
+djangorestframework-xml==2.0.0  # via -r ./requirements.txt, drf-amsterdam
+djangorestframework==3.11.0  # via -r ./requirements.txt, djangorestframework-csv, drf-amsterdam, drf-extensions
+drf-amsterdam==0.3.2      # via -r ./requirements.txt
+drf-extensions==0.6.0     # via -r ./requirements.txt, drf-amsterdam
 factory-boy==2.12.0       # via pytest-factoryboy
-faker==4.0.2              # via factory-boy
-flake8==3.7.9             # via -r requirements_dev.in
-inflection==0.3.1         # via pytest-factoryboy
-ipdb==0.13.2              # via -r requirements_dev.in
+faker==4.1.1              # via factory-boy
+flake8==3.8.3             # via -r requirements_dev.in
+inflection==0.5.0         # via pytest-factoryboy
+ipdb==0.13.3              # via -r requirements_dev.in
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.13.0           # via -r requirements_dev.in, ipdb
-isort==4.3.21             # via -r requirements_dev.in
-jedi==0.16.0              # via -r requirements_dev.in, ipython
+ipython==7.16.1           # via -r requirements_dev.in, ipdb
+isort==5.1.4              # via -r requirements_dev.in
+jedi==0.17.2              # via -r requirements_dev.in, ipython
 mccabe==0.6.1             # via flake8
-more-itertools==8.2.0     # via pytest
-packaging==20.3           # via pytest
-parso==0.6.2              # via jedi
+more-itertools==8.4.0     # via pytest
+packaging==20.4           # via pytest
+parso==0.7.0              # via jedi
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
-pip-tools==4.5.1          # via -r requirements_dev.in
+pip-tools==5.2.1          # via -r requirements_dev.in
 pluggy==0.13.1            # via pytest
-prometheus-client==0.7.1  # via -r ./requirements.txt, django-prometheus
-prompt-toolkit==3.0.4     # via ipython
-psycopg2==2.8.4           # via -r ./requirements.txt
+prometheus-client==0.8.0  # via -r ./requirements.txt, django-prometheus
+prompt-toolkit==3.0.5     # via ipython
+psycopg2==2.8.5           # via -r ./requirements.txt
 ptyprocess==0.6.0         # via pexpect
-py==1.8.1                 # via pytest
-pycodestyle==2.5.0        # via flake8
-pyflakes==2.1.1           # via flake8
+py==1.9.0                 # via pytest
+pycodestyle==2.6.0        # via flake8
+pyflakes==2.2.0           # via flake8
 pygments==2.6.1           # via ipython
-pyparsing==2.4.6          # via packaging
-pytest-cov==2.8.1         # via -r requirements_dev.in
-pytest-django==3.8.0      # via -r requirements_dev.in
+pyhumps==1.6.1            # via -r ./requirements.txt
+pyparsing==2.4.7          # via packaging
+pytest-cov==2.10.0        # via -r requirements_dev.in
+pytest-django==3.9.0      # via -r requirements_dev.in
 pytest-factoryboy==2.0.3  # via -r requirements_dev.in
-pytest==5.4.1             # via -r requirements_dev.in, pytest-cov, pytest-django, pytest-factoryboy
+pytest==5.4.3             # via -r requirements_dev.in, pytest-cov, pytest-django, pytest-factoryboy
 python-dateutil==2.8.1    # via -r ./requirements.txt, faker
-pytz==2019.3              # via -r ./requirements.txt, django
-sentry-sdk==0.14.3        # via -r ./requirements.txt
-six==1.14.0               # via -r ./requirements.txt, django-extensions, packaging, pip-tools, python-dateutil, traitlets
+pytz==2020.1              # via -r ./requirements.txt, django
+sentry-sdk==0.16.1        # via -r ./requirements.txt
+six==1.15.0               # via -r ./requirements.txt, django-extensions, djangorestframework-csv, packaging, pip-tools, python-dateutil, traitlets
 sqlparse==0.3.1           # via -r ./requirements.txt, django
 text-unidecode==1.3       # via faker
 traitlets==4.3.3          # via ipython
-urllib3==1.25.8           # via -r ./requirements.txt, sentry-sdk
-wcwidth==0.1.9            # via prompt-toolkit, pytest
-yapf==0.29.0              # via -r requirements_dev.in
+unicodecsv==0.14.1        # via -r ./requirements.txt, djangorestframework-csv
+urllib3==1.25.9           # via -r ./requirements.txt, sentry-sdk
+wcwidth==0.2.5            # via prompt-toolkit, pytest
+xmltodict==0.12.0         # via -r ./requirements.txt
+yapf==0.30.0              # via -r requirements_dev.in
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools

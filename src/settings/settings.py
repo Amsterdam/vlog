@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_prometheus",
     "vlog",
     "api",
+    "reistijden_v1",
 ]
 
 MIDDLEWARE = [
@@ -80,14 +81,13 @@ TEMPLATES = [
 WSGI_APPLICATION = "settings.wsgi.application"
 
 # Database
-
 if strtobool(os.getenv("DATABASE_ENABLED", "true")):
     DATABASES = {
         "default": {
             "ENGINE": "contrib.timescale.db.backend",
-            "NAME": os.getenv("DATABASE_NAME", "dev"),
-            "USER": os.getenv("DATABASE_USER", "dev"),
-            "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
+            "NAME": os.getenv("DATABASE_NAME", "waarnemingen_voertuigen"),
+            "USER": os.getenv("DATABASE_USER", "waarnemingen_voertuigen"),
+            "PASSWORD": os.getenv("DATABASE_PASSWORD", "insecure"),
             "HOST": os.getenv("DATABASE_HOST", "database"),
             "PORT": os.getenv("DATABASE_PORT", "5432"),
             "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
@@ -102,6 +102,7 @@ REST_FRAMEWORK = {
         "contrib.rest_framework.authentication.SimpleTokenAuthentication",
     ],
     "DEFAULT_PARSER_CLASSES": [
+        "rest_framework_xml.parsers.XMLParser",
         "rest_framework.parsers.JSONParser",
         "contrib.rest_framework.parsers.PlainTextParser",
     ],
@@ -111,6 +112,7 @@ REST_FRAMEWORK = {
         "contrib.rest_framework.renderers.PlainTextRenderer",
     ],
     "TEST_REQUEST_RENDERER_CLASSES": [
+        "rest_framework_xml.renderers.XMLRenderer",
         "rest_framework.renderers.JSONRenderer",
         "contrib.rest_framework.renderers.PlainTextRenderer",
     ],
