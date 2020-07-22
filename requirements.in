@@ -1,9 +1,6 @@
 Django
 django_extensions
-django_filter
 django_prometheus
-djangorestframework
-djangorestframework-xml
 drf_amsterdam
 prometheus_client
 psycopg2

@@ -8,12 +8,11 @@ asgiref==3.2.10           # via django
 certifi==2020.6.20        # via sentry-sdk
 defusedxml==0.6.0         # via djangorestframework-xml
 django-extensions==3.0.3  # via -r requirements.in
-django-filter==2.3.0      # via -r requirements.in
 django-prometheus==2.0.0  # via -r requirements.in
-django==3.0.8             # via -r requirements.in, django-filter, djangorestframework
+django==3.0.8             # via -r requirements.in, djangorestframework
 djangorestframework-csv==2.1.0  # via drf-amsterdam
-djangorestframework-xml==2.0.0  # via -r requirements.in, drf-amsterdam
-djangorestframework==3.11.0  # via -r requirements.in, djangorestframework-csv, drf-amsterdam, drf-extensions
+djangorestframework-xml==2.0.0  # via drf-amsterdam
+djangorestframework==3.11.0  # via djangorestframework-csv, drf-amsterdam, drf-extensions
 drf-amsterdam==0.3.2      # via -r requirements.in
 drf-extensions==0.6.0     # via drf-amsterdam
 prometheus-client==0.8.0  # via -r requirements.in, django-prometheus

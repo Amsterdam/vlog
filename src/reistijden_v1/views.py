@@ -22,7 +22,6 @@ def location_src_to_dict(src_d):
         'lane_number': src_d['lane']['camera']['lane_number'],
         'status': src_d['lane']['camera']['status'],
         'view_direction': src_d['lane']['camera']['view_direction'],
-
     }
 
 
