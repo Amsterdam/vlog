@@ -1,8 +1,8 @@
 from django.conf import settings
 from rest_framework.test import APITestCase
 
-from .models import (IndividualTravelTime, Location, Measurement, Publication,
-                     TrafficFlow, TravelTime)
+from src.reistijden_v1.models import (IndividualTravelTime, Location, Measurement, Publication,
+                                      TrafficFlow, TravelTime)
 from .test_xml import (TEST_POST_INDIVIDUAL_TRAVEL_TIME,
                        TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME)
 
