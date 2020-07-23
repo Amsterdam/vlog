@@ -6,6 +6,7 @@ import xmltodict
 from rest_framework import exceptions, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_xml.parsers import XMLParser
 
 from .serializers import PublicationSerializer
 
@@ -83,6 +84,7 @@ def restructure_data(xml_str):
 class PublicationViewSet(viewsets.ModelViewSet):
     serializer_class = PublicationSerializer
     serializer_detail_class = PublicationSerializer
+    parser_classes = [XMLParser]
 
     http_method_names = ['post']
     permission_classes = [IsAuthenticated]

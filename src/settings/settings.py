@@ -102,7 +102,6 @@ REST_FRAMEWORK = {
         "contrib.rest_framework.authentication.SimpleTokenAuthentication",
     ],
     "DEFAULT_PARSER_CLASSES": [
-        "rest_framework_xml.parsers.XMLParser",
         "rest_framework.parsers.JSONParser",
         "contrib.rest_framework.parsers.PlainTextParser",
     ],

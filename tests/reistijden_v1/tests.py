@@ -74,17 +74,17 @@ class ReistijdenPostTest(APITestCase):
     def test_update_method_not_allowed(self):
         """ Test if updating a peoplemeasurement is not allowed """
         # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='json')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot update it
-        response = self.client.put(f'{self.URL}1/', TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='json')
+        response = self.client.put(f'{self.URL}1/', TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
         self.assertEqual(response.status_code, 405)
 
     def test_delete_method_not_allowed(self):
         """ Test if deleting a peoplemeasurement is not allowed """
         # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='json')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot delete it
