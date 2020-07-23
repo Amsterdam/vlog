@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django_prometheus",
     "vlog",
     "api",
+    "reistijden_v1",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "settings.wsgi.application"
 
 # Database
-
 if strtobool(os.getenv("DATABASE_ENABLED", "true")):
     DATABASES = {
         "default": {
@@ -111,6 +111,7 @@ REST_FRAMEWORK = {
         "contrib.rest_framework.renderers.PlainTextRenderer",
     ],
     "TEST_REQUEST_RENDERER_CLASSES": [
+        "rest_framework_xml.renderers.XMLRenderer",
         "rest_framework.renderers.JSONRenderer",
         "contrib.rest_framework.renderers.PlainTextRenderer",
     ],
