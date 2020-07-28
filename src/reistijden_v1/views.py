@@ -92,6 +92,9 @@ class PublicationViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         try:
             restructured_data = restructure_data(request.body.decode("utf-8"))
+        except UnicodeError as e:
+            logger.error(f"Unicode error in message: {request.data}")
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
         except (exceptions.ValidationError, KeyError) as e:
             logger.error(f"{e} in message: {request.data}")
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)

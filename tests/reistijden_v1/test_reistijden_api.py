@@ -62,8 +62,11 @@ class ReistijdenPostTest(APITestCase):
         response = self.client.post(self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 400, response.data)
 
+    def test_non_unicode(self):
+        response = self.client.post(self.URL, '\x80abc', **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 400)
+
     def test_get_method_not_allowed(self):
-        """ Test if getting a peoplemeasurement is not allowed """
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
@@ -73,7 +76,6 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 405)
 
     def test_update_method_not_allowed(self):
-        """ Test if updating a peoplemeasurement is not allowed """
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
@@ -83,7 +85,6 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 405)
 
     def test_delete_method_not_allowed(self):
-        """ Test if deleting a peoplemeasurement is not allowed """
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
