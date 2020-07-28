@@ -1,7 +1,4 @@
-import datetime
-
 import pytest
-import pytz
 from django.urls import reverse
 from rest_framework import status
 
