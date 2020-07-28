@@ -39,6 +39,9 @@ dev:
 test:
 	$(dc) run --rm test pytest $(ARGS)
 
+pdb:
+	$(dc) run --rm test pytest --pdb $(ARGS)
+
 clean:
 	$(dc) down -v
 

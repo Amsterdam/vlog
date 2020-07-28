@@ -1,12 +1,13 @@
 from django.conf import settings
 from rest_framework.test import APITestCase
 
-from src.reistijden_v1.models import (IndividualTravelTime, Location, Measurement, Publication,
-                                      TrafficFlow, TravelTime)
-from .test_xml import (TEST_POST_INDIVIDUAL_TRAVEL_TIME,
-                       TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME)
+from reistijden_v1.models import (IndividualTravelTime, Location, Measurement,
+                                  Publication, TrafficFlow, TravelTime)
+from tests.reistijden_v1.test_xml import TEST_POST_TRAVEL_TIME, TEST_POST_INDIVIDUAL_TRAVEL_TIME, TEST_POST_TRAFFIC_FLOW
 
 AUTHORIZATION_HEADER = {'HTTP_AUTHORIZATION': f"Token {settings.AUTHORIZATION_TOKEN}"}
+CONTENT_TYPE_HEADER = {'content_type': 'application/xml'}
+REQUEST_HEADERS = {**AUTHORIZATION_HEADER, **CONTENT_TYPE_HEADER}
 
 
 class ReistijdenPostTest(APITestCase):
@@ -15,7 +16,7 @@ class ReistijdenPostTest(APITestCase):
 
     def test_post_new_travel_time(self):
         """ Test posting a new vanilla travel time message """
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -27,7 +28,7 @@ class ReistijdenPostTest(APITestCase):
 
     def test_post_new_individual_travel_time(self):
         """ Test posting a new vanilla travel time message """
-        response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS)
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -39,7 +40,7 @@ class ReistijdenPostTest(APITestCase):
 
     def test_post_new_traffic_flow(self):
         """ Test posting a new vanilla travel time message """
-        response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -50,21 +51,24 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(TrafficFlow.objects.all().count(), 3)
 
     def test_post_fails_without_token(self):
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER)
         self.assertEqual(response.status_code, 401)
 
     def test_post_wrongy_formatted_xml(self):
-        response = self.client.post(self.URL, '<wrongly>formatted</xml>', **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, '<wrongly>formatted</xml>', **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 400, response.data)
 
     def test_post_wrongy_formatted_message_structure(self):
-        response = self.client.post(self.URL, '<root>wrong structure</root>', **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 400, response.data)
 
+    def test_non_unicode(self):
+        response = self.client.post(self.URL, '\x80abc', **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 400)
+
     def test_get_method_not_allowed(self):
-        """ Test if getting a peoplemeasurement is not allowed """
         # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot get it
@@ -72,19 +76,17 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 405)
 
     def test_update_method_not_allowed(self):
-        """ Test if updating a peoplemeasurement is not allowed """
         # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot update it
-        response = self.client.put(f'{self.URL}1/', TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.put(f'{self.URL}1/', TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 405)
 
     def test_delete_method_not_allowed(self):
-        """ Test if deleting a peoplemeasurement is not allowed """
         # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **AUTHORIZATION_HEADER, format='xml')
+        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot delete it
