@@ -1,4 +1,6 @@
 import logging
+import os
+from datetime import datetime
 from xml.parsers.expat import ExpatError
 
 import humps
@@ -11,6 +13,20 @@ from rest_framework_xml.parsers import XMLParser
 from .serializers import PublicationSerializer
 
 logger = logging.getLogger(__name__)
+
+
+def store_error_content(e, request):
+    """
+    In order to keep the content of the messages that resulted in errors, we store them in the container for now.
+    This is a massive hack and should be removed very soon. If you find this code and
+    """
+    error_type = e.__repr__().replace("'", '')
+    folder = '/tmp/errors/'
+    file_path = f'{folder}{datetime.now().isoformat()}-{error_type}.xml'
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    with open(file_path, 'w') as f:
+        f.write(request.body.decode("utf-8"))
 
 
 def location_src_to_dict(src_d):
@@ -93,13 +109,16 @@ class PublicationViewSet(viewsets.ModelViewSet):
         try:
             restructured_data = restructure_data(request.body.decode("utf-8"))
         except UnicodeError as e:
-            logger.error(f"Unicode error in message: {request.data}")
+            logger.error(e)
+            store_error_content(e, request)
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
-        except (exceptions.ValidationError, KeyError) as e:
-            logger.error(f"{e} in message: {request.data}")
+        except (exceptions.ValidationError, KeyError, TypeError) as e:
+            logger.error(e)
+            store_error_content(e, request)
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
         except ExpatError as e:
-            logger.error(f"Parse error in message: {request.data}")
+            logger.error(e)
+            store_error_content(e, request)
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
         publication_serializer = PublicationSerializer(data=restructured_data)
