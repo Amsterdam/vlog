@@ -18,15 +18,18 @@ logger = logging.getLogger(__name__)
 def store_error_content(e, request):
     """
     In order to keep the content of the messages that resulted in errors, we store them in the container for now.
-    This is a massive hack and should be removed very soon. If you find this code and
+    This is a massive hack and should be removed very soon. If you find this code, please remove it.
     """
-    error_type = e.__repr__().replace("'", '')
-    folder = '/tmp/errors/'
-    file_path = f'{folder}{datetime.now().isoformat()}-{error_type}.xml'
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-    with open(file_path, 'w') as f:
-        f.write(request.body.decode("utf-8"))
+    try:
+        error_type = e.__repr__().replace("'", '')
+        folder = '/tmp/errors/'
+        file_path = f'{folder}{datetime.now().isoformat()}-{error_type}.xml'
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        with open(file_path, 'w') as f:
+            f.write(request.body.decode("utf-8"))
+    except Exception as e:
+        logger.error(e)
 
 
 def location_src_to_dict(src_d):
