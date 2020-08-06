@@ -9,7 +9,7 @@ certifi==2020.6.20        # via sentry-sdk
 defusedxml==0.6.0         # via djangorestframework-xml
 django-extensions==3.0.3  # via -r requirements.in
 django-prometheus==2.0.0  # via -r requirements.in
-django==3.0.8             # via -r requirements.in, djangorestframework
+django==3.1               # via -r requirements.in, djangorestframework
 djangorestframework-csv==2.1.0  # via drf-amsterdam
 djangorestframework-xml==2.0.0  # via drf-amsterdam
 djangorestframework==3.11.0  # via djangorestframework-csv, drf-amsterdam, drf-extensions
@@ -20,9 +20,9 @@ psycopg2==2.8.5           # via -r requirements.in
 pyhumps==1.6.1            # via -r requirements.in
 python-dateutil==2.8.1    # via -r requirements.in
 pytz==2020.1              # via django
-sentry-sdk==0.16.1        # via -r requirements.in
+sentry-sdk==0.16.3        # via -r requirements.in
 six==1.15.0               # via django-extensions, djangorestframework-csv, python-dateutil
 sqlparse==0.3.1           # via django
 unicodecsv==0.14.1        # via djangorestframework-csv
-urllib3==1.25.9           # via sentry-sdk
+urllib3==1.25.10          # via sentry-sdk
 xmltodict==0.12.0         # via -r requirements.in
