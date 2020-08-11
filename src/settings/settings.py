@@ -138,6 +138,7 @@ if SENTRY_DSN:
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration()],
         ignore_errors=["ExpiredSignatureError"],
+        request_bodies='always'
     )
 
 # Prometheus
