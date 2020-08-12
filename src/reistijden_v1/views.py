@@ -59,7 +59,8 @@ def location_src_to_dict(src_d):
 def travel_time_src_to_dict(src_d):
     return {
         'travel_time_type': src_d['@travel_time_type'],
-        'estimation_type': src_d['@estimation_type'],
+        'data_quality': src_d.get('@data_quality'),
+        'estimation_type': src_d.get('@estimation_type'),
         'travel_time': src_d['travel_time'],
         'traffic_speed': src_d['traffic_speed'],
     }
@@ -93,8 +94,17 @@ def get_location_from_site_ref(site_ref):
         return [location_src_to_dict(d) for d in site_ref['location_contained_in_itinerary']['location']]
 
 
-def measurement_src_to_dict(src_d):
-    site_ref = src_d['measurement_site_reference']
+def get_travel_times_from_measurement(src_d):
+    travel_times = []
+    if 'travel_time_data' in src_d:
+        if type(src_d['travel_time_data']) is list:
+            travel_times = [travel_time_src_to_dict(travel_time) for travel_time in src_d['travel_time_data']]
+        else:
+            travel_times = [travel_time_src_to_dict(src_d['travel_time_data'])]
+    return travel_times
+
+
+def get_measured_flows_from_measurement(src_d):
     measured_flows = []
     if 'traffic_flow_data' in src_d:
         measured_flows_src = src_d['traffic_flow_data']['measured_flow']
@@ -102,6 +112,11 @@ def measurement_src_to_dict(src_d):
             measured_flows = [measured_flow_src_to_dict(measured_flow) for measured_flow in measured_flows_src]
         else:
             measured_flows = [measured_flow_src_to_dict(measured_flows_src)]
+    return measured_flows
+
+
+def measurement_src_to_dict(src_d):
+    site_ref = src_d['measurement_site_reference']
     return {
         'measurement_site_reference_id': site_ref['@id'],
         'measurement_site_reference_version': site_ref['@version'],
@@ -109,9 +124,9 @@ def measurement_src_to_dict(src_d):
         'measurement_site_type': site_ref['measurement_site_type'],
         'length': site_ref.get('length'),
         'locations': get_location_from_site_ref(site_ref),
-        'travel_times': [travel_time_src_to_dict(src_d['travel_time_data'])] if 'travel_time_data' in src_d else [],
+        'travel_times': get_travel_times_from_measurement(src_d),
         'individual_travel_times': [d for d in src_d['individual_travel_time_data']] if 'individual_travel_time_data' in src_d else [],
-        'measured_flows': measured_flows,
+        'measured_flows': get_measured_flows_from_measurement(src_d),
     }
 
 
