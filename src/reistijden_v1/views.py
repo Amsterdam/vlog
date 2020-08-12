@@ -72,17 +72,16 @@ def category_src_to_dict(src_d):
     }
 
 
-def traffic_flow_src_to_dict(src_d):
-    measured_flow = src_d['measured_flow']
-    category_src = measured_flow['number_of_input_values_used']['category']
+def measured_flow_src_to_dict(src_d):
+    category_src = src_d['number_of_input_values_used']['category']
     if type(category_src) is list:
         categories = [category_src_to_dict(category) for category in category_src]
     else:
         categories = [category_src_to_dict(category_src)]
 
     return {
-        'specific_lane': measured_flow['@specific_lane'],
-        'vehicle_flow': measured_flow['vehicle_flow'],
+        'specific_lane': src_d['@specific_lane'],
+        'vehicle_flow': src_d['vehicle_flow'],
         'categories': categories
     }
 
@@ -96,6 +95,13 @@ def get_location_from_site_ref(site_ref):
 
 def measurement_src_to_dict(src_d):
     site_ref = src_d['measurement_site_reference']
+    measured_flows = []
+    if 'traffic_flow_data' in src_d:
+        measured_flows_src = src_d['traffic_flow_data']['measured_flow']
+        if type(measured_flows_src) is list:
+            measured_flows = [measured_flow_src_to_dict(measured_flow) for measured_flow in measured_flows_src]
+        else:
+            measured_flows = [measured_flow_src_to_dict(measured_flows_src)]
     return {
         'measurement_site_reference_id': site_ref['@id'],
         'measurement_site_reference_version': site_ref['@version'],
@@ -105,7 +111,7 @@ def measurement_src_to_dict(src_d):
         'locations': get_location_from_site_ref(site_ref),
         'travel_times': [travel_time_src_to_dict(src_d['travel_time_data'])] if 'travel_time_data' in src_d else [],
         'individual_travel_times': [d for d in src_d['individual_travel_time_data']] if 'individual_travel_time_data' in src_d else [],
-        'traffic_flows': [traffic_flow_src_to_dict(src_d['traffic_flow_data'])] if 'traffic_flow_data' in src_d else [],
+        'measured_flows': measured_flows,
     }
 
 

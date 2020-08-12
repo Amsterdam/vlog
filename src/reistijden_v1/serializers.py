@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import (Category, IndividualTravelTime, Lane, Location,
-                     Measurement, Publication, TrafficFlow, TravelTime)
+                     MeasuredFlow, Measurement, Publication, TravelTime)
 
 
 class LaneSerializer(serializers.ModelSerializer):
@@ -32,13 +32,13 @@ class IndividualTravelTimeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        exclude = ['traffic_flow']
+        exclude = ['measured_flow']
 
 
-class TrafficFlowSerializer(serializers.ModelSerializer):
+class MeasuredFlowSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
     class Meta:
-        model = TrafficFlow
+        model = MeasuredFlow
         exclude = ['measurement']
 
 
@@ -46,7 +46,7 @@ class MeasurementSerializer(serializers.ModelSerializer):
     locations = LocationSerializer(many=True)
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
-    traffic_flows = TrafficFlowSerializer(many=True)
+    measured_flows = MeasuredFlowSerializer(many=True)
 
     class Meta:
         model = Measurement
@@ -67,7 +67,7 @@ class PublicationSerializer(serializers.ModelSerializer):
             locations = measurement_src.pop('locations')
             travel_times = measurement_src.pop('travel_times')
             individual_travel_times = measurement_src.pop('individual_travel_times')
-            traffic_flows = measurement_src.pop('traffic_flows')
+            measured_flows = measurement_src.pop('measured_flows')
 
             measurement = Measurement.objects.create(
                 publication=publication,
@@ -99,16 +99,16 @@ class PublicationSerializer(serializers.ModelSerializer):
                     **individual_travel_time_src
                 )
 
-            for traffic_flow_src in traffic_flows:
-                categories = traffic_flow_src.pop('categories')
-                traffic_flow = TrafficFlow.objects.create(
+            for measured_flow_src in measured_flows:
+                categories = measured_flow_src.pop('categories')
+                measured_flow = MeasuredFlow.objects.create(
                     measurement=measurement,
-                    **traffic_flow_src
+                    **measured_flow_src
                 )
 
                 for category_src in categories:
                     Category.objects.create(
-                        traffic_flow=traffic_flow,
+                        measured_flow=measured_flow,
                         **category_src
                     )
 

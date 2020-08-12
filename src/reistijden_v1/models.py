@@ -65,21 +65,19 @@ class IndividualTravelTime(models.Model):
     traffic_speed = models.IntegerField()
 
 
-class TrafficFlow(models.Model):
-    # <trafficFlowData>
-    #     <measuredFlow specificLane="lane1">
-    #         <vehicleFlow>6</vehicleFlow>
-    #         <numberOfInputValuesUsed>
-    #             <category count="6" type="Auto" />
-    #         </numberOfInputValuesUsed>
-    #     </measuredFlow>
-    # </trafficFlowData>
+class MeasuredFlow(models.Model):
+    # <measuredFlow specificLane="lane1">
+    #     <vehicleFlow>6</vehicleFlow>
+    #     <numberOfInputValuesUsed>
+    #         <category count="6" type="Auto" />
+    #     </numberOfInputValuesUsed>
+    # </measuredFlow>
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     specific_lane = models.CharField(max_length=255)
     vehicle_flow = models.IntegerField()
 
 
 class Category(models.Model):
-    traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
+    measured_flow = models.ForeignKey('MeasuredFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
     type = models.CharField(max_length=255)

@@ -4,9 +4,9 @@ from tests.reistijden_v1.test_xml import (TEST_POST_INDIVIDUAL_TRAVEL_TIME,
                                           TEST_POST_TRAFFIC_FLOW,
                                           TEST_POST_TRAVEL_TIME)
 
-from reistijden_v1.models import (Category, IndividualTravelTime, Lane, Location,
-                                  Measurement, Publication, TrafficFlow,
-                                  TravelTime)
+from reistijden_v1.models import (Category, IndividualTravelTime, Lane,
+                                  Location, MeasuredFlow, Measurement,
+                                  Publication, TravelTime)
 
 AUTHORIZATION_HEADER = {'HTTP_AUTHORIZATION': f"Token {settings.AUTHORIZATION_TOKEN}"}
 CONTENT_TYPE_HEADER = {'content_type': 'application/xml'}
@@ -28,9 +28,9 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Lane.objects.all().count(), 7)
         self.assertEqual(TravelTime.objects.all().count(), 2)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
-
+    #
     def test_post_new_individual_travel_time(self):
         """ Test posting a new vanilla individual travel time message """
         response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS)
@@ -42,7 +42,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Lane.objects.all().count(), 4)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 5)
-        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_traffic_flow(self):
@@ -56,8 +56,8 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Lane.objects.all().count(), 3)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(TrafficFlow.objects.all().count(), 3)
-        self.assertEqual(Category.objects.all().count(), 4)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 4)
+        self.assertEqual(Category.objects.all().count(), 5)
 
     def test_post_fails_without_token(self):
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER)
