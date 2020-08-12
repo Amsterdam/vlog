@@ -26,11 +26,11 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 6)
         self.assertEqual(Lane.objects.all().count(), 7)
-        self.assertEqual(TravelTime.objects.all().count(), 2)
+        self.assertEqual(TravelTime.objects.all().count(), 5)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
-    #
+
     def test_post_new_individual_travel_time(self):
         """ Test posting a new vanilla individual travel time message """
         response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS)

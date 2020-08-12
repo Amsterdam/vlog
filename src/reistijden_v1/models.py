@@ -42,7 +42,8 @@ class TravelTime(models.Model):
     # </travelTimeData>
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     travel_time_type = models.CharField(max_length=255)
-    estimation_type = models.CharField(max_length=255)
+    data_quality = models.FloatField(null=True)
+    estimation_type = models.CharField(max_length=255, null=True)
     travel_time = models.IntegerField()
     traffic_speed = models.IntegerField()
 

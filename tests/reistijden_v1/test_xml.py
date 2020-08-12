@@ -68,6 +68,18 @@ TEST_POST_TRAVEL_TIME = """
                 <travelTime>11</travelTime>
                 <trafficSpeed>22</trafficSpeed>
             </travelTimeData>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>-1</travelTime>
+                <trafficSpeed>-1</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>-1</travelTime>
+                <trafficSpeed>-1</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="38.000000" estimationType="estimated">
+                <travelTime>178</travelTime>
+                <trafficSpeed>34</trafficSpeed>
+            </travelTimeData>
         </siteMeasurements>
         <siteMeasurements>
             <measurementSiteReference id="TRJ_2222" version="1.0">
