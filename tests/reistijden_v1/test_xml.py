@@ -23,6 +23,14 @@ TEST_POST_TRAVEL_TIME = """
                                 <viewDirection>111</viewDirection>
                             </camera>
                         </lane>
+                        <lane specificLane="2">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef112">
+                                <coordinates latitude="52.111111" longitude="4.111111" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>111</viewDirection>
+                            </camera>
+                        </lane>
                     </location>
                     <location index="2">
                         <lane specificLane="1">
