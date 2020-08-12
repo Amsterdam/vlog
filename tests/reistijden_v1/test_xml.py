@@ -245,6 +245,7 @@ TEST_POST_TRAFFIC_FLOW = """
                     <vehicleFlow>6</vehicleFlow>
                     <numberOfInputValuesUsed>
                         <category count="6" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
                     </numberOfInputValuesUsed>
                 </measuredFlow>
             </trafficFlowData>

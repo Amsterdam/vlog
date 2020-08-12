@@ -4,7 +4,7 @@ from tests.reistijden_v1.test_xml import (TEST_POST_INDIVIDUAL_TRAVEL_TIME,
                                           TEST_POST_TRAFFIC_FLOW,
                                           TEST_POST_TRAVEL_TIME)
 
-from reistijden_v1.models import (IndividualTravelTime, Lane, Location,
+from reistijden_v1.models import (Category, IndividualTravelTime, Lane, Location,
                                   Measurement, Publication, TrafficFlow,
                                   TravelTime)
 
@@ -29,30 +29,35 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(TravelTime.objects.all().count(), 2)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_individual_travel_time(self):
-        """ Test posting a new vanilla travel time message """
+        """ Test posting a new vanilla individual travel time message """
         response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS)
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 4)
+        self.assertEqual(Lane.objects.all().count(), 4)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 5)
         self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_traffic_flow(self):
-        """ Test posting a new vanilla travel time message """
+        """ Test posting a new vanilla traffic flow message """
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
         self.assertEqual(Location.objects.all().count(), 3)
+        self.assertEqual(Lane.objects.all().count(), 3)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(TrafficFlow.objects.all().count(), 3)
+        self.assertEqual(Category.objects.all().count(), 4)
 
     def test_post_fails_without_token(self):
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER)

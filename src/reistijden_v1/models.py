@@ -77,5 +77,9 @@ class TrafficFlow(models.Model):
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     specific_lane = models.CharField(max_length=255)
     vehicle_flow = models.IntegerField()
-    category_count = models.IntegerField()
-    category_type = models.CharField(max_length=255)
+
+
+class Category(models.Model):
+    traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
+    count = models.IntegerField()
+    type = models.CharField(max_length=255)

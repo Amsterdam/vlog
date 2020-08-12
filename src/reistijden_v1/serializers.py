@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import (IndividualTravelTime, Lane, Location, Measurement,
-                     Publication, TrafficFlow, TravelTime)
+from .models import (Category, IndividualTravelTime, Lane, Location,
+                     Measurement, Publication, TrafficFlow, TravelTime)
 
 
 class LaneSerializer(serializers.ModelSerializer):
@@ -29,7 +29,14 @@ class IndividualTravelTimeSerializer(serializers.ModelSerializer):
         exclude = ['measurement']
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        exclude = ['traffic_flow']
+
+
 class TrafficFlowSerializer(serializers.ModelSerializer):
+    categories = CategorySerializer(many=True)
     class Meta:
         model = TrafficFlow
         exclude = ['measurement']
@@ -74,10 +81,10 @@ class PublicationSerializer(serializers.ModelSerializer):
                     **location_src
                 )
 
-                for lane in lanes:
+                for lane_src in lanes:
                     Lane.objects.create(
                         location=location,
-                        **lane
+                        **lane_src
                     )
 
             for travel_time_src in travel_times:
@@ -93,9 +100,16 @@ class PublicationSerializer(serializers.ModelSerializer):
                 )
 
             for traffic_flow_src in traffic_flows:
-                TrafficFlow.objects.create(
+                categories = traffic_flow_src.pop('categories')
+                traffic_flow = TrafficFlow.objects.create(
                     measurement=measurement,
                     **traffic_flow_src
                 )
+
+                for category_src in categories:
+                    Category.objects.create(
+                        traffic_flow=traffic_flow,
+                        **category_src
+                    )
 
         return publication
