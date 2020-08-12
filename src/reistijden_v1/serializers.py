@@ -1,10 +1,17 @@
 from rest_framework import serializers
 
-from .models import (IndividualTravelTime, Location, Measurement, Publication,
-                     TrafficFlow, TravelTime)
+from .models import (IndividualTravelTime, Lane, Location, Measurement,
+                     Publication, TrafficFlow, TravelTime)
+
+
+class LaneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lane
+        exclude = ['location']
 
 
 class LocationSerializer(serializers.ModelSerializer):
+    lanes = LaneSerializer(many=True)
     class Meta:
         model = Location
         exclude = ['measurement']
@@ -49,39 +56,46 @@ class PublicationSerializer(serializers.ModelSerializer):
         measurements = validated_data.pop('measurements')
         publication = Publication.objects.create(**validated_data)
 
-        for site_measurement in measurements:
-            locations = site_measurement.pop('locations')
-            travel_times = site_measurement.pop('travel_times')
-            individual_travel_times = site_measurement.pop('individual_travel_times')
-            traffic_flows = site_measurement.pop('traffic_flows')
+        for measurement_src in measurements:
+            locations = measurement_src.pop('locations')
+            travel_times = measurement_src.pop('travel_times')
+            individual_travel_times = measurement_src.pop('individual_travel_times')
+            traffic_flows = measurement_src.pop('traffic_flows')
 
             measurement = Measurement.objects.create(
                 publication=publication,
-                **site_measurement
+                **measurement_src
             )
 
-            for location in locations:
-                Location.objects.create(
+            for location_src in locations:
+                lanes = location_src.pop('lanes')
+                location = Location.objects.create(
                     measurement=measurement,
-                    **location
+                    **location_src
                 )
 
-            for travel_time in travel_times:
+                for lane in lanes:
+                    Lane.objects.create(
+                        location=location,
+                        **lane
+                    )
+
+            for travel_time_src in travel_times:
                 TravelTime.objects.create(
                     measurement=measurement,
-                    **travel_time
+                    **travel_time_src
                 )
 
-            for individual_travel_time in individual_travel_times:
+            for individual_travel_time_src in individual_travel_times:
                 IndividualTravelTime.objects.create(
                     measurement=measurement,
-                    **individual_travel_time
+                    **individual_travel_time_src
                 )
 
-            for traffic_flow in traffic_flows:
+            for traffic_flow_src in traffic_flows:
                 TrafficFlow.objects.create(
                     measurement=measurement,
-                    **traffic_flow
+                    **traffic_flow_src
                 )
 
         return publication

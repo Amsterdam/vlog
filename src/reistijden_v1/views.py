@@ -32,16 +32,27 @@ def store_error_content(e, request):
         logger.error(e)
 
 
+def lane_src_to_dict(src_d):
+    return {
+        'specific_lane': src_d['@specific_lane'],
+        'camera_id': src_d['camera']['@id'],
+        'latitude': src_d['camera']['coordinates']['@latitude'],
+        'longitude': src_d['camera']['coordinates']['@longitude'],
+        'lane_number': src_d['camera']['lane_number'],
+        'status': src_d['camera']['status'],
+        'view_direction': src_d['camera']['view_direction'],
+    }
+
+
 def location_src_to_dict(src_d):
+    if type(src_d['lane']) is list:
+        lanes = [lane_src_to_dict(lane) for lane in src_d['lane']]
+    else:
+        lanes = [lane_src_to_dict(src_d['lane'])]
+
     return {
         'index': src_d.get('@index'),
-        'specific_lane': src_d['lane']['@specific_lane'],
-        'camera_id': src_d['lane']['camera']['@id'],
-        'latitude': src_d['lane']['camera']['coordinates']['@latitude'],
-        'longitude': src_d['lane']['camera']['coordinates']['@longitude'],
-        'lane_number': src_d['lane']['camera']['lane_number'],
-        'status': src_d['lane']['camera']['status'],
-        'view_direction': src_d['lane']['camera']['view_direction'],
+        'lanes': lanes
     }
 
 

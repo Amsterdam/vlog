@@ -22,6 +22,10 @@ class Measurement(models.Model):
 class Location(models.Model):
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     index = models.IntegerField(null=True)  # e.g. 1, 2, 3, 4
+
+
+class Lane(models.Model):
+    location = models.ForeignKey('Location', on_delete=models.CASCADE)
     specific_lane = models.CharField(max_length=255)  # Sometimes an int, sometimes a string. Because why not?
     camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
     latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
