@@ -65,13 +65,25 @@ def travel_time_src_to_dict(src_d):
     }
 
 
+def category_src_to_dict(src_d):
+    return {
+        'count': src_d['@count'], 
+        'type': src_d['@type']
+    }
+
+
 def traffic_flow_src_to_dict(src_d):
     measured_flow = src_d['measured_flow']
+    category_src = measured_flow['number_of_input_values_used']['category']
+    if type(category_src) is list:
+        categories = [category_src_to_dict(category) for category in category_src]
+    else:
+        categories = [category_src_to_dict(category_src)]
+
     return {
         'specific_lane': measured_flow['@specific_lane'],
         'vehicle_flow': measured_flow['vehicle_flow'],
-        'category_count': measured_flow['number_of_input_values_used']['category']['@count'],
-        'category_type': measured_flow['number_of_input_values_used']['category']['@type'],
+        'categories': categories
     }
 
 
