@@ -69,7 +69,7 @@ def travel_time_src_to_dict(src_d):
 def category_src_to_dict(src_d):
     return {
         'count': src_d['@count'], 
-        'type': src_d['@type']
+        'type': src_d['@type'] if src_d['@type'] else None  # Convert empty strings to Null
     }
 
 

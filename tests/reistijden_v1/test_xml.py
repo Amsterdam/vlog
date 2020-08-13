@@ -280,7 +280,7 @@ TEST_POST_TRAFFIC_FLOW = """
                 <measuredFlow specificLane="lane1">
                     <vehicleFlow>6</vehicleFlow>
                     <numberOfInputValuesUsed>
-                        <category count="6" type="Auto" />
+                        <category count="6" type="" />
                     </numberOfInputValuesUsed>
                 </measuredFlow>
             </trafficFlowData>
