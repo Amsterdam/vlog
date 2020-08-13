@@ -81,4 +81,4 @@ class MeasuredFlow(models.Model):
 class Category(models.Model):
     measured_flow = models.ForeignKey('MeasuredFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
-    type = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, null=True)
