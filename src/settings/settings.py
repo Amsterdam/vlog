@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_prometheus.middleware.PrometheusAfterMiddleware",
+    "django_sentry_400_middleware.Sentry400CatchMiddleware",
 ]
 
 ROOT_URLCONF = "settings.urls"
