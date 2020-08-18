@@ -12,27 +12,27 @@ class Publication(models.Model):
 
 class Measurement(models.Model):
     publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
-    measurement_site_reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
-    measurement_site_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
-    measurement_site_name = models.CharField(max_length=255, null=True)
-    measurement_site_type = models.CharField(max_length=255)  # e.g. "section"
-    length = models.IntegerField(null=True)
+    measurement_site_reference_id = models.CharField(max_length=10)  # e.g. "SEC_0001"
+    measurement_site_reference_version = models.CharField(max_length=5)  # e.g. "1.0"
+    measurement_site_name = models.CharField(max_length=100, null=True)
+    measurement_site_type = models.CharField(max_length=15)  # e.g. "section"
+    length = models.SmallIntegerField(null=True)
 
 
 class Location(models.Model):
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    index = models.IntegerField(null=True)  # e.g. 1, 2, 3, 4
+    index = models.SmallIntegerField(null=True)  # e.g. 1, 2, 3, 4
 
 
 class Lane(models.Model):
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
-    specific_lane = models.CharField(max_length=255)  # Sometimes an int, sometimes a string. Because why not?
-    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
+    specific_lane = models.CharField(max_length=9)  # Sometimes an int, sometimes a string. Because why not?
+    camera_id = models.CharField(max_length=36)  # Are either UUIDs OR ints in strings
     latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
-    status = models.CharField(max_length=255)  # e.g. "on"
-    view_direction = models.IntegerField()  # e.g. 225
+    lane_number = models.SmallIntegerField()  # e.g. 1, 2, 3, 4
+    status = models.CharField(max_length=10)  # e.g. "on"
+    view_direction = models.SmallIntegerField()  # e.g. 225
 
 
 class TravelTime(models.Model):
@@ -41,11 +41,11 @@ class TravelTime(models.Model):
     #     <trafficSpeed>50</trafficSpeed>
     # </travelTimeData>
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    travel_time_type = models.CharField(max_length=255)
-    data_quality = models.FloatField(null=True)
-    estimation_type = models.CharField(max_length=255, null=True)
-    travel_time = models.IntegerField()
-    traffic_speed = models.IntegerField()
+    travel_time_type = models.CharField(max_length=20)
+    data_quality = models.SmallIntegerField(null=True)
+    estimation_type = models.CharField(max_length=15, null=True)
+    travel_time = models.SmallIntegerField()
+    traffic_speed = models.SmallIntegerField()
 
 
 class IndividualTravelTime(models.Model):
@@ -74,11 +74,11 @@ class MeasuredFlow(models.Model):
     #     </numberOfInputValuesUsed>
     # </measuredFlow>
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    specific_lane = models.CharField(max_length=255)
-    vehicle_flow = models.IntegerField()
+    specific_lane = models.CharField(max_length=10)
+    vehicle_flow = models.SmallIntegerField()
 
 
 class Category(models.Model):
     measured_flow = models.ForeignKey('MeasuredFlow', on_delete=models.CASCADE)
-    count = models.IntegerField()
-    type = models.CharField(max_length=255, null=True)
+    count = models.SmallIntegerField()
+    type = models.CharField(max_length=25, null=True)
