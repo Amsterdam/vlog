@@ -228,6 +228,64 @@ TEST_POST_INDIVIDUAL_TRAVEL_TIME = """
 </amsterdamTravelTimes>
 """
 
+TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT = """
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="travelTime">
+        <publicationReference id="IndividualSectionTT_ESB" version="1.0" />
+        <publicationTime>2019-01-22T13:23:40Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-01-22T11:55:00Z</measurementStartTime>
+            <measurementEndTime>2019-01-22T11:56:00Z</measurementEndTime>
+        </measurementPeriod>
+        <siteMeasurements>
+            <measurementSiteReference id="11_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>111</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="111">
+                                <coordinates latitude="52.111111" longitude="4.111111" />
+                                <laneNumber>1</laneNumber>
+                                <status>off</status>
+                                <viewDirection>111</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane2">
+                            <camera id="222">
+                                <coordinates latitude="52.222222" longitude="4.222222" />
+                                <laneNumber>2</laneNumber>
+                                <status>off</status>
+                                <viewDirection>222</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>ABCDEFGHIJKLMNOPQRSTUVWXYZ11111111111111</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-22T11:55:12Z</startDetectionTime>
+                <endDetectionTime>2019-01-22T11:55:18Z</endDetectionTime>
+                <travelTime>1</travelTime>
+                <trafficSpeed>111</trafficSpeed>
+            </individualTravelTimeData>
+            <individualTravelTimeData>
+                <licensePlate>ABCDEFGHIJKLMNOPQRSTUVWXYZ22222222222222</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-22T11:55:25Z</startDetectionTime>
+                <endDetectionTime>2019-01-22T11:55:31Z</endDetectionTime>
+                <travelTime>2</travelTime>
+                <trafficSpeed>222</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>
+"""
+
 TEST_POST_TRAFFIC_FLOW = """
 <?xml version="1.0" encoding="UTF-8" ?>
 <amsterdamTravelTimes>
