@@ -1,7 +1,5 @@
 import pytest
 from django.conf import settings
-from pytest_factoryboy import register
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
 
