@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework.test import APITestCase
 from tests.reistijden_v1.test_xml import (
-    TEST_POST_INDIVIDUAL_TRAVEL_TIME,
+    TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
     TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME)
 
@@ -73,6 +73,19 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(MeasuredFlow.objects.all().count(), 4)
         self.assertEqual(Category.objects.all().count(), 5)
+
+    def test_empty_measurement(self):
+        response = self.client.post(self.URL, TEST_POST_EMPTY, **REQUEST_HEADERS)
+
+        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(Publication.objects.all().count(), 1)
+        self.assertEqual(Measurement.objects.all().count(), 0)
+        self.assertEqual(Location.objects.all().count(), 0)
+        self.assertEqual(Lane.objects.all().count(), 0)
+        self.assertEqual(TravelTime.objects.all().count(), 0)
+        self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
+        self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_fails_without_token(self):
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER)

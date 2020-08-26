@@ -375,3 +375,17 @@ TEST_POST_TRAFFIC_FLOW = """
     </payloadPublication>
 </amsterdamTravelTimes>
 """
+
+TEST_POST_EMPTY = """
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="individualTravelTime">
+        <publicationReference id="AMS_PUB_INDIVIDUAL_TT" version="1.0" />
+        <publicationTime>2020-08-26T03:28:28Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2020-08-25T02:00:00Z</measurementStartTime>
+            <measurementEndTime>2020-08-25T02:01:00Z</measurementEndTime>
+        </measurementPeriod>
+    </payloadPublication>
+</amsterdamTravelTimes>
+"""

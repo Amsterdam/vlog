@@ -134,10 +134,12 @@ def restructure_data(xml_str):
     data_dict = humps.decamelize(xmltodict.parse(xml_str.strip()))
     publication_src = data_dict['amsterdam_travel_times']['payload_publication']
 
-    if type(publication_src['site_measurements']) is list:
-        measurements = [measurement_src_to_dict(d) for d in publication_src['site_measurements']]
-    else:
-        measurements = [measurement_src_to_dict(publication_src['site_measurements'])]
+    measurements = []
+    if 'site_measurements' in publication_src:
+        if type(publication_src['site_measurements']) is list:
+            measurements = [measurement_src_to_dict(d) for d in publication_src['site_measurements']]
+        else:
+            measurements = [measurement_src_to_dict(publication_src['site_measurements'])]
 
     return {
         'publication_type': publication_src['@type'],
