@@ -389,3 +389,19 @@ TEST_POST_EMPTY = """
     </payloadPublication>
 </amsterdamTravelTimes>
 """
+
+# The message below was a real message that was received
+TEST_POST_WRONG_TAGS = """
+<?xml version="1.0" encoding="UTF-8" ?>
+    <mismatchedtag>
+        <payloadPublication type="individualTravelTime">
+            <publicationReference id="AMS_PUB_INDIVIDUAL_TT" version="1.0" />
+            <publicationTime>2020-08-26T03:28:28Z</publicationTime>
+            <measurementPeriod>
+                <measurementStartTime>2020-08-25T02:00:00Z</measurementStartTime>
+                <measurementEndTime>2020-08-25T02:01:00Z</measurementEndTime>
+            </measurementPeriod>
+        </payloadPublication>
+    <>
+</amsterdamTravelTimes>
+"""

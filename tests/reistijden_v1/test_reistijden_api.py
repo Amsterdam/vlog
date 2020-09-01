@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase
 from tests.reistijden_v1.test_xml import (
     TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
-    TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME)
+    TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME, TEST_POST_WRONG_TAGS)
 
 from reistijden_v1.models import (Category, IndividualTravelTime, Lane,
                                   Location, MeasuredFlow, Measurement,
@@ -79,6 +79,19 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
+        self.assertEqual(Measurement.objects.all().count(), 0)
+        self.assertEqual(Location.objects.all().count(), 0)
+        self.assertEqual(Lane.objects.all().count(), 0)
+        self.assertEqual(TravelTime.objects.all().count(), 0)
+        self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
+        self.assertEqual(Category.objects.all().count(), 0)
+
+    def test_expaterror(self):
+        response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, 'not well-formed (invalid token): line 11, column 5')
+        self.assertEqual(Publication.objects.all().count(), 0)
         self.assertEqual(Measurement.objects.all().count(), 0)
         self.assertEqual(Location.objects.all().count(), 0)
         self.assertEqual(Lane.objects.all().count(), 0)
