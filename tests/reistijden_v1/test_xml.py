@@ -207,22 +207,6 @@ TEST_POST_INDIVIDUAL_TRAVEL_TIME = """
                 <travelTime>8</travelTime>
                 <trafficSpeed>230</trafficSpeed>
             </individualTravelTimeData>
-            <individualTravelTimeData>
-                <licensePlate>ABCDEFGHIJKLMNOPQRSTUVWXYZ44444444444444</licensePlate>
-                <vehicleCategory>M1</vehicleCategory>
-                <startDetectionTime>2019-01-22T11:55:16Z</startDetectionTime>
-                <endDetectionTime>2019-01-22T11:55:24Z</endDetectionTime>
-                <travelTime>8</travelTime>
-                <trafficSpeed>230</trafficSpeed>
-            </individualTravelTimeData>
-            <individualTravelTimeData>
-                <licensePlate>ABCDEFGHIJKLMNOPQRSTUVWXYZ55555555555555</licensePlate>
-                <vehicleCategory>M1</vehicleCategory>
-                <startDetectionTime>2019-01-22T11:55:18Z</startDetectionTime>
-                <endDetectionTime>2019-01-22T11:55:26Z</endDetectionTime>
-                <travelTime>8</travelTime>
-                <trafficSpeed>230</trafficSpeed>
-            </individualTravelTimeData>
         </siteMeasurements>
     </payloadPublication>
 </amsterdamTravelTimes>
