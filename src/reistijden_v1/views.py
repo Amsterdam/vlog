@@ -104,6 +104,16 @@ def get_travel_times_from_measurement(src_d):
     return travel_times
 
 
+def get_individual_travel_times_from_measurement(src_d):
+    individual_travel_times = []
+    if 'individual_travel_time_data' in src_d:
+        if type(src_d['individual_travel_time_data']) is list:
+            individual_travel_times = [d for d in src_d['individual_travel_time_data']]
+        else:
+            individual_travel_times = [src_d['individual_travel_time_data']]
+    return individual_travel_times
+
+
 def get_measured_flows_from_measurement(src_d):
     measured_flows = []
     if 'traffic_flow_data' in src_d:
@@ -125,7 +135,7 @@ def measurement_src_to_dict(src_d):
         'length': site_ref.get('length'),
         'locations': get_location_from_site_ref(site_ref),
         'travel_times': get_travel_times_from_measurement(src_d),
-        'individual_travel_times': [d for d in src_d['individual_travel_time_data']] if 'individual_travel_time_data' in src_d else [],
+        'individual_travel_times': get_individual_travel_times_from_measurement(src_d),
         'measured_flows': get_measured_flows_from_measurement(src_d),
     }
 

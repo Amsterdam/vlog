@@ -42,7 +42,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Location.objects.all().count(), 4)
         self.assertEqual(Lane.objects.all().count(), 4)
         self.assertEqual(TravelTime.objects.all().count(), 0)
-        self.assertEqual(IndividualTravelTime.objects.all().count(), 5)
+        self.assertEqual(IndividualTravelTime.objects.all().count(), 3)
         self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
 
