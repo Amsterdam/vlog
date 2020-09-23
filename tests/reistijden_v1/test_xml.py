@@ -1,3 +1,6 @@
+import xml.etree.ElementTree as ET
+
+
 TEST_POST_TRAVEL_TIME = {}
 TEST_POST_TRAVEL_TIME['source'] = """
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -118,13 +121,14 @@ TEST_POST_TRAVEL_TIME['source'] = """
     </payloadPublication>
 </amsterdamTravelTimes>
 """
+travel_time_root = ET.fromstring(TEST_POST_TRAVEL_TIME['source'].strip())
 TEST_POST_TRAVEL_TIME['publication'] = {
-    'publication_type': 'travelTime',
-    'publication_reference_id': 'PUB_AMS_PRED_TRAJECTORY_TT',
-    'publication_reference_version': '1.0',
-    'publication_time': '2019-02-01T12:15:10Z',
-    'measurement_start_time': '2019-02-01T12:14:00Z',
-    'measurement_end_time': '2019-02-01T12:15:00Z',
+    'publication_type': travel_time_root[0].attrib['type'],
+    'publication_reference_id': travel_time_root[0][0].attrib['id'],
+    'publication_reference_version': travel_time_root[0][0].attrib['version'],
+    'publication_time': travel_time_root[0][1].text,
+    'measurement_start_time': travel_time_root[0][2][0].text,
+    'measurement_end_time': travel_time_root[0][2][1].text,
 }
 
 
