@@ -39,7 +39,7 @@ pipeline {
         }
 
         stage('Push and deploy') {
-            when { 
+            when {
                 anyOf {
                     branch 'master'
                     buildingTag()

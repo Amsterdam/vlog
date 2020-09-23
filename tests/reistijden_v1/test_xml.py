@@ -1,4 +1,5 @@
-TEST_POST_TRAVEL_TIME = """
+TEST_POST_TRAVEL_TIME = {}
+TEST_POST_TRAVEL_TIME['source'] = """
 <?xml version="1.0" encoding="UTF-8" ?>
 <amsterdamTravelTimes>
     <payloadPublication type="travelTime">
@@ -117,6 +118,15 @@ TEST_POST_TRAVEL_TIME = """
     </payloadPublication>
 </amsterdamTravelTimes>
 """
+TEST_POST_TRAVEL_TIME['publication'] = {
+    'publication_type': 'travelTime',
+    'publication_reference_id': 'PUB_AMS_PRED_TRAJECTORY_TT',
+    'publication_reference_version': '1.0',
+    'publication_time': '2019-02-01T12:15:10Z',
+    'measurement_start_time': '2019-02-01T12:14:00Z',
+    'measurement_end_time': '2019-02-01T12:15:00Z',
+}
+
 
 TEST_POST_INDIVIDUAL_TRAVEL_TIME = """
 <?xml version="1.0" encoding="UTF-8" ?>
