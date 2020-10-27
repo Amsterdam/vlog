@@ -51,7 +51,7 @@ pipeline {
 
         stage('Deploy to acceptance') {
             when {
-                tag '*-rc*'
+                tag pattern: "^(?i)\\d+\\.\\d+\\.\\d+(-rc.*)", comparator: "REGEXP"
             }
             steps {
                 sh 'VERSION=acceptance make push'
@@ -68,10 +68,7 @@ pipeline {
 
         stage('Deploy to production') {
             when { 
-                allOf {
-                    buildingTag()
-                    not { tag '*-rc*'}
-                }
+                tag pattern: "^(?i)\\d+\\.\\d+\\.\\d+(?!-rc.*)", comparator: "REGEXP"
             }
             steps {
                 sh 'VERSION=production make push'
