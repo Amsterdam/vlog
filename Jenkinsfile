@@ -19,10 +19,7 @@ pipeline {
     environment {
         SHORT_UUID = sh( script: "uuidgen | cut -d '-' -f1", returnStdout: true).trim()
         COMPOSE_PROJECT_NAME = "${PROJECT_NAME}-${env.SHORT_UUID}"
-        VERSION = env.BRANCH_NAME.replace('/', '-').toLowerCase().replace(
-            'master', 'latest'
-        )
-        IS_RELEASE = "${env.BRANCH_NAME ==~ "release/.*"}"
+        VERSION = env.BRANCH_NAME.replace('master', 'latest')
     }
 
     stages {
@@ -38,64 +35,61 @@ pipeline {
             }
         }
 
-        stage('Push and deploy') {
-            when { 
+        stage('Push') {
+            when {
                 anyOf {
-                    branch 'master'
                     buildingTag()
-                    environment name: 'IS_RELEASE', value: 'true'
+                    branch 'master'
                 }
             }
-            stages {
-                stage('Push') {
-                    steps {
-                        retry(3) {
-                            sh 'make push'
-                        }
-                    }
+            steps {
+                retry(3) {
+                    sh 'make push'
                 }
+            }
+        }
 
-                stage('Deploy to acceptance') {
-                    when { 
-                        anyOf {
-                            environment name: 'IS_RELEASE', value: 'true' 
-                            branch 'master'
-                        }
-                    }
-                    steps {
-                        sh 'VERSION=acceptance make push'
-                        build job: 'Subtask_Openstack_Playbook', parameters: [
-                            string(name: 'PLAYBOOK', value: PLAYBOOK),
-                            string(name: 'INVENTORY', value: "acceptance"),
-                            string(
-                                name: 'PLAYBOOKPARAMS', 
-                                value: "-e deployversion=${VERSION}"
-                            )
-                        ], wait: true
-                    }
+        stage('Deploy to acceptance') {
+            when {
+                tag '*-rc*'
+            }
+            steps {
+                sh 'VERSION=acceptance make push'
+                build job: 'Subtask_Openstack_Playbook', parameters: [
+                    string(name: 'PLAYBOOK', value: PLAYBOOK),
+                    string(name: 'INVENTORY', value: "acceptance"),
+                    string(
+                        name: 'PLAYBOOKPARAMS',
+                        value: "-e deployversion=${VERSION}"
+                    )
+                ], wait: true
+            }
+        }
+
+        stage('Deploy to production') {
+            when { 
+                allOf {
+                    buildingTag()
+                    not { tag '*-rc*'}
                 }
+            }
+            steps {
+                sh 'VERSION=production make push'
+                build job: 'Subtask_Openstack_Playbook', parameters: [
+                    string(name: 'PLAYBOOK', value: PLAYBOOK),
+                    string(name: 'INVENTORY', value: "production"),
+                    string(
+                        name: 'PLAYBOOKPARAMS',
+                        value: "-e deployversion=${VERSION}"
+                    )
+                ], wait: true
 
-                stage('Deploy to production') {
-                    when { buildingTag() }
-                    steps {
-                        sh 'VERSION=production make push'
-                        build job: 'Subtask_Openstack_Playbook', parameters: [
-                            string(name: 'PLAYBOOK', value: PLAYBOOK),
-                            string(name: 'INVENTORY', value: "production"),
-                            string(
-                                name: 'PLAYBOOKPARAMS', 
-                                value: "-e deployversion=${VERSION}"
-                            )
-                        ], wait: true
-
-                        slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
-                            [
-                                "color": "#36a64f",
-                                "title": "Deploy to production succeeded :rocket:",
-                            ]
-                        ])
-                    }
-                }
+                slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE <<
+                    [
+                        "color": "#36a64f",
+                        "title": "Deploy to production succeeded :rocket:",
+                    ]
+                ])
             }
         }
 
@@ -105,7 +99,7 @@ pipeline {
             sh 'make clean'
         }
         failure {
-            slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE << 
+            slackSend(channel: SLACK_CHANNEL, attachments: [SLACK_MESSAGE <<
                 [
                     "color": "#D53030",
                     "title": "Build failed :fire:",
