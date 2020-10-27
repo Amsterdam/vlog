@@ -22,9 +22,9 @@ pyhumps==1.6.1            # via -r requirements.in
 python-dateutil==2.8.1    # via -r requirements.in
 pytz==2020.1              # via django
 raven==6.10.0             # via django-sentry-400-middleware
-sentry-sdk==0.18.0        # via -r requirements.in
+sentry-sdk==0.19.1        # via -r requirements.in
 six==1.15.0               # via djangorestframework-csv, python-dateutil
 sqlparse==0.4.1           # via django
 unicodecsv==0.14.1        # via djangorestframework-csv
-urllib3==1.25.10          # via sentry-sdk
+urllib3==1.25.11          # via sentry-sdk
 xmltodict==0.12.0         # via -r requirements.in
