@@ -38,7 +38,7 @@ pipeline {
         stage('Push') {
             when {
                 anyOf {
-                    tag
+                    buildingTag()
                     branch 'master'
                 }
             }
@@ -69,7 +69,7 @@ pipeline {
         stage('Deploy to production') {
             when { 
                 allOf {
-                    tag
+                    buildingTag()
                     not { tag '*-rc*'}
                 }
             }
