@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements_dev.txt requirements_dev.in
 #
-asgiref==3.3.0            # via -r ./requirements.txt, django
+asgiref==3.3.1            # via -r ./requirements.txt, django
 attrs==20.3.0             # via pytest
 backcall==0.2.0           # via ipython
 certifi==2020.11.8        # via -r ./requirements.txt, sentry-sdk
@@ -12,7 +12,7 @@ click==7.1.2              # via pip-tools
 coverage==5.3             # via pytest-cov
 decorator==4.4.2          # via ipython
 defusedxml==0.6.0         # via -r ./requirements.txt, djangorestframework-xml
-django-extensions==3.0.9  # via -r ./requirements.txt
+django-extensions==3.1.0  # via -r ./requirements.txt
 django-prometheus==2.1.0  # via -r ./requirements.txt
 django-sentry-400-middleware==0.3.0  # via -r ./requirements.txt
 django==3.1.3             # via -r ./requirements.txt, django-sentry-400-middleware, djangorestframework
@@ -22,7 +22,7 @@ djangorestframework==3.12.2  # via -r ./requirements.txt, djangorestframework-cs
 drf-amsterdam==0.4.0      # via -r ./requirements.txt
 drf-extensions==0.6.0     # via -r ./requirements.txt, drf-amsterdam
 factory-boy==3.1.0        # via pytest-factoryboy
-faker==4.14.2             # via factory-boy
+faker==4.17.1             # via factory-boy
 flake8==3.8.4             # via -r requirements_dev.in
 inflection==0.5.1         # via pytest-factoryboy
 iniconfig==1.1.1          # via pytest
@@ -32,13 +32,13 @@ ipython==7.19.0           # via -r requirements_dev.in, ipdb
 isort==5.6.4              # via -r requirements_dev.in
 jedi==0.17.2              # via -r requirements_dev.in, ipython
 mccabe==0.6.1             # via flake8
-packaging==20.4           # via pytest
+packaging==20.7           # via pytest
 parso==0.7.1              # via jedi
 pexpect==4.8.0            # via ipython
 pickleshare==0.7.5        # via ipython
-pip-tools==5.3.1          # via -r requirements_dev.in
+pip-tools==5.4.0          # via -r requirements_dev.in
 pluggy==0.13.1            # via pytest
-prometheus-client==0.8.0  # via -r ./requirements.txt, django-prometheus
+prometheus-client==0.9.0  # via -r ./requirements.txt, django-prometheus
 prompt-toolkit==3.0.8     # via ipython
 psycopg2==2.8.6           # via -r ./requirements.txt
 ptyprocess==0.6.0         # via pexpect
@@ -55,14 +55,14 @@ pytest==6.1.2             # via -r requirements_dev.in, pytest-cov, pytest-djang
 python-dateutil==2.8.1    # via -r ./requirements.txt, faker
 pytz==2020.4              # via -r ./requirements.txt, django
 raven==6.10.0             # via -r ./requirements.txt, django-sentry-400-middleware
-sentry-sdk==0.19.2        # via -r ./requirements.txt
-six==1.15.0               # via -r ./requirements.txt, djangorestframework-csv, packaging, pip-tools, python-dateutil
+sentry-sdk==0.19.4        # via -r ./requirements.txt
+six==1.15.0               # via -r ./requirements.txt, djangorestframework-csv, pip-tools, python-dateutil
 sqlparse==0.4.1           # via -r ./requirements.txt, django
 text-unidecode==1.3       # via faker
 toml==0.10.2              # via pytest
 traitlets==5.0.5          # via ipython
 unicodecsv==0.14.1        # via -r ./requirements.txt, djangorestframework-csv
-urllib3==1.25.11          # via -r ./requirements.txt, sentry-sdk
+urllib3==1.26.2           # via -r ./requirements.txt, sentry-sdk
 wcwidth==0.2.5            # via prompt-toolkit
 xmltodict==0.12.0         # via -r ./requirements.txt
 yapf==0.30.0              # via -r requirements_dev.in
