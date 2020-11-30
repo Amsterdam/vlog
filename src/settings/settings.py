@@ -61,7 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "settings.urls"
-FORCE_SCRIPT_NAME = os.getenv("BASE_URL")
+BASE_URL = os.getenv("BASE_URL", "/")
+FORCE_SCRIPT_NAME = BASE_URL
 
 TEMPLATES = [
     {
@@ -127,7 +128,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-STATIC_URL = "/static/"
+STATIC_URL = os.path.join(BASE_URL, "static/")
 STATIC_ROOT = "static"
 
 # The token that is allowed to post data to protected endpoints
