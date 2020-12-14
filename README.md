@@ -2,6 +2,9 @@
 
 This project is part of the waarnemingen cluster.
 
+# Project architecture
+This project follows the setup used in multiple projects and is described here: https://github.com/Amsterdam/opdrachten_team_dev.  
+
 ## VLOG - VRI Log - Verkeersregelinstallatie Log
 An app to store the VRI logs. The ESB sends files to the POST endpoint provided by this app. This app loops over the 
 file and stores every line in a separate database record. 
