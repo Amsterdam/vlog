@@ -5,12 +5,12 @@
 #    pip-compile --output-file=requirements.txt requirements.in
 #
 asgiref==3.3.1            # via django
-certifi==2020.11.8        # via sentry-sdk
+certifi==2020.12.5        # via sentry-sdk
 defusedxml==0.6.0         # via djangorestframework-xml
 django-extensions==3.1.0  # via -r requirements.in
 django-prometheus==2.1.0  # via -r requirements.in
 django-sentry-400-middleware==0.3.0  # via -r requirements.in
-django==3.1.3             # via -r requirements.in, django-sentry-400-middleware, djangorestframework
+django==3.1.4             # via -r requirements.in, django-sentry-400-middleware, djangorestframework
 djangorestframework-csv==2.1.0  # via drf-amsterdam
 djangorestframework-xml==2.0.0  # via drf-amsterdam
 djangorestframework==3.12.2  # via djangorestframework-csv, drf-amsterdam, drf-extensions
@@ -22,7 +22,7 @@ pyhumps==1.6.1            # via -r requirements.in
 python-dateutil==2.8.1    # via -r requirements.in
 pytz==2020.4              # via django
 raven==6.10.0             # via django-sentry-400-middleware
-sentry-sdk==0.19.4        # via -r requirements.in
+sentry-sdk==0.19.5        # via -r requirements.in
 six==1.15.0               # via djangorestframework-csv, python-dateutil
 sqlparse==0.4.1           # via django
 unicodecsv==0.14.1        # via djangorestframework-csv
