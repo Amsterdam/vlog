@@ -22,7 +22,7 @@ djangorestframework==3.12.2  # via -r ./requirements.txt, djangorestframework-cs
 drf-amsterdam==0.4.0      # via -r ./requirements.txt
 drf-extensions==0.6.0     # via -r ./requirements.txt, drf-amsterdam
 factory-boy==3.2.0        # via pytest-factoryboy
-faker==5.4.0              # via factory-boy
+faker==5.6.5              # via factory-boy
 flake8==3.8.4             # via -r requirements_dev.in
 inflection==0.5.1         # via pytest-factoryboy
 iniconfig==1.1.1          # via pytest
@@ -39,16 +39,16 @@ pickleshare==0.7.5        # via ipython
 pip-tools==5.5.0          # via -r requirements_dev.in
 pluggy==0.13.1            # via pytest
 prometheus-client==0.9.0  # via -r ./requirements.txt, django-prometheus
-prompt-toolkit==3.0.10    # via ipython
+prompt-toolkit==3.0.14    # via ipython
 psycopg2==2.8.6           # via -r ./requirements.txt
 ptyprocess==0.7.0         # via pexpect
 py==1.10.0                # via pytest
 pycodestyle==2.6.0        # via flake8
 pyflakes==2.2.0           # via flake8
-pygments==2.7.3           # via ipython
+pygments==2.7.4           # via ipython
 pyhumps==1.6.1            # via -r ./requirements.txt
 pyparsing==2.4.7          # via packaging
-pytest-cov==2.10.1        # via -r requirements_dev.in
+pytest-cov==2.11.1        # via -r requirements_dev.in
 pytest-django==4.1.0      # via -r requirements_dev.in
 pytest-factoryboy==2.1.0  # via -r requirements_dev.in
 pytest==6.2.1             # via -r requirements_dev.in, pytest-cov, pytest-django, pytest-factoryboy
