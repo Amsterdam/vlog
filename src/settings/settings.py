@@ -134,10 +134,8 @@ STATIC_ROOT = "static"
 # The token that is allowed to post data to protected endpoints
 AUTHORIZATION_TOKEN = os.getenv("AUTHORIZATION_TOKEN")
 
-SENTRY_DSN = os.getenv("SENTRY_DSN")
-if SENTRY_DSN:
+if os.getenv("SENTRY_DSN"):
     sentry_sdk.init(
-        dsn=SENTRY_DSN,
         integrations=[DjangoIntegration()],
         ignore_errors=["ExpiredSignatureError"],
         request_bodies='always'
