@@ -2,6 +2,7 @@ Django
 django_extensions
 django_prometheus
 django-sentry-400-middleware
+datapunt_data_ingress
 drf_amsterdam
 prometheus_client
 psycopg2

@@ -20,9 +20,11 @@ click==7.1.2
     # via pip-tools
 coverage==5.5
     # via pytest-cov
+datapunt-data-ingress==2.0.1
+    # via -r ./requirements.txt
 decorator==4.4.2
     # via ipython
-defusedxml==0.7.0
+defusedxml==0.7.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-xml
@@ -35,6 +37,7 @@ django-sentry-400-middleware==0.3.0
 django==3.1.7
     # via
     #   -r ./requirements.txt
+    #   datapunt-data-ingress
     #   django-sentry-400-middleware
     #   djangorestframework
 djangorestframework-csv==2.1.0
@@ -51,7 +54,7 @@ djangorestframework==3.12.2
     #   djangorestframework-csv
     #   drf-amsterdam
     #   drf-extensions
-drf-amsterdam==0.4.0
+drf-amsterdam==0.4.1
     # via -r ./requirements.txt
 drf-extensions==0.7.0
     # via
@@ -59,7 +62,7 @@ drf-extensions==0.7.0
     #   drf-amsterdam
 factory-boy==3.2.0
     # via pytest-factoryboy
-faker==6.5.0
+faker==6.6.0
     # via factory-boy
 flake8==3.8.4
     # via -r requirements_dev.in
@@ -67,7 +70,7 @@ inflection==0.5.1
     # via pytest-factoryboy
 iniconfig==1.1.1
     # via pytest
-ipdb==0.13.5
+ipdb==0.13.6
     # via -r requirements_dev.in
 ipython-genutils==0.2.0
     # via traitlets
@@ -155,7 +158,9 @@ sqlparse==0.4.1
 text-unidecode==1.3
     # via faker
 toml==0.10.2
-    # via pytest
+    # via
+    #   ipdb
+    #   pytest
 traitlets==5.0.5
     # via ipython
 unicodecsv==0.14.1

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "vlog",
     "api",
     "reistijden_v1",
+    "ingress"
 ]
 
 MIDDLEWARE = [
@@ -118,6 +119,22 @@ REST_FRAMEWORK = {
         "contrib.rest_framework.renderers.PlainTextRenderer",
     ],
 }
+
+# A list of classpaths to implementations of ingress.consumer.IngressConsumer
+# to handle the data in the queue.
+INGRESS_CONSUMER_CLASSES = ['reistijden_v1.consumer.ReistijdenConsumer']
+
+# A list of authentication classes used in the ingress view.
+# See https://www.django-rest-framework.org/api-guide/authentication/
+INGRESS_AUTHENTICATION_CLASSES = [
+    "contrib.rest_framework.authentication.SimpleTokenAuthentication",
+]
+
+# A list of permission classes used in the ingress view.
+# See https://www.django-rest-framework.org/api-guide/permissions/
+INGRESS_PERMISSION_CLASSES = [
+    'rest_framework.permissions.IsAuthenticated',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

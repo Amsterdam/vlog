@@ -20,5 +20,5 @@ urlpatterns = [
     re_path('^status/', include('health.urls')),
     re_path(r'^api/(?P<version>v[0-9]+)/', include('api.urls')),
     re_path('', include('django_prometheus.urls')),
-    path('reistijden/v1/', include('reistijden_v1.urls')),
+    path('ingress/', include('ingress.urls')),
 ]
