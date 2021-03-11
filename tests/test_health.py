@@ -1,7 +1,7 @@
 from unittest import TestCase, mock
 
 import pytest
-from django.test import Client
+from django.test import Client, override_settings
 
 
 @pytest.mark.django_db
@@ -14,7 +14,7 @@ class TestViews(TestCase):
         assert response.status_code == 200
         assert response.content == b"Connectivity OK"
 
-    @mock.patch('health.views.settings.DEBUG', True)
+    @override_settings(DEBUG=True)
     def test_debug_false(self):
         response = self.http_client.get('/status/health')
         assert response.status_code == 500
