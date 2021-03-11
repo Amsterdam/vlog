@@ -21,6 +21,13 @@ CMD ["/deploy/docker-run.sh"]
 FROM app as dev
 
 USER root
+
+RUN apt-get update \
+ && apt-get install -y \
+    libgv-python \
+    graphviz \
+    graphviz-dev
+
 WORKDIR /app_install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt

@@ -2,14 +2,13 @@ from django.conf import settings
 from ingress.models import Collection, FailedMessage, Message
 from reistijden_v1.consumer import ReistijdenConsumer
 from reistijden_v1.models import (
-    Category,
     IndividualTravelTime,
     Lane,
-    Location,
-    MeasuredFlow,
+    MeasurementLocation,
+    TrafficFlow,
     Measurement,
     Publication,
-    TravelTime,
+    TravelTime, VehicleCategory,
 )
 from rest_framework.test import APITestCase
 
@@ -42,12 +41,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
-        self.assertEqual(Location.objects.all().count(), 6)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 6)
         self.assertEqual(Lane.objects.all().count(), 7)
         self.assertEqual(TravelTime.objects.all().count(), 5)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_post_new_individual_travel_time(self):
         """ Test posting a new vanilla individual travel time message """
@@ -60,12 +59,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
-        self.assertEqual(Location.objects.all().count(), 4)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 4)
         self.assertEqual(Lane.objects.all().count(), 4)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 3)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_post_new_individual_travel_time_with_single_measurement(self):
         """
@@ -82,12 +81,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 1)
-        self.assertEqual(Location.objects.all().count(), 2)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 2)
         self.assertEqual(Lane.objects.all().count(), 2)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 2)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_post_new_traffic_flow(self):
         """ Test posting a new vanilla traffic flow message """
@@ -98,12 +97,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
-        self.assertEqual(Location.objects.all().count(), 3)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 3)
         self.assertEqual(Lane.objects.all().count(), 3)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 4)
-        self.assertEqual(Category.objects.all().count(), 5)
+        self.assertEqual(TrafficFlow.objects.all().count(), 4)
+        self.assertEqual(VehicleCategory.objects.all().count(), 5)
 
     def test_empty_measurement(self):
         response = self.client.post(self.URL, TEST_POST_EMPTY, **REQUEST_HEADERS)
@@ -113,12 +112,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 0)
-        self.assertEqual(Location.objects.all().count(), 0)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 0)
         self.assertEqual(Lane.objects.all().count(), 0)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_expaterror(self):
         response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
@@ -135,12 +134,12 @@ class ReistijdenPostTest(APITestCase):
         )
         self.assertEqual(Publication.objects.all().count(), 0)
         self.assertEqual(Measurement.objects.all().count(), 0)
-        self.assertEqual(Location.objects.all().count(), 0)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 0)
         self.assertEqual(Lane.objects.all().count(), 0)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_missing_location_contained_in_itinerary(self):
         response = self.client.post(
@@ -152,12 +151,12 @@ class ReistijdenPostTest(APITestCase):
 
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
-        self.assertEqual(Location.objects.all().count(), 2)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 2)
         self.assertEqual(Lane.objects.all().count(), 3)
         self.assertEqual(TravelTime.objects.all().count(), 9)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
-        self.assertEqual(Category.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(VehicleCategory.objects.all().count(), 0)
 
     def test_post_fails_without_token(self):
         response = self.client.post(

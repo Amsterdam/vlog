@@ -1,5 +1,4 @@
 import os
-from distutils.util import strtobool
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -72,18 +71,19 @@ TEMPLATES = [
 WSGI_APPLICATION = "main.wsgi.application"
 
 # Database
-if strtobool(os.getenv("DATABASE_ENABLED", "true")):
-    DATABASES = {
-        "default": {
-            "ENGINE": "contrib.timescale.db.backend",
-            "NAME": os.getenv("DATABASE_NAME", "dev"),
-            "USER": os.getenv("DATABASE_USER", "dev"),
-            "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
-            "HOST": os.getenv("DATABASE_HOST", "database"),
-            "PORT": os.getenv("DATABASE_PORT", "5432"),
-            "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "contrib.timescale.db.backend",
+        "NAME": os.getenv("DATABASE_NAME", "dev"),
+        "USER": os.getenv("DATABASE_USER", "dev"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
+        "HOST": os.getenv("DATABASE_HOST", "database"),
+        "PORT": os.getenv("DATABASE_PORT", "5432"),
+        "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
     }
+}
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",

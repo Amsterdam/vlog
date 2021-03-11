@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="individualTravelTime">
+        <publicationReference id="PUB_AMS_INDIVIDUAL_TT" version="1.0" />
+        <publicationTime>2019-01-31T23:02:07Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-01-30T23:14:00Z</measurementStartTime>
+            <measurementEndTime>2019-01-30T23:15:00Z</measurementEndTime>
+        </measurementPeriod>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0009" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1256</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bb7fb71-b779-41ba-99ea-66e0b2ad8a27">
+                                <coordinates latitude="52.364006" longitude="4.878841" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="575f7f5f-da34-40e4-bc08-682ed595ab5e">
+                                <coordinates latitude="52.374256" longitude="4.875272" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>0C939EB8D2877BDA3D820A42DE8DD602E1BA0F2A</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T22:54:30Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:20Z</endDetectionTime>
+                <travelTime>1190</travelTime>
+                <trafficSpeed>3</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0019" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>2650</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>248</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="e96b667b-f9f3-4958-aed9-472335f0950a">
+                                <coordinates latitude="52.358250" longitude="4.843029" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>96C69BE52D6E571DBD8A7C19D7ABD0FB0B2C15C8</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:00:27Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:03Z</endDetectionTime>
+                <travelTime>816</travelTime>
+                <trafficSpeed>11</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0021" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>2241</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="250e2ced-6053-41d2-ad92-899cbe44a692">
+                                <coordinates latitude="52.348289" longitude="4.919699" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>68</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="6b0ed693-84a2-486b-a2cc-98d6884e677c">
+                                <coordinates latitude="52.336102" longitude="4.943391" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>E6403AD23054A1E6D69127FA27BD5DAC19112EB7</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:12:43Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:15Z</endDetectionTime>
+                <travelTime>92</travelTime>
+                <trafficSpeed>87</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0023" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>3735</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="6b0ed693-84a2-486b-a2cc-98d6884e677c">
+                                <coordinates latitude="52.336102" longitude="4.943391" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="be8e87cf-c0c4-47de-800f-3b1af4e354cf">
+                                <coordinates latitude="52.307228" longitude="4.971523" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>158</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>B90ECADF252257EFD333919B230D0A1CC496FC01</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:08:08Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:00Z</endDetectionTime>
+                <travelTime>352</travelTime>
+                <trafficSpeed>38</trafficSpeed>
+            </individualTravelTimeData>
+            <individualTravelTimeData>
+                <licensePlate>849DF2031265429D86E051C49CBDA3DC9E2351A6</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:29Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:56Z</endDetectionTime>
+                <travelTime>207</travelTime>
+                <trafficSpeed>64</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0024" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>2756</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="4c500f74-80e7-4852-babd-68abd1ef0c1f">
+                                <coordinates latitude="52.368401" longitude="4.970895" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="befda96a-2f48-402c-9b25-f4cf050dcb0b">
+                                <coordinates latitude="52.373177" longitude="4.933230" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>DD6D12CB86A085CE2393BB21BCB370E9FEE91C07</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:02:09Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:45Z</endDetectionTime>
+                <travelTime>756</travelTime>
+                <trafficSpeed>13</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0039" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1600</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="65ecc4d4-4a51-4e71-888a-7aad4b3b6777">
+                                <coordinates latitude="52.372318" longitude="4.933635" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="34140b04-0b25-43ed-a4d5-3d73a00399f8">
+                                <coordinates latitude="52.363281" longitude="4.922042" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>248</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>322649D22667F82815FE6500D3BC869B9F1195E7</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:03:32Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:55Z</endDetectionTime>
+                <travelTime>683</travelTime>
+                <trafficSpeed>8</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0043" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1630</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="4f731672-236e-4049-876d-3e6dc5607114">
+                                <coordinates latitude="52.363903" longitude="4.923448" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="befda96a-2f48-402c-9b25-f4cf050dcb0b">
+                                <coordinates latitude="52.373177" longitude="4.933230" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>DD6D12CB86A085CE2393BB21BCB370E9FEE91C07</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:12:14Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:45Z</endDetectionTime>
+                <travelTime>151</travelTime>
+                <trafficSpeed>38</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0046" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1779</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="65ecc4d4-4a51-4e71-888a-7aad4b3b6777">
+                                <coordinates latitude="52.372318" longitude="4.933635" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="db3a3001-2c3a-4489-9d24-63ee0208fc84">
+                                <coordinates latitude="52.362778" longitude="4.923333" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>158</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>BD98728241DDB15501D95473D0911E013284B01C</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:06:00Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:34Z</endDetectionTime>
+                <travelTime>514</travelTime>
+                <trafficSpeed>12</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0049" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1698</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                                <coordinates latitude="52.389618" longitude="4.891221" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                                <coordinates latitude="52.392670" longitude="4.862752" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>5E904D7B9DACD72DBFC2E6668CA786EF743C78CE</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:51Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:25Z</endDetectionTime>
+                <travelTime>154</travelTime>
+                <trafficSpeed>39</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0063" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1880</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="5a6061bc-cab3-4811-b242-7a85b54f5e6b">
+                                <coordinates latitude="52.348721" longitude="4.918459" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ae036c8f-515e-402a-a22c-2e7eadeab18f">
+                                <coordinates latitude="52.358723" longitude="4.903407" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>248</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>72C09E6EB61054A61DC2E838AFD938F761E0369B</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:09:55Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:16Z</endDetectionTime>
+                <travelTime>261</travelTime>
+                <trafficSpeed>25</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0072" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1038</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="34140b04-0b25-43ed-a4d5-3d73a00399f8">
+                                <coordinates latitude="52.363281" longitude="4.922042" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>248</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="f8720124-97ae-4aae-9e2f-340672e662cb">
+                                <coordinates latitude="52.360432" longitude="4.908612" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>D7B6F19E0B861AC20CD5D3727EDD9F07BFEA6981</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:59Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:23Z</endDetectionTime>
+                <travelTime>144</travelTime>
+                <trafficSpeed>25</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0080" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>894</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="befda96a-2f48-402c-9b25-f4cf050dcb0b">
+                                <coordinates latitude="52.373177" longitude="4.933230" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="db96e004-fee7-4f95-b4a9-17ba74a7eaf3">
+                                <coordinates latitude="52.376400" longitude="4.921220" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>1D1A938A4AEB70A394BA58DBC30B722609D78524</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:13:55Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:58Z</endDetectionTime>
+                <travelTime>63</travelTime>
+                <trafficSpeed>51</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0082" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>961</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7abeb082-f73c-483b-aac9-b3644d636ac4">
+                                <coordinates latitude="52.376099" longitude="4.922350" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>112</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="65ecc4d4-4a51-4e71-888a-7aad4b3b6777">
+                                <coordinates latitude="52.372318" longitude="4.933635" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>35B0BA6FD33D47D92BE7CB98D0F718D7F4BEB37C</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:12:55Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:00Z</endDetectionTime>
+                <travelTime>65</travelTime>
+                <trafficSpeed>53</trafficSpeed>
+            </individualTravelTimeData>
+            <individualTravelTimeData>
+                <licensePlate>D396025D21B514F75ECA80BDF64C23F620E78214</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:13:23Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:16Z</endDetectionTime>
+                <travelTime>53</travelTime>
+                <trafficSpeed>65</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0091" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1698</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="c4f95ba4-cdb0-42fb-b1ed-2170f4e159f0">
+                                <coordinates latitude="52.357784" longitude="4.855979" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>68</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="69ce25b6-621c-4d7b-bb7e-4346406df9c8">
+                                <coordinates latitude="52.363556" longitude="4.878957" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>C9BCD6BCC8D5E6018A232233E7380AD7BEB082ED</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:51Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:41Z</endDetectionTime>
+                <travelTime>170</travelTime>
+                <trafficSpeed>35</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0092" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1750</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="c4f95ba4-cdb0-42fb-b1ed-2170f4e159f0">
+                                <coordinates latitude="52.357784" longitude="4.855979" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>68</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="3bb7fb71-b779-41ba-99ea-66e0b2ad8a27">
+                                <coordinates latitude="52.364006" longitude="4.878841" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>18C56B469943AAB0E1AD2BEC5E40F14217F47BA9</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:38Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:40Z</endDetectionTime>
+                <travelTime>182</travelTime>
+                <trafficSpeed>34</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0098" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>611</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="e96b667b-f9f3-4958-aed9-472335f0950a">
+                                <coordinates latitude="52.358250" longitude="4.843029" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>96C69BE52D6E571DBD8A7C19D7ABD0FB0B2C15C8</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:05:23Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:03Z</endDetectionTime>
+                <travelTime>520</travelTime>
+                <trafficSpeed>4</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0112" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1719</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="746dba37-bf04-44c4-a2e4-31164546dfb4">
+                                <coordinates latitude="52.340481" longitude="4.953218" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>22</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>AAB90536F0BAC480027AE7B80BE9525D883B26D4</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:12:37Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:40Z</endDetectionTime>
+                <travelTime>123</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0147" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>2228</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="57ba5bb3-62fe-481e-98cc-3bebf1032add">
+                                <coordinates latitude="52.365963" longitude="4.975174" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="348dff37-330e-456d-a4dc-cb97475cdc8a">
+                                <coordinates latitude="52.352600" longitude="4.999930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>B4C0C072D2D80E7E20E8F411492F5D3A21BD77E9</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:08:21Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:02Z</endDetectionTime>
+                <travelTime>341</travelTime>
+                <trafficSpeed>23</trafficSpeed>
+            </individualTravelTimeData>
+            <individualTravelTimeData>
+                <licensePlate>0C5CAFB0F9302E481414D3BD5FFA6970D896D7F6</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:20Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:13Z</endDetectionTime>
+                <travelTime>173</travelTime>
+                <trafficSpeed>46</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0171" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1466</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="1e9ac96d-066f-4ed8-b4f2-34e1a5e2b236">
+                                <coordinates latitude="52.369770" longitude="4.907240" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>225</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ae036c8f-515e-402a-a22c-2e7eadeab18f">
+                                <coordinates latitude="52.358723" longitude="4.903407" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>248</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>68A6B5BFB365AD15F77F2489822ACD43A4EE99B1</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:50Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:39Z</endDetectionTime>
+                <travelTime>169</travelTime>
+                <trafficSpeed>31</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0172" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1217</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="f8720124-97ae-4aae-9e2f-340672e662cb">
+                                <coordinates latitude="52.360432" longitude="4.908612" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>338</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="c2bee365-ab39-446c-adbb-3411564ec4e2">
+                                <coordinates latitude="52.369221" longitude="4.906203" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>8E40DBB91B91139F391B8584E62F63F65B24DA57</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:11:20Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:17Z</endDetectionTime>
+                <travelTime>177</travelTime>
+                <trafficSpeed>24</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0189" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1646</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="bff688d3-58ee-4c75-a863-677169143415">
+                                <coordinates latitude="52.310204" longitude="4.938064" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>158</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="562dc827-e502-49fc-a34b-6b6b22481f6d">
+                                <coordinates latitude="52.298893" longitude="4.949424" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>68</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>AF6AFAD5A067F4AFDCDB4DF8BB6BC7FF50A063B3</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T22:34:34Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:22Z</endDetectionTime>
+                <travelTime>2388</travelTime>
+                <trafficSpeed>2</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="SEC_0215" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>1786</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="4">
+                            <camera id="dda6fd9a-b146-41c6-a875-5d0d75ab8bd9">
+                                <coordinates latitude="52.355534" longitude="4.965955" />
+                                <laneNumber>4</laneNumber>
+                                <status>on</status>
+                                <viewDirection>22</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="4c500f74-80e7-4852-babd-68abd1ef0c1f">
+                                <coordinates latitude="52.368401" longitude="4.970895" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <individualTravelTimeData>
+                <licensePlate>81C7E5D9CD24CE3AA3E033C8EB528156D54F750E</licensePlate>
+                <vehicleCategory>M1</vehicleCategory>
+                <startDetectionTime>2019-01-30T23:13:12Z</startDetectionTime>
+                <endDetectionTime>2019-01-30T23:14:54Z</endDetectionTime>
+                <travelTime>102</travelTime>
+                <trafficSpeed>63</trafficSpeed>
+            </individualTravelTimeData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>
