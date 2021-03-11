@@ -66,7 +66,7 @@ services:
     environment:
       SECRET_KEY: "tests"
       AUTHORIZATION_TOKEN: "dev"
-      DJANGO_SETTINGS_MODULE: "settings.settings"
+      DJANGO_SETTINGS_MODULE: "main.settings"
       PYTEST_ADDOPTS:
     depends_on:
       - database
