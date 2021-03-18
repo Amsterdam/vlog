@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 from reistijden_v1.models import (Category, IndividualTravelTime, Lane,
                                   Location, MeasuredFlow, Measurement,
                                   Publication, TravelTime)
-from tests.reistijden_v1.test_xml import (
+from tests.api.reistijden_v1.test_xml import (
     TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
     TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME, TEST_POST_WRONG_TAGS,
@@ -17,7 +17,7 @@ REQUEST_HEADERS = {**AUTHORIZATION_HEADER, **CONTENT_TYPE_HEADER}
 
 class ReistijdenPostTest(APITestCase):
     def setUp(self):
-        self.URL = '/reistijden/v1/'
+        self.URL = '/api/v1/reistijden/'
 
     def test_post_new_travel_time(self):
         """ Test posting a new vanilla travel time message """
@@ -35,7 +35,9 @@ class ReistijdenPostTest(APITestCase):
 
     def test_post_new_individual_travel_time(self):
         """ Test posting a new vanilla individual travel time message """
-        response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS)
+        response = self.client.post(
+            self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
+        )
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -49,7 +51,11 @@ class ReistijdenPostTest(APITestCase):
 
     def test_post_new_individual_travel_time_with_single_measurement(self):
         """ Test posting a new individual travel time message with a single measurement """
-        response = self.client.post(self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT, **REQUEST_HEADERS)
+        response = self.client.post(
+            self.URL,
+            TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
+            **REQUEST_HEADERS,
+        )
 
         self.assertEqual(response.status_code, 201, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -91,7 +97,9 @@ class ReistijdenPostTest(APITestCase):
     def test_expaterror(self):
         response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.data, 'not well-formed (invalid token): line 11, column 5')
+        self.assertEqual(
+            response.data, 'not well-formed (invalid token): line 11, column 5'
+        )
         self.assertEqual(Publication.objects.all().count(), 0)
         self.assertEqual(Measurement.objects.all().count(), 0)
         self.assertEqual(Location.objects.all().count(), 0)
@@ -102,8 +110,10 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_missing_locationContainedInItinerary(self):
-        response = self.client.post(self.URL, TEST_POST_MISSING_locationContainedInItinerary, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 201)
+        response = self.client.post(
+            self.URL, TEST_POST_MISSING_locationContainedInItinerary, **REQUEST_HEADERS
+        )
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
         self.assertEqual(Location.objects.all().count(), 2)
@@ -114,15 +124,21 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_fails_without_token(self):
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER)
+        response = self.client.post(
+            self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER
+        )
         self.assertEqual(response.status_code, 401)
 
     def test_post_wrongy_formatted_xml(self):
-        response = self.client.post(self.URL, '<wrongly>formatted</xml>', **REQUEST_HEADERS)
+        response = self.client.post(
+            self.URL, '<wrongly>formatted</xml>', **REQUEST_HEADERS
+        )
         self.assertEqual(response.status_code, 400, response.data)
 
     def test_post_wrongy_formatted_message_structure(self):
-        response = self.client.post(self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS)
+        response = self.client.post(
+            self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS
+        )
         self.assertEqual(response.status_code, 400, response.data)
 
     def test_non_unicode(self):
@@ -135,7 +151,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot get it
-        response = self.client.get(f'{self.URL}1/', **AUTHORIZATION_HEADER)
+        response = self.client.get(f'{self.URL}', **AUTHORIZATION_HEADER)
         self.assertEqual(response.status_code, 405)
 
     def test_update_method_not_allowed(self):
@@ -144,7 +160,9 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot update it
-        response = self.client.put(f'{self.URL}1/', TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
+        response = self.client.put(
+            f'{self.URL}', TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS
+        )
         self.assertEqual(response.status_code, 405)
 
     def test_delete_method_not_allowed(self):
@@ -153,5 +171,5 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(response.status_code, 201)
 
         # Then check if I cannot delete it
-        response = self.client.delete(f'{self.URL}1/', **AUTHORIZATION_HEADER)
+        response = self.client.delete(f'{self.URL}', **AUTHORIZATION_HEADER)
         self.assertEqual(response.status_code, 405)

@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
-from .models import (Category, IndividualTravelTime, Lane, Location,
-                     MeasuredFlow, Measurement, Publication, TravelTime)
+from reistijden_v1.models import (
+    Category, IndividualTravelTime, Lane, Location,
+    MeasuredFlow, Measurement, Publication, TravelTime)
 
 
 class LaneSerializer(serializers.ModelSerializer):
