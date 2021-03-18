@@ -90,8 +90,9 @@ def measured_flow_src_to_dict(src_d):
 def get_location_from_site_ref(site_ref):
     if 'location' in site_ref:
         return [location_src_to_dict(site_ref['location'])]
-    else:
+    elif 'location_contained_in_itinerary' in site_ref:
         return [location_src_to_dict(d) for d in site_ref['location_contained_in_itinerary']['location']]
+    return []
 
 
 def get_travel_times_from_measurement(src_d):

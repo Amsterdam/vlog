@@ -1,13 +1,14 @@
 from django.conf import settings
 from rest_framework.test import APITestCase
-from tests.reistijden_v1.test_xml import (
-    TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
-    TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
-    TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME, TEST_POST_WRONG_TAGS)
 
 from reistijden_v1.models import (Category, IndividualTravelTime, Lane,
                                   Location, MeasuredFlow, Measurement,
                                   Publication, TravelTime)
+from tests.reistijden_v1.test_xml import (
+    TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
+    TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
+    TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME, TEST_POST_WRONG_TAGS,
+    TEST_POST_MISSING_locationContainedInItinerary)
 
 AUTHORIZATION_HEADER = {'HTTP_AUTHORIZATION': f"Token {settings.AUTHORIZATION_TOKEN}"}
 CONTENT_TYPE_HEADER = {'content_type': 'application/xml'}
@@ -96,6 +97,18 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Location.objects.all().count(), 0)
         self.assertEqual(Lane.objects.all().count(), 0)
         self.assertEqual(TravelTime.objects.all().count(), 0)
+        self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
+        self.assertEqual(MeasuredFlow.objects.all().count(), 0)
+        self.assertEqual(Category.objects.all().count(), 0)
+
+    def test_missing_locationContainedInItinerary(self):
+        response = self.client.post(self.URL, TEST_POST_MISSING_locationContainedInItinerary, **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Publication.objects.all().count(), 1)
+        self.assertEqual(Measurement.objects.all().count(), 3)
+        self.assertEqual(Location.objects.all().count(), 2)
+        self.assertEqual(Lane.objects.all().count(), 3)
+        self.assertEqual(TravelTime.objects.all().count(), 9)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
