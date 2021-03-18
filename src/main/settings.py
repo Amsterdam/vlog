@@ -1,4 +1,3 @@
-
 import os
 from distutils.util import strtobool
 
@@ -127,7 +126,7 @@ if os.getenv("SENTRY_DSN"):
     sentry_sdk.init(
         integrations=[DjangoIntegration()],
         ignore_errors=["ExpiredSignatureError"],
-        request_bodies='always'
+        request_bodies='always',
     )
 
 # Prometheus

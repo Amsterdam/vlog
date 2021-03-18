@@ -1,7 +1,8 @@
 import logging
 
-from django.contrib.gis.db.backends.postgis.base import \
-    DatabaseWrapper as PostgisDBWrapper
+from django.contrib.gis.db.backends.postgis.base import (
+    DatabaseWrapper as PostgisDBWrapper,
+)
 from django.db import ProgrammingError
 
 from .schema import TimescaleSchemaEditor
@@ -28,5 +29,5 @@ class DatabaseWrapper(PostgisDBWrapper):
                     'If timescale is needed, make sure you are connected '
                     'to the database as a superuser '
                     'or add the extension manually.',
-                    exc_info=True
+                    exc_info=True,
                 )
