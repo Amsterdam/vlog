@@ -32,8 +32,8 @@ INSTALLED_APPS = [
     "contrib.timescale",
     "django_prometheus",
     "vlog",
-    "api",
     "reistijden_v1",
+    "api",
 ]
 
 MIDDLEWARE = [
