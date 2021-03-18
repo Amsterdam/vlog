@@ -1,0 +1,11 @@
+[tool.black]
+
+# Default is 88
+line-length = 88
+
+# Black will default to double quotes
+skip-string-normalization = true
+
+# Warning; multiline exclude does not work properly
+# See https://github.com/shopkeep/pytest-black/issues/36
+exclude = 'migrations'
