@@ -1,14 +1,25 @@
 from django.conf import settings
 from rest_framework.test import APITestCase
 
-from reistijden_v1.models import (Category, IndividualTravelTime, Lane,
-                                  Location, MeasuredFlow, Measurement,
-                                  Publication, TravelTime)
+from reistijden_v1.models import (
+    Category,
+    IndividualTravelTime,
+    Lane,
+    Location,
+    MeasuredFlow,
+    Measurement,
+    Publication,
+    TravelTime,
+)
 from tests.api.reistijden_v1.test_xml import (
-    TEST_POST_EMPTY, TEST_POST_INDIVIDUAL_TRAVEL_TIME,
+    TEST_POST_EMPTY,
+    TEST_POST_INDIVIDUAL_TRAVEL_TIME,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
-    TEST_POST_TRAFFIC_FLOW, TEST_POST_TRAVEL_TIME, TEST_POST_WRONG_TAGS,
-    TEST_POST_MISSING_locationContainedInItinerary)
+    TEST_POST_TRAFFIC_FLOW,
+    TEST_POST_TRAVEL_TIME,
+    TEST_POST_WRONG_TAGS,
+    TEST_POST_MISSING_locationContainedInItinerary,
+)
 
 AUTHORIZATION_HEADER = {'HTTP_AUTHORIZATION': f"Token {settings.AUTHORIZATION_TOKEN}"}
 CONTENT_TYPE_HEADER = {'content_type': 'application/xml'}
@@ -23,7 +34,7 @@ class ReistijdenPostTest(APITestCase):
         """ Test posting a new vanilla travel time message """
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
 
-        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 6)
@@ -39,7 +50,7 @@ class ReistijdenPostTest(APITestCase):
             self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
         )
 
-        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 4)
@@ -50,14 +61,16 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_individual_travel_time_with_single_measurement(self):
-        """ Test posting a new individual travel time message with a single measurement """
+        """
+        Test posting a new individual travel time message with a single measurement
+        """
         response = self.client.post(
             self.URL,
             TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
             **REQUEST_HEADERS,
         )
 
-        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 1)
         self.assertEqual(Location.objects.all().count(), 2)
@@ -71,7 +84,7 @@ class ReistijdenPostTest(APITestCase):
         """ Test posting a new vanilla traffic flow message """
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
 
-        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
         self.assertEqual(Location.objects.all().count(), 3)
@@ -84,7 +97,7 @@ class ReistijdenPostTest(APITestCase):
     def test_empty_measurement(self):
         response = self.client.post(self.URL, TEST_POST_EMPTY, **REQUEST_HEADERS)
 
-        self.assertEqual(response.status_code, 201, response.data)
+        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 0)
         self.assertEqual(Location.objects.all().count(), 0)
@@ -148,7 +161,7 @@ class ReistijdenPostTest(APITestCase):
     def test_get_method_not_allowed(self):
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
         # Then check if I cannot get it
         response = self.client.get(f'{self.URL}', **AUTHORIZATION_HEADER)
@@ -157,7 +170,7 @@ class ReistijdenPostTest(APITestCase):
     def test_update_method_not_allowed(self):
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
         # Then check if I cannot update it
         response = self.client.put(
@@ -168,7 +181,7 @@ class ReistijdenPostTest(APITestCase):
     def test_delete_method_not_allowed(self):
         # First post one
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
 
         # Then check if I cannot delete it
         response = self.client.delete(f'{self.URL}', **AUTHORIZATION_HEADER)
