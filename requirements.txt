@@ -8,7 +8,7 @@ asgiref==3.3.1
     # via django
 certifi==2020.12.5
     # via sentry-sdk
-defusedxml==0.7.0
+defusedxml==0.7.1
     # via djangorestframework-xml
 django-extensions==3.1.1
     # via -r requirements.in
@@ -30,7 +30,7 @@ djangorestframework==3.12.2
     #   djangorestframework-csv
     #   drf-amsterdam
     #   drf-extensions
-drf-amsterdam==0.4.0
+drf-amsterdam==0.4.1
     # via -r requirements.in
 drf-extensions==0.7.0
     # via drf-amsterdam
@@ -58,7 +58,7 @@ sqlparse==0.4.1
     # via django
 unicodecsv==0.14.1
     # via djangorestframework-csv
-urllib3==1.26.3
+urllib3==1.26.4
     # via sentry-sdk
 xmltodict==0.12.0
     # via -r requirements.in
