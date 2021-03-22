@@ -26,6 +26,8 @@ click==7.1.2
     #   pip-tools
 coverage==5.5
     # via pytest-cov
+datapunt-data-ingress==2.0.3
+    # via -r ./requirements.txt
 decorator==4.4.2
     # via ipython
 defusedxml==0.7.1
@@ -41,6 +43,7 @@ django-sentry-400-middleware==0.3.0
 django==3.1.7
     # via
     #   -r ./requirements.txt
+    #   datapunt-data-ingress
     #   django-sentry-400-middleware
     #   djangorestframework
 djangorestframework-csv==2.1.0

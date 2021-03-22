@@ -1,6 +1,8 @@
 from django.conf import settings
+from ingress.models import Collection
 from rest_framework.test import APITestCase
 
+from reistijden_v1.consumer import ReistijdenConsumer
 from reistijden_v1.models import (
     Category,
     IndividualTravelTime,
@@ -28,11 +30,13 @@ REQUEST_HEADERS = {**AUTHORIZATION_HEADER, **CONTENT_TYPE_HEADER}
 
 class ReistijdenPostTest(APITestCase):
     def setUp(self):
-        self.URL = '/api/v1/reistijden/'
+        Collection.objects.get_or_create(name='reistijden')
+        self.URL = '/ingress/reistijden/'
 
     def test_post_new_travel_time(self):
         """ Test posting a new vanilla travel time message """
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -49,6 +53,7 @@ class ReistijdenPostTest(APITestCase):
         response = self.client.post(
             self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
         )
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -69,6 +74,7 @@ class ReistijdenPostTest(APITestCase):
             TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
             **REQUEST_HEADERS,
         )
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -83,6 +89,7 @@ class ReistijdenPostTest(APITestCase):
     def test_post_new_traffic_flow(self):
         """ Test posting a new vanilla traffic flow message """
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
@@ -96,6 +103,7 @@ class ReistijdenPostTest(APITestCase):
 
     def test_empty_measurement(self):
         response = self.client.post(self.URL, TEST_POST_EMPTY, **REQUEST_HEADERS)
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)

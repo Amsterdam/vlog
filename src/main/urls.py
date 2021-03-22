@@ -13,10 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import include, re_path
+from django.urls import include, path, re_path
 
 urlpatterns = [
     re_path('^status/', include('health.urls')),
     re_path(r'^api/(?P<version>v[0-9]+)/', include('api.urls')),
     re_path('', include('django_prometheus.urls')),
+    path('ingress/', include('ingress.urls')),
 ]
