@@ -9,7 +9,7 @@ from rest_framework import exceptions, generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .serializers import PublicationSerializer
+from reistijden_v1.serializers import PublicationSerializer
 
 logger = logging.getLogger(__name__)
 
