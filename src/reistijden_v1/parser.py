@@ -64,11 +64,12 @@ class ReistijdenParser:
     def get_location_from_site_ref(self, site_ref):
         if "location" in site_ref:
             return [self.location_src_to_dict(site_ref["location"])]
-        else:
+        elif "location_contained_in_itinerary" in site_ref:
             return [
                 self.location_src_to_dict(d)
                 for d in site_ref["location_contained_in_itinerary"]["location"]
             ]
+        return []
 
     def store_error_content(self, e, request):
         """
