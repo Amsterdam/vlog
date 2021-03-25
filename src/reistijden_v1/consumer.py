@@ -3,7 +3,7 @@ import logging
 from ingress.consumer.base import BaseConsumer
 
 from reistijden_v1.serializers import PublicationSerializer
-from src.reistijden_v1.parser import ReistijdenParser
+from reistijden_v1.parser import ReistijdenParser
 
 logger = logging.getLogger(__name__)
 
