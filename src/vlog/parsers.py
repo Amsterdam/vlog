@@ -24,7 +24,7 @@ def parse_vlog_line(data: str):
         time=date,
         vri_id=int(vri_id),
         message_type=int(message_type),
-        message=message.strip()
+        message=message.strip(),
     )
 
 

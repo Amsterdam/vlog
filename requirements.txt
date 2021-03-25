@@ -8,6 +8,8 @@ asgiref==3.3.1
     # via django
 certifi==2020.12.5
     # via sentry-sdk
+datapunt-data-ingress==2.0.3
+    # via -r requirements.in
 defusedxml==0.7.1
     # via djangorestframework-xml
 django-extensions==3.1.1
@@ -19,6 +21,7 @@ django-sentry-400-middleware==0.3.0
 django==3.1.7
     # via
     #   -r requirements.in
+    #   datapunt-data-ingress
     #   django-sentry-400-middleware
     #   djangorestframework
 djangorestframework-csv==2.1.0

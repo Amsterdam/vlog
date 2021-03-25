@@ -26,8 +26,8 @@ ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
 RUN chmod -R a+r /app_install
 
-WORKDIR /src
 USER datapunt
+WORKDIR /src
 
 # Any process that requires to write in the home dir
 # we write to /tmp since we have no home dir

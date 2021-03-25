@@ -53,10 +53,9 @@ class TestVlogParser:
             '2002810110',
         ]
 
-        data = newlines.join([
-            separator.join(map(str, x))
-            for x in zip(dates, vri_ids, types, messages)
-        ])
+        data = newlines.join(
+            [separator.join(map(str, x)) for x in zip(dates, vri_ids, types, messages)]
+        )
         lines = parse_vlog_lines(data)
         assert len(lines) == 5
 

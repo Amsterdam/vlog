@@ -5,20 +5,22 @@ from xml.parsers.expat import ExpatError
 
 import humps
 import xmltodict
-from rest_framework import exceptions, status, viewsets
+from rest_framework import exceptions, generics, status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_xml.parsers import XMLParser
 
-from .serializers import PublicationSerializer
+from reistijden_v1.serializers import PublicationSerializer
 
 logger = logging.getLogger(__name__)
 
 
 def store_error_content(e, request):
     """
-    In order to keep the content of the messages that resulted in errors, we store them in the container for now.
-    This is a massive hack and should be removed very soon. If you find this code, please remove it.
+    In order to keep the content of the messages that resulted in errors, we store
+    them in the container for now.
+
+    This is a massive hack and should be removed very soon.
+    If you find this code, please remove it.
     """
     try:
         error_type = e.__repr__().replace("'", '')
@@ -50,10 +52,7 @@ def location_src_to_dict(src_d):
     else:
         lanes = [lane_src_to_dict(src_d['lane'])]
 
-    return {
-        'index': src_d.get('@index'),
-        'lanes': lanes
-    }
+    return {'index': src_d.get('@index'), 'lanes': lanes}
 
 
 def travel_time_src_to_dict(src_d):
@@ -68,8 +67,10 @@ def travel_time_src_to_dict(src_d):
 
 def category_src_to_dict(src_d):
     return {
-        'count': src_d['@count'], 
-        'type': src_d['@type'] if src_d['@type'] else None  # Convert empty strings to Null
+        'count': src_d['@count'],
+        'type': src_d['@type']
+        if src_d['@type']
+        else None,  # Convert empty strings to Null
     }
 
 
@@ -83,7 +84,7 @@ def measured_flow_src_to_dict(src_d):
     return {
         'specific_lane': src_d['@specific_lane'],
         'vehicle_flow': src_d['vehicle_flow'],
-        'categories': categories
+        'categories': categories,
     }
 
 
@@ -91,7 +92,10 @@ def get_location_from_site_ref(site_ref):
     if 'location' in site_ref:
         return [location_src_to_dict(site_ref['location'])]
     elif 'location_contained_in_itinerary' in site_ref:
-        return [location_src_to_dict(d) for d in site_ref['location_contained_in_itinerary']['location']]
+        return [
+            location_src_to_dict(d)
+            for d in site_ref['location_contained_in_itinerary']['location']
+        ]
     return []
 
 
@@ -99,7 +103,10 @@ def get_travel_times_from_measurement(src_d):
     travel_times = []
     if 'travel_time_data' in src_d:
         if type(src_d['travel_time_data']) is list:
-            travel_times = [travel_time_src_to_dict(travel_time) for travel_time in src_d['travel_time_data']]
+            travel_times = [
+                travel_time_src_to_dict(travel_time)
+                for travel_time in src_d['travel_time_data']
+            ]
         else:
             travel_times = [travel_time_src_to_dict(src_d['travel_time_data'])]
     return travel_times
@@ -120,7 +127,10 @@ def get_measured_flows_from_measurement(src_d):
     if 'traffic_flow_data' in src_d:
         measured_flows_src = src_d['traffic_flow_data']['measured_flow']
         if type(measured_flows_src) is list:
-            measured_flows = [measured_flow_src_to_dict(measured_flow) for measured_flow in measured_flows_src]
+            measured_flows = [
+                measured_flow_src_to_dict(measured_flow)
+                for measured_flow in measured_flows_src
+            ]
         else:
             measured_flows = [measured_flow_src_to_dict(measured_flows_src)]
     return measured_flows
@@ -148,27 +158,32 @@ def restructure_data(xml_str):
     measurements = []
     if 'site_measurements' in publication_src:
         if type(publication_src['site_measurements']) is list:
-            measurements = [measurement_src_to_dict(d) for d in publication_src['site_measurements']]
+            measurements = [
+                measurement_src_to_dict(d) for d in publication_src['site_measurements']
+            ]
         else:
-            measurements = [measurement_src_to_dict(publication_src['site_measurements'])]
+            measurements = [
+                measurement_src_to_dict(publication_src['site_measurements'])
+            ]
 
     return {
         'publication_type': publication_src['@type'],
         'publication_reference_id': publication_src['publication_reference']['@id'],
-        'publication_reference_version': publication_src['publication_reference']['@version'],
+        'publication_reference_version': publication_src['publication_reference'][
+            '@version'
+        ],
         'publication_time': publication_src['publication_time'],
-        'measurement_start_time': publication_src['measurement_period']['measurement_start_time'],
-        'measurement_end_time': publication_src['measurement_period']['measurement_end_time'],
+        'measurement_start_time': publication_src['measurement_period'][
+            'measurement_start_time'
+        ],
+        'measurement_end_time': publication_src['measurement_period'][
+            'measurement_end_time'
+        ],
         'measurements': measurements,
     }
 
 
-class PublicationViewSet(viewsets.ModelViewSet):
-    serializer_class = PublicationSerializer
-    serializer_detail_class = PublicationSerializer
-    parser_classes = [XMLParser]
-
-    http_method_names = ['post']
+class ReistijdenViewSet(viewsets.ViewSetMixin, generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):

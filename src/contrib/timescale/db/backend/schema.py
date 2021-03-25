@@ -10,7 +10,7 @@ class TimescaleSchemaEditor(PostGISSchemaEditor):
         "chunk_time_interval => interval {interval})"
     )
 
-    sql_drop_primary_key = ('ALTER TABLE {table} ' 'DROP CONSTRAINT {pkey}')
+    sql_drop_primary_key = 'ALTER TABLE {table} ' 'DROP CONSTRAINT {pkey}'
 
     def drop_primary_key(self, model):
         """
