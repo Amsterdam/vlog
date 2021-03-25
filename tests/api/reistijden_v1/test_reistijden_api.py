@@ -36,10 +36,10 @@ class ReistijdenPostTest(APITestCase):
     def test_post_new_travel_time(self):
         """ Test posting a new vanilla travel time message """
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
+
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
-        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 6)
@@ -54,7 +54,7 @@ class ReistijdenPostTest(APITestCase):
         response = self.client.post(
             self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
@@ -76,7 +76,7 @@ class ReistijdenPostTest(APITestCase):
             TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
             **REQUEST_HEADERS,
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
@@ -92,11 +92,10 @@ class ReistijdenPostTest(APITestCase):
     def test_post_new_traffic_flow(self):
         """ Test posting a new vanilla traffic flow message """
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
-        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 3)
         self.assertEqual(Location.objects.all().count(), 3)
@@ -108,11 +107,10 @@ class ReistijdenPostTest(APITestCase):
 
     def test_empty_measurement(self):
         response = self.client.post(self.URL, TEST_POST_EMPTY, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
-        self.assertEqual(response.status_code, 200, response.data)
         self.assertEqual(Publication.objects.all().count(), 1)
         self.assertEqual(Measurement.objects.all().count(), 0)
         self.assertEqual(Location.objects.all().count(), 0)
@@ -124,7 +122,7 @@ class ReistijdenPostTest(APITestCase):
 
     def test_expaterror(self):
         response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
@@ -148,7 +146,7 @@ class ReistijdenPostTest(APITestCase):
         response = self.client.post(
             self.URL, TEST_POST_MISSING_locationContainedInItinerary, **REQUEST_HEADERS
         )
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
@@ -165,7 +163,7 @@ class ReistijdenPostTest(APITestCase):
         response = self.client.post(
             self.URL, TEST_POST_TRAVEL_TIME, **CONTENT_TYPE_HEADER
         )
-        self.assertEqual(response.status_code, 401)
+        self.assertEqual(response.status_code, 401, response.data)
 
     def test_post_wrongly_formatted_xml(self):
         response = self.client.post(
@@ -177,7 +175,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Message.objects.count(), 0)
         self.assertEqual(FailedMessage.objects.count(), 1)
 
-    def test_post_wrongy_formatted_message_structure(self):
+    def test_post_wrongly_formatted_message_structure(self):
         response = self.client.post(
             self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS
         )
@@ -189,37 +187,8 @@ class ReistijdenPostTest(APITestCase):
 
     def test_non_unicode(self):
         response = self.client.post(self.URL, '\x80abc', **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
         self.assertEqual(Message.objects.count(), 0)
         self.assertEqual(FailedMessage.objects.count(), 1)
-
-    def test_get_method_not_allowed(self):
-        # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
-
-        # Then check if I cannot get it
-        response = self.client.get(f'{self.URL}', **AUTHORIZATION_HEADER)
-        self.assertEqual(response.status_code, 405)
-
-    def test_update_method_not_allowed(self):
-        # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
-
-        # Then check if I cannot update it
-        response = self.client.put(
-            f'{self.URL}', TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS
-        )
-        self.assertEqual(response.status_code, 405)
-
-    def test_delete_method_not_allowed(self):
-        # First post one
-        response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200)
-
-        # Then check if I cannot delete it
-        response = self.client.delete(f'{self.URL}', **AUTHORIZATION_HEADER)
-        self.assertEqual(response.status_code, 405)
