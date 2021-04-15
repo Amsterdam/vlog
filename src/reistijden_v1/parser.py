@@ -110,7 +110,7 @@ class ReistijdenParser:
 
     def travel_time_src_to_dict(self, src_d):
         return {
-            "travel_time_type": src_d["@travel_time_type"],
+            "type": src_d["@travel_time_type"],
             "data_quality": src_d.get("@data_quality"),
             "estimation_type": src_d.get("@estimation_type"),
             "travel_time": src_d["travel_time"],

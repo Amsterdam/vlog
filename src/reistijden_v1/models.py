@@ -94,16 +94,48 @@ class Lane(models.Model):
 
 
 class TravelTime(models.Model):
-    # <travelTimeData travelTimeType="predicted" estimationType="estimated">
-    #     <travelTime>73</travelTime>
-    #     <trafficSpeed>50</trafficSpeed>
-    # </travelTimeData>
+    """
+    A Measurement measured over multiple MeasurementLocations which contains
+    the general travel time and traffic speed for traffic passing these locations.
+    """
+
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    travel_time_type = models.CharField(max_length=255)
-    data_quality = models.FloatField(null=True)
-    estimation_type = models.CharField(max_length=255, null=True)
-    travel_time = models.IntegerField()
-    traffic_speed = models.IntegerField()
+    type = models.CharField(
+        max_length=255,
+        help_text=("One of: raw, representative, processed, predicted, actual"),
+    )
+    num_input_values_used = models.IntegerField(
+        null=True,
+        help_text=(
+            "The total no: of samples (individual travel times) used to "
+            "compute the travel time."
+        ),
+    )
+    estimation_type = models.CharField(
+        max_length=255,
+        null=True,
+        help_text=(
+            "The type of estimation used, one of best, estimated, instantaneous, "
+            "reconstituted"
+        ),
+    )
+    data_quality = models.FloatField(
+        null=True, help_text=("Quality of the computed travel time/speed (0...100%)")
+    )
+    data_error = models.BooleanField(
+        max_length=255,
+        default=False,
+        help_text=(
+            "Optional elemnt to indicate whether there were errors in the "
+            "travel time computation or there are alarm reported against this site."
+        ),
+    )
+    travel_time = models.IntegerField(
+        help_text=("The computed travel time in seconds.")
+    )
+    traffic_speed = models.IntegerField(
+        help_text=("The computed driving speed in kmph.")
+    )
 
 
 class IndividualTravelTime(models.Model):
