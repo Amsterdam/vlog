@@ -7,6 +7,7 @@ TEST_POST_TRAVEL_TIME = """
         <measurementPeriod>
             <measurementStartTime>2019-02-01T12:14:00Z</measurementStartTime>
             <measurementEndTime>2019-02-01T12:15:00Z</measurementEndTime>
+            <duration>10</duration>
         </measurementPeriod>
         <siteMeasurements>
             <measurementSiteReference id="TRJ_1111" version="1.0">
