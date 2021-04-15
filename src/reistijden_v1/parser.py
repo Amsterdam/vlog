@@ -41,7 +41,7 @@ class ReistijdenParser:
                 "measurement_end_time"
             ),
             "measurement_duration": publication_src["measurement_period"].get(
-                "measurement_duration"
+                "duration"
             ),
             "measurements": measurements,
         }
@@ -115,6 +115,8 @@ class ReistijdenParser:
             "estimation_type": src_d.get("@estimation_type"),
             "travel_time": src_d["travel_time"],
             "traffic_speed": src_d["traffic_speed"],
+            "num_input_values_used": src_d.get("@number_of_input_values_used"),
+            "data_error": src_d.get("data_error", False),
         }
 
     def category_src_to_dict(self, src_d):
