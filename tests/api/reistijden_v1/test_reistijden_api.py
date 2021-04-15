@@ -42,8 +42,8 @@ class ReistijdenPostTest(APITestCase):
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
+        # assert publication existance and content
         self.assertEqual(Publication.objects.all().count(), 1)
-
         publication = Publication.objects.get()
         self.assertEqual(publication.type, "travelTime")
         self.assertEqual(publication.reference_id, "PUB_AMS_PRED_TRAJECTORY_TT")
@@ -65,7 +65,42 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 6)
         self.assertEqual(Lane.objects.all().count(), 7)
+
+        # assert traveltime existence and content
         self.assertEqual(TravelTime.objects.all().count(), 5)
+        self.assertTrue(
+            TravelTime.objects.filter(
+                type="predicted",
+                estimation_type="estimated",
+                travel_time=11,
+                traffic_speed=22,
+                data_error=False,
+                data_quality=None,
+                num_input_values_used=None,
+            ).exists()
+        )
+        self.assertTrue(
+            TravelTime.objects.filter(
+                type="processed",
+                estimation_type="estimated",
+                travel_time=178,
+                traffic_speed=34,
+                data_error=True,
+                data_quality=38.0,
+                num_input_values_used=10,
+            ).exists()
+        )
+        self.assertTrue(
+            TravelTime.objects.filter(
+                type="raw", travel_time=-1, traffic_speed=-1
+            ).exists()
+        )
+        self.assertTrue(
+            TravelTime.objects.filter(
+                type="representative", travel_time=-1, traffic_speed=-1
+            ).exists()
+        )
+
         self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
         self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)

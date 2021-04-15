@@ -77,9 +77,10 @@ TEST_POST_TRAVEL_TIME = """
                 <travelTime>-1</travelTime>
                 <trafficSpeed>-1</trafficSpeed>
             </travelTimeData>
-            <travelTimeData travelTimeType="processed" dataQuality="38.000000" estimationType="estimated">
+            <travelTimeData travelTimeType="processed" dataQuality="38.000000" estimationType="estimated" numberOfInputValuesUsed="10">
                 <travelTime>178</travelTime>
                 <trafficSpeed>34</trafficSpeed>
+                <dataError>true</dataError>
             </travelTimeData>
         </siteMeasurements>
         <siteMeasurements>

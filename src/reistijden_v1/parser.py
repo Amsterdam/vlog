@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import datetime
+from distutils.util import strtobool
 
 import humps
 import xmltodict
@@ -116,7 +117,7 @@ class ReistijdenParser:
             "travel_time": src_d["travel_time"],
             "traffic_speed": src_d["traffic_speed"],
             "num_input_values_used": src_d.get("@number_of_input_values_used"),
-            "data_error": src_d.get("data_error", False),
+            "data_error": bool(strtobool(src_d.get("data_error", "false"))),
         }
 
     def category_src_to_dict(self, src_d):
