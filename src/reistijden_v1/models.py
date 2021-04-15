@@ -1,6 +1,15 @@
 from django.db import models
 
 
+class VehicleCategory(models.Model):
+    """
+    A category for vehicles, e.g. auto, aanhanger, motor.
+    Note that this could also be a vehicle code, such as 'M1'.
+    """
+
+    name = models.CharField(max_length=255, unique=True)
+
+
 class Publication(models.Model):
     """
     A data publication posted to our api which contains Measurements for
