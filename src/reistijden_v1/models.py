@@ -2,16 +2,68 @@ from django.db import models
 
 
 class Publication(models.Model):
-    publication_type = models.CharField(
-        max_length=255
-    )  # one of travelTime or trafficFlow
-    publication_reference_id = models.CharField(
-        max_length=255
-    )  # e.g. PUB_AMS_ACTUAL_TRAJECTORY_TT
-    publication_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
-    publication_time = models.DateTimeField()
-    measurement_start_time = models.DateTimeField()
-    measurement_end_time = models.DateTimeField()
+    """
+    A data publication posted to our api which contains Measurements for
+    MeasurementSites.
+    """
+
+    type = models.CharField(
+        max_length=255,
+        help_text=(
+            "The type of publication. One of: TrafficFlow, TravelTime, "
+            "IndividualTravelTime"
+        ),
+    )
+    reference_id = models.CharField(
+        max_length=255,
+        help_text=(
+            "Unique publication identifier. The ID is a unique for data set delivered "
+            "by the system and shall remain unchanged throughout the system lifetime"
+        ),
+    )
+    version = models.CharField(
+        max_length=255,
+        help_text=(
+            "The version of the publication. Incremented (+1) every time section "
+            "and/or route definition are modified i.e., a) New section(s) and/or "
+            "trajectory(ies) are activated, b) Existing section(s) and/or "
+            "trajectory(ies) are deactivated c)	Existing section(s) and/or "
+            "trajectories are modified"
+        ),
+    )
+    publication_time = models.DateTimeField(
+        help_text=(
+            "The date time the latest version (refer attribute 'version') "
+            "for this publication was published in UTC format: ISO 8601 "
+            "[https://en.wikipedia.org/wiki/ISO_8601]"
+        )
+    )
+
+    # The following defines the period against which the statistics were reported.
+    # The period is defined either using the measurementStartTime-duration pair
+    # or measurementStartTime-measurementendTime pair.
+    # A default measurement period of 60s is assumed, if duration and
+    # measurementEndTime elements are not present.
+    measurement_start_time = models.DateTimeField(
+        help_text=(
+            "The time recorded here is the starting time of the supply period "
+            "in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]"
+        )
+    )
+    measurement_end_time = models.DateTimeField(
+        null=True,
+        help_text=(
+            "The time recorded here is the ending time of the supply period "
+            "in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]"
+        ),
+    )
+    measurement_duration = models.IntegerField(
+        null=True,
+        help_text=(
+            "The duration element provides the measurement frequency at which "
+            "the travel time values are calculated/exported."
+        ),
+    )
 
 
 class Measurement(models.Model):

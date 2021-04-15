@@ -30,18 +30,19 @@ class ReistijdenParser:
                 ]
 
         return {
-            "publication_type": publication_src["@type"],
-            "publication_reference_id": publication_src["publication_reference"]["@id"],
-            "publication_reference_version": publication_src["publication_reference"][
-                "@version"
-            ],
+            "type": publication_src["@type"],
+            "reference_id": publication_src["publication_reference"]["@id"],
+            "version": publication_src["publication_reference"]["@version"],
             "publication_time": publication_src["publication_time"],
             "measurement_start_time": publication_src["measurement_period"][
                 "measurement_start_time"
             ],
-            "measurement_end_time": publication_src["measurement_period"][
+            "measurement_end_time": publication_src["measurement_period"].get(
                 "measurement_end_time"
-            ],
+            ),
+            "measurement_duration": publication_src["measurement_period"].get(
+                "measurement_duration"
+            ),
             "measurements": measurements,
         }
 
