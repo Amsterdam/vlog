@@ -1,3 +1,4 @@
+from datetime import datetime
 from unittest.mock import patch
 
 from django.conf import settings
@@ -62,6 +63,25 @@ class ReistijdenPostTest(ReistijdenPostTestBase):
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(Publication.objects.all().count(), 1)
+
+        publication = Publication.objects.get()
+        self.assertEqual(publication.type, "travelTime")
+        self.assertEqual(publication.reference_id, "PUB_AMS_PRED_TRAJECTORY_TT")
+        self.assertEqual(publication.version, "1.0")
+        self.assertEqual(
+            publication.publication_time,
+            datetime.fromisoformat("2019-02-01T12:15:10+00:00"),
+        )
+        self.assertEqual(
+            publication.measurement_start_time,
+            datetime.fromisoformat("2019-02-01T12:14:00+00:00"),
+        )
+        self.assertEqual(
+            publication.measurement_end_time,
+            datetime.fromisoformat("2019-02-01T12:15:00+00:00"),
+        )
+        self.assertEqual(publication.measurement_duration, 10)
+
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(MeasurementLocation.objects.all().count(), 6)
         self.assertEqual(Lane.objects.all().count(), 7)
@@ -80,6 +100,25 @@ class ReistijdenPostTest(ReistijdenPostTestBase):
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
         self.assertEqual(Publication.objects.all().count(), 1)
+
+        publication = Publication.objects.get()
+        self.assertEqual(publication.type, "travelTime")
+        self.assertEqual(publication.reference_id, "IndividualSectionTT_ESB")
+        self.assertEqual(publication.version, "1.0")
+        self.assertEqual(
+            publication.publication_time,
+            datetime.fromisoformat("2019-01-22T13:23:40+00:00"),
+        )
+        self.assertEqual(
+            publication.measurement_start_time,
+            datetime.fromisoformat("2019-01-22T11:55:00+00:00"),
+        )
+        self.assertEqual(
+            publication.measurement_end_time,
+            datetime.fromisoformat("2019-01-22T11:56:00+00:00"),
+        )
+        self.assertIsNone(publication.measurement_duration)
+
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(MeasurementLocation.objects.all().count(), 4)
         self.assertEqual(Lane.objects.all().count(), 4)
