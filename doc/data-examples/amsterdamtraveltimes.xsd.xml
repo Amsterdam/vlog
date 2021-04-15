@@ -1,0 +1,123 @@
+<amsterdamTravelTimes>
+  <payloadPublication type="travelTime">
+    <publicationReference id="string" version="1000.00"/>
+    <publicationTime>2007-10-26T08:36:28</publicationTime>
+    <measurementPeriod>
+      <measurementStartTime>2004-02-14T19:44:14</measurementStartTime>
+      <!--Optional:-->
+      <measurementEndTime>2018-11-01T06:36:46+01:00</measurementEndTime>
+      <!--Optional:-->
+      <duration>100</duration>
+    </measurementPeriod>
+    <!--Zero or more repetitions:-->
+    <siteMeasurements>
+      <measurementSiteReference id="string" version="1000.00">
+        <!--Optional:-->
+        <measurementSiteName>string</measurementSiteName>
+        <measurementSiteType>section</measurementSiteType>
+        <!--Optional:-->
+        <length>100</length>
+        <!--Optional:-->
+        <locationContainedInItinerary>
+          <!--2 or more repetitions:-->
+          <location index="100">
+            <!--1 or more repetitions:-->
+            <lane specificLane="string">
+              <!--1 or more repetitions:-->
+              <camera id="string">
+                <!--Optional:-->
+                <coordinates latitude="1000.00" longitude="1000.00"/>
+                <laneNumber>100</laneNumber>
+                <!--Optional:-->
+                <status>off</status>
+                <viewDirection>100</viewDirection>
+              </camera>
+            </lane>
+          </location>
+          <location index="100">
+            <!--1 or more repetitions:-->
+            <lane specificLane="string">
+              <!--1 or more repetitions:-->
+              <camera id="string">
+                <!--Optional:-->
+                <coordinates latitude="1000.00" longitude="1000.00"/>
+                <laneNumber>100</laneNumber>
+                <!--Optional:-->
+                <status>off</status>
+                <viewDirection>100</viewDirection>
+              </camera>
+            </lane>
+          </location>
+        </locationContainedInItinerary>
+        <!--Optional:-->
+        <location index="100">
+          <!--1 or more repetitions:-->
+          <lane specificLane="string">
+            <!--1 or more repetitions:-->
+            <camera id="string">
+              <!--Optional:-->
+              <coordinates latitude="1000.00" longitude="1000.00"/>
+              <laneNumber>100</laneNumber>
+              <!--Optional:-->
+              <status>on</status>
+              <viewDirection>100</viewDirection>
+            </camera>
+          </lane>
+        </location>
+      </measurementSiteReference>
+      <!--Zero or more repetitions:-->
+      <travelTimeData dataQuality="1000.00" estimationType="reconstituted" numberOfInputValuesUsed="0" travelTimeType="actual">
+        <!--Optional:-->
+        <dataError>false</dataError>
+        <travelTime>100</travelTime>
+        <trafficSpeed>100</trafficSpeed>
+        <!--Optional:-->
+        <numberOfInputValuesUsed>
+          <!--Zero or more repetitions:-->
+          <category count="100" type="string"/>
+        </numberOfInputValuesUsed>
+      </travelTimeData>
+      <!--Zero or more repetitions:-->
+      <individualTravelTimeData>
+        <licensePlate>string</licensePlate>
+        <vehicleCategory>string</vehicleCategory>
+        <startDetectionTime>2016-01-01T20:07:42</startDetectionTime>
+        <endDetectionTime>2012-01-07T20:42:56</endDetectionTime>
+        <travelTime>100</travelTime>
+        <trafficSpeed>100</trafficSpeed>
+      </individualTravelTimeData>
+      <!--Zero or more repetitions:-->
+      <trafficFlowData>
+        <!--Zero or more repetitions:-->
+        <measuredFlow specificLane="string">
+          <vehicleFlow>100</vehicleFlow>
+          <!--Optional:-->
+          <numberOfInputValuesUsed>
+            <!--Zero or more repetitions:-->
+            <category count="100" type="string"/>
+          </numberOfInputValuesUsed>
+        </measuredFlow>
+      </trafficFlowData>
+      <!--Optional:-->
+      <trafficAlarms>
+        <!--1 or more repetitions:-->
+        <alarm description="string" id="string"/>
+      </trafficAlarms>
+      <!--Optional:-->
+      <situations>
+        <situation>
+          <description>string</description>
+          <!--Optional:-->
+          <severity>high</severity>
+          <!--Optional:-->
+          <validityPeriod>
+            <!--Optional:-->
+            <startOfPeriod>2018-12-28T20:51:14+01:00</startOfPeriod>
+            <!--Optional:-->
+            <endOfPeriod>2017-11-01T09:15:53+01:00</endOfPeriod>
+          </validityPeriod>
+        </situation>
+      </situations>
+    </siteMeasurements>
+  </payloadPublication>
+</amsterdamTravelTimes>
