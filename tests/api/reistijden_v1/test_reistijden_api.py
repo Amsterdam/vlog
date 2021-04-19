@@ -139,6 +139,22 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Lane.objects.all().count(), 4)
         self.assertEqual(TravelTime.objects.all().count(), 0)
         self.assertEqual(IndividualTravelTime.objects.all().count(), 3)
+
+        itt = IndividualTravelTime.objects.get(
+            license_plate="ABCDEFGHIJKLMNOPQRSTUVWXYZ11111111111111"
+        )
+        self.assertEqual(itt.vehicle_category.name, "M1")
+        self.assertEqual(
+            itt.detection_start_time,
+            datetime.fromisoformat("2019-01-22T11:55:12+00:00"),
+        )
+        self.assertEqual(
+            itt.detection_end_time,
+            datetime.fromisoformat("2019-01-22T11:55:18+00:00"),
+        )
+        self.assertEqual(itt.travel_time, 1)
+        self.assertEqual(itt.traffic_speed, 111)
+
         self.assertEqual(MeasuredFlow.objects.all().count(), 0)
         self.assertEqual(Category.objects.all().count(), 0)
 
