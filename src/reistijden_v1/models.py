@@ -148,21 +148,47 @@ class TravelTime(models.Model):
 
 
 class IndividualTravelTime(models.Model):
-    # <individualTravelTimeData>
-    #     <licensePlate>ABCDEFGHIJKLMNOPQRSTUVWXYZ11111111111111</licensePlate>
-    #     <vehicleCategory>M1</vehicleCategory>
-    #     <startDetectionTime>2019-01-22T11:55:12Z</startDetectionTime>
-    #     <endDetectionTime>2019-01-22T11:55:18Z</endDetectionTime>
-    #     <travelTime>6</travelTime>
-    #     <trafficSpeed>300</trafficSpeed>
-    # </individualTravelTimeData>
+    """
+    A Measurement measured over multiple MeasurementLocations which contains
+    the specific travel time and traffic stpeed for a single vehicle.
+    """
+
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=255)
-    vehicle_category = models.CharField(max_length=255)
-    start_detection_time = models.DateTimeField()
-    end_detection_time = models.DateTimeField()
-    travel_time = models.IntegerField()
-    traffic_speed = models.IntegerField()
+
+    # then update parser, create testcases
+    vehicle_category = models.ForeignKey(
+        'VehicleCategory',
+        on_delete=models.CASCADE,
+        help_text=(
+            "The vehicle category. Reference: "
+            "https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring"
+        ),
+        null=True,
+        blank=True,
+    )
+    detection_start_time = models.DateTimeField(
+        help_text=(
+            "The date time the vehicle was detected at the start location of the "
+            "measurement site (section) in UTC format."
+        ),
+        null=True,
+        blank=True,
+    )
+    detection_end_time = models.DateTimeField(
+        help_text=(
+            "The date time the vehicle was detected at the end lcoation of the "
+            "measurement site (section) in UTC format."
+        ),
+        null=True,
+        blank=True,
+    )
+    travel_time = models.IntegerField(
+        help_text=("The computed travel time in seconds.")
+    )
+    traffic_speed = models.IntegerField(
+        help_text=("The computed driving speed in kmph.")
+    )
 
 
 class MeasuredFlow(models.Model):
