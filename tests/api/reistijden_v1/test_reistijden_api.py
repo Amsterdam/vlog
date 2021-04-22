@@ -10,6 +10,7 @@ from reistijden_v1.models import (
     Location,
     MeasuredFlow,
     Measurement,
+    MeasurementSite,
     Publication,
     TravelTime,
 )
@@ -42,9 +43,10 @@ class ReistijdenPostTest(APITestCase):
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)
 
-        # assert publication existance and content
+        # assert publication existence and content
         self.assertEqual(Publication.objects.all().count(), 1)
         publication = Publication.objects.get()
+
         self.assertEqual(publication.type, "travelTime")
         self.assertEqual(publication.reference_id, "PUB_AMS_PRED_TRAJECTORY_TT")
         self.assertEqual(publication.version, "1.0")
@@ -65,6 +67,23 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Measurement.objects.all().count(), 2)
         self.assertEqual(Location.objects.all().count(), 6)
         self.assertEqual(Lane.objects.all().count(), 7)
+
+        # assert that both measurements have the same measurement site
+        self.assertTrue(
+            MeasurementSite.objects.filter(
+                reference_id="TRJ_1111",
+                name="traject_ZX1111_ZX1111",
+                version="1.0",
+                type="trajectory",
+                length=1111,
+            ).exists()
+        )
+
+        measurement_site = MeasurementSite.objects.get()
+        self.assertEqual(Measurement.objects.count(), 2)
+        self.assertEqual(
+            Measurement.objects.filter(measurement_site=measurement_site).count(), 2
+        )
 
         # assert traveltime existence and content
         self.assertEqual(TravelTime.objects.all().count(), 5)

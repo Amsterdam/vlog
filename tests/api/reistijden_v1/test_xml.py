@@ -84,10 +84,10 @@ TEST_POST_TRAVEL_TIME = """
             </travelTimeData>
         </siteMeasurements>
         <siteMeasurements>
-            <measurementSiteReference id="TRJ_2222" version="1.0">
-                <measurementSiteName>traject_ZX2222_ZX2222</measurementSiteName>
+            <measurementSiteReference id="TRJ_1111" version="1.0">
+                <measurementSiteName>traject_ZX1111_ZX1111</measurementSiteName>
                 <measurementSiteType>trajectory</measurementSiteType>
-                <length>2222</length>
+                <length>1111</length>
                 <locationContainedInItinerary>
                     <location index="1">
                         <lane specificLane="1">
