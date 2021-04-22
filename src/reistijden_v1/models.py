@@ -75,13 +75,68 @@ class Publication(models.Model):
     )
 
 
+class MeasurementSite(models.Model):
+    """
+    A measurement site that consists of one or more MeasurementLocations.
+    """
+
+    reference_id = models.CharField(
+        max_length=255,
+        help_text=(
+            "The measuremenetsitereference element describes the measurement site "
+            "(section or trajectory) against which the values are reported"
+        ),
+    )
+    version = models.CharField(max_length=255)
+    name = models.CharField(
+        max_length=255,
+        null=True,
+        help_text=("An optional readable name for the measurement site."),
+    )
+    type = models.CharField(
+        max_length=255,
+        help_text=(
+            """
+        Measurement site type. A measurement site can be either a location, a section
+        or a trajectory.
+        - Location
+        A location refers to a point location in the road network from which data
+        (vehicle passages) are collected.  A location consists of one or more
+        camera-lane pairs. The Amsterdam Travel time system delivers vehicle count
+        per location per lane per vehicle category under the trafficflow publication.
+        - Section
+        A section refers to a traversible route between two locations.
+        The Amsterdam Travel time system delivers the following for the sections
+        defined in the system:
+        a. Raw, representative and processed travel time values under the traveltime
+           publication.
+        b. Individual travel time values under the individualtraveltime publication
+        - Trajectory
+        A trajectory refers to a traversible route created using one or more sections.
+        The Amsterdam Travel time system delivers the following for the trajectories
+        defined in the system:
+        a. Processed, predicted and actual under the traveltime publication.
+        """
+        ),
+    )
+    length = models.IntegerField(
+        null=True,
+        help_text=(
+            "This element contains information about the length (in meters) of the "
+            "measurement site. Applicable only for sections and trajectories"
+        ),
+    )
+
+
 class Measurement(models.Model):
+    """
+    A measurement for a specific MeasurementSite, published in a Publication.
+    """
+
     publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
-    measurement_site_reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
-    measurement_site_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
-    measurement_site_name = models.CharField(max_length=255, null=True)
-    measurement_site_type = models.CharField(max_length=255)  # e.g. "section"
-    length = models.IntegerField(null=True)
+    measurement_site = models.ForeignKey(
+        'MeasurementSite', null=True, on_delete=models.SET_NULL
+    )
 
 
 class Location(models.Model):

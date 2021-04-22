@@ -7,6 +7,7 @@ from reistijden_v1.models import (
     Location,
     MeasuredFlow,
     Measurement,
+    MeasurementSite,
     Publication,
     TravelTime,
 )
@@ -52,7 +53,14 @@ class MeasuredFlowSerializer(serializers.ModelSerializer):
         exclude = ['measurement']
 
 
+class MeasurementSiteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MeasurementSite
+        fields = '__all__'
+
+
 class MeasurementSerializer(serializers.ModelSerializer):
+    measurement_site = MeasurementSiteSerializer(many=False)
     locations = LocationSerializer(many=True)
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
@@ -75,14 +83,19 @@ class PublicationSerializer(serializers.ModelSerializer):
         publication = Publication.objects.create(**validated_data)
 
         for measurement_src in measurements:
+            measurement_site_src = measurement_src.pop('measurement_site')
+            measurement_site, _ = MeasurementSite.objects.get_or_create(
+                **measurement_site_src
+            )
+
+            measurement = Measurement.objects.create(
+                publication=publication, measurement_site=measurement_site
+            )
+
             locations = measurement_src.pop('locations')
             travel_times = measurement_src.pop('travel_times')
             individual_travel_times = measurement_src.pop('individual_travel_times')
             measured_flows = measurement_src.pop('measured_flows')
-
-            measurement = Measurement.objects.create(
-                publication=publication, **measurement_src
-            )
 
             for location_src in locations:
                 lanes = location_src.pop('lanes')
