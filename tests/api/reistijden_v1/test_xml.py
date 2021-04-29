@@ -77,20 +77,21 @@ TEST_POST_TRAVEL_TIME = """
                 <travelTime>-1</travelTime>
                 <trafficSpeed>-1</trafficSpeed>
             </travelTimeData>
-            <travelTimeData travelTimeType="processed" dataQuality="38.000000" estimationType="estimated">
+            <travelTimeData travelTimeType="processed" dataQuality="38.000000" estimationType="estimated" numberOfInputValuesUsed="10">
                 <travelTime>178</travelTime>
                 <trafficSpeed>34</trafficSpeed>
+                <dataError>true</dataError>
             </travelTimeData>
         </siteMeasurements>
         <siteMeasurements>
-            <measurementSiteReference id="TRJ_2222" version="1.0">
-                <measurementSiteName>traject_ZX2222_ZX2222</measurementSiteName>
+            <measurementSiteReference id="TRJ_1111" version="1.0">
+                <measurementSiteName>traject_ZX1111_ZX1111</measurementSiteName>
                 <measurementSiteType>trajectory</measurementSiteType>
-                <length>2222</length>
+                <length>1111</length>
                 <locationContainedInItinerary>
                     <location index="1">
                         <lane specificLane="1">
-                            <camera id="1eedd82b-4228-44cd-8409-cbaa30661111">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef111">
                                 <coordinates latitude="52.111111" longitude="4.111111" />
                                 <laneNumber>1</laneNumber>
                                 <status>on</status>
@@ -321,7 +322,7 @@ TEST_POST_TRAFFIC_FLOW = """
             </measurementSiteReference>
             <trafficFlowData>
                 <measuredFlow specificLane="lane1">
-                    <vehicleFlow>6</vehicleFlow>
+                    <vehicleFlow>7</vehicleFlow>
                     <numberOfInputValuesUsed>
                         <category count="6" type="" />
                     </numberOfInputValuesUsed>
