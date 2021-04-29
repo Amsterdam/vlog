@@ -246,19 +246,29 @@ class IndividualTravelTime(models.Model):
     )
 
 
-class MeasuredFlow(models.Model):
-    # <measuredFlow specificLane="lane1">
-    #     <vehicleFlow>6</vehicleFlow>
-    #     <numberOfInputValuesUsed>
-    #         <category count="6" type="Auto" />
-    #     </numberOfInputValuesUsed>
-    # </measuredFlow>
+class TrafficFlow(models.Model):
+    """
+    TrafficFlow describes the intensity data computed for a specific lane
+    in the measurement location.
+    """
+
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    specific_lane = models.CharField(max_length=255)
-    vehicle_flow = models.IntegerField()
+    specific_lane = models.CharField(
+        max_length=255,
+        help_text=(
+            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) used in "
+            "the Amsterdam Travel Time system. See Lane.specific_lane."
+        ),
+    )
+    vehicle_flow = models.IntegerField(
+        help_text=(
+            "Provides the total number of vehicle detections at the "
+            "measurement site (location) for the measurement period."
+        )
+    )
 
 
 class Category(models.Model):
-    measured_flow = models.ForeignKey('MeasuredFlow', on_delete=models.CASCADE)
+    traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
     type = models.CharField(max_length=255, null=True)

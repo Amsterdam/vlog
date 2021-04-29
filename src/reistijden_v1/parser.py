@@ -64,7 +64,7 @@ class ReistijdenParser:
             "individual_travel_times": self.get_individual_travel_times_from_measurement(  # noqa: E501
                 src_d
             ),
-            "measured_flows": self.get_measured_flows_from_measurement(src_d),
+            "traffic_flows": self.get_traffic_flows_from_measurement(src_d),
         }
 
     def get_location_from_site_ref(self, site_ref):
@@ -131,14 +131,16 @@ class ReistijdenParser:
             # Convert empty strings to Null
         }
 
-    def measured_flow_src_to_dict(self, src_d):
-        category_src = src_d["number_of_input_values_used"]["category"]
-        if type(category_src) is list:
-            categories = [
-                self.category_src_to_dict(category) for category in category_src
-            ]
-        else:
-            categories = [self.category_src_to_dict(category_src)]
+    def traffic_flow_src_to_dict(self, src_d):
+        categories = []
+        if "number_of_input_values_used" in src_d:
+            category_src = src_d["number_of_input_values_used"]["category"]
+            if type(category_src) is list:
+                categories = [
+                    self.category_src_to_dict(category) for category in category_src
+                ]
+            else:
+                categories = [self.category_src_to_dict(category_src)]
 
         return {
             "specific_lane": src_d["@specific_lane"],
@@ -186,15 +188,16 @@ class ReistijdenParser:
         src_d['detection_end_time'] = src_d.pop('end_detection_time', None)
         return src_d
 
-    def get_measured_flows_from_measurement(self, src_d):
-        measured_flows = []
+    def get_traffic_flows_from_measurement(self, src_d):
+        traffic_flows = []
         if "traffic_flow_data" in src_d:
-            measured_flows_src = src_d["traffic_flow_data"]["measured_flow"]
-            if type(measured_flows_src) is list:
-                measured_flows = [
-                    self.measured_flow_src_to_dict(measured_flow)
-                    for measured_flow in measured_flows_src
-                ]
-            else:
-                measured_flows = [self.measured_flow_src_to_dict(measured_flows_src)]
-        return measured_flows
+            if "measured_flow" in src_d["traffic_flow_data"]:
+                traffic_flows_src = src_d["traffic_flow_data"]["measured_flow"]
+                if type(traffic_flows_src) is list:
+                    traffic_flows = [
+                        self.traffic_flow_src_to_dict(measured_flow)
+                        for measured_flow in traffic_flows_src
+                    ]
+                else:
+                    traffic_flows = [self.traffic_flow_src_to_dict(traffic_flows_src)]
+        return traffic_flows
