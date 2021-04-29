@@ -16,7 +16,7 @@ def create_vehicle_categories(apps, schema_editor):
 
     for category in unique_categories:
         vehicle_category = VehicleCategory.objects.create(name=category)
-        category_dict['category'] = vehicle_category.id
+        category_dict[category] = vehicle_category.id
 
     for category, vehicle_category_id in category_dict.items():
         IndividualTravelTime.objects.filter(old_vehicle_category=category).update(

@@ -125,11 +125,18 @@ class ReistijdenParser:
         }
 
     def category_src_to_dict(self, src_d):
-        return {
+        result = {
             "count": src_d["@count"],
-            "type": src_d["@type"] if src_d["@type"] else None
-            # Convert empty strings to Null
         }
+
+        vehicle_category_str = src_d.pop("@type")
+        if vehicle_category_str:
+            vehicle_category, _ = VehicleCategory.objects.get_or_create(
+                name=vehicle_category_str
+            )
+            result['vehicle_category'] = vehicle_category.pk
+
+        return result
 
     def traffic_flow_src_to_dict(self, src_d):
         categories = []

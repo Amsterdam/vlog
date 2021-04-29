@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from reistijden_v1.models import (
-    Category,
     IndividualTravelTime,
     Lane,
     Location,
@@ -9,6 +8,7 @@ from reistijden_v1.models import (
     MeasurementSite,
     Publication,
     TrafficFlow,
+    TrafficFlowCategoryCount,
     TravelTime,
 )
 
@@ -41,7 +41,7 @@ class IndividualTravelTimeSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = TrafficFlowCategoryCount
         exclude = ['traffic_flow']
 
 
@@ -121,6 +121,8 @@ class PublicationSerializer(serializers.ModelSerializer):
                 )
 
                 for category_src in categories:
-                    Category.objects.create(traffic_flow=traffic_flow, **category_src)
+                    TrafficFlowCategoryCount.objects.create(
+                        traffic_flow=traffic_flow, **category_src
+                    )
 
         return publication

@@ -268,7 +268,9 @@ class TrafficFlow(models.Model):
     )
 
 
-class Category(models.Model):
+class TrafficFlowCategoryCount(models.Model):
     traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
-    type = models.CharField(max_length=255, null=True)
+    vehicle_category = models.ForeignKey(
+        'VehicleCategory', on_delete=models.CASCADE, null=True
+    )
