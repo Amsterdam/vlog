@@ -75,6 +75,17 @@ class Publication(models.Model):
     )
 
 
+class Measurement(models.Model):
+    """
+    A measurement for a specific MeasurementSite, published in a Publication.
+    """
+
+    publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
+    measurement_site = models.ForeignKey(
+        'MeasurementSite', null=True, on_delete=models.SET_NULL
+    )
+
+
 class MeasurementSite(models.Model):
     """
     A measurement site that consists of one or more MeasurementLocations.
@@ -128,24 +139,32 @@ class MeasurementSite(models.Model):
     )
 
 
-class Measurement(models.Model):
+class MeasurementLocation(models.Model):
     """
-    A measurement for a specific MeasurementSite, published in a Publication.
+    A location that is part of the MeasurementSite.
+    At most one location exists if the measurement site is of type 'location.
+    A maximum of two locations should be present if the measurement site is of type
+    'section' (start and end location).
+    The number of locations is unbounded if the measurement site is of type
+    'trajectory' (start location, end location and all via locations)
     """
 
-    publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
     measurement_site = models.ForeignKey(
-        'MeasurementSite', null=True, on_delete=models.SET_NULL
+        'MeasurementSite', on_delete=models.CASCADE, null=True
+    )
+    index = models.IntegerField(
+        null=True,
+        help_text=(
+            "The index attribute indicates the order of measurement location in the "
+            "measurement site. Optional, if the measurement site is of type 'location'"
+        ),
     )
 
 
-class Location(models.Model):
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    index = models.IntegerField(null=True)  # e.g. 1, 2, 3, 4
-
-
 class Lane(models.Model):
-    location = models.ForeignKey('Location', on_delete=models.CASCADE)
+    measurement_location = models.ForeignKey(
+        'MeasurementLocation', on_delete=models.CASCADE
+    )
     specific_lane = models.CharField(
         max_length=255
     )  # Sometimes an int, sometimes a string. Because why not?

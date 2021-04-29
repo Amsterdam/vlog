@@ -3,8 +3,8 @@ from rest_framework import serializers
 from reistijden_v1.models import (
     IndividualTravelTime,
     Lane,
-    Location,
     Measurement,
+    MeasurementLocation,
     MeasurementSite,
     Publication,
     TrafficFlow,
@@ -16,15 +16,15 @@ from reistijden_v1.models import (
 class LaneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lane
-        exclude = ['location']
+        exclude = ['measurement_location']
 
 
-class LocationSerializer(serializers.ModelSerializer):
+class MeasurementLocationSerializer(serializers.ModelSerializer):
     lanes = LaneSerializer(many=True)
 
     class Meta:
-        model = Location
-        exclude = ['measurement']
+        model = MeasurementLocation
+        exclude = ['measurement_site']
 
 
 class TravelTimeSerializer(serializers.ModelSerializer):
@@ -61,7 +61,7 @@ class MeasurementSiteSerializer(serializers.ModelSerializer):
 
 class MeasurementSerializer(serializers.ModelSerializer):
     measurement_site = MeasurementSiteSerializer(many=False)
-    locations = LocationSerializer(many=True)
+    locations = MeasurementLocationSerializer(many=True)
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
     traffic_flows = TrafficFlowSerializer(many=True)
@@ -99,12 +99,14 @@ class PublicationSerializer(serializers.ModelSerializer):
 
             for location_src in locations:
                 lanes = location_src.pop('lanes')
-                location = Location.objects.create(
-                    measurement=measurement, **location_src
+                measurement_location, _ = MeasurementLocation.objects.get_or_create(
+                    measurement_site=measurement_site, **location_src
                 )
 
                 for lane_src in lanes:
-                    Lane.objects.create(location=location, **lane_src)
+                    Lane.objects.create(
+                        measurement_location=measurement_location, **lane_src
+                    )
 
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)
