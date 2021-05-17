@@ -34,7 +34,7 @@ class ReistijdenPostTest(APITestCase):
         self.URL = '/ingress/reistijden_v1/'
 
     def test_post_new_travel_time(self):
-        """ Test posting a new vanilla travel time message """
+        """Test posting a new vanilla travel time message"""
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 200, response.data)
 
@@ -50,7 +50,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_individual_travel_time(self):
-        """ Test posting a new vanilla individual travel time message """
+        """Test posting a new vanilla individual travel time message"""
         response = self.client.post(
             self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
         )
@@ -90,7 +90,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(Category.objects.all().count(), 0)
 
     def test_post_new_traffic_flow(self):
-        """ Test posting a new vanilla traffic flow message """
+        """Test posting a new vanilla traffic flow message"""
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 200, response.data)
 
