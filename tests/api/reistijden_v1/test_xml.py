@@ -91,7 +91,7 @@ TEST_POST_TRAVEL_TIME = """
                 <locationContainedInItinerary>
                     <location index="1">
                         <lane specificLane="1">
-                            <camera id="1eedd82b-4228-44cd-8409-cbaa30661111">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef111">
                                 <coordinates latitude="52.111111" longitude="4.111111" />
                                 <laneNumber>1</laneNumber>
                                 <status>on</status>

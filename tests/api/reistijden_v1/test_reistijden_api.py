@@ -5,6 +5,7 @@ from django.db.models import Q
 from ingress.models import Collection, FailedMessage, Message
 from reistijden_v1.consumer import ReistijdenConsumer
 from reistijden_v1.models import (
+    Camera,
     IndividualTravelTime,
     Lane,
     Measurement,
@@ -38,7 +39,7 @@ class ReistijdenPostTest(APITestCase):
         self.URL = '/ingress/reistijden_v1/'
 
     def test_post_new_travel_time(self):
-        """ Test posting a new vanilla travel time message """
+        """Test posting a new vanilla travel time message"""
         response = self.client.post(self.URL, TEST_POST_TRAVEL_TIME, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 200, response.data)
 
@@ -134,8 +135,23 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(TrafficFlow.objects.all().count(), 0)
         self.assertEqual(TrafficFlowCategoryCount.objects.all().count(), 0)
 
+        self.assertEqual(Camera.objects.count(), 6)
+        self.assertTrue(
+            Camera.objects.filter(
+                reference_id="233f606b-b5f4-424e-ae2b-266e552ef444",
+                latitude=52.444444,
+                longitude=4.444444,
+                lane_number=1,
+                status="on",
+                view_direction=444,
+                lane__specific_lane=1,
+                lane__measurement_location__index=4,
+                lane__measurement_location__measurement_site__reference_id="TRJ_1111",
+            ).exists()
+        )
+
     def test_post_new_individual_travel_time(self):
-        """ Test posting a new vanilla individual travel time message """
+        """Test posting a new vanilla individual travel time message"""
         response = self.client.post(
             self.URL, TEST_POST_INDIVIDUAL_TRAVEL_TIME, **REQUEST_HEADERS
         )
@@ -210,7 +226,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(TrafficFlowCategoryCount.objects.all().count(), 0)
 
     def test_post_new_traffic_flow(self):
-        """ Test posting a new vanilla traffic flow message """
+        """Test posting a new vanilla traffic flow message"""
         response = self.client.post(self.URL, TEST_POST_TRAFFIC_FLOW, **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 200, response.data)
 
