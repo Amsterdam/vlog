@@ -75,7 +75,7 @@ class ReistijdenPostTest(APITestCase):
         self.assertEqual(location_qs.filter(index=3).count(), 1)
         self.assertEqual(location_qs.filter(index=4).count(), 1)
 
-        self.assertEqual(Lane.objects.all().count(), 7)
+        self.assertEqual(Lane.objects.all().count(), 6)
 
         # assert that both measurements have the same measurement site
         self.assertEquals(
