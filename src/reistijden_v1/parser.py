@@ -95,15 +95,26 @@ class ReistijdenParser:
             logger.error(e)
 
     def lane_src_to_dict(self, src_d):
-        return {
-            "specific_lane": src_d["@specific_lane"],
-            "camera_id": src_d["camera"]["@id"],
-            "latitude": src_d["camera"]["coordinates"]["@latitude"],
-            "longitude": src_d["camera"]["coordinates"]["@longitude"],
-            "lane_number": src_d["camera"]["lane_number"],
-            "status": src_d["camera"]["status"],
-            "view_direction": src_d["camera"]["view_direction"],
+        if type(src_d["camera"]) is list:
+            cameras = [self.camera_src_to_dict(camera) for camera in src_d["camera"]]
+        else:
+            cameras = [self.camera_src_to_dict(src_d["camera"])]
+
+        return {"specific_lane": src_d["@specific_lane"], "cameras": cameras}
+
+    def camera_src_to_dict(self, src_d):
+        camera_src = {
+            "reference_id": src_d["@id"],
+            "lane_number": src_d["lane_number"],
+            "status": src_d.get("status"),
+            "view_direction": src_d["view_direction"],
         }
+
+        if "coordinates" in src_d:
+            camera_src["latitude"] = src_d["coordinates"]["@latitude"]
+            camera_src["longitude"] = src_d["coordinates"]["@longitude"]
+
+        return camera_src
 
     def location_src_to_dict(self, src_d):
         if type(src_d["lane"]) is list:

@@ -162,18 +162,70 @@ class MeasurementLocation(models.Model):
 
 
 class Lane(models.Model):
+    """
+    A road lane at a MeasurementLocation.
+    """
+
     measurement_location = models.ForeignKey(
         'MeasurementLocation', on_delete=models.CASCADE
     )
     specific_lane = models.CharField(
-        max_length=255
-    )  # Sometimes an int, sometimes a string. Because why not?
-    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
-    status = models.CharField(max_length=255)  # e.g. "on"
-    view_direction = models.IntegerField()  # e.g. 225
+        max_length=255,
+        help_text=(
+            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
+            "used in the Amsterdam Travel Time system. The actual lane number is "
+            "available at Camera.lane_number with respect to the camera view direction "
+            "at the measurement location."
+        ),
+    )
+
+
+class Camera(models.Model):
+    """
+    A single camera at a measurement location.
+    """
+
+    reference_id = models.CharField(
+        max_length=255,
+        help_text=(
+            "The unique camera identifier (defined by the ANPR data supplier). "
+            "Format: UUIDv4"
+        ),
+    )
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    lane = models.ForeignKey('Lane', on_delete=models.CASCADE)
+    lane_number = models.IntegerField(
+        help_text=(
+            "Lanenumber, calculated from the 'middle' of the road. "
+            "Lane direction is indicated by being "
+            "- positive (regular traffic should be moving away from the camera), or "
+            "- negative (regular traffic should be moving towards the camera). "
+            " For example: "
+            "- Left lane with regular traffic moving away from the camera is number: 1 "
+            "- Left lane with regular traffic moving towards the camera is number: -1"
+            "Rechts v/d middenberg positief (verkeer dat van je af gaat)"
+            "Links negatief (verkeer dat naar je toe komt)"
+        )
+    )
+    status = models.CharField(
+        max_length=255,
+        null=True,
+        help_text=(
+            "On, off or outage. "
+            "On: camera is active for travel-time system and functioning, "
+            "Off: camera is not active for travel-time system, "
+            "Outage: camera is active for travel-time system, but malfunctioning"
+        ),
+    )
+    view_direction = models.IntegerField(
+        help_text=(
+            "The direction the camera is looking in, expressed in degrees. "
+            "0 and every 22,5 degrees are valid values. "
+            "0 equals looking North,  180 degrees equals to South, "
+            "90 degrees to East, 270 degrees to West."
+        )
+    )
 
 
 class TravelTime(models.Model):
