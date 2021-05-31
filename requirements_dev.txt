@@ -16,11 +16,11 @@ backcall==0.2.0
     # via ipython
 black==21.5b1
     # via pytest-black
-certifi==2020.12.5
+certifi==2021.5.30
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
-click==8.0.0
+click==8.0.1
     # via
     #   black
     #   pip-tools
@@ -29,7 +29,9 @@ coverage[toml]==5.5
 datapunt-data-ingress==2.1.0
     # via -r ./requirements.txt
 decorator==5.0.9
-    # via ipython
+    # via
+    #   ipdb
+    #   ipython
 defusedxml==0.7.1
     # via
     #   -r ./requirements.txt
@@ -72,11 +74,11 @@ flake8==3.9.2
     # via pytest-flake8
 iniconfig==1.1.1
     # via pytest
-ipdb==0.13.7
+ipdb==0.13.8
     # via -r requirements_dev.in
 ipython-genutils==0.2.0
     # via traitlets
-ipython==7.23.1
+ipython==7.24.0
     # via
     #   -r requirements_dev.in
     #   ipdb
@@ -186,7 +188,7 @@ unicodecsv==0.14.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-csv
-urllib3==1.26.4
+urllib3==1.26.5
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
