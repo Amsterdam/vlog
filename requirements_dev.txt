@@ -42,7 +42,7 @@ django-prometheus==2.1.0
     # via -r ./requirements.txt
 django-sentry-400-middleware==0.3.0
     # via -r ./requirements.txt
-django==3.2.3
+django==3.2.4
     # via
     #   -r ./requirements.txt
     #   datapunt-data-ingress
