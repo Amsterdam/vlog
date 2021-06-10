@@ -1,0 +1,36 @@
+
+
+schema migration
+
+data migration
+
+data deletion
+
+----
+
+alle migrations > 0006 zijn nieuw
+
+schema migrations:
+0007
+0008
+0009
+0010
+0013
+0016
+0017 
+0020
+0023
+
+data migrations:
+0011: VehicleCategory maken en IndividualTravelTime.vehicle_category opslaan
+0014: MeasurementSite maken en Measurement.mesaurement_site opslaan
+0018: VehicleCategory maken en TrafficFlowCategoryCount.vehicle_category opslaan
+0021: MeasurementLocation.measurement_site_id opslaan
+0024: Camera uit Lane halen en los opslaan
+
+data deletions:
+0012: IndividualTravelTime.old_vehicle_category verwijderen
+0015: Measurement attributen verwijderen
+0019: TrafficFlowCategoryCount.type verwijderen (= vehicle category)
+0022: MeasurementLocation.measurement verwijderen
+0025: Alle camera data uit Lane verwijderen
