@@ -3,31 +3,6 @@
 from django.db import migrations
 
 
-def update_vehicle_categories(apps, schema_editor):
-    VehicleCategory = apps.get_model('reistijden_v1', 'VehicleCategory')
-    TrafficFlowCategoryCount = apps.get_model('reistijden_v1', 'TrafficFlowCategoryCount')
-
-    unique_categories = (
-        TrafficFlowCategoryCount.objects.all()
-        .values_list('type', flat=True)
-        .distinct()
-    )
-
-    category_dict = {
-        vc.name: vc.id for vc in VehicleCategory.objects.all()
-    }
-
-    for category in unique_categories:
-        if category not in category_dict:
-            vehicle_category = VehicleCategory.objects.create(name=category)
-            category_dict[category] = vehicle_category.id
-
-    for category, vehicle_category_id in category_dict.items():
-        TrafficFlowCategoryCount.objects.filter(type=category).update(
-            vehicle_category_id=vehicle_category_id
-        )
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -35,5 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(update_vehicle_categories),
     ]
