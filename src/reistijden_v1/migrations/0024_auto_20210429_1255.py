@@ -3,32 +3,6 @@
 from django.db import migrations
 
 
-def update_cameras(apps, schema_editor):
-    Camera = apps.get_model('reistijden_v1', 'Camera')
-    Lane = apps.get_model('reistijden_v1', 'Lane')
-
-    unique_cameras = Lane.objects.values_list(
-        'id',
-        'camera_id',
-        'latitude',
-        'longitude',
-        'lane_number',
-        'status',
-        'view_direction'
-    ).distinct()
-
-    for camera in unique_cameras:
-        Camera.objects.create(
-            lane_id=camera[0],
-            reference_id=camera[1],
-            latitude=camera[2],
-            longitude=camera[3],
-            lane_number=camera[4],
-            status=camera[5],
-            view_direction=camera[6]
-        )
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -36,5 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(update_cameras)
     ]
