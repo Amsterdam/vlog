@@ -10,24 +10,24 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='measurement',
-            name='length',
-        ),
-        migrations.RemoveField(
-            model_name='measurement',
-            name='measurement_site_name',
-        ),
-        migrations.RemoveField(
-            model_name='measurement',
-            name='measurement_site_reference_id',
-        ),
-        migrations.RemoveField(
-            model_name='measurement',
-            name='measurement_site_reference_version',
-        ),
-        migrations.RemoveField(
-            model_name='measurement',
-            name='measurement_site_type',
-        ),
+        # migrations.RemoveField(
+        #     model_name='measurement',
+        #     name='length',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='measurement',
+        #     name='measurement_site_name',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='measurement',
+        #     name='measurement_site_reference_id',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='measurement',
+        #     name='measurement_site_reference_version',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='measurement',
+        #     name='measurement_site_type',
+        # ),
     ]

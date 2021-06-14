@@ -10,30 +10,30 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='lane',
-            name='camera_id',
-        ),
-        migrations.RemoveField(
-            model_name='lane',
-            name='lane_number',
-        ),
-        migrations.RemoveField(
-            model_name='lane',
-            name='latitude',
-        ),
-        migrations.RemoveField(
-            model_name='lane',
-            name='longitude',
-        ),
-        migrations.RemoveField(
-            model_name='lane',
-            name='status',
-        ),
-        migrations.RemoveField(
-            model_name='lane',
-            name='view_direction',
-        ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='camera_id',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='lane_number',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='latitude',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='longitude',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='status',
+        # ),
+        # migrations.RemoveField(
+        #     model_name='lane',
+        #     name='view_direction',
+        # ),
         migrations.AlterField(
             model_name='lane',
             name='specific_lane',

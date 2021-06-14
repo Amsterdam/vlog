@@ -85,6 +85,13 @@ class Measurement(models.Model):
         'MeasurementSite', null=True, on_delete=models.SET_NULL
     )
 
+    # to be removed after data migrations
+    measurement_site_reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
+    measurement_site_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
+    measurement_site_name = models.CharField(max_length=255, null=True)
+    measurement_site_type = models.CharField(max_length=255)  # e.g. "section"
+    length = models.IntegerField(null=True)
+
 
 class MeasurementSite(models.Model):
     """
@@ -160,6 +167,9 @@ class MeasurementLocation(models.Model):
         ),
     )
 
+    # to be removed after data migrations
+    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
+
 
 class Lane(models.Model):
     """
@@ -178,6 +188,12 @@ class Lane(models.Model):
             "at the measurement location."
         ),
     )
+    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
+    status = models.CharField(max_length=255)  # e.g. "on"
+    view_direction = models.IntegerField()  # e.g. 225
 
 
 class Camera(models.Model):
@@ -282,7 +298,9 @@ class IndividualTravelTime(models.Model):
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=255)
 
-    # then update parser, create testcases
+    # to be removed after data migrations
+    old_vehicle_category = models.CharField(max_length=255)
+
     vehicle_category = models.ForeignKey(
         'VehicleCategory',
         on_delete=models.CASCADE,
@@ -345,3 +363,6 @@ class TrafficFlowCategoryCount(models.Model):
     vehicle_category = models.ForeignKey(
         'VehicleCategory', on_delete=models.CASCADE, null=True
     )
+
+    # to be removed after data migrations
+    type = models.CharField(max_length=255, null=True)

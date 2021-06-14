@@ -10,8 +10,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='individualtraveltime',
-            name='old_vehicle_category',
-        ),
+        # migrations.RemoveField(
+        #     model_name='individualtraveltime',
+        #     name='old_vehicle_category',
+        # ),
     ]
