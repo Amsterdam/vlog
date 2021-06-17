@@ -55,6 +55,30 @@ services:
     entrypoint: /deploy/wait-for-it.sh database:5432 --
     command: python manage.py runserver 0.0.0.0:8000
 
+  download:
+    build:
+      context: .
+      target: dev
+    ports:
+      - 8000
+    environment:
+      DEBUG: "true"
+      SECRET_KEY: "dev"
+      AUTHORIZATION_TOKEN: "dev"
+      PYTHONBREAKPOINT:
+      ACC_DATABASE_NAME: ""
+      ACC_DATABASE_USER: ""
+      ACC_DATABASE_PASSWORD: ""
+      ACC_DATABASE_HOST: ""
+      ACC_DATABASE_PORT: ""
+    volumes:
+      - ./src:/src
+      - ./deploy:/deploy
+    depends_on:
+      - database
+    entrypoint: /deploy/wait-for-it.sh database:5432 --
+    command: python manage.py runserver 0.0.0.0:8000
+
   test:
     build:
       context: .

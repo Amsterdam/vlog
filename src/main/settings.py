@@ -1,3 +1,4 @@
+import base64
 import os
 from distutils.util import strtobool
 
@@ -72,17 +73,29 @@ TEMPLATES = [
 WSGI_APPLICATION = "main.wsgi.application"
 
 # Database
+DATABASES = {}
 if strtobool(os.getenv("DATABASE_ENABLED", "true")):
-    DATABASES = {
-        "default": {
-            "ENGINE": "contrib.timescale.db.backend",
-            "NAME": os.getenv("DATABASE_NAME", "dev"),
-            "USER": os.getenv("DATABASE_USER", "dev"),
-            "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
-            "HOST": os.getenv("DATABASE_HOST", "database"),
-            "PORT": os.getenv("DATABASE_PORT", "5432"),
-            "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
-        }
+    DATABASES['default'] = {
+        "ENGINE": "contrib.timescale.db.backend",
+        "NAME": os.getenv("DATABASE_NAME", "dev"),
+        "USER": os.getenv("DATABASE_USER", "dev"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "dev"),
+        "HOST": os.getenv("DATABASE_HOST", "database"),
+        "PORT": os.getenv("DATABASE_PORT", "5432"),
+        "CONN_MAX_AGE": float(os.getenv("DATABASE_CONN_MAX_AGE", 20)),
+    }
+
+if os.getenv("ACC_DATABASE_NAME", None):
+    DATABASES['acc'] = {
+        "ENGINE": "contrib.timescale.db.backend",
+        "NAME": os.getenv("ACC_DATABASE_NAME", "dev"),
+        "USER": os.getenv("ACC_DATABASE_USER", "dev"),
+        "PASSWORD": base64.b64decode(
+            os.getenv("ACC_DATABASE_PASSWORD", "dev")
+        ).decode('utf-8'),
+        "HOST": os.getenv("ACC_DATABASE_HOST", "database"),
+        "PORT": os.getenv("ACC_DATABASE_PORT", "5432"),
+        "CONN_MAX_AGE": float(os.getenv("ACC_DATABASE_CONN_MAX_AGE", 20)),
     }
 
 REST_FRAMEWORK = {

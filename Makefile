@@ -43,6 +43,9 @@ app:
 bash:                               ## Run the container and start bash
 	$(run) dev bash
 
+downloadbash:                               ## Run the container and start bash
+	$(run) download bash
+
 shell:
 	$(manage) shell_plus --print-sql
 
