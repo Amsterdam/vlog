@@ -98,6 +98,8 @@ if os.getenv("ACC_DATABASE_NAME", None):
         "CONN_MAX_AGE": float(os.getenv("ACC_DATABASE_CONN_MAX_AGE", 20)),
     }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 100,
