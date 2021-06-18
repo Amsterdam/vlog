@@ -188,6 +188,8 @@ class Lane(models.Model):
             "at the measurement location."
         ),
     )
+
+    # to be removed after data migrations
     camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
     latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
