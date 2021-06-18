@@ -61,8 +61,5 @@ pdb:
 clean:                              ## Clean docker stuff
 	$(dc) down -v --remove-orphans
 
-bash:
-	$(dc) run --rm dev bash
-
 env:
 	env | sort
