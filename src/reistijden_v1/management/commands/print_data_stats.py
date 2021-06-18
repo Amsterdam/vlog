@@ -3,12 +3,10 @@ from django.core.management.base import BaseCommand
 from reistijden_v1.models import (
     Publication,
     Measurement,
-    Location,
     Lane,
     TravelTime,
-    IndividualTravelTime,
-    MeasuredFlow,
-    Category,
+    IndividualTravelTime, VehicleCategory, MeasurementSite, MeasurementLocation, Camera,
+    TrafficFlow, TrafficFlowCategoryCount,
 )
 
 
@@ -19,12 +17,15 @@ class Command(BaseCommand):
         for model in [
             Publication,
             Measurement,
-            Location,
+            MeasurementSite,
+            MeasurementLocation,
             Lane,
+            Camera,
             TravelTime,
             IndividualTravelTime,
-            MeasuredFlow,
-            Category,
+            TrafficFlow,
+            TrafficFlowCategoryCount,
+            VehicleCategory,
         ]:
             num_objects = model.objects.count()
             self.stdout.write(f"Num {model.__name__} objects: {num_objects}")
