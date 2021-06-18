@@ -1,9 +1,9 @@
 import logging
 
-from django.core.management import BaseCommand
+from django.db.models import F, Q
 
+from reistijden_v1.management.commands.base_command import MyCommand
 from reistijden_v1.models import (
-    IndividualTravelTime,
     VehicleCategory,
     TrafficFlowCategoryCount,
 )
@@ -11,7 +11,7 @@ from reistijden_v1.models import (
 logger = logging.getLogger(__name__)
 
 
-class Command(BaseCommand):
+class Command(MyCommand):
     def add_arguments(self, parser):
         parser.add_argument('--sleep', nargs='?', default=1, type=int)
 
@@ -20,22 +20,51 @@ class Command(BaseCommand):
 
         sleep = options['sleep']
 
-        unique_categories = (
-            TrafficFlowCategoryCount.objects.all()
-            .values_list('type', flat=True)
-            .distinct()
+        unique_categories = TrafficFlowCategoryCount.objects.exclude(
+            type=None
+        ).distinct('type')
+
+        num_categories = unique_categories.count()
+        self.success(
+            f"Found {num_categories} unique Traffic flow categories. Migrating..."
         )
 
-        category_dict = {vc.name: vc.id for vc in VehicleCategory.objects.all()}
-
         for category in unique_categories:
-            if category not in category_dict:
-                vehicle_category = VehicleCategory.objects.create(name=category)
-                category_dict[category] = vehicle_category.id
-
-        for category, vehicle_category_id in category_dict.items():
-            TrafficFlowCategoryCount.objects.filter(type=category).update(
-                vehicle_category_id=vehicle_category_id
+            self.notice(f"- Migrating {category.type}...")
+            vehicle_category, _ = VehicleCategory.objects.get_or_create(
+                name=category.type
             )
 
-        self.stdout.write(self.style.SUCCESS('Finished'))
+            TrafficFlowCategoryCount.objects.filter(
+                vehicle_category=None,
+                type=category.type,
+            ).update(vehicle_category_id=vehicle_category.id)
+
+        num_categories = VehicleCategory.objects.count()
+        self.success(f"FINISHED! Migrated {num_categories} categories")
+
+        self.validate_results()
+
+    def validate_results(self):
+        self.notice("Validating results")
+        num_objects = TrafficFlowCategoryCount.objects.count()
+        category_counts = TrafficFlowCategoryCount.objects.exclude(
+            Q(type=F('vehicle_category__name')) |
+            Q(type=None),
+        ).select_related('vehicle_category_id')
+
+        num_errors = category_counts.count()
+        if num_errors > 0:
+            self.stdout.write(
+                self.style.ERROR(
+                    f"ERROR! Found {num_errors} TrafficFlowCategoryCount objects "
+                    f"(out of {num_objects}) where vehicle category name is different."
+                )
+            )
+        else:
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"SUCCESS! All TrafficFlowCategoryCount objects ({num_objects}) "
+                    f"have a correct vehicle category"
+                )
+            )
