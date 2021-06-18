@@ -68,7 +68,7 @@ class Command(MyCommand):
             measurement_site_name=F('measurement_site__name'),
             measurement_site_type=F('measurement_site__type'),
             length=F('measurement_site__length'),
-        ).select_related('measurement_site')
+        )
 
         # somehow length=None and measurement_site__length=None are seen as diffs
         measurements = measurements.exclude(length=None, measurement_site__length=None)

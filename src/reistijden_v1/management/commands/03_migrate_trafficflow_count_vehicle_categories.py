@@ -51,7 +51,7 @@ class Command(MyCommand):
         category_counts = TrafficFlowCategoryCount.objects.exclude(
             Q(type=F('vehicle_category__name')) |
             Q(type=None),
-        ).select_related('vehicle_category_id')
+        )
 
         num_errors = category_counts.count()
         if num_errors > 0:
