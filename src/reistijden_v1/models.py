@@ -86,11 +86,17 @@ class Measurement(models.Model):
     )
 
     # to be removed after data migrations
-    measurement_site_reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
-    measurement_site_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
-    measurement_site_name = models.CharField(max_length=255, null=True)
-    measurement_site_type = models.CharField(max_length=255)  # e.g. "section"
-    length = models.IntegerField(null=True)
+    measurement_site_reference_id = models.CharField(
+        max_length=255, null=True, blank=True
+    )  # e.g. "SEC_0001"
+    measurement_site_reference_version = models.CharField(
+        max_length=255, null=True, blank=True
+    )  # e.g. "1.0"
+    measurement_site_name = models.CharField(max_length=255, null=True, blank=True)
+    measurement_site_type = models.CharField(
+        max_length=255, null=True, blank=True
+    )  # e.g. "section"
+    length = models.IntegerField(null=True, blank=True)
 
 
 class MeasurementSite(models.Model):
@@ -168,7 +174,9 @@ class MeasurementLocation(models.Model):
     )
 
     # to be removed after data migrations
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
+    measurement = models.ForeignKey(
+        'Measurement', on_delete=models.CASCADE, null=True, blank=True
+    )
 
 
 class Lane(models.Model):
@@ -190,12 +198,18 @@ class Lane(models.Model):
     )
 
     # to be removed after data migrations
-    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
-    status = models.CharField(max_length=255)  # e.g. "on"
-    view_direction = models.IntegerField()  # e.g. 225
+    camera_id = models.CharField(
+        max_length=255, null=True, blank=True
+    )  # Are either UUIDs OR ints in strings
+    latitude = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )  # Decimal(9,6)
+    longitude = models.DecimalField(
+        max_digits=9, decimal_places=6, null=True, blank=True
+    )  # Decimal(9,6)
+    lane_number = models.IntegerField(null=True, blank=True)  # e.g. 1, 2, 3, 4
+    status = models.CharField(max_length=255, null=True, blank=True)  # e.g. "on"
+    view_direction = models.IntegerField(null=True, blank=True)  # e.g. 225
 
 
 class Camera(models.Model):
@@ -301,7 +315,7 @@ class IndividualTravelTime(models.Model):
     license_plate = models.CharField(max_length=255)
 
     # to be removed after data migrations
-    old_vehicle_category = models.CharField(max_length=255)
+    old_vehicle_category = models.CharField(max_length=255, null=True, blank=True)
 
     vehicle_category = models.ForeignKey(
         'VehicleCategory',
@@ -367,4 +381,4 @@ class TrafficFlowCategoryCount(models.Model):
     )
 
     # to be removed after data migrations
-    type = models.CharField(max_length=255, null=True)
+    type = models.CharField(max_length=255, null=True, blank=True)
