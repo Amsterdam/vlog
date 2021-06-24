@@ -1,7 +1,6 @@
 import logging
 
-from django.core.management import BaseCommand
-from django.db.models import F, Q
+from django.db.models import F
 
 from reistijden_v1.management.commands.base_command import MyCommand
 from reistijden_v1.models import Measurement, MeasurementSite
@@ -15,8 +14,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         unique_measurement_sites = Measurement.objects.values_list(
             'measurement_site_reference_id',

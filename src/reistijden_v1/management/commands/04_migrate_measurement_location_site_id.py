@@ -1,13 +1,11 @@
 import logging
 from math import ceil
 
-from django.core.management import BaseCommand
 from django.db import connection
-from django.db.models import F, Subquery, OuterRef
-from psycopg2.extras import execute_values
+from django.db.models import F
 
 from reistijden_v1.management.commands.base_command import MyCommand
-from reistijden_v1.models import MeasurementLocation, Measurement
+from reistijden_v1.models import Measurement, MeasurementLocation
 
 logger = logging.getLogger(__name__)
 
@@ -18,8 +16,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         locations = MeasurementLocation.objects.filter(measurement_site=None).exclude(
             measurement=None
@@ -33,15 +29,15 @@ class Command(MyCommand):
 
         max_location_id = MeasurementLocation.objects.order_by('id').last().id
 
-        for i in range(1, 100+1):
+        for i in range(1, 100 + 1):
             max_id = ceil(max_location_id / 100 * i)
             self.notice(f"- Updating locations with ID < {max_id}")
             query = f"""
-                UPDATE {MeasurementLocation.objects.model._meta.db_table} AS location 
+                UPDATE {MeasurementLocation.objects.model._meta.db_table} AS location
                 SET measurement_site_id = measurement.measurement_site_id
                 FROM {Measurement.objects.model._meta.db_table} AS measurement
                 WHERE location.measurement_id = measurement.id
-                AND measurement.measurement_site_id IS NOT NULL 
+                AND measurement.measurement_site_id IS NOT NULL
                 AND location.measurement_site_id IS NULL
                 AND location.id <= %s
             """

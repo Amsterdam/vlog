@@ -3,10 +3,7 @@ import logging
 from django.db.models import F, Q
 
 from reistijden_v1.management.commands.base_command import MyCommand
-from reistijden_v1.models import (
-    VehicleCategory,
-    TrafficFlowCategoryCount,
-)
+from reistijden_v1.models import TrafficFlowCategoryCount, VehicleCategory
 
 logger = logging.getLogger(__name__)
 
@@ -17,8 +14,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         unique_categories = TrafficFlowCategoryCount.objects.exclude(
             type=None
@@ -49,8 +44,7 @@ class Command(MyCommand):
         self.notice("Validating results")
         num_objects = TrafficFlowCategoryCount.objects.count()
         category_counts = TrafficFlowCategoryCount.objects.exclude(
-            Q(type=F('vehicle_category__name')) |
-            Q(type=None),
+            Q(type=F('vehicle_category__name')) | Q(type=None),
         )
 
         num_errors = category_counts.count()

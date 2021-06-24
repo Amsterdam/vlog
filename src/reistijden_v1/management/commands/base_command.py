@@ -2,7 +2,6 @@ from django.core.management import BaseCommand
 
 
 class MyCommand(BaseCommand):
-
     def success(self, msg):
         self.stdout.write(self.style.SUCCESS(msg))
 

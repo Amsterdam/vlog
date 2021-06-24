@@ -1,6 +1,5 @@
 import logging
 
-from django.core.management import BaseCommand
 from django.db.models import F
 
 from reistijden_v1.management.commands.base_command import MyCommand
@@ -15,8 +14,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         # this query takes a bit less than 2 minutes on acc. Seems acceptable
         unique_categories = (

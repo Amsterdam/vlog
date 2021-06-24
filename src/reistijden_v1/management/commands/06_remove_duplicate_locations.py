@@ -1,10 +1,9 @@
 import logging
 
-from django.core.management import BaseCommand
 from django.db.models import Count
 
 from reistijden_v1.management.commands.base_command import MyCommand
-from reistijden_v1.models import Lane, Camera, MeasurementLocation
+from reistijden_v1.models import MeasurementLocation
 
 logger = logging.getLogger(__name__)
 
@@ -15,8 +14,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         superfluous_locations = MeasurementLocation.objects.annotate(
             num_lanes=Count('lane')

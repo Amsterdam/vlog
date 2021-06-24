@@ -1,9 +1,7 @@
 import logging
 
-from django.core.management import BaseCommand
-
 from reistijden_v1.management.commands.base_command import MyCommand
-from reistijden_v1.models import Lane, Camera
+from reistijden_v1.models import Camera, Lane
 
 logger = logging.getLogger(__name__)
 
@@ -14,8 +12,6 @@ class Command(MyCommand):
 
     def handle(self, **options):
         logger.info("message")
-
-        sleep = options['sleep']
 
         unique_lanes = Lane.objects.distinct(
             'measurement_location__measurement_site',
@@ -38,9 +34,10 @@ class Command(MyCommand):
 
         for lane in unique_lanes:
             self.notice(f"- Processing lane @ {lane.latitude}, {lane.longitude}...")
+            measurement_site = lane.measurement_location.measurement_site
             num_deleted, _ = (
                 Lane.objects.filter(
-                    measurement_location__measurement_site=lane.measurement_location.measurement_site,
+                    measurement_location__measurement_site=measurement_site,
                     measurement_location__index=lane.measurement_location.index,
                     specific_lane=lane.specific_lane,
                     camera_id=lane.camera_id,
