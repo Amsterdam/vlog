@@ -189,15 +189,13 @@ class ReistijdenViewSet(viewsets.ViewSetMixin, generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         try:
             restructured_data = restructure_data(request.body.decode("utf-8"))
-        except UnicodeError as e:
-            logger.error(e)
-            store_error_content(e, request)
-            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
-        except (exceptions.ValidationError, KeyError, TypeError) as e:
-            logger.error(e)
-            store_error_content(e, request)
-            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
-        except ExpatError as e:
+        except (
+            UnicodeError,
+            KeyError,
+            TypeError,
+            exceptions.ValidationError,
+            ExpatError,
+        ) as e:
             logger.error(e)
             store_error_content(e, request)
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
