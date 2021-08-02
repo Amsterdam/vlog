@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="travelTime">
+        <publicationReference id="PredictedTrajectoryTT_ESB" version="1.0" />
+        <publicationTime>2019-01-19T13:59:15Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-01-19T13:57:00Z</measurementStartTime>
+            <measurementEndTime>2019-01-19T13:59:00Z</measurementEndTime>
+        </measurementPeriod>
+        
+        <siteMeasurements>
+            <measurementSiteReference version="1.0">
+                <measurementSiteName>T1</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2000</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="576">
+                                <coordinates latitude="52.378292" longitude="4.841175" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="577">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="lane1">
+                            <camera id="572">
+                                <coordinates latitude="52.377865" longitude="4.900773" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted">
+                <travelTime>50</travelTime>
+                <trafficSpeed>168</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference version="1.0">
+                <measurementSiteName>Trajectory2</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2200</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="574">
+                                <coordinates latitude="52.378216" longitude="4.899978" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="573">
+                                <coordinates latitude="52.378433" longitude="4.899220" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="lane1">
+                            <camera id="579">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="lane1">
+                            <camera id="581">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted">
+                <travelTime>189</travelTime>
+                <trafficSpeed>7</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>

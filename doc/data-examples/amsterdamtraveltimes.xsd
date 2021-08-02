@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1.0">
+  <xs:annotation>
+    <xs:documentation>
+      This schema defines the travel time export from the Amsterdam Travel Time system!
+    </xs:documentation>
+  </xs:annotation>
+  <xs:simpleType name="payloadTypeEnum" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        Various types of payloads exposed by the system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="travelTime"/>
+      <xs:enumeration value="individualTravelTime"/>
+      <xs:enumeration value="trafficFlow"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="travelTimeTypeEnum" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        Various types of travel times exposed by the system.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="raw"/>
+      <xs:enumeration value="representative"/>
+      <xs:enumeration value="processed"/>
+      <xs:enumeration value="predicted"/>
+      <xs:enumeration value="actual"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="measurementSiteTypeEnum" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        Various types of measurement sites. 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="location">
+        <xs:annotation>
+        <xs:documentation>
+          A location refers to a point location in the road network from which data (vehicle passages) are collected. 
+          A location consists of one or more camera-lane pairs. 
+          The Amsterdam Travel time system delivers vehicle count per location per lane per vehicle category under the trafficflow publication.
+        </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="section">
+        <xs:annotation>
+          <xs:documentation>
+            A section refers to a traversible route between two locations. 
+            The Amsterdam Travel time system delivers the following for the sections defined in the system
+            a. Raw, representative and processed travel time values under the traveltime publication.
+            b. Individual travel time values under the individualtraveltime publication
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="trajectory">
+        <xs:annotation>
+          <xs:documentation>
+            A trajectory refers to a traversible route created using one or more sections. 
+            The Amsterdam Travel time system delivers teh following for teh trajectories defined in the system
+            a. Processed, predicted and actual under the traveltime publication.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="trafficAlarms" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        Pattern definition for the alaram identifier.
+        ALARM matches the characters ALARM literally (case sensitive). \d matches a digit (equal to [0-9]). {3} Quantifier — Matches exactly 3 times
+      </xs:documentation>
+    </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="ALARM[0-9][0-9][0-9]"/>
+      </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="estimationTypeEnum" final="restriction">
+    <xs:annotation>
+      <xs:documentation>
+        The type of estimation used to arrive at the computed travel time
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="best"/>
+      <xs:enumeration value="estimated"/>
+      <xs:enumeration value="instantaneous"/>
+	  <xs:enumeration value="reconstituted"/>
+    </xs:restriction>
+  </xs:simpleType>
+   <xs:simpleType name="CameraStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="on">
+        <xs:annotation>
+          <xs:documentation>camera is active for travel-time system and functioning</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="off">
+        <xs:annotation>
+          <xs:documentation>camera is not active for travel-time system</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="outage">
+        <xs:annotation>
+          <xs:documentation>camera is active for travel-time system, but malfunctioning</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="severityEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="low"/>
+      <xs:enumeration value="medium"/>
+      <xs:enumeration value="high"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="amsterdamTravelTimes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="payloadPublication"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="payloadPublication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="publicationReference" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="publicationTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="measurementPeriod" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="siteMeasurements" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="payloadTypeEnum">
+        <xs:annotation>
+          <xs:documentation>
+            The type of publication. Refer payloadTypeEnum for details
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="publicationReference">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The publication identification details.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="id" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Unique publication identifier. The ID is a unique for data set delivered by the system and shall remain unchanged throughout the system lifetime
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" use="required" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>
+            The version of the publication. Incremented (+1) every time section and/or route definition are modified.i.e., 
+            a.	New section(s) and/or trajectory(ies) are activated  
+            b.	Existing section(s) and/or trajectory(ies) are deactivated 
+            c.	Existing section(s) and/or trajectories are modified
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="publicationTime" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The date time the latest version (refer attribute "version") for this publication was published in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="measurementPeriod">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The period against which the statistics were reported. The period is defined either using the measurementStartTime-duration pair or measurementStartTime-measurementendTime pair.
+          A default measurement period of 60s is assumed, if duration and measurementEndTime elements are not present.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="measurementStartTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="measurementEndTime" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="duration" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="measurementStartTime" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The time recorded here is the starting time of the supply period in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="measurementEndTime" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The time recorded here is the ending time of the supply period in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="duration" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        The duration element provides the measurement frequency at which the trave time values are calculated/exported.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="siteMeasurements">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The sitemeasurements element include the traffic data per measurement site (location/section/trajectory). 
+		  The element shall be repeated for each measurement site (location/section/trajectory) for which data is avialable for a measurement period.
+		  If there are no active sites or none of the site have valid data to be delivered, the element will not be included in the measurement file
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="measurementSiteReference" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="travelTimeData" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="individualTravelTimeData" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="trafficFlowData" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="trafficAlarms" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="situations" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="measurementSiteReference">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The measuremenetsitereference element describes the measurement site (section or trajectory) against which the values are reported
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="measurementSiteName" minOccurs="0"/>
+        <xs:element ref="measurementSiteType" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="length" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="locationContainedInItinerary" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="location" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The unique identifier for a measurement site.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="version" use="required" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>
+            The version of the measurement site. The version is updated (+1), follwong an update to any of the site's attributes.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="measurementSiteName" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        An optional readable name for the measurement site.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="measurementSiteType" type="measurementSiteTypeEnum">
+    <xs:annotation>
+      <xs:documentation>
+        Measurement site type. A measurement site can be either a lcoation, a section or a trajectory (Refer measurementSiteTypeEnum) .
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="length" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        This element contains information about the length (in meters) of the measurement site. Applicable only for sections and trajectories
+      </xs:documentation>
+    </xs:annotation>
+   </xs:element>
+  <xs:element name="locationContainedInItinerary">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The element locationContainedInItinerary is used to be able to record a sorted list of measurement locations which forms the measurement site. 
+          The element is used only for describing measurement site of type section or trajectories.
+          A maximum of two locations should be present if the measurement site is of type “section” (start and end location). 
+          The no: of locations is unbounded if the measurement site is of type “trajectory” (start location, end location and all via locations)
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="location" minOccurs="2" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="location">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The location element describe a point location that is part of the measurement site. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="lane" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="index" use="optional" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation>
+            The index attribute indicates the order of measurement location in the itinerary. Optional, if the measurement site is a point location.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lane">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The lane element describes a specific lane in the measurement location. 
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="camera" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="specificLane" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) used in the Amsterdam Travel Time system. 
+            The actual lane number is available under the element lanenr with respect to the camera view direction at the measurement location.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="camera">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The camera element describes a single camera at a measurement location
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="coordinates" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="laneNumber" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="viewDirection" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The unique camera identifier (defined by the ANPR data supplier). Format: UUIDv4
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="coordinates">
+    <xs:complexType>
+      <xs:attribute name="latitude" use="required" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>
+            Latitude (WGS84) in degrees. (+/- 90 degrees; North = positive; South = negative) Examples:
+            -90deg (south)       = -90.0000000
+            0deg0min1sec (north) =   0.0000016
+            50deg50min (north)   =  50.8333333
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="longitude" use="required" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>
+            Longitude (WGS84) in degrees. (+/- 180 degrees; East = positive; West = negative). Examples:
+            -180deg (west)      = -180.0000000
+            0deg0min1sec (east) =    0.0000016
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="laneNumber" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        Lanenumber, calculated from the 'middle' of the road.
+        lane direction is indicated by being positive (regular traffic should be moving away from the camera).
+        Or being negative (regular traffic should be moving towards the camera). F.ex.:
+        - Left lane with regular traffic moving away from the camera is number: 1
+        - Left lane with regular traffic moving towards the camera is number: -1
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="status" type="CameraStatusEnum">
+    <xs:annotation>
+      <xs:documentation>
+        The status elementr is used to indicate the status of the camera during the measurement period. 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="viewDirection" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        The direction the camera is looking in, expressed in degrees. 0 and every 22,5 degrees are valid values.
+        0 equals looking North, 180 degrees equals to South, 90 degrees to East, 270 degrees to West.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+ <!-- Elements to describe the travel time data  -->
+  <xs:element name="travelTimeData">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The measuredData element is used to describe the statistics computed for a measurement site. Repeated for each measurement site.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="dataError" minOccurs="0"/>
+        <xs:element ref="travelTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="trafficSpeed" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="numberOfInputValuesUsed" minOccurs="0" maxOccurs="1"/>
+       </xs:sequence>
+      <xs:attribute name="dataQuality" use="optional" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation>
+            Quality of the computed travel time/speed (0...100%)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="estimationType" use="optional" type="estimationTypeEnum">
+        <xs:annotation>
+          <xs:documentation>
+            The type of estimation used, one of estimationtypeenum (for e.g. best, extrapoated)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="numberOfInputValuesUsed" use="optional" type="xs:integer" default="0">
+        <xs:annotation>
+          <xs:documentation>
+            The total no: of samples (individual travel times) used to compute the travel time.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="travelTimeType" use="required" type="travelTimeTypeEnum">
+        <xs:annotation>
+          <xs:documentation>
+            Travel time type. One of travelTimeTypeEnum.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dataError" type="xs:boolean" default="false">
+    <xs:annotation>
+      <xs:documentation>
+        Optional elemnt to indicate whether there were errors in the travel time computation or there are alarm reported against this site.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="travelTime" type="xs:integer" default="-1">
+    <xs:annotation>
+      <xs:documentation>
+        The computed travel time in seconds.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="trafficSpeed" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        The computed driving speed in kmph.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="numberOfInputValuesUsed">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The numberOfInputValuesUsed elemenet provides the no: of samples (indiviual travel times) per vehicle category used in the travel time calculation.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="category" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="category">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The element category is used to describe a category and the no: of samples based in this category.
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="count" use="required" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation>
+            No: of samples under a vehicle category.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="type" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            The vehicle category. Reference: https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="trafficAlarms">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The trafficalarms element is used to describe the various alarms reported by the system. 
+          A traffic alarm is reported by the system when it detects deviations in the traffic conditions.
+          The child element alram is repeasted for each active alarm in the system
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="alarm" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="alarm">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The alarm element describe a single alarm available in the system
+        </xs:documentation>
+      </xs:annotation>
+      <xs:attribute name="description" use="optional" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Free text to describe the alarm.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="id" use="required" type="trafficAlarms">
+        <xs:annotation>
+          <xs:documentation>
+            Unique identifier for an alarm defined in the system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="situations">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The situations element is used to describe any manual status reported against the measurement site by the authorized authorities.
+          Each situation reported is described using a situation element
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="situation" minOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="situation">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The situation element describes a situation reported. Other or related situation(s) shall be specified in a seperated situation tag
+        </xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+        <xs:element ref="description" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="severity" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="validityPeriod" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        Free text describing the reported situation
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="severity" type="severityEnum">
+    <xs:annotation>
+      <xs:documentation>
+        The severity of the situation
+      </xs:documentation>
+    </xs:annotation> 
+  </xs:element>
+  <xs:element name="validityPeriod">
+    <xs:complexType>
+      <xs:annotation>
+        <xs:documentation>
+          The period the reported situation is valid
+        </xs:documentation>
+      </xs:annotation> 
+      <xs:sequence>
+        <xs:element ref="startOfPeriod" minOccurs="0"/>
+        <xs:element ref="endOfPeriod" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="startOfPeriod" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The start of a period (in UTC) in which the situation is or becomes valid
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="endOfPeriod" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The end of a period (in UTC) till which the situation is valid 
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <!-- Elements to describe the individual travel times -->
+  <xs:element name="individualTravelTimeData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="licensePlate" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="vehicleCategory" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="startDetectionTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="endDetectionTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="travelTime" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="trafficSpeed" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="licensePlate" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        The unique vehicle registration against which the indivisual travel time is computed.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="vehicleCategory" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        The category to which the vehicle belongs to. Reference: [https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring]
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="startDetectionTime" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The date time the vehicle was detected at the start lcoation of the measurement site (section) in UTC format.
+      </xs:documentation>
+    </xs:annotation> 
+  </xs:element>
+  <xs:element name="endDetectionTime" type="xs:dateTime">
+    <xs:annotation>
+      <xs:documentation>
+        The date time the vehicle was detected at the end lcoation of the measurement site (section) in UTC format.
+      </xs:documentation>
+    </xs:annotation> 
+  </xs:element>
+  <!-- Elements to describe the traffic flow data -->
+  <xs:element name="trafficFlowData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="measuredFlow" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="measuredFlow">
+    <xs:annotation>
+      <xs:documentation>
+        The measuredflow elemenst describes the intensity data computed for a specific lane in the measurement location. 
+        The element is repeated for each lane present at the location.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="vehicleFlow" minOccurs="1" maxOccurs="1"/>
+        <xs:element ref="numberOfInputValuesUsed" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+      <xs:attribute name="specificLane" use="required" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) used in the Amsterdam Travel Time system. 
+            Refer the lane element for the detailed lane definition.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vehicleFlow" type="xs:integer">
+    <xs:annotation>
+      <xs:documentation>
+        The vehicleflow element provides the toatal no: of vehicle detections at the measurement site (location) for the measurement period.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

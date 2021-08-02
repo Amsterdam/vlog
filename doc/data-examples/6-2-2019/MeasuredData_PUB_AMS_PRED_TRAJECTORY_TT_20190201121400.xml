@@ -1,0 +1,1623 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="travelTime">
+        <publicationReference id="PUB_AMS_PRED_TRAJECTORY_TT" version="1.0" />
+        <publicationTime>2019-02-01T12:15:10Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-02-01T12:14:00Z</measurementStartTime>
+            <measurementEndTime>2019-02-01T12:15:00Z</measurementEndTime>
+        </measurementPeriod>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0002" version="1.0">
+                <measurementSiteName>traject_ZX3404_ZX3774</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3666</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="b2a097b7-788a-48be-99d7-c923e6534005">
+                                <coordinates latitude="52.367996" longitude="4.970488" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>225</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="7abeb082-f73c-483b-aac9-b3644d636ac4">
+                                <coordinates latitude="52.376099" longitude="4.922350" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>112</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>73</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0003" version="1.0">
+                <measurementSiteName>traject_ZX3407_ZX3708</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>6418</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                                <coordinates latitude="52.389618" longitude="4.891221" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                                <coordinates latitude="52.392670" longitude="4.862752" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="2">
+                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                                <coordinates latitude="52.392670" longitude="4.862752" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="36c769f7-919d-4993-aa11-2a10f04124e6">
+                                <coordinates latitude="52.391369" longitude="4.843579" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="5">
+                        <lane specificLane="1">
+                            <camera id="db96e004-fee7-4f95-b4a9-17ba74a7eaf3">
+                                <coordinates latitude="52.376400" longitude="4.921220" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="6">
+                        <lane specificLane="1">
+                            <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                                <coordinates latitude="52.389618" longitude="4.891221" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>940</travelTime>
+                <trafficSpeed>6</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0004" version="1.0">
+                <measurementSiteName>traject_ZX3400_ZX3774</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>5313</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="b2a097b7-788a-48be-99d7-c923e6534005">
+                                <coordinates latitude="52.367996" longitude="4.970488" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>225</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="7abeb082-f73c-483b-aac9-b3644d636ac4">
+                                <coordinates latitude="52.376099" longitude="4.922350" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>112</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="5">
+                        <lane specificLane="1">
+                            <camera id="c2bee365-ab39-446c-adbb-3411564ec4e2">
+                                <coordinates latitude="52.369221" longitude="4.906203" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="6">
+                        <lane specificLane="1">
+                            <camera id="7abeb082-f73c-483b-aac9-b3644d636ac4">
+                                <coordinates latitude="52.376099" longitude="4.922350" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>112</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>106</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0005" version="1.0">
+                <measurementSiteName>traject_ZX3749_ZX3755</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3761</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="2">
+                            <camera id="cd6a1321-0f7c-4957-8c0d-d55d9c8220db">
+                                <coordinates latitude="52.359886" longitude="4.908634" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>157</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="250e2ced-6053-41d2-ad92-899cbe44a692">
+                                <coordinates latitude="52.348289" longitude="4.919699" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="250e2ced-6053-41d2-ad92-899cbe44a692">
+                                <coordinates latitude="52.348289" longitude="4.919699" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="ba058cb5-de9e-4bf4-87eb-9154d8f45454">
+                                <coordinates latitude="52.336090" longitude="4.942789" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>225</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>430</travelTime>
+                <trafficSpeed>8</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0006" version="1.0">
+                <measurementSiteName>traject_ZX3744_ZX3774</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>5252</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="b2a097b7-788a-48be-99d7-c923e6534005">
+                                <coordinates latitude="52.367996" longitude="4.970488" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>225</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="4f731672-236e-4049-876d-3e6dc5607114">
+                                <coordinates latitude="52.363903" longitude="4.923448" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef311">
+                                <coordinates latitude="52.372505" longitude="4.934386" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="5">
+                        <lane specificLane="1">
+                            <camera id="94059b2a-e561-45f9-bbfb-2916f0251f7d">
+                                <coordinates latitude="52.360222" longitude="4.910639" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="6">
+                        <lane specificLane="1">
+                            <camera id="4f731672-236e-4049-876d-3e6dc5607114">
+                                <coordinates latitude="52.363903" longitude="4.923448" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>105</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0007" version="1.0">
+                <measurementSiteName>traject_ZX3721_ZX3708</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>5129</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="a0ad206d-860e-4cd0-a510-31075c9265c4">
+                                <coordinates latitude="52.385155" longitude="4.881622" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                                <coordinates latitude="52.389618" longitude="4.891221" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="575f7f5f-da34-40e4-bc08-682ed595ab5e">
+                                <coordinates latitude="52.374256" longitude="4.875272" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="a0ad206d-860e-4cd0-a510-31075c9265c4">
+                                <coordinates latitude="52.385155" longitude="4.881622" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="5">
+                        <lane specificLane="1">
+                            <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                                <coordinates latitude="52.389618" longitude="4.891221" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="6">
+                        <lane specificLane="2">
+                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                                <coordinates latitude="52.392670" longitude="4.862752" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="7">
+                        <lane specificLane="2">
+                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                                <coordinates latitude="52.392670" longitude="4.862752" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="8">
+                        <lane specificLane="1">
+                            <camera id="36c769f7-919d-4993-aa11-2a10f04124e6">
+                                <coordinates latitude="52.391369" longitude="4.843579" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>2154</travelTime>
+                <trafficSpeed>2</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0008" version="1.0">
+                <measurementSiteName>traject_ZX3720_ZX3723</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2411</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="4b0dd5aa-b16c-4982-aadd-a4ad3e5ccdaa">
+                                <coordinates latitude="52.374168" longitude="4.874904" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="f12a418d-1307-420c-8c6d-7ac974194b35">
+                                <coordinates latitude="52.371975" longitude="4.841708" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>48</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0009" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3736</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>4356</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="74017062-e05b-4487-95bc-6f4679ee21b6">
+                                <coordinates latitude="52.336975" longitude="4.858680" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>90</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>662</travelTime>
+                <trafficSpeed>6</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0010" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3737</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>4300</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="5">
+                            <camera id="e3c1c012-31dc-44c2-97a9-f029b88bfee1">
+                                <coordinates latitude="52.336849" longitude="4.857405" />
+                                <laneNumber>5</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>638</travelTime>
+                <trafficSpeed>6</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0011" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3738</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>4096</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                                <coordinates latitude="52.357399" longitude="4.854930" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="2c00b274-35cc-49b8-b569-0f803e573336">
+                                <coordinates latitude="52.339020" longitude="4.858126" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>620</travelTime>
+                <trafficSpeed>6</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0012" version="1.0">
+                <measurementSiteName>traject_ZX3765_ZX3400</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2255</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="34140b04-0b25-43ed-a4d5-3d73a00399f8">
+                                <coordinates latitude="52.363281" longitude="4.922042" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="2">
+                            <camera id="f8720124-97ae-4aae-9e2f-340672e662cb">
+                                <coordinates latitude="52.360432" longitude="4.908612" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>337</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="2">
+                            <camera id="f8720124-97ae-4aae-9e2f-340672e662cb">
+                                <coordinates latitude="52.360432" longitude="4.908612" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>337</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="c2bee365-ab39-446c-adbb-3411564ec4e2">
+                                <coordinates latitude="52.369221" longitude="4.906203" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>45</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0013" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3741</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3788</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="4">
+                            <camera id="09c74ba8-fd90-4a94-add1-7f892c922b7f">
+                                <coordinates latitude="52.334248" longitude="4.889741" />
+                                <laneNumber>4</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>75</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0014" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3742</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3374</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="e162595b-9187-4552-a1ed-2cf209f14ab2">
+                                <coordinates latitude="52.337521" longitude="4.891545" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>67</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0015" version="1.0">
+                <measurementSiteName>traject_0031_ZX3763</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3159</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="-1">
+                            <camera id="081fad75-6d93-4b57-8be8-dbdc06b27275">
+                                <coordinates latitude="52.341652" longitude="4.950234" />
+                                <laneNumber>-1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ba8d367b-d35d-4dba-aaf1-9484ac70e2f4">
+                                <coordinates latitude="52.351101" longitude="4.934920" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="ba8d367b-d35d-4dba-aaf1-9484ac70e2f4">
+                                <coordinates latitude="52.351101" longitude="4.934920" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="4f731672-236e-4049-876d-3e6dc5607114">
+                                <coordinates latitude="52.363903" longitude="4.923448" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>63</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0016" version="1.0">
+                <measurementSiteName>traject_ZX3764_ZX3766</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3282</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="db3a3001-2c3a-4489-9d24-63ee0208fc84">
+                                <coordinates latitude="52.362778" longitude="4.923333" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>157</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="1c3b7986-1506-44d6-8004-92b7de231a85">
+                                <coordinates latitude="52.339973" longitude="4.952782" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>112</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>65</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0017" version="1.0">
+                <measurementSiteName>traject_ZX3764_ZX3767</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3138</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="db3a3001-2c3a-4489-9d24-63ee0208fc84">
+                                <coordinates latitude="52.362778" longitude="4.923333" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>157</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="ced53f35-d06a-4bb8-8214-a9abad9aa010">
+                                <coordinates latitude="52.341232" longitude="4.951071" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>45</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>62</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0018" version="1.0">
+                <measurementSiteName>traject_ZX3764_ZX3769</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3317</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="db3a3001-2c3a-4489-9d24-63ee0208fc84">
+                                <coordinates latitude="52.362778" longitude="4.923333" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>157</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="57fcdd21-1596-4555-88e4-a8a18704f0db">
+                                <coordinates latitude="52.350601" longitude="4.935480" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="746dba37-bf04-44c4-a2e4-31164546dfb4">
+                                <coordinates latitude="52.340481" longitude="4.953218" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>22</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>66</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0019" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3736</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>4224</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="74017062-e05b-4487-95bc-6f4679ee21b6">
+                                <coordinates latitude="52.336975" longitude="4.858680" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>90</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>495</travelTime>
+                <trafficSpeed>8</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0020" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3737</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>4158</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="5">
+                            <camera id="e3c1c012-31dc-44c2-97a9-f029b88bfee1">
+                                <coordinates latitude="52.336849" longitude="4.857405" />
+                                <laneNumber>5</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>485</travelTime>
+                <trafficSpeed>8</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0021" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3738</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3954</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                                <coordinates latitude="52.347000" longitude="4.879320" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="2c00b274-35cc-49b8-b569-0f803e573336">
+                                <coordinates latitude="52.339020" longitude="4.858126" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>67</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>491</travelTime>
+                <trafficSpeed>8</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0022" version="1.0">
+                <measurementSiteName>traject_ZX3720_ZX3724</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2431</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="4b0dd5aa-b16c-4982-aadd-a4ad3e5ccdaa">
+                                <coordinates latitude="52.374168" longitude="4.874904" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="e7cf31bb-72a1-4ac0-a15d-e38586ee10da">
+                                <coordinates latitude="52.372444" longitude="4.841373" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>48</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0023" version="1.0">
+                <measurementSiteName>traject_ZX3720_ZX3725</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2453</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="4b0dd5aa-b16c-4982-aadd-a4ad3e5ccdaa">
+                                <coordinates latitude="52.374168" longitude="4.874904" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="f394330e-7c26-4a47-ad71-ee4ef1a8ef1f">
+                                <coordinates latitude="52.372456" longitude="4.842727" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>49</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0024" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3732</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2608</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="e96b667b-f9f3-4958-aed9-472335f0950a">
+                                <coordinates latitude="52.358250" longitude="4.843029" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>0</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>513</travelTime>
+                <trafficSpeed>5</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0025" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3730</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2776</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="c4093175-4011-4fd8-950f-69ce75382340">
+                                <coordinates latitude="52.357510" longitude="4.841930" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>522</travelTime>
+                <trafficSpeed>5</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0026" version="1.0">
+                <measurementSiteName>traject_ZX3727_ZX3731</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2818</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                                <coordinates latitude="52.363731" longitude="4.878717" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                                <coordinates latitude="52.358101" longitude="4.852130" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>270</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="f0e3d6dd-a088-4578-9322-b70effeebbd6">
+                                <coordinates latitude="52.358101" longitude="4.841874" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>522</travelTime>
+                <trafficSpeed>5</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0027" version="1.0">
+                <measurementSiteName>traject_ZX3720_ZX3723</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>2411</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="4b0dd5aa-b16c-4982-aadd-a4ad3e5ccdaa">
+                                <coordinates latitude="52.374168" longitude="4.874904" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>292</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                                <coordinates latitude="52.374599" longitude="4.858010" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="f12a418d-1307-420c-8c6d-7ac974194b35">
+                                <coordinates latitude="52.371975" longitude="4.841708" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>48</travelTime>
+                <trafficSpeed>50</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0028" version="1.0">
+                <measurementSiteName>traject_0031_ZX3765</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3211</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="-1">
+                            <camera id="081fad75-6d93-4b57-8be8-dbdc06b27275">
+                                <coordinates latitude="52.341652" longitude="4.950234" />
+                                <laneNumber>-1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="ba8d367b-d35d-4dba-aaf1-9484ac70e2f4">
+                                <coordinates latitude="52.351101" longitude="4.934920" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="ba8d367b-d35d-4dba-aaf1-9484ac70e2f4">
+                                <coordinates latitude="52.351101" longitude="4.934920" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>315</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="1">
+                            <camera id="34140b04-0b25-43ed-a4d5-3d73a00399f8">
+                                <coordinates latitude="52.363281" longitude="4.922042" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>247</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>1119</travelTime>
+                <trafficSpeed>2</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="TRJ_0029" version="1.0">
+                <measurementSiteName>traject_ZX3734_ZX3740</measurementSiteName>
+                <measurementSiteType>trajectory</measurementSiteType>
+                <length>3837</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="1">
+                            <camera id="7ebe9b62-cd0b-472d-9aca-a4a81d0ca774">
+                                <coordinates latitude="52.359921" longitude="4.886561" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>202</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="3">
+                        <lane specificLane="1">
+                            <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                                <coordinates latitude="52.346802" longitude="4.880400" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>135</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="4">
+                        <lane specificLane="2">
+                            <camera id="8756543a-db91-44fa-8a92-8fc3cd095fe3">
+                                <coordinates latitude="52.333794" longitude="4.890665" />
+                                <laneNumber>2</laneNumber>
+                                <status>on</status>
+                                <viewDirection>90</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="predicted" estimationType="estimated">
+                <travelTime>286</travelTime>
+                <trafficSpeed>13</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>

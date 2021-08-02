@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="travelTime">
+        <publicationReference id="All sectionsTT_ESB" version="1.0" />
+        <publicationTime>2019-01-20T06:47:10Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-01-20T06:46:00Z</measurementStartTime>
+            <measurementEndTime>2019-01-20T06:47:00Z</measurementEndTime>
+        </measurementPeriod>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="39_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>200</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="576">
+                                <coordinates latitude="52.378292" longitude="4.841175" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="577">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>15</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>15</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="100.000000">
+                <travelTime>13</travelTime>
+                <trafficSpeed>55</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="40_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>220</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="575">
+                                <coordinates latitude="52.369686" longitude="4.901002" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="572">
+                                <coordinates latitude="52.377865" longitude="4.900773" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>16</travelTime>
+                <trafficSpeed>49</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>16</travelTime>
+                <trafficSpeed>49</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="100.000000">
+                <travelTime>15</travelTime>
+                <trafficSpeed>52</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="41_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>215</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="574">
+                                <coordinates latitude="52.378216" longitude="4.899978" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="573">
+                                <coordinates latitude="52.378433" longitude="4.899220" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>16</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>16</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="100.000000">
+                <travelTime>14</travelTime>
+                <trafficSpeed>55</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="42_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>230</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="578">
+                                <coordinates latitude="52.378292" longitude="4.841175" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="579">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>17</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>17</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="100.000000">
+                <travelTime>16</travelTime>
+                <trafficSpeed>51</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+        
+        <siteMeasurements>
+            <measurementSiteReference id="43_1" version="1.0">
+                <measurementSiteType>section</measurementSiteType>
+                <length>256</length>
+                <locationContainedInItinerary>
+                    <location index="1">
+                        <lane specificLane="lane1">
+                            <camera id="580">
+                                <coordinates latitude="52.378292" longitude="4.841175" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                    <location index="2">
+                        <lane specificLane="lane1">
+                            <camera id="581">
+                                <coordinates latitude="52.374134" longitude="4.894487" />
+                                <laneNumber>1</laneNumber>
+                                <status>on</status>
+                                <viewDirection>180</viewDirection>
+                            </camera>
+                        </lane>
+                    </location>
+                </locationContainedInItinerary>
+            </measurementSiteReference>
+            <travelTimeData travelTimeType="raw">
+                <travelTime>19</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="representative">
+                <travelTime>19</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+            <travelTimeData travelTimeType="processed" dataQuality="100.000000">
+                <travelTime>19</travelTime>
+                <trafficSpeed>48</trafficSpeed>
+            </travelTimeData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>
