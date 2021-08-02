@@ -1,29 +1,39 @@
 from rest_framework import serializers
 
 from reistijden_v1.models import (
-    Category,
+    Camera,
     IndividualTravelTime,
     Lane,
-    Location,
-    MeasuredFlow,
     Measurement,
+    MeasurementLocation,
+    MeasurementSite,
     Publication,
+    TrafficFlow,
+    TrafficFlowCategoryCount,
     TravelTime,
 )
 
 
+class CameraSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Camera
+        exclude = ['lane']
+
+
 class LaneSerializer(serializers.ModelSerializer):
+    cameras = CameraSerializer(many=True)
+
     class Meta:
         model = Lane
-        exclude = ['location']
+        exclude = ['measurement_location']
 
 
-class LocationSerializer(serializers.ModelSerializer):
+class MeasurementLocationSerializer(serializers.ModelSerializer):
     lanes = LaneSerializer(many=True)
 
     class Meta:
-        model = Location
-        exclude = ['measurement']
+        model = MeasurementLocation
+        exclude = ['measurement_site']
 
 
 class TravelTimeSerializer(serializers.ModelSerializer):
@@ -40,23 +50,30 @@ class IndividualTravelTimeSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
-        exclude = ['measured_flow']
+        model = TrafficFlowCategoryCount
+        exclude = ['traffic_flow']
 
 
-class MeasuredFlowSerializer(serializers.ModelSerializer):
+class TrafficFlowSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
 
     class Meta:
-        model = MeasuredFlow
+        model = TrafficFlow
         exclude = ['measurement']
 
 
+class MeasurementSiteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MeasurementSite
+        fields = '__all__'
+
+
 class MeasurementSerializer(serializers.ModelSerializer):
-    locations = LocationSerializer(many=True)
+    measurement_site = MeasurementSiteSerializer(many=False)
+    locations = MeasurementLocationSerializer(many=True)
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
-    measured_flows = MeasuredFlowSerializer(many=True)
+    traffic_flows = TrafficFlowSerializer(many=True)
 
     class Meta:
         model = Measurement
@@ -75,23 +92,34 @@ class PublicationSerializer(serializers.ModelSerializer):
         publication = Publication.objects.create(**validated_data)
 
         for measurement_src in measurements:
+            measurement_site_src = measurement_src.pop('measurement_site')
+            measurement_site, _ = MeasurementSite.objects.get_or_create(
+                **measurement_site_src
+            )
+
+            measurement = Measurement.objects.create(
+                publication=publication, measurement_site=measurement_site
+            )
+
             locations = measurement_src.pop('locations')
             travel_times = measurement_src.pop('travel_times')
             individual_travel_times = measurement_src.pop('individual_travel_times')
-            measured_flows = measurement_src.pop('measured_flows')
-
-            measurement = Measurement.objects.create(
-                publication=publication, **measurement_src
-            )
+            traffic_flows = measurement_src.pop('traffic_flows')
 
             for location_src in locations:
                 lanes = location_src.pop('lanes')
-                location = Location.objects.create(
-                    measurement=measurement, **location_src
+                measurement_location, _ = MeasurementLocation.objects.get_or_create(
+                    measurement_site=measurement_site, **location_src
                 )
 
                 for lane_src in lanes:
-                    Lane.objects.create(location=location, **lane_src)
+                    cameras = lane_src.pop('cameras')
+                    lane, _ = Lane.objects.get_or_create(
+                        measurement_location=measurement_location, **lane_src
+                    )
+
+                    for camera_src in cameras:
+                        Camera.objects.get_or_create(lane=lane, **camera_src)
 
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)
@@ -101,13 +129,15 @@ class PublicationSerializer(serializers.ModelSerializer):
                     measurement=measurement, **individual_travel_time_src
                 )
 
-            for measured_flow_src in measured_flows:
-                categories = measured_flow_src.pop('categories')
-                measured_flow = MeasuredFlow.objects.create(
-                    measurement=measurement, **measured_flow_src
+            for traffic_flow_src in traffic_flows:
+                categories = traffic_flow_src.pop('categories')
+                traffic_flow = TrafficFlow.objects.create(
+                    measurement=measurement, **traffic_flow_src
                 )
 
                 for category_src in categories:
-                    Category.objects.create(measured_flow=measured_flow, **category_src)
+                    TrafficFlowCategoryCount.objects.create(
+                        traffic_flow=traffic_flow, **category_src
+                    )
 
         return publication

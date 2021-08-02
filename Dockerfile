@@ -1,41 +1,40 @@
 FROM amsterdam/python:3.8-buster as app
+MAINTAINER datapunt@amsterdam.nl
 
 WORKDIR /app_install
-ADD requirements.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-ADD deploy /deploy
+COPY deploy /deploy
 
 WORKDIR /src
-ADD src .
+COPY src .
 
-ARG DATABASE_ENABLED=false 
-ARG SECRET_KEY=collectstatic 
-RUN python manage.py collectstatic --no-input
+ARG SECRET_KEY=not-used
+RUN DATABASE_ENABLED=false python manage.py collectstatic --no-input
 
 USER datapunt
 
 CMD ["/deploy/docker-run.sh"]
 
-# devserver
+# stage 2, dev
 FROM app as dev
 
 USER root
 WORKDIR /app_install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
-RUN chmod -R a+r /app_install
 
-USER datapunt
 WORKDIR /src
+USER datapunt
 
 # Any process that requires to write in the home dir
 # we write to /tmp since we have no home dir
 ENV HOME /tmp
 
-CMD ["python manage.py runserver 0.0.0.0"]
+CMD ["./manage.py", "runserver", "0.0.0.0:8000"]
 
-# tests
+# stage 3, tests
 FROM dev as tests
 
 USER datapunt

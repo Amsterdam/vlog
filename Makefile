@@ -40,9 +40,6 @@ push: build
 app:
 	$(run) --service-ports app
 
-bash:                               ## Run the container and start bash
-	$(run) dev bash
-
 shell:
 	$(manage) shell_plus --print-sql
 
