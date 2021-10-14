@@ -6,6 +6,8 @@ from distutils.util import strtobool
 import humps
 import xmltodict
 
+from reistijden_v1.models import VehicleCategory
+
 logger = logging.getLogger(__name__)
 
 
@@ -121,11 +123,18 @@ class ReistijdenParser:
         }
 
     def category_src_to_dict(self, src_d):
-        return {
+        result = {
             "count": src_d["@count"],
-            "type": src_d["@type"] if src_d["@type"] else None
-            # Convert empty strings to Null
         }
+
+        vehicle_category_str = src_d.pop("@type")
+        if vehicle_category_str:
+            vehicle_category, _ = VehicleCategory.objects.get_or_create(
+                name=vehicle_category_str
+            )
+            result['vehicle_category'] = vehicle_category.pk
+
+        return result
 
     def traffic_flow_src_to_dict(self, src_d):
         categories = []
@@ -161,13 +170,25 @@ class ReistijdenParser:
         if "individual_travel_time_data" in src_d:
             if type(src_d["individual_travel_time_data"]) is list:
                 individual_travel_times = [
-                    d for d in src_d["individual_travel_time_data"]
+                    self.get_individual_travel_time(d)
+                    for d in src_d["individual_travel_time_data"]
                 ]
             else:
-                individual_travel_times = [src_d["individual_travel_time_data"]]
+                individual_travel_times = [
+                    self.get_individual_travel_time(
+                        src_d["individual_travel_time_data"]
+                    )
+                ]
         return individual_travel_times
 
     def get_individual_travel_time(self, src_d):
+        vehicle_category_str = src_d.pop('vehicle_category')
+        if vehicle_category_str:
+            vehicle_category, _ = VehicleCategory.objects.get_or_create(
+                name=vehicle_category_str
+            )
+            src_d['vehicle_category'] = vehicle_category.pk
+
         src_d['detection_start_time'] = src_d.pop('start_detection_time', None)
         src_d['detection_end_time'] = src_d.pop('end_detection_time', None)
         return src_d
