@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='lane',
             name='specific_lane',
-            field=models.CharField(help_text='Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) used in the Amsterdam Travel Time system. The actual lane number is available at Camera.lane_number with respect to the camera view direction at the measurement location.', max_length=255),
+            field=models.CharField(help_text='Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) used in the Amsterdam Travel Time system. The actual lane number is available at Camera.lane_number with respect to the camera view direction at the measurement location.', max_length=255),
         ),
         migrations.AlterField(
             model_name='location',
