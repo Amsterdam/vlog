@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import datetime
+from distutils.util import strtobool
 
 import humps
 import xmltodict
@@ -37,9 +38,12 @@ class ReistijdenParser:
             "measurement_start_time": publication_src["measurement_period"][
                 "measurement_start_time"
             ],
-            "measurement_end_time": publication_src["measurement_period"][
+            "measurement_end_time": publication_src["measurement_period"].get(
                 "measurement_end_time"
-            ],
+            ),
+            "measurement_duration": publication_src["measurement_period"].get(
+                "duration"
+            ),
             "measurements": measurements,
         }
 
@@ -112,6 +116,8 @@ class ReistijdenParser:
             "estimation_type": src_d.get("@estimation_type"),
             "travel_time": src_d["travel_time"],
             "traffic_speed": src_d["traffic_speed"],
+            "num_input_values_used": src_d.get("@number_of_input_values_used"),
+            "data_error": bool(strtobool(src_d.get("data_error", "false"))),
         }
 
     def category_src_to_dict(self, src_d):
