@@ -47,6 +47,8 @@ django-prometheus==2.1.0
     # via -r ./requirements.txt
 django-sentry-400-middleware==0.3.0
     # via -r ./requirements.txt
+django-test-migrations==1.1.0
+    # via -r requirements_dev.in
 djangorestframework==3.12.4
     # via
     #   -r ./requirements.txt
@@ -122,9 +124,9 @@ ptyprocess==0.7.0
     # via pexpect
 py==1.10.0
     # via pytest
-pycodestyle==2.7.0
+pycodestyle==2.8.0
     # via flake8
-pyflakes==2.3.1
+pyflakes==2.4.0
     # via flake8
 pygments==2.10.0
     # via ipython
@@ -187,7 +189,9 @@ traitlets==5.1.0
     #   ipython
     #   matplotlib-inline
 typing-extensions==3.10.0.2
-    # via black
+    # via
+    #   black
+    #   django-test-migrations
 unicodecsv==0.14.1
     # via
     #   -r ./requirements.txt
