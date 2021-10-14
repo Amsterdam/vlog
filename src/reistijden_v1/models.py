@@ -7,21 +7,21 @@ class Publication(models.Model):
     MeasurementSites.
     """
 
-    publication_type = models.CharField(
+    type = models.CharField(
         max_length=255,
         help_text=(
             "The type of publication. One of: TrafficFlow, TravelTime, "
             "IndividualTravelTime"
         ),
     )
-    publication_reference_id = models.CharField(
+    reference_id = models.CharField(
         max_length=255,
         help_text=(
             "Unique publication identifier. The ID is a unique for data set delivered "
             "by the system and shall remain unchanged throughout the system lifetime"
         ),
     )
-    publication_reference_version = models.CharField(
+    version = models.CharField(
         max_length=255,
         help_text=(
             "The version of the publication. Incremented (+1) every time section "
@@ -63,15 +63,16 @@ class Measurement(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
     """
+
     publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
-    measurement_site_reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
-    measurement_site_reference_version = models.CharField(max_length=255)  # e.g. "1.0"
-    measurement_site_name = models.CharField(max_length=255, null=True)
-    measurement_site_type = models.CharField(max_length=255)  # e.g. "section"
+    reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
+    version = models.CharField(max_length=255)  # e.g. "1.0"
+    name = models.CharField(max_length=255, null=True)
+    type = models.CharField(max_length=255)  # e.g. "section"
     length = models.IntegerField(null=True)
 
 
-class Location(models.Model):
+class MeasurementLocation(models.Model):
     """
     A location that is part of the MeasurementSite.
     At most one location exists if the measurement site is of type 'location.
@@ -80,6 +81,7 @@ class Location(models.Model):
     The number of locations is unbounded if the measurement site is of type
     'trajectory' (start location, end location and all via locations)
     """
+
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
 
     index = models.IntegerField(
@@ -93,16 +95,15 @@ class Location(models.Model):
 
 class Lane(models.Model):
     """
-    A road lane at a Location.
+    A road lane at a MeasurementLocation.
     """
 
-    location = models.ForeignKey(
-        'Location', on_delete=models.CASCADE
+    measurement_location = models.ForeignKey(
+        'MeasurementLocation', on_delete=models.CASCADE
     )
     specific_lane = models.CharField(
         max_length=255,
         help_text=(
-            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
             "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
             "used in the Amsterdam Travel Time system. The actual lane number is "
             "available at Camera.lane_number with respect to the camera view direction "
@@ -124,7 +125,7 @@ class TravelTime(models.Model):
     """
 
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-    travel_time_type = models.CharField(
+    type = models.CharField(
         max_length=255,
         help_text=("One of: raw, representative, processed, predicted, actual"),
     )
@@ -156,7 +157,7 @@ class IndividualTravelTime(models.Model):
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=255)
     vehicle_category = models.CharField(max_length=255)
-    start_detection_time = models.DateTimeField(
+    detection_start_time = models.DateTimeField(
         help_text=(
             "The date time the vehicle was detected at the start location of the "
             "measurement site (section) in UTC format."
@@ -164,7 +165,7 @@ class IndividualTravelTime(models.Model):
         null=True,
         blank=True,
     )
-    end_detection_time = models.DateTimeField(
+    detection_end_time = models.DateTimeField(
         help_text=(
             "The date time the vehicle was detected at the end lcoation of the "
             "measurement site (section) in UTC format."
@@ -180,9 +181,9 @@ class IndividualTravelTime(models.Model):
     )
 
 
-class MeasuredFlow(models.Model):
+class TrafficFlow(models.Model):
     """
-    MeasuredFlow describes the intensity data computed for a specific lane
+    TrafficFlow describes the intensity data computed for a specific lane
     in the measurement location.
     """
 
@@ -202,7 +203,7 @@ class MeasuredFlow(models.Model):
     )
 
 
-class Category(models.Model):
-    measured_flow = models.ForeignKey('MeasuredFlow', on_delete=models.CASCADE)
+class TrafficFlowCategoryCount(models.Model):
+    traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
     type = models.CharField(max_length=255, null=True)
