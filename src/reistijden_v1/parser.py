@@ -52,11 +52,13 @@ class ReistijdenParser:
     def measurement_src_to_dict(self, src_d):
         site_ref = src_d["measurement_site_reference"]
         return {
-            "reference_id": site_ref["@id"],
-            "version": site_ref["@version"],
-            "name": site_ref.get("measurement_site_name"),
-            "type": site_ref["measurement_site_type"],
-            "length": site_ref.get("length"),
+            "measurement_site": {
+                "reference_id": site_ref["@id"],
+                "version": site_ref["@version"],
+                "name": site_ref.get("measurement_site_name"),
+                "type": site_ref["measurement_site_type"],
+                "length": site_ref.get("length"),
+            },
             "locations": self.get_location_from_site_ref(site_ref),
             "travel_times": self.get_travel_times_from_measurement(src_d),
             "individual_travel_times": self.get_individual_travel_times_from_measurement(  # noqa: E501
