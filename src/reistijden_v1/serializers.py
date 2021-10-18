@@ -24,7 +24,7 @@ class MeasurementLocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MeasurementLocation
-        exclude = ['measurement']
+        exclude = ['measurement_site']
 
 
 class TravelTimeSerializer(serializers.ModelSerializer):
@@ -100,7 +100,7 @@ class PublicationSerializer(serializers.ModelSerializer):
             for location_src in locations:
                 lanes = location_src.pop('lanes')
                 measurement_location, _ = MeasurementLocation.objects.get_or_create(
-                    measurement=measurement, **location_src
+                    measurement_site=measurement_site, **location_src
                 )
 
                 for lane_src in lanes:
