@@ -158,14 +158,20 @@ class MeasurementLocation(models.Model):
     'trajectory' (start location, end location and all via locations)
     """
 
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
-
+    measurement_site = models.ForeignKey(
+        'MeasurementSite', on_delete=models.CASCADE, null=True
+    )
     index = models.IntegerField(
         null=True,
         help_text=(
             "The index attribute indicates the order of measurement location in the "
             "measurement site. Optional, if the measurement site is of type 'location'"
         ),
+    )
+
+    # to be removed after data migrations
+    measurement = models.ForeignKey(
+        'Measurement', on_delete=models.CASCADE, null=True, blank=True
     )
 
 
