@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from reistijden_v1.models import (
+    Camera,
     IndividualTravelTime,
     Lane,
     Measurement,
@@ -13,7 +14,15 @@ from reistijden_v1.models import (
 )
 
 
+class CameraSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Camera
+        exclude = ['lane']
+
+
 class LaneSerializer(serializers.ModelSerializer):
+    cameras = CameraSerializer(many=True)
+
     class Meta:
         model = Lane
         exclude = ['measurement_location']
@@ -104,7 +113,13 @@ class PublicationSerializer(serializers.ModelSerializer):
                 )
 
                 for lane_src in lanes:
-                    Lane.objects.create(measurement_location=measurement_location, **lane_src)
+                    cameras = lane_src.pop('cameras')
+                    lane, _ = Lane.objects.get_or_create(
+                        measurement_location=measurement_location, **lane_src
+                    )
+
+                    for camera_src in cameras:
+                        Camera.objects.get_or_create(lane=lane, **camera_src)
 
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)

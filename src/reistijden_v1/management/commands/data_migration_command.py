@@ -13,6 +13,7 @@ class DataMigrationCommand(BaseCommand):
     # the number of values migrated and the number of errors that were detected.
     INSERT_QUERY: str = NotImplemented
     UPDATE_QUERY: str = NotImplemented
+    DELETE_QUERY: str = NotImplemented
     VALIDATE_QUERY: str = NotImplemented
 
     def handle(self, **options):
@@ -30,8 +31,13 @@ class DataMigrationCommand(BaseCommand):
             logging.info("Inserting")
             cursor.execute(self.INSERT_QUERY)
 
-        logging.info("Updating")
-        cursor.execute(self.UPDATE_QUERY)
+        if self.UPDATE_QUERY is not NotImplemented:
+            logging.info("Updating")
+            cursor.execute(self.UPDATE_QUERY)
+
+        if self.DELETE_QUERY is not NotImplemented:
+            logging.info("Deleting")
+            cursor.execute(self.DELETE_QUERY)
 
     def validate(self, cursor) -> Tuple[int, int]:
         """
@@ -45,21 +51,24 @@ class DataMigrationCommand(BaseCommand):
 
         :return: Tuple of (expected number of rows, number of rows with errors).
         """
-        logger.info("Validating")
+        num_objects = num_errors = 0
 
-        cursor.execute(self.VALIDATE_QUERY)
-        num_objects, num_errors = cursor.fetchone()
+        if self.VALIDATE_QUERY is not NotImplemented:
+            logger.info("Validating")
 
-        if num_errors > 0:
-            self.error(
-                f"ERROR! Found {num_errors} objects "
-                f"(out of {num_objects}) where migrated data is wrong."
-            )
-        else:
-            self.success(
-                f"SUCCESS! All objects ({num_objects}) "
-                f"have been correctly migrated."
-            )
+            cursor.execute(self.VALIDATE_QUERY)
+            num_objects, num_errors = cursor.fetchone()
+
+            if num_errors > 0:
+                self.error(
+                    f"ERROR! Found {num_errors} objects "
+                    f"(out of {num_objects}) where migrated data is wrong."
+                )
+            else:
+                self.success(
+                    f"SUCCESS! All objects ({num_objects}) "
+                    f"have been correctly migrated."
+                )
 
         return num_objects, num_errors
 
