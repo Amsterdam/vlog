@@ -1,12 +1,17 @@
 from django.core.management.base import BaseCommand
 
 from reistijden_v1.models import (
-    Publication,
-    Measurement,
+    Camera,
+    IndividualTravelTime,
     Lane,
+    Measurement,
+    MeasurementLocation,
+    MeasurementSite,
+    Publication,
+    TrafficFlow,
+    TrafficFlowCategoryCount,
     TravelTime,
-    IndividualTravelTime, VehicleCategory, MeasurementSite, MeasurementLocation, Camera,
-    TrafficFlow, TrafficFlowCategoryCount,
+    VehicleCategory,
 )
 
 
