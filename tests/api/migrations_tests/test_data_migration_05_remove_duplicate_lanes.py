@@ -2,7 +2,7 @@ import itertools
 
 import pytest
 from django.utils.timezone import now
-from reistijden_v1.management.commands.data_migration_05_remove_duplicate_lanes import (  # noqa
+from reistijden_v1.management.commands.data_migration_05_cameras_from_lanes import (  # noqa
     Command,
 )
 
@@ -13,7 +13,7 @@ from tests.api.migrations_tests.test_data_migration import TestDataMigration
 class TestVehicleCategoryDataMigration(TestDataMigration):
 
     migrate_from = ('reistijden_v1', '0001_initial')
-    migrate_to = ('reistijden_v1', '0014_05_remove_duplicate_lanes')
+    migrate_to = ('reistijden_v1', '0014_05_cameras_from_lanes')
 
     def setUp(self):
         super().setUp()

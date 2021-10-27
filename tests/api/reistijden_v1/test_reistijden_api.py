@@ -328,28 +328,6 @@ class ReistijdenPostTest(ReistijdenPostTestBase):
         self.assertEqual(TrafficFlow.objects.all().count(), 0)
         self.assertEqual(TrafficFlowCategoryCount.objects.all().count(), 0)
 
-    def test_expaterror(self):
-        response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
-        self.assertEqual(response.status_code, 200, response.data)
-
-        ReistijdenConsumer().consume(end_at_empty_queue=True)
-
-        self.assertEqual(
-            FailedMessage.objects.filter(
-                consume_fail_info__icontains='not well-formed (invalid token): '
-                'line 11, column 5'
-            ).count(),
-            1,
-        )
-        self.assertEqual(Publication.objects.all().count(), 0)
-        self.assertEqual(Measurement.objects.all().count(), 0)
-        self.assertEqual(MeasurementLocation.objects.all().count(), 0)
-        self.assertEqual(Lane.objects.all().count(), 0)
-        self.assertEqual(TravelTime.objects.all().count(), 0)
-        self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
-        self.assertEqual(TrafficFlow.objects.all().count(), 0)
-        self.assertEqual(TrafficFlowCategoryCount.objects.all().count(), 0)
-
     def test_missing_location_contained_in_itinerary(self):
         response = self.client.post(
             self.URL, TEST_POST_MISSING_locationContainedInItinerary, **REQUEST_HEADERS
@@ -373,6 +351,38 @@ class ReistijdenPostTest(ReistijdenPostTestBase):
         )
         self.assertEqual(response.status_code, 401, response.data)
 
+
+class ReistijdenPostErrorsTest(ReistijdenPostTestBase):
+    def test_expaterror(self):
+        response = self.client.post(self.URL, TEST_POST_WRONG_TAGS, **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 200, response.data)
+
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
+
+        self.assertEqual(
+            FailedMessage.objects.filter(
+                consume_fail_info__icontains='not well-formed (invalid token): '
+                'line 11, column 5'
+            ).count(),
+            1,
+        )
+        self.assertEqual(Publication.objects.all().count(), 0)
+        self.assertEqual(Measurement.objects.all().count(), 0)
+        self.assertEqual(MeasurementLocation.objects.all().count(), 0)
+        self.assertEqual(Lane.objects.all().count(), 0)
+        self.assertEqual(TravelTime.objects.all().count(), 0)
+        self.assertEqual(IndividualTravelTime.objects.all().count(), 0)
+        self.assertEqual(TrafficFlow.objects.all().count(), 0)
+        self.assertEqual(TrafficFlowCategoryCount.objects.all().count(), 0)
+
+    def test_non_unicode(self):
+        response = self.client.post(self.URL, '\x80abc', **REQUEST_HEADERS)
+        self.assertEqual(response.status_code, 200, response.data)
+
+        ReistijdenConsumer().consume(end_at_empty_queue=True)
+        self.assertEqual(Message.objects.count(), 0)
+        self.assertEqual(FailedMessage.objects.count(), 1)
+
     def test_post_wrongly_formatted_xml(self):
         response = self.client.post(
             self.URL, '<wrongly>formatted</xml>', **REQUEST_HEADERS
@@ -387,14 +397,6 @@ class ReistijdenPostTest(ReistijdenPostTestBase):
         response = self.client.post(
             self.URL, '<root>wrong structure</root>', **REQUEST_HEADERS
         )
-        self.assertEqual(response.status_code, 200, response.data)
-
-        ReistijdenConsumer().consume(end_at_empty_queue=True)
-        self.assertEqual(Message.objects.count(), 0)
-        self.assertEqual(FailedMessage.objects.count(), 1)
-
-    def test_non_unicode(self):
-        response = self.client.post(self.URL, '\x80abc', **REQUEST_HEADERS)
         self.assertEqual(response.status_code, 200, response.data)
 
         ReistijdenConsumer().consume(end_at_empty_queue=True)

@@ -12,7 +12,7 @@ from tests.api.migrations_tests.test_data_migration import TestDataMigration
 class TestVehicleCategoryDataMigration(TestDataMigration):
 
     migrate_from = ('reistijden_v1', '0001_initial')
-    migrate_to = ('reistijden_v1', '0010_01_individual_travel_time_vehicle_categories')
+    migrate_to = ('reistijden_v1', '0009_add_fields')
 
     def setUp(self):
         super().setUp()
@@ -31,10 +31,12 @@ class TestVehicleCategoryDataMigration(TestDataMigration):
 
         self.create_objects(
             'IndividualTravelTime',
-            dict(default_values, old_vehicle_category='abc'),
-            dict(default_values, old_vehicle_category='xyz'),
-            dict(default_values, old_vehicle_category=''),
+            dict(default_values, vehicle_category='abc'),
+            dict(default_values, vehicle_category='xyz'),
+            dict(default_values, vehicle_category=''),
         )
+
+        self.finish_schema_migration()
 
     def test_migration(self):
         self.call_command(Command)
