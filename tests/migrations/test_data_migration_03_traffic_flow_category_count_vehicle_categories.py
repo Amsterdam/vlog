@@ -1,40 +1,45 @@
 import pytest
 from django.db import connection
 from django.utils.timezone import now
-from reistijden_v1.management.commands.data_migration_01_individual_travel_time_vehicle_categories import (  # noqa
+from reistijden_v1.management.commands.data_migration_03_traffic_flow_category_count_vehicle_categories import (  # noqa
     Command,
 )
 
-from tests.api.migrations_tests.test_data_migration import TestDataMigration
+from migrations.test_data_migration import TestDataMigration
 
 
 @pytest.mark.django_db
 class TestVehicleCategoryDataMigration(TestDataMigration):
 
     migrate_from = ('reistijden_v1', '0001_initial')
-    migrate_to = ('reistijden_v1', '0009_add_fields')
+    migrate_to = (
+        'reistijden_v1',
+        '0012_03_traffic_flow_category_count_vehicle_categories',
+    )
 
     def setUp(self):
         super().setUp()
 
         keys = 'publication_time', 'measurement_start_time', 'measurement_end_time'
-        publication, = self.create_objects('Publication', dict.fromkeys(keys, now()))
-        measurement, = self.create_objects('Measurement', dict(publication=publication))
-
-        default_values = dict(
-            detection_start_time=now(),
-            detection_end_time=now(),
-            travel_time=0,
-            traffic_speed=1,
-            measurement=measurement,
+        (publication,) = self.create_objects('Publication', dict.fromkeys(keys, now()))
+        (measurement,) = self.create_objects(
+            'Measurement', dict(publication=publication)
+        )
+        (traffic_flow,) = self.create_objects(
+            'TrafficFlow',
+            dict(measurement=measurement, vehicle_flow=0),
         )
 
+        # Create some objects to migrate
         self.create_objects(
-            'IndividualTravelTime',
-            dict(default_values, vehicle_category='abc'),
-            dict(default_values, vehicle_category='xyz'),
-            dict(default_values, vehicle_category=''),
+            'TrafficFlowCategoryCount',
+            dict(type='abc', traffic_flow=traffic_flow, count=0),
+            dict(type='xyz', traffic_flow=traffic_flow, count=0),
+            dict(type='', traffic_flow=traffic_flow, count=0),
         )
+
+        # create a VehicleCategory to check we don't insert duplicate values
+        self.create_objects('VehicleCategory', dict(name='abc'))
 
         self.finish_schema_migration()
 
@@ -42,8 +47,8 @@ class TestVehicleCategoryDataMigration(TestDataMigration):
         self.call_command(Command)
         values_list = self.get_model('VehicleCategory').objects.values_list
         actual = sorted(values_list('name', 'id'))
-        values_list = self.get_model('IndividualTravelTime').objects.values_list
-        expected = sorted(values_list('old_vehicle_category', 'vehicle_category_id'))
+        values_list = self.get_model('TrafficFlowCategoryCount').objects.values_list
+        expected = sorted(values_list('type', 'vehicle_category_id'))
         self.assertEqual(actual, expected)
 
     def test_validation(self):
