@@ -3,7 +3,6 @@ from django_test_migrations.contrib.unittest_case import MigratorTestCase
 
 
 class TestDataMigration(MigratorTestCase):
-
     def get_model(self, model_name):
         """
         Get a model as in the state it would be at the end of the 'migrate_to'

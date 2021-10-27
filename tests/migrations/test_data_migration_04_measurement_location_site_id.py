@@ -5,7 +5,7 @@ from reistijden_v1.management.commands.data_migration_04_measurement_location_si
     Command,
 )
 
-from tests.api.migrations_tests.test_data_migration import TestDataMigration
+from migrations.test_data_migration import TestDataMigration
 
 
 @pytest.mark.django_db
@@ -18,7 +18,7 @@ class TestVehicleCategoryDataMigration(TestDataMigration):
         super().setUp()
 
         keys = 'publication_time', 'measurement_start_time', 'measurement_end_time'
-        publication, = self.create_objects('Publication', dict.fromkeys(keys, now()))
+        (publication,) = self.create_objects('Publication', dict.fromkeys(keys, now()))
         measurement_sites = self.create_objects('MeasurementSite', {}, {}, {})
         measurements = self.create_objects(
             'Measurement',
