@@ -29,4 +29,4 @@ class Command(DataMigrationCommand):
         FROM reistijden_v1_individualtraveltime
         LEFT JOIN reistijden_v1_vehiclecategory 
                   ON old_vehicle_category=reistijden_v1_vehiclecategory.name
-    """
+    """  # noqa

@@ -28,4 +28,4 @@ class Command(DataMigrationCommand):
                COUNT(*) FILTER (WHERE reistijden_v1_vehiclecategory.id IS NULL) as errors
         FROM reistijden_v1_trafficflowcategorycount
         LEFT JOIN reistijden_v1_vehiclecategory ON type=name
-    """
+    """  # noqa
