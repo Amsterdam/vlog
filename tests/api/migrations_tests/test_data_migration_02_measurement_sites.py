@@ -30,6 +30,8 @@ class TestDataMigration(TestDataMigration):
             dict(default_values, reference_id='SEC_0002', name='xyz', length=42),
         )
 
+        self.finish_schema_migration()
+
     def test_migration(self):
         self.call_command(Command)
         fields = 'reference_id', 'version', 'name', 'type', 'length'

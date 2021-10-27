@@ -37,6 +37,8 @@ class TestVehicleCategoryDataMigration(TestDataMigration):
             dict(measurement=measurements[2], index=2),
         )
 
+        self.finish_schema_migration()
+
     def test_migration(self):
         self.call_command(Command)
         values_list = self.get_model('MeasurementLocation').objects.values_list

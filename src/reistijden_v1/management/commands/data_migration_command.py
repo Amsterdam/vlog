@@ -23,21 +23,24 @@ class DataMigrationCommand(BaseCommand):
 
     def migrate(self, cursor):
         """
-        Peform the actual data migration.
+        Perform the actual data migration.
 
         :param cursor: Cursor to use for executing queries.
         """
         if self.INSERT_QUERY is not NotImplemented:
             logging.info("Inserting")
             cursor.execute(self.INSERT_QUERY)
+            logging.info(f'Inserted {cursor.rowcount} rows')
 
         if self.UPDATE_QUERY is not NotImplemented:
             logging.info("Updating")
             cursor.execute(self.UPDATE_QUERY)
+            logging.info(f'Updated {cursor.rowcount} rows')
 
         if self.DELETE_QUERY is not NotImplemented:
             logging.info("Deleting")
             cursor.execute(self.DELETE_QUERY)
+            logging.info(f'Deleted {cursor.rowcount} rows')
 
     def validate(self, cursor) -> Tuple[int, int]:
         """

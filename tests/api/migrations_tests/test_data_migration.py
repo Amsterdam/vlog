@@ -39,3 +39,15 @@ class TestDataMigration(MigratorTestCase):
             command.migrate(cursor)
             _, errors = command.validate(cursor)
         self.assertEqual(errors, 0)
+
+    def finish_schema_migration(self):
+        """
+        We will first deploy with all schema migrations, then the commands
+        will be run, so now run the rest of the schema migrations so we can
+        run the commands for the data migrations as they will be run in
+        production.
+
+        NOTE: setUp should call this after creating some objects
+        """
+        last_migration = ('reistijden_v1', '0014_05_cameras_from_lanes')
+        self.new_state = self._migrator.apply_tested_migration(last_migration)

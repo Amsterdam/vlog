@@ -39,6 +39,8 @@ class TestVehicleCategoryDataMigration(TestDataMigration):
         # create a VehicleCategory to check we don't insert duplicate values
         self.create_objects('VehicleCategory', dict(name='abc'))
 
+        self.finish_schema_migration()
+
     def test_migration(self):
         self.call_command(Command)
         values_list = self.get_model('VehicleCategory').objects.values_list
