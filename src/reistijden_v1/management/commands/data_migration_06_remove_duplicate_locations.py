@@ -1,6 +1,6 @@
 import logging
 
-from src.reistijden_v1.management.commands.data_migration_command import (
+from reistijden_v1.management.commands.data_migration_command import (
     DataMigrationCommand,
 )
 

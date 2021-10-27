@@ -17,7 +17,7 @@ class Command(DataMigrationCommand):
             type,
             length
         )
-        SELECT DISTINCT 
+        SELECT DISTINCT
             reference_id,
             version,
             name,
@@ -30,7 +30,7 @@ class Command(DataMigrationCommand):
         UPDATE reistijden_v1_measurement as m
         SET measurement_site_id=ms.id
         FROM reistijden_v1_measurementsite as ms
-        WHERE 
+        WHERE
             m.reference_id=ms.reference_id AND
             m.version=ms.version AND
             m.name=ms.name AND

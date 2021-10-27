@@ -1,8 +1,10 @@
+from io import StringIO
+
 from django.db import connection
 from django_test_migrations.contrib.unittest_case import MigratorTestCase
 
 
-class TestDataMigration(MigratorTestCase):
+class TestDataMigrationBase(MigratorTestCase):
     def get_model(self, model_name):
         """
         Get a model as in the state it would be at the end of the 'migrate_to'
@@ -34,6 +36,7 @@ class TestDataMigration(MigratorTestCase):
         Call the command and check that there were no errors.
         """
         command = command_cls()
+        command.stdout = StringIO()
         with connection.cursor() as cursor:
             command.migrate(cursor)
             _, errors = command.validate(cursor)

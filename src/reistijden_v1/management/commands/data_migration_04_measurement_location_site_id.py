@@ -27,4 +27,4 @@ class Command(DataMigrationCommand):
         FROM reistijden_v1_measurementlocation AS location
         LEFT JOIN reistijden_v1_measurement AS measurement 
             ON location.measurement_id = measurement.id 
-    """
+    """  # noqa
