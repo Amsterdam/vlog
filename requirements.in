@@ -1,4 +1,4 @@
-Django
+Django<4  # Need to replace ``url`` with ``path``
 django_extensions
 django_prometheus
 django-sentry-400-middleware
