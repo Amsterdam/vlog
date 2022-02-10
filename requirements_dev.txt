@@ -38,7 +38,7 @@ defusedxml==0.7.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-xml
-django==3.2.11
+django==3.2.12
     # via
     #   -r ./requirements.txt
     #   datapunt-data-ingress

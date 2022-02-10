@@ -12,7 +12,7 @@ datapunt-data-ingress==2.3.0
     # via -r requirements.in
 defusedxml==0.7.1
     # via djangorestframework-xml
-django==3.2.11
+django==3.2.12
     # via
     #   -r requirements.in
     #   datapunt-data-ingress
