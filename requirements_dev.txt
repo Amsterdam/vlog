@@ -14,7 +14,7 @@ attrs==21.4.0
     # via pytest
 backcall==0.2.0
     # via ipython
-black==21.12b0
+black==22.1.0
     # via
     #   ipython
     #   pytest-black
@@ -26,7 +26,7 @@ click==8.0.3
     # via
     #   black
     #   pip-tools
-coverage[toml]==6.2
+coverage[toml]==6.3.1
     # via pytest-cov
 datapunt-data-ingress==2.3.0
     # via -r ./requirements.txt
@@ -38,7 +38,7 @@ defusedxml==0.7.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-xml
-django==3.2.11
+django==3.2.12
     # via
     #   -r ./requirements.txt
     #   datapunt-data-ingress
@@ -110,17 +110,17 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pip-tools==6.4.0
+pip-tools==6.5.1
     # via -r requirements_dev.in
-platformdirs==2.4.1
+platformdirs==2.5.0
     # via black
 pluggy==1.0.0
     # via pytest
-prometheus-client==0.12.0
+prometheus-client==0.13.1
     # via
     #   -r ./requirements.txt
     #   django-prometheus
-prompt-toolkit==3.0.24
+prompt-toolkit==3.0.28
     # via ipython
 psycopg2==2.9.3
     # via -r ./requirements.txt
@@ -136,17 +136,18 @@ pyflakes==2.3.1
     # via flake8
 pygments==2.11.2
     # via ipython
-pyhumps==3.5.0
+pyhumps==3.5.3
     # via -r ./requirements.txt
 pyparsing==3.0.7
     # via packaging
-pytest==6.2.5
+pytest==7.0.1
     # via
     #   -r requirements_dev.in
     #   pytest-black
     #   pytest-cov
     #   pytest-django
     #   pytest-flake8
+    #   pytest-isort
 pytest-black==0.3.12
     # via -r requirements_dev.in
 pytest-cov==3.0.0
@@ -155,7 +156,7 @@ pytest-django==4.5.2
     # via -r requirements_dev.in
 pytest-flake8==1.0.7
     # via -r requirements_dev.in
-pytest-isort==2.0.0
+pytest-isort==3.0.0
     # via -r requirements_dev.in
 python-dateutil==2.8.2
     # via -r ./requirements.txt
@@ -168,7 +169,7 @@ raven==6.10.0
     # via
     #   -r ./requirements.txt
     #   django-sentry-400-middleware
-sentry-sdk==1.5.3
+sentry-sdk==1.5.5
     # via -r ./requirements.txt
 six==1.16.0
     # via
@@ -184,18 +185,18 @@ stack-data==0.1.4
 toml==0.10.2
     # via
     #   ipdb
-    #   pytest
     #   pytest-black
-tomli==1.2.3
+tomli==2.0.1
     # via
     #   black
     #   coverage
     #   pep517
+    #   pytest
 traitlets==5.1.1
     # via
     #   ipython
     #   matplotlib-inline
-typing-extensions==4.0.1
+typing-extensions==4.1.1
     # via black
 unicodecsv==0.14.1
     # via
