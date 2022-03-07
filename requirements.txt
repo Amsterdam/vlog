@@ -55,7 +55,7 @@ pytz==2021.3
     #   djangorestframework
 raven==6.10.0
     # via django-sentry-400-middleware
-sentry-sdk==1.5.5
+sentry-sdk==1.5.6
     # via -r requirements.in
 six==1.16.0
     # via
