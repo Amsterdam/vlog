@@ -72,15 +72,13 @@ drf-extensions==0.7.1
     #   drf-amsterdam
 executing==0.8.3
     # via stack-data
-flake8==3.9.2
-    # via
-    #   -r requirements_dev.in
-    #   pytest-flake8
+flake8==4.0.1
+    # via pytest-flake8
 iniconfig==1.1.1
     # via pytest
 ipdb==0.13.9
     # via -r requirements_dev.in
-ipython==8.1.1
+ipython==8.2.0
     # via
     #   -r requirements_dev.in
     #   ipdb
@@ -128,9 +126,9 @@ pure-eval==0.2.2
     # via stack-data
 py==1.11.0
     # via pytest
-pycodestyle==2.7.0
+pycodestyle==2.8.0
     # via flake8
-pyflakes==2.3.1
+pyflakes==2.4.0
     # via flake8
 pygments==2.11.2
     # via ipython
@@ -138,7 +136,7 @@ pyhumps==3.5.3
     # via -r ./requirements.txt
 pyparsing==3.0.7
     # via packaging
-pytest==7.0.1
+pytest==7.1.1
     # via
     #   -r requirements_dev.in
     #   pytest-black
@@ -152,13 +150,13 @@ pytest-cov==3.0.0
     # via -r requirements_dev.in
 pytest-django==4.5.2
     # via -r requirements_dev.in
-pytest-flake8==1.1.0
+pytest-flake8==1.1.1
     # via -r requirements_dev.in
 pytest-isort==3.0.0
     # via -r requirements_dev.in
 python-dateutil==2.8.2
     # via -r ./requirements.txt
-pytz==2021.3
+pytz==2022.1
     # via
     #   -r ./requirements.txt
     #   django
@@ -167,7 +165,7 @@ raven==6.10.0
     # via
     #   -r ./requirements.txt
     #   django-sentry-400-middleware
-sentry-sdk==1.5.6
+sentry-sdk==1.5.8
     # via -r ./requirements.txt
 six==1.16.0
     # via
@@ -200,7 +198,7 @@ unicodecsv==0.14.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-csv
-urllib3==1.26.8
+urllib3==1.26.9
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
