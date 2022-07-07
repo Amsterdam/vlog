@@ -1,5 +1,24 @@
-version: '3.4'
+version: '3.5'
 
+x-app: &base-app
+  build:
+    context: .
+    target: app
+  depends_on:
+    - database
+  volumes:
+    - ./src:/src
+    - ./tests:/tests
+    - ./deploy:/deploy
+  environment: &base-app-env
+    SECRET_KEY: "insecure"
+    DEBUG: "true"
+    AUTHORIZATION_TOKEN: "dev"
+    PYTHONBREAKPOINT:
+    DJANGO_LOG_LEVEL:
+    JANITOR_LOG_LEVEL:
+  entrypoint: /deploy/wait-for-it.sh database:5432 --
+  
 volumes:
   db_data:
   db_wal:
@@ -16,25 +35,6 @@ services:
     volumes:
       - db_data:/data
       - db_wal:/wal
-
-  x-app: &base-app
-    build:
-      context: .
-      target: app
-    depends_on:
-      - database
-    volumes:
-      - ./src:/src
-      - ./tests:/tests
-      - ./deploy:/deploy
-    environment: &base-app-env
-      SECRET_KEY: "insecure"
-      DEBUG: "true"
-      AUTHORIZATION_TOKEN: "dev"
-      PYTHONBREAKPOINT:
-      DJANGO_LOG_LEVEL:
-      JANITOR_LOG_LEVEL:
-    entrypoint: /deploy/wait-for-it.sh database:5432 --
 
   dev:
     <<: *base-app
