@@ -1,5 +1,24 @@
-version: '3.4'
+version: '3.5'
 
+x-app: &base-app
+  build:
+    context: .
+    target: app
+  depends_on:
+    - database
+  volumes:
+    - ./src:/src
+    - ./tests:/tests
+    - ./deploy:/deploy
+  environment: &base-app-env
+    SECRET_KEY: "insecure"
+    DEBUG: "true"
+    AUTHORIZATION_TOKEN: "dev"
+    PYTHONBREAKPOINT:
+    DJANGO_LOG_LEVEL:
+    JANITOR_LOG_LEVEL:
+  entrypoint: /deploy/wait-for-it.sh database:5432 --
+  
 volumes:
   db_data:
   db_wal:
@@ -7,8 +26,6 @@ volumes:
 services:
   database:
     image: timescale/timescaledb-postgis:1.4.2-pg11
-    ports:
-      - 5432
     environment:
       POSTGRES_DB: dev
       POSTGRES_USER: dev
@@ -19,55 +36,31 @@ services:
       - db_data:/data
       - db_wal:/wal
 
-  app:
-    build:
-      context: .
-      target: app
-    image: docker-registry.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
-    ports:
-      - 8000
-    environment:
-      DEBUG: "true"
-      SECRET_KEY: "dev"
-      AUTHORIZATION_TOKEN: "dev"
-    volumes:
-      - ./src:/src
-      - ./deploy:/deploy
-    depends_on:
-      - database
-
   dev:
+    <<: *base-app
     build:
       context: .
       target: dev
-    ports:
-      - 8000
-    environment:
-      DEBUG: "true"
-      SECRET_KEY: "dev"
-      AUTHORIZATION_TOKEN: "dev"
-      PYTHONBREAKPOINT:
-    volumes:
-      - ./src:/src
-      - ./deploy:/deploy
-    depends_on:
-      - database
-    entrypoint: /deploy/wait-for-it.sh database:5432 --
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver_plus 0.0.0.0:8000
+
+  app:
+    <<: *base-app
+    build:
+      context: .
+      target: app
+      args:
+        - BUILD_DATE
+        - BUILD_REVISION
+        - BUILD_VERSION
+    image: docker-registry.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
+    command: /deploy/docker-run.sh
 
   test:
+    <<: *base-app
     build:
       context: .
       target: tests
-    volumes:
-      - ./src:/src
-      - ./tests:/tests
-      - ./deploy:/deploy
     environment:
-      SECRET_KEY: "tests"
-      AUTHORIZATION_TOKEN: "dev"
+      <<: *base-app-env
       DJANGO_SETTINGS_MODULE: "main.settings"
       PYTEST_ADDOPTS:
-    depends_on:
-      - database
-    entrypoint: /deploy/wait-for-it.sh database:5432 --

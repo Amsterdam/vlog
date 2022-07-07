@@ -12,6 +12,7 @@ yapf
 ipython
 ipdb
 jedi
+Werkzeug
 
 # test libs
 pytest
