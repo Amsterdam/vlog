@@ -45,7 +45,7 @@ django==3.2.14
     #   django-extensions
     #   django-sentry-400-middleware
     #   djangorestframework
-django-extensions==3.1.5
+django-extensions==3.2.0
     # via -r ./requirements.txt
 django-prometheus==2.2.0
     # via -r ./requirements.txt
@@ -202,7 +202,7 @@ unicodecsv==0.14.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-csv
-urllib3==1.26.9
+urllib3==1.26.10
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
