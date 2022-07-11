@@ -1,0 +1,2622 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<amsterdamTravelTimes>
+    <payloadPublication type="trafficFlow">
+        <publicationReference id="PUB_AMS_TRAFFIC_FLOW" version="1.0" />
+        <publicationTime>2019-02-01T13:03:06Z</publicationTime>
+        <measurementPeriod>
+            <measurementStartTime>2019-02-01T13:02:00Z</measurementStartTime>
+            <measurementEndTime>2019-02-01T13:03:00Z</measurementEndTime>
+        </measurementPeriod>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_2" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="fb7db345-1d32-48e7-8da7-b608b4a574f1">
+                            <coordinates latitude="52.345001" longitude="4.827550" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_3" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="07ba2bac-f485-431e-a392-7946f7828e0e">
+                            <coordinates latitude="52.406544" longitude="4.938657" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>112</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                        <category count="1" type="Bus" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+            <trafficAlarms>
+                <alarm id="ALARM101" description="Sudden test of flow alarmsituation " />
+            </trafficAlarms>
+            <situations>
+                <situation>
+                    <description>Unscheduled maintenence on route</description>
+                    <severity>low</severity>
+                    <validityPeriod>
+                        <startOfPeriod>2018-10-16T08:00:00Z</startOfPeriod>
+                        <endOfPeriod>2018-10-26T06:00:00Z</endOfPeriod>
+                    </validityPeriod>
+                </situation>
+            </situations>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_4" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="01da2a39-6a4b-4af0-92f2-8824eaa83d51">
+                            <coordinates latitude="52.357868" longitude="4.904155" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>10</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="9" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_6" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="0bf03cba-330d-4a7e-b1f8-d60707d86450">
+                            <coordinates latitude="52.374599" longitude="4.858010" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_7" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="1080ef87-604f-462a-a35f-3bbbbf34935c">
+                            <coordinates latitude="52.335125" longitude="4.878177" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_8" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="1799a835-99b0-4de0-9d99-891c2991c54d">
+                            <coordinates latitude="52.384869" longitude="4.881474" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_10" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="1e9ac96d-066f-4ed8-b4f2-34e1a5e2b236">
+                            <coordinates latitude="52.369770" longitude="4.907240" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>8</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                        <category count="3" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_12" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="250e2ced-6053-41d2-ad92-899cbe44a692">
+                            <coordinates latitude="52.348289" longitude="4.919699" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                        <category count="1" type="Bedrijfsauto Zwaar" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_13" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="2bb034b6-a8fe-43e4-b587-2506f45f2af7">
+                            <coordinates latitude="52.309963" longitude="4.930773" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_14" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="2e769323-cd09-4106-a29b-1696a7a09d91">
+                            <coordinates latitude="52.308811" longitude="4.970333" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_15" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="2c01011e-24ff-409a-896c-906956ddc884">
+                            <coordinates latitude="52.365582" longitude="4.905400" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_18" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="4">
+                        <camera id="370fa24f-ed5a-44f6-827b-de9285d77c7b">
+                            <coordinates latitude="52.400173" longitude="4.847897" />
+                            <laneNumber>4</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="4">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Aanhanger Zwaar" />
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_19" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="3bb7fb71-b779-41ba-99ea-66e0b2ad8a27">
+                            <coordinates latitude="52.364006" longitude="4.878841" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_21" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="4202fada-0b88-4d09-a0a0-ec7b99b642c2">
+                            <coordinates latitude="52.315498" longitude="4.945748" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_23" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="4b54e9c6-9bde-407b-81ab-aaeac49f3aa3">
+                            <coordinates latitude="52.328907" longitude="4.890237" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_25" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="4">
+                        <camera id="4c7f0a12-f35d-4858-92f0-0c8278f808fe">
+                            <coordinates latitude="52.383034" longitude="4.844966" />
+                            <laneNumber>4</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="4">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_26" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="510fc828-f06b-402d-b696-66a4481d1ae5">
+                            <coordinates latitude="52.334763" longitude="4.928862" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Zwaar" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_28" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="5557988c-4d0f-44b7-9380-ef8e23e94333">
+                            <coordinates latitude="52.359966" longitude="4.886950" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_31" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="5b0f3eac-b3f3-45a3-ab68-3a3520baccbc">
+                            <coordinates latitude="52.365299" longitude="4.949150" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>90</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_32" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="5db3b2f1-7b9f-4692-824c-493c3a25ffcc">
+                            <coordinates latitude="52.397869" longitude="4.793810" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_34" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="64a77fb4-2e5c-42cb-bc95-053bbe94db9f">
+                            <coordinates latitude="52.391972" longitude="4.843077" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>7</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="7" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_35" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="06587a76-8b04-4a4a-9ae9-b5c93eceb39a">
+                            <coordinates latitude="52.300804" longitude="4.946712" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>11</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="11" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_36" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="66b48231-cc6b-4518-9758-e121fece627d">
+                            <coordinates latitude="52.353100" longitude="4.999500" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_38" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="6ad7ca3d-07f7-4da1-96a6-21be9792ef94">
+                            <coordinates latitude="52.392670" longitude="4.862752" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_45" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="846a9c2d-3458-4d70-a9ca-49a28835c8ef">
+                            <coordinates latitude="52.385880" longitude="4.913420" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>8</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_46" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="894bcf66-e3fb-48cf-ae13-0d8016b895d4">
+                            <coordinates latitude="52.389702" longitude="4.966260" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_48" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="34140b04-0b25-43ed-a4d5-3d73a00399f8">
+                            <coordinates latitude="52.363281" longitude="4.922042" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_50" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="267de643-6557-4123-a033-b96c9fb3137c">
+                            <coordinates latitude="52.425129" longitude="4.882062" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_51" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="2fd11a12-7705-4198-b1d7-f4645433402c">
+                            <coordinates latitude="52.422100" longitude="4.953010" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_52" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="8c2f7227-5f95-4ecf-b4e2-c86ada257335">
+                            <coordinates latitude="52.307655" longitude="4.971930" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>8</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="7" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_56" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="1eedd82b-4228-44cd-8409-cbaa30660883">
+                            <coordinates latitude="52.389618" longitude="4.891221" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>292</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_57" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="3">
+                        <camera id="06561856-ff74-410b-86e2-459450ba01de">
+                            <coordinates latitude="52.337852" longitude="4.892218" />
+                            <laneNumber>3</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="3">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_61" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="4">
+                        <camera id="09c74ba8-fd90-4a94-add1-7f892c922b7f">
+                            <coordinates latitude="52.334248" longitude="4.889741" />
+                            <laneNumber>4</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="4">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_62" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="0dedb268-3bad-4454-81b7-efa1cd817a99">
+                            <coordinates latitude="52.381241" longitude="4.821952" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>112</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_63" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="36c769f7-919d-4993-aa11-2a10f04124e6">
+                            <coordinates latitude="52.391369" longitude="4.843579" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_64" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="3bf9c4b0-d115-4842-89cd-cf92ff3009a6">
+                            <coordinates latitude="52.363731" longitude="4.878717" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_67" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="-1">
+                        <camera id="3ee10427-7fa1-46e1-bb4c-b478919abb54">
+                            <coordinates latitude="52.357838" longitude="4.845479" />
+                            <laneNumber>-1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="-1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_68" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="43881c8b-d4c4-415a-87b3-373c5eca42c2">
+                            <coordinates latitude="52.357399" longitude="4.854930" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>202</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_70" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="4be5c1f7-b162-41dc-987c-4c52549ab30e">
+                            <coordinates latitude="52.337326" longitude="4.891583" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_72" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="4c500f74-80e7-4852-babd-68abd1ef0c1f">
+                            <coordinates latitude="52.368401" longitude="4.970895" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_73" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="4f731672-236e-4049-876d-3e6dc5607114">
+                            <coordinates latitude="52.363903" longitude="4.923448" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_75" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="524c0aa0-adbc-411c-bc3f-f3041628b82a">
+                            <coordinates latitude="52.377499" longitude="4.843620" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>202</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_76" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="536b6ecd-7220-4aa0-b0a7-de2d45f2c9fb">
+                            <coordinates latitude="52.322201" longitude="4.958221" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_77" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="562dc827-e502-49fc-a34b-6b6b22481f6d">
+                            <coordinates latitude="52.298893" longitude="4.949424" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_79" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="5a6061bc-cab3-4811-b242-7a85b54f5e6b">
+                            <coordinates latitude="52.348721" longitude="4.918459" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>7</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_80" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="5d4d1c93-be29-420a-b351-d75d9d5e1f8f">
+                            <coordinates latitude="52.345860" longitude="4.839947" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_81" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="3">
+                        <camera id="5de57d5b-85ee-4492-ae92-8a51a4b7a727">
+                            <coordinates latitude="52.416958" longitude="4.916326" />
+                            <laneNumber>3</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="3">
+                    <vehicleFlow>8</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="7" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Zwaar" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_82" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="a0ad206d-860e-4cd0-a510-31075c9265c4">
+                            <coordinates latitude="52.385155" longitude="4.881622" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_83" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="3">
+                        <camera id="6115e8c0-69b8-4004-bb3c-1df0bce8a060">
+                            <coordinates latitude="52.380283" longitude="4.972978" />
+                            <laneNumber>3</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="3">
+                    <vehicleFlow>11</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Aanhanger Licht" />
+                        <category count="8" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_85" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="69ce25b6-621c-4d7b-bb7e-4346406df9c8">
+                            <coordinates latitude="52.363556" longitude="4.878957" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_87" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="6b0ed693-84a2-486b-a2cc-98d6884e677c">
+                            <coordinates latitude="52.336102" longitude="4.943391" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_88" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="74017062-e05b-4487-95bc-6f4679ee21b6">
+                            <coordinates latitude="52.336975" longitude="4.858680" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>90</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_89" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="774a24ba-48e5-4994-9e30-42e6af4a83e9">
+                            <coordinates latitude="52.333427" longitude="4.984169" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>22</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_90" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="7902af73-12db-4eff-821a-2a7d58ea86d9">
+                            <coordinates latitude="52.338501" longitude="4.812440" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_92" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="8167c407-0814-481f-a298-a7800fe03764">
+                            <coordinates latitude="52.423698" longitude="4.883378" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>10</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="8" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_94" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="a3972654-a86f-49f7-87f5-b0f4581f30f8">
+                            <coordinates latitude="52.408688" longitude="4.940725" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>22</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_95" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="8756543a-db91-44fa-8a92-8fc3cd095fe3">
+                            <coordinates latitude="52.333794" longitude="4.890665" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>90</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_96" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="89501da6-7faf-4b0d-96e7-f25da1f96aff">
+                            <coordinates latitude="52.312714" longitude="4.937072" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_97" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="89cfdbdd-1995-4ff2-a7ee-73a1310b3ea6">
+                            <coordinates latitude="52.337879" longitude="4.939232" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>202</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_98" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="8c364982-17d9-4b5b-9015-4036058bafcc">
+                            <coordinates latitude="52.292374" longitude="4.945539" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_101" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="9686590b-da18-4049-9c5e-8d09e51dc0c6">
+                            <coordinates latitude="52.360161" longitude="4.886769" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_103" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="a3233e0b-ef52-4185-9385-801ccf1deecf">
+                            <coordinates latitude="52.405815" longitude="4.937149" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_104" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="a40876f4-734d-4198-805f-36191a3c1552">
+                            <coordinates latitude="52.374668" longitude="4.859076" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>7</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Aanhanger Licht" />
+                        <category count="5" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_106" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="a7add139-3210-4986-8a0a-bd9868dc4175">
+                            <coordinates latitude="52.346802" longitude="4.880400" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_107" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="a8bd1ac8-477e-4006-a92d-fb66f2e007a6">
+                            <coordinates latitude="52.338501" longitude="4.812440" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_108" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ab14a9e6-b66d-4945-a0fd-947f97f11b24">
+                            <coordinates latitude="52.323185" longitude="4.954792" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_109" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ae036c8f-515e-402a-a22c-2e7eadeab18f">
+                            <coordinates latitude="52.358723" longitude="4.903407" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_110" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="acca8ccd-12f0-4f14-a707-560c4825a274">
+                            <coordinates latitude="52.333321" longitude="4.983384" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_112" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="b2a097b7-788a-48be-99d7-c923e6534005">
+                            <coordinates latitude="52.367996" longitude="4.970488" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>8</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="8" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_113" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="b3e5103d-e685-473b-88e8-02d84264fe7c">
+                            <coordinates latitude="52.366318" longitude="4.804841" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_115" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="b892bfe2-ec02-4100-bed1-b6e51a94d8ee">
+                            <coordinates latitude="52.423477" longitude="4.882707" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_116" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="b8df810f-9b23-4a12-b106-3c2b8d51be51">
+                            <coordinates latitude="52.328033" longitude="4.857582" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_117" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="1c3b7986-1506-44d6-8004-92b7de231a85">
+                            <coordinates latitude="52.339973" longitude="4.952782" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>112</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_118" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ba058cb5-de9e-4bf4-87eb-9154d8f45454">
+                            <coordinates latitude="52.336090" longitude="4.942789" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_119" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ba8d367b-d35d-4dba-aaf1-9484ac70e2f4">
+                            <coordinates latitude="52.351101" longitude="4.934920" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_120" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="bbc5e21f-f507-4624-afb0-7523fcab9a66">
+                            <coordinates latitude="52.348900" longitude="4.883640" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_121" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="be8e87cf-c0c4-47de-800f-3b1af4e354cf">
+                            <coordinates latitude="52.307228" longitude="4.971523" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_123" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="bff688d3-58ee-4c75-a863-677169143415">
+                            <coordinates latitude="52.310204" longitude="4.938064" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_125" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="c2bee365-ab39-446c-adbb-3411564ec4e2">
+                            <coordinates latitude="52.369221" longitude="4.906203" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_129" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="c8c1fa6f-6788-4f78-b7f8-5268638a0b4c">
+                            <coordinates latitude="52.308647" longitude="4.970800" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_130" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="c98f4652-184e-48a7-9e51-a4f2b9f3a819">
+                            <coordinates latitude="52.337852" longitude="4.892218" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_131" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="cce6bab0-1e78-463b-a877-4c019baafa62">
+                            <coordinates latitude="52.402798" longitude="4.897278" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>135</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_133" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="cd6a1321-0f7c-4957-8c0d-d55d9c8220db">
+                            <coordinates latitude="52.359886" longitude="4.908634" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                        <category count="1" type="Bedrijfsauto Zwaar" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_135" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ce4bb191-9cf1-4b41-b81f-0919ef9845e4">
+                            <coordinates latitude="52.324390" longitude="4.958853" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>7</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="7" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_136" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ced53f35-d06a-4bb8-8214-a9abad9aa010">
+                            <coordinates latitude="52.341232" longitude="4.951071" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_137" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="5">
+                        <camera id="d0b3e9da-f6cb-4822-9a8b-acfb3491912c">
+                            <coordinates latitude="52.334072" longitude="4.934195" />
+                            <laneNumber>5</laneNumber>
+                            <status>on</status>
+                            <viewDirection>68</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="5">
+                    <vehicleFlow>7</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="7" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_138" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="3">
+                        <camera id="d59d3ccd-c46b-4d1c-bccd-32c52aa55cb9">
+                            <coordinates latitude="52.402370" longitude="4.953026" />
+                            <laneNumber>3</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="3">
+                    <vehicleFlow>12</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="12" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_139" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="d0e66e85-0a51-493d-b7a5-09457261634c">
+                            <coordinates latitude="52.358101" longitude="4.852130" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_140" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="d9b878ff-e31c-405b-927a-7e23e5beab7d">
+                            <coordinates latitude="52.421600" longitude="4.952710" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_141" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="db3a3001-2c3a-4489-9d24-63ee0208fc84">
+                            <coordinates latitude="52.362778" longitude="4.923333" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_142" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="db96e004-fee7-4f95-b4a9-17ba74a7eaf3">
+                            <coordinates latitude="52.376400" longitude="4.921220" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>292</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_144" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="4">
+                        <camera id="dda6fd9a-b146-41c6-a875-5d0d75ab8bd9">
+                            <coordinates latitude="52.355534" longitude="4.965955" />
+                            <laneNumber>4</laneNumber>
+                            <status>on</status>
+                            <viewDirection>22</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="4">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_145" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="ddd896db-2f1b-44f1-a673-3881a0c70603">
+                            <coordinates latitude="52.347000" longitude="4.879320" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>270</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_146" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="df87cc6b-7130-4562-b349-b757906c6d54">
+                            <coordinates latitude="52.407715" longitude="4.938830" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>292</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_147" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="df8a3f73-aa12-498e-8b5c-f779a422d8dd">
+                            <coordinates latitude="52.385880" longitude="4.913420" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>45</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>11</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="9" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_148" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="e015a9fe-89f8-46bb-b9a7-4b4a796effc4">
+                            <coordinates latitude="52.365734" longitude="4.804088" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_149" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="dfc0d965-3619-44d4-a5e3-5698ab394aa5">
+                            <coordinates latitude="52.313793" longitude="4.935223" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_150" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="e162595b-9187-4552-a1ed-2cf209f14ab2">
+                            <coordinates latitude="52.337521" longitude="4.891545" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="4" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_151" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="e1ff70b8-b013-4712-bf51-a148fc6f3711">
+                            <coordinates latitude="52.307758" longitude="4.925587" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>315</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_153" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="e4494c43-d282-407a-a4b6-40e2822a06ca">
+                            <coordinates latitude="52.334759" longitude="4.912037" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>180</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_154" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="e729dea1-2df8-44d3-9af8-f2ffbaf2be9b">
+                            <coordinates latitude="52.376129" longitude="4.921560" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>202</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_155" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="e7cf31bb-72a1-4ac0-a15d-e38586ee10da">
+                            <coordinates latitude="52.372444" longitude="4.841373" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_156" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="e814054b-6c18-40f5-a051-0ae085e298c4">
+                            <coordinates latitude="52.425854" longitude="4.882061" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>292</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>3</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Zwaar" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_157" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="e96b667b-f9f3-4958-aed9-472335f0950a">
+                            <coordinates latitude="52.358250" longitude="4.843029" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_159" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="eb1ae23a-a000-4e6b-87cc-aec6ab58c653">
+                            <coordinates latitude="52.334934" longitude="4.869102" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>90</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>2</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="2" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_161" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="f0e3d6dd-a088-4578-9322-b70effeebbd6">
+                            <coordinates latitude="52.358101" longitude="4.841874" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>248</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>5</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="5" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_163" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="f394330e-7c26-4a47-ad71-ee4ef1a8ef1f">
+                            <coordinates latitude="52.372456" longitude="4.842727" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>0</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>4</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="3" type="Auto" />
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_164" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="4">
+                        <camera id="f39a19d8-3ab6-4c33-8cc7-360011e7a268">
+                            <coordinates latitude="52.340881" longitude="4.952378" />
+                            <laneNumber>4</laneNumber>
+                            <status>on</status>
+                            <viewDirection>225</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="4">
+                    <vehicleFlow>9</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="9" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_166" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="f55421f1-9bd3-4712-8293-204f45a0c687">
+                            <coordinates latitude="52.291443" longitude="4.944668" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>6</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="6" type="Auto" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_167" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="2">
+                        <camera id="f8720124-97ae-4aae-9e2f-340672e662cb">
+                            <coordinates latitude="52.360432" longitude="4.908612" />
+                            <laneNumber>2</laneNumber>
+                            <status>on</status>
+                            <viewDirection>338</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="2">
+                    <vehicleFlow>1</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="1" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+        <siteMeasurements>
+            <measurementSiteReference id="LOC_169" version="1.0">
+                <measurementSiteType>location</measurementSiteType>
+                <location>
+                    <lane specificLane="1">
+                        <camera id="fc91de32-b0bf-49d4-9852-5463413d8edf">
+                            <coordinates latitude="52.334641" longitude="4.929146" />
+                            <laneNumber>1</laneNumber>
+                            <status>on</status>
+                            <viewDirection>158</viewDirection>
+                        </camera>
+                    </lane>
+                </location>
+            </measurementSiteReference>
+            <trafficFlowData>
+                <measuredFlow specificLane="1">
+                    <vehicleFlow>10</vehicleFlow>
+                    <numberOfInputValuesUsed>
+                        <category count="8" type="Auto" />
+                        <category count="2" type="Bedrijfsauto Licht" />
+                    </numberOfInputValuesUsed>
+                </measuredFlow>
+            </trafficFlowData>
+        </siteMeasurements>
+    </payloadPublication>
+</amsterdamTravelTimes>
