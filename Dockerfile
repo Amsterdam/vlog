@@ -9,6 +9,7 @@ COPY deploy /deploy
 
 WORKDIR /src
 COPY src .
+COPY pyproject.toml /
 
 ARG SECRET_KEY=not-used
 RUN DATABASE_ENABLED=false python manage.py collectstatic --no-input

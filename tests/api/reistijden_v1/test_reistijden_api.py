@@ -4,6 +4,8 @@ from unittest.mock import patch
 from django.conf import settings
 from django.db.models import Q
 from ingress.models import Collection, FailedMessage, Message
+from rest_framework.test import APITestCase
+
 from reistijden_v1.consumer import ReistijdenConsumer
 from reistijden_v1.models import (
     Camera,
@@ -17,8 +19,6 @@ from reistijden_v1.models import (
     TrafficFlowCategoryCount,
     TravelTime,
 )
-from rest_framework.test import APITestCase
-
 from tests.api.reistijden_v1.test_xml import (
     TEST_POST_EMPTY,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME,
