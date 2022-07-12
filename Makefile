@@ -52,6 +52,10 @@ dev: 						        ## Run the development app (and run extra migrations first)
 lint:                               ## Execute lint checks
 	$(run) dev pytest $(ARGS)
 
+lintfix:                            ## Execute lint fixes
+	$(run) test isort /src /tests
+	$(run) test black /src /tests
+
 test: lint                          ## Execute tests
 	$(run) test pytest $(APP) $(ARGS)
 
