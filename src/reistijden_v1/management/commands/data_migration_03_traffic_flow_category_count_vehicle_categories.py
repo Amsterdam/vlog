@@ -13,6 +13,7 @@ class Command(DataMigrationCommand):
         INSERT INTO reistijden_v1_vehiclecategory (name)
         SELECT DISTINCT type
         FROM reistijden_v1_trafficflowcategorycount
+        WHERE type is NOT NULL
         ON CONFLICT DO NOTHING
     """
 
@@ -25,7 +26,10 @@ class Command(DataMigrationCommand):
 
     VALIDATE_QUERY = """
         SELECT COUNT(*) as expected,
-               COUNT(*) FILTER (WHERE reistijden_v1_vehiclecategory.id IS NULL) as errors
+               COUNT(*) FILTER (
+                   WHERE reistijden_v1_trafficflowcategorycount IS NOT NULL AND 
+                         reistijden_v1_vehiclecategory.id IS NULL
+               ) as errors
         FROM reistijden_v1_trafficflowcategorycount
         LEFT JOIN reistijden_v1_vehiclecategory ON type=name
     """  # noqa

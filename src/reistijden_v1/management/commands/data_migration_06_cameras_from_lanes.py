@@ -19,16 +19,7 @@ class Command(DataMigrationCommand):
             status,
             view_direction
         )
-        SELECT DISTINCT ON (
-            measurement_location_id,
-            specific_lane,
-            camera_id,
-            latitude,
-            longitude,
-            lane_number,
-            status,
-            view_direction
-        )
+        SELECT DISTINCT
             camera_id,
             latitude,
             longitude,
@@ -37,9 +28,4 @@ class Command(DataMigrationCommand):
             status,
             view_direction
         FROM reistijden_v1_lane as lane
-    """
-
-    DELETE_QUERY = """
-        DELETE FROM reistijden_v1_lane
-        WHERE id NOT in (SELECT lane_id FROM reistijden_v1_camera)
     """
