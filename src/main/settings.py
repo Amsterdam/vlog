@@ -36,6 +36,13 @@ INSTALLED_APPS = [
     "ingress",
 ]
 
+NOTEBOOK_ARGUMENTS = [
+    "--ip=0.0.0.0",
+    "--port=8888",
+    "--allow-root",
+    "--no-browser",
+]
+
 MIDDLEWARE = [
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",

@@ -43,6 +43,9 @@ app:
 shell:
 	$(manage) shell_plus --print-sql
 
+notebook:
+	$(dc) run -e DJANGO_ALLOW_ASYNC_UNSAFE=true --rm --service-ports dev python manage.py shell_plus --notebook
+
 dev: 						        ## Run the development app (and run extra migrations first)
 	$(run) --service-ports dev
 
