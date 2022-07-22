@@ -146,6 +146,19 @@ class MeasurementSite(models.Model):
             "measurement site. Applicable only for sections and trajectories"
         ),
     )
+    locations_json = models.JSONField(
+        null=True,
+        help_text=(
+            "This field is made to include a nested json object containing the "
+            "locations, its lanes and its respective cameras. If something changes "
+            "in the measurement site or any of the locations, lanes or cameras, new "
+            "records need to be created for all of them. To be able to test this somewhat "
+            "easily, we create a json object in this field to be able to test for changes "
+            "in any of those objects by doing a select on all fields of the measurement site, "
+            "including this locations_json. Note that the order of keys in the json "
+            "objects does not matter when using a native jsonb field."
+        )
+    )
 
 
 class MeasurementLocation(models.Model):

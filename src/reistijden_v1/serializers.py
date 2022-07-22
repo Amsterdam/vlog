@@ -63,6 +63,8 @@ class TrafficFlowSerializer(serializers.ModelSerializer):
 
 
 class MeasurementSiteSerializer(serializers.ModelSerializer):
+    locations = MeasurementLocationSerializer(many=True)
+
     class Meta:
         model = MeasurementSite
         fields = '__all__'
@@ -70,7 +72,6 @@ class MeasurementSiteSerializer(serializers.ModelSerializer):
 
 class MeasurementSerializer(serializers.ModelSerializer):
     measurement_site = MeasurementSiteSerializer(many=False)
-    locations = MeasurementLocationSerializer(many=True)
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
     traffic_flows = TrafficFlowSerializer(many=True)
@@ -93,33 +94,33 @@ class PublicationSerializer(serializers.ModelSerializer):
 
         for measurement_src in measurements:
             measurement_site_src = measurement_src.pop('measurement_site')
-            measurement_site, _ = MeasurementSite.objects.get_or_create(
-                **measurement_site_src
-            )
-
-            measurement = Measurement.objects.create(
-                publication=publication, measurement_site=measurement_site
-            )
-
-            locations = measurement_src.pop('locations')
+            locations = measurement_site_src.pop('locations')
             travel_times = measurement_src.pop('travel_times')
             individual_travel_times = measurement_src.pop('individual_travel_times')
             traffic_flows = measurement_src.pop('traffic_flows')
 
-            for location_src in locations:
-                lanes = location_src.pop('lanes')
-                measurement_location, _ = MeasurementLocation.objects.get_or_create(
-                    measurement_site=measurement_site, **location_src
-                )
+            measurement_site, created_new_site = MeasurementSite.objects.get_or_create(
+                **measurement_site_src
+            )
+            measurement = Measurement.objects.create(
+                publication=publication, measurement_site=measurement_site
+            )
 
-                for lane_src in lanes:
-                    cameras = lane_src.pop('cameras')
-                    lane, _ = Lane.objects.get_or_create(
-                        measurement_location=measurement_location, **lane_src
+            if created_new_site:
+                for location_src in locations:
+                    lanes = location_src.pop('lanes')
+                    measurement_location, _ = MeasurementLocation.objects.get_or_create(
+                        measurement_site=measurement_site, **location_src
                     )
 
-                    for camera_src in cameras:
-                        Camera.objects.get_or_create(lane=lane, **camera_src)
+                    for lane_src in lanes:
+                        cameras = lane_src.pop('cameras')
+                        lane, _ = Lane.objects.get_or_create(
+                            measurement_location=measurement_location, **lane_src
+                        )
+
+                        for camera_src in cameras:
+                            Camera.objects.get_or_create(lane=lane, **camera_src)
 
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)

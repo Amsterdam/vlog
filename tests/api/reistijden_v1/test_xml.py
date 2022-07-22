@@ -10,8 +10,8 @@ TEST_POST_TRAVEL_TIME = """
             <duration>10</duration>
         </measurementPeriod>
         <siteMeasurements>
-            <measurementSiteReference id="TRJ_1111" version="1.0">
-                <measurementSiteName>traject_ZX1111_ZX1111</measurementSiteName>
+            <measurementSiteReference id="TRJ_1" version="1.0">
+                <measurementSiteName>traject_ZX1</measurementSiteName>
                 <measurementSiteType>trajectory</measurementSiteType>
                 <length>1111</length>
                 <locationContainedInItinerary>
@@ -84,14 +84,14 @@ TEST_POST_TRAVEL_TIME = """
             </travelTimeData>
         </siteMeasurements>
         <siteMeasurements>
-            <measurementSiteReference id="TRJ_1111" version="1.0">
-                <measurementSiteName>traject_ZX1111_ZX1111</measurementSiteName>
+            <measurementSiteReference id="TRJ_2" version="1.0">
+                <measurementSiteName>traject_ZX2</measurementSiteName>
                 <measurementSiteType>trajectory</measurementSiteType>
                 <length>1111</length>
                 <locationContainedInItinerary>
                     <location index="1">
                         <lane specificLane="1">
-                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef111">
+                            <camera id="233f606b-b5f4-424e-ae2b-266e552ef211">
                                 <coordinates latitude="52.111111" longitude="4.111111" />
                                 <laneNumber>1</laneNumber>
                                 <status>on</status>
@@ -100,8 +100,8 @@ TEST_POST_TRAVEL_TIME = """
                         </lane>
                     </location>
                     <location index="2">
-                        <lane specificLane="2">
-                            <camera id="6ad7ca3d-07f7-4da1-96a6-21be97912222">
+                        <lane specificLane="1">
+                            <camera id="b2a097b7-788a-48be-99d7-c923e6534212">
                                 <coordinates latitude="52.222222" longitude="4.222222" />
                                 <laneNumber>2</laneNumber>
                                 <status>on</status>
