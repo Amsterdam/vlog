@@ -3,8 +3,8 @@ from rest_framework import serializers
 from reistijden_v1.models import (
     IndividualTravelTime,
     Lane,
-    MeasurementLocation,
     Measurement,
+    MeasurementLocation,
     Publication,
     TrafficFlow,
     TrafficFlowCategoryCount,
@@ -91,7 +91,9 @@ class PublicationSerializer(serializers.ModelSerializer):
                 )
 
                 for lane_src in lanes:
-                    Lane.objects.create(measurement_location=measurement_location, **lane_src)
+                    Lane.objects.create(
+                        measurement_location=measurement_location, **lane_src
+                    )
 
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)
