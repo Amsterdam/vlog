@@ -121,13 +121,14 @@ class Command(BaseCommand):
                 )
                 measurement_sites.append(measurement_site)
 
-                for location_id, lanes in group_by(
-                    locations, lambda x: x['location_id']
+                # locations are either all NULL, or all not-NULL so we can safely
+                # coalesce null values to -1 to allow for sorting.
+                for location_index, lanes in group_by(
+                    locations, lambda x: x['index'] or -1
                 ):
 
-                    lanes = list(lanes)
                     location_json = {
-                        'index': lanes[0]['index'],
+                        'index': location_index,
                         'lanes': [],
                     }
                     measurement_site.measurement_site_json['locations'].append(
