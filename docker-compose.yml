@@ -7,9 +7,9 @@ x-app: &base-app
   depends_on:
     - database
   volumes:
-    - ./src:/src
-    - ./tests:/tests
-    - ./deploy:/deploy
+    - ./src:/app/src
+    - ./tests:/app/tests
+    - ./deploy:/app/deploy
   environment: &base-app-env
     SECRET_KEY: "insecure"
     DEBUG: "true"
@@ -17,7 +17,7 @@ x-app: &base-app
     PYTHONBREAKPOINT:
     DJANGO_LOG_LEVEL:
     JANITOR_LOG_LEVEL:
-  entrypoint: /deploy/wait-for-it.sh database:5432 --
+  entrypoint: /app/deploy/wait-for-it.sh database:5432 --
   
 volumes:
   db_data:
@@ -53,7 +53,7 @@ services:
         - BUILD_REVISION
         - BUILD_VERSION
     image: docker-registry.data.amsterdam.nl/datapunt/waarnemingen-voertuigen:${VERSION:-latest}
-    command: /deploy/docker-run.sh
+    command: /app/deploy/docker-run.sh
 
   test:
     <<: *base-app

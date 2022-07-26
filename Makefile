@@ -49,14 +49,19 @@ notebook:
 dev: 						        ## Run the development app (and run extra migrations first)
 	$(run) --service-ports dev
 
+lintfix:                            ## Execute lint fixes
+	$(run) test isort /app/src/$(APP) /app/tests/$(APP)
+	$(run) test black /app/src/$(APP) /app/tests/$(APP)
+
 lint:                               ## Execute lint checks
-	$(run) dev pytest $(ARGS)
+	$(run) test isort --diff --check /app/src/$(APP) /app/tests/$(APP)
+	$(run) test black --diff --check /app/src/$(APP) /app/tests/$(APP)
 
 test: lint                          ## Execute tests
-	$(run) test pytest $(APP) $(ARGS)
+	$(run) test pytest /app/tests/$(APP) $(ARGS)
 
 pdb:
-	$(run) test pytest $(APP) --pdb $(ARGS)
+	$(run) test pytest /app/tests/$(APP) --pdb $(ARGS)
 
 clean:                              ## Clean docker stuff
 	$(dc) down -v --remove-orphans
