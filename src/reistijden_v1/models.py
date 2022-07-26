@@ -65,11 +65,82 @@ class Measurement(models.Model):
     """
 
     publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
+    measurement_site = models.ForeignKey(
+        'MeasurementSite', null=True, on_delete=models.SET_NULL
+    )
+    # to be removed after migration...
     reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
     version = models.CharField(max_length=255)  # e.g. "1.0"
     name = models.CharField(max_length=255, null=True)
     type = models.CharField(max_length=255)  # e.g. "section"
     length = models.IntegerField(null=True)
+
+
+class MeasurementSite(models.Model):
+    """
+    A measurement site that consists of one or more MeasurementLocations.
+    """
+
+    reference_id = models.CharField(
+        max_length=255,
+        help_text=(
+            "The measurementsitereference element describes the measurement site "
+            "(section or trajectory) against which the values are reported"
+        ),
+    )
+    version = models.CharField(max_length=255)
+    name = models.CharField(
+        max_length=255,
+        null=True,
+        help_text=("An optional readable name for the measurement site."),
+    )
+    type = models.CharField(
+        max_length=255,
+        help_text=(
+            """
+        Measurement site type. A measurement site can be either a location, a section
+        or a trajectory.
+        - Location
+        A location refers to a point location in the road network from which data
+        (vehicle passages) are collected.  A location consists of one or more
+        camera-lane pairs. The Amsterdam Travel time system delivers vehicle count
+        per location per lane per vehicle category under the trafficflow publication.
+        - Section
+        A section refers to a traversible route between two locations.
+        The Amsterdam Travel time system delivers the following for the sections
+        defined in the system:
+        a. Raw, representative and processed travel time values under the traveltime
+           publication.
+        b. Individual travel time values under the individualtraveltime publication
+        - Trajectory
+        A trajectory refers to a traversible route created using one or more sections.
+        The Amsterdam Travel time system delivers the following for the trajectories
+        defined in the system:
+        a. Processed, predicted and actual under the traveltime publication.
+        """
+        ),
+    )
+    length = models.IntegerField(
+        null=True,
+        help_text=(
+            "This element contains information about the length (in meters) of the "
+            "measurement site. Applicable only for sections and trajectories"
+        ),
+    )
+    measurement_site_json = models.JSONField(
+        null=False,
+        unique=True,
+        help_text=(
+            "This field is made to include a nested json object containing the measurement"
+            " site meta data and locations, its lanes and its respective cameras. If"
+            " something changes in the measurement site or any of the locations, lanes or"
+            " cameras, new records need to be created for all of them. To be able to test"
+            " this somewhat easily, we create a json object in this field to be able to test"
+            " for changes in any of those objects by doing a select on all fields of the"
+            " measurement site, including this locations_json. Note that the order of keys"
+            " in the json objects does not matter when using a native jsonb field."
+        ),
+    )
 
 
 class MeasurementLocation(models.Model):
