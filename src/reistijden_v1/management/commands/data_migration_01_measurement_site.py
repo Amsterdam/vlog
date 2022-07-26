@@ -122,13 +122,15 @@ class Command(BaseCommand):
                 measurement_sites.append(measurement_site)
 
                 # locations are either all NULL, or all not-NULL so we can safely
-                # coalesce null values to -1 to allow for sorting.
+                # coalesce null values to -1 to allow for sorting, however python
+                # cannot handle None < None, so we use -1 as a sentinel value to
+                # mean NULL
                 for location_index, lanes in group_by(
                     locations, lambda x: x['index'] or -1
                 ):
 
                     location_json = {
-                        'index': location_index,
+                        'index': None if location_index == -1 else location_index,
                         'lanes': [],
                     }
                     measurement_site.measurement_site_json[
@@ -138,24 +140,21 @@ class Command(BaseCommand):
                     for specific_lane, cameras in group_by(
                         lanes, lambda x: x['specific_lane']
                     ):
+                        if specific_lane is not None:
 
-                        lane_json = {'specific_lane': specific_lane, 'cameras': []}
-                        location_json['lanes'].append(lane_json)
+                            lane_json = {'specific_lane': specific_lane, 'cameras': []}
+                            location_json['lanes'].append(lane_json)
 
-                        for camera in cameras:
-                            camera_json = {
-                                'camera_id': camera['camera_id'],
-                                'latitude': None
-                                if camera['latitude'] is None
-                                else float(camera['latitude']),
-                                'longitude': None
-                                if camera['longitude'] is None
-                                else float(camera['longitude']),
-                                'lane_number': camera['lane_number'],
-                                'status': camera['status'],
-                                'view_direction': camera['view_direction'],
-                            }
-                            lane_json['cameras'].append(camera_json)
+                            for camera in cameras:
+                                camera_json = {
+                                    'camera_id': camera['camera_id'],
+                                    'latitude': float(camera['latitude']),
+                                    'longitude': float(camera['longitude']),
+                                    'lane_number': camera['lane_number'],
+                                    'status': camera['status'],
+                                    'view_direction': camera['view_direction'],
+                                }
+                                lane_json['cameras'].append(camera_json)
 
             duration = time.time() - start_time
             self.stdout.write(
