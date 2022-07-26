@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reistijden_v1', '0008_rename_fields'),
+        ('reistijden_v1', '0009_fix_field_rename'),
     ]
 
     operations = [
