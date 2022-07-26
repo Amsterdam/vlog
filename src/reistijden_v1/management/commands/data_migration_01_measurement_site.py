@@ -145,8 +145,12 @@ class Command(BaseCommand):
                         for camera in cameras:
                             camera_json = {
                                 'camera_id': camera['camera_id'],
-                                'latitude': float(camera['latitude']),
-                                'longitude': float(camera['longitude']),
+                                'latitude': None
+                                if camera['latitude'] is None
+                                else float(camera['latitude']),
+                                'longitude': None
+                                if camera['longitude'] is None
+                                else float(camera['longitude']),
                                 'lane_number': camera['lane_number'],
                                 'status': camera['status'],
                                 'view_direction': camera['view_direction'],
