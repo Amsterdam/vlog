@@ -116,7 +116,7 @@ class Command(BaseCommand):
                         'name': locations[0]['name'],
                         'type': locations[0]['type'],
                         'length': locations[0]['length'],
-                        'locations': [],
+                        'measurement_locations': [],
                     },
                 )
                 measurement_sites.append(measurement_site)
@@ -131,9 +131,9 @@ class Command(BaseCommand):
                         'index': location_index,
                         'lanes': [],
                     }
-                    measurement_site.measurement_site_json['locations'].append(
-                        location_json
-                    )
+                    measurement_site.measurement_site_json[
+                        'measurement_locations'
+                    ].append(location_json)
 
                     for specific_lane, cameras in group_by(
                         lanes, lambda x: x['specific_lane']
