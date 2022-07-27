@@ -20,7 +20,8 @@ def get_first_unprocessed_id():
         # because selecting the min(id) where measurement_site_id is null
         # gets progressively slower as junk builds up in the table (until
         # vacuum is called)
-        cursor.execute("""
+        cursor.execute(
+            """
             select  id
             from    reistijden_v1_measurement
             where   id > (
@@ -33,18 +34,21 @@ def get_first_unprocessed_id():
             )
             and measurement_site_id is null
             limit 1
-        """)
+        """
+        )
         if cursor.rowcount == 1:
             return cursor.fetchone()[0]
         else:
             # measurement sites not created, or no foreign key relation yet
             # made, rever to the slower method which starts out fast and
             # gets slower as more junk collects up (until a vacuum is run)
-            cursor.execute("""
+            cursor.execute(
+                """
                 select  min(id)
                 from    reistijden_v1_measurement
                 where   measurement_site_id is null
-            """)
+            """
+            )
             return cursor.fetchone()[0]
 
 
@@ -210,7 +214,10 @@ class Command(BaseCommand):
 
             # update all measurements with the appropriate measurement site id
             values = ''
-            for measurement_site_id, measurement_ids in measurement_site_measurements.items():
+            for (
+                measurement_site_id,
+                measurement_ids,
+            ) in measurement_site_measurements.items():
                 for measurement_id in measurement_ids:
                     values += f'({measurement_site_id}, {measurement_id}),'
                     if measurement_id > max_measurement_id:
