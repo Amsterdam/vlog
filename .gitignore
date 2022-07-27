@@ -52,3 +52,4 @@ coverage.xml
 *.sqlite3
 
 docker-compose.override.yml
+/src/data.xml
