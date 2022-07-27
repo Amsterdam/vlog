@@ -16,10 +16,40 @@ from reistijden_v1.models import MeasurementSite
 @time_it('get_first_unprocessed_id')
 def get_first_unprocessed_id():
     with connection.cursor() as cursor:
+        # this faster method of determining the last processed id is used
+        # because selecting the min(id) where measurement_site_id is null
+        # gets progressively slower as junk builds up in the table (until
+        # vacuum is called)
         cursor.execute(
-            "select min(id) from reistijden_v1_measurement where measurement_site_id is null"
+            """
+            select  id
+            from    reistijden_v1_measurement
+            where   id > (
+                select id
+                from reistijden_v1_measurement
+                where measurement_site_id = (
+                    select max(id)
+                    from reistijden_v1_measurementsite
+                )
+            )
+            and measurement_site_id is null
+            limit 1
+        """
         )
-        return cursor.fetchone()[0]
+        if cursor.rowcount == 1:
+            return cursor.fetchone()[0]
+        else:
+            # measurement sites not created, or no foreign key relation yet
+            # made, rever to the slower method which starts out fast and
+            # gets slower as more junk collects up (until a vacuum is run)
+            cursor.execute(
+                """
+                select  min(id)
+                from    reistijden_v1_measurement
+                where   measurement_site_id is null
+            """
+            )
+            return cursor.fetchone()[0]
 
 
 SELECT_DATA_QUERY = """
@@ -41,7 +71,7 @@ SELECT_DATA_QUERY = """
     left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
     left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
     and         measurement.measurement_site_id is null
-    where       measurement.id between %(first_id)s and %(last_id)s
+    where       measurement.id between %(next_id)s and %(last_id)s
     order by    measurement_id,
                 index,
                 specific_lane,
@@ -133,16 +163,20 @@ class Command(BaseCommand):
         self.measurement_site_cache = {}
 
     @time_it('process_batch')
-    def process_batch(self, first_id, batch_size):
+    def process_batch(self, next_id, batch_size):
 
         measurement_site_measurements = defaultdict(list)
         created_measurement_sites = 0
+        max_measurement_id = next_id
 
         with connection.cursor() as cursor:
 
             # Get the measurement, location and lanes data for this batch
-            last_id = first_id + batch_size
+            last_id = next_id + batch_size
             cursor.execute(SELECT_DATA_QUERY, locals())
+
+            if cursor.rowcount == 0:
+                return None
 
             for measurement_id, measurement_rows in groupby(
                 cursor.fetchall(),
@@ -179,11 +213,17 @@ class Command(BaseCommand):
                 self.measurement_site_cache[key] = measurement_site
 
             # update all measurements with the appropriate measurement site id
-            values = ','.join(
-                f'({measurement_site_id}, {measurement_id})'
-                for measurement_site_id, measurement_ids in measurement_site_measurements.items()
-                for measurement_id in measurement_ids
-            )
+            values = ''
+            for (
+                measurement_site_id,
+                measurement_ids,
+            ) in measurement_site_measurements.items():
+                for measurement_id in measurement_ids:
+                    values += f'({measurement_site_id}, {measurement_id}),'
+                    if measurement_id > max_measurement_id:
+                        max_measurement_id = measurement_id
+            values = values[:-1]  # remove trailing comma
+
             cursor.execute(
                 f"""
                 update reistijden_v1_measurement
@@ -196,6 +236,8 @@ class Command(BaseCommand):
         if created_measurement_sites:
             print(f'Created {created_measurement_sites} measurement sites')
 
+        return max_measurement_id + 1
+
     def add_arguments(self, parser):
         parser.add_argument('batch_size', type=int)
         parser.add_argument('--single', action='store_true')
@@ -204,12 +246,11 @@ class Command(BaseCommand):
     @time_it('handle')
     def handle(self, *args, **options):
 
-        while True:
+        if (next_id := get_first_unprocessed_id()) is not None:
 
-            if (first_id := get_first_unprocessed_id()) is None:
-                break
+            while True:
+                if not (next_id := self.process_batch(next_id, options['batch_size'])):
+                    break
 
-            self.process_batch(first_id, options['batch_size'])
-
-            if options['single']:
-                break
+                if options['single']:
+                    break
