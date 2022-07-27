@@ -88,15 +88,16 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
         'measurement_locations': [],
     }
 
-    # within a specific measurement site, locations are either all
-    # NULL, or all not-NULL so we can safely coalesce null values to
-    # -1 to allow for sorting.
+    # locations are either all NULL, or all not-NULL so we can safely
+    # coalesce null values to -1 to allow for sorting, however python
+    # cannot handle None < None, so we use -1 as a sentinel value to
+    # mean NULL
     for location_index, lanes in sort_and_group_by(
         data,
         lambda x: x.index or -1,
     ):
         location_json = {
-            'index': location_index,
+            'index': None if location_index == -1 else location_index,
             'lanes': [],
         }
         measurement_site_json['measurement_locations'].append(location_json)
@@ -105,19 +106,22 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
             lanes,
             lambda x: x.specific_lane,
         ):
-            lane_json = {'specific_lane': specific_lane, 'cameras': []}
-            location_json['lanes'].append(lane_json)
 
-            for camera in cameras:
-                camera_json = {
-                    'camera_id': camera.camera_id,
-                    'latitude': float(camera.latitude),
-                    'longitude': float(camera.longitude),
-                    'lane_number': camera.lane_number,
-                    'status': camera.status,
-                    'view_direction': camera.view_direction,
-                }
-                lane_json['cameras'].append(camera_json)
+            if specific_lane is not None:
+
+                lane_json = {'specific_lane': specific_lane, 'cameras': []}
+                location_json['lanes'].append(lane_json)
+
+                for camera in cameras:
+                    camera_json = {
+                        'camera_id': camera.camera_id,
+                        'latitude': float(camera.latitude),
+                        'longitude': float(camera.longitude),
+                        'lane_number': camera.lane_number,
+                        'status': camera.status,
+                        'view_direction': camera.view_direction,
+                    }
+                    lane_json['cameras'].append(camera_json)
 
     return measurement_site_json
 
