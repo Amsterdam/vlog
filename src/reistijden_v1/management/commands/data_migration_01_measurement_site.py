@@ -16,9 +16,20 @@ from reistijden_v1.models import MeasurementSite
 @time_it('get_first_unprocessed_id')
 def get_first_unprocessed_id():
     with connection.cursor() as cursor:
-        cursor.execute(
-            "select min(id) from reistijden_v1_measurement where measurement_site_id is null"
-        )
+        cursor.execute("""
+            select  id
+            from    reistijden_v1_measurement
+            where   id > (
+                select id
+                from reistijden_v1_measurement
+                where measurement_site_id = (
+                    select max(id)
+                    from reistijden_v1_measurementsite
+                )
+            )
+            and measurement_site_id is null
+            limit 1
+        """)
         return cursor.fetchone()[0]
 
 
