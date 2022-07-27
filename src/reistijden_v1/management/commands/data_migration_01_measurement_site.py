@@ -13,6 +13,7 @@ from reistijden_v1.management.commands.util import (
 from reistijden_v1.models import MeasurementSite
 
 
+@time_it('get_first_unprocessed_id')
 def get_first_unprocessed_id():
     with connection.cursor() as cursor:
         cursor.execute(
@@ -131,7 +132,7 @@ class Command(BaseCommand):
         super().__init__(*args, **kwargs)
         self.measurement_site_cache = {}
 
-    @time_it('Process batch')
+    @time_it('process_batch')
     def process_batch(self, first_id, batch_size):
 
         measurement_site_measurements = defaultdict(list)
@@ -200,7 +201,7 @@ class Command(BaseCommand):
         parser.add_argument('--single', action='store_true')
 
     @profile_it()
-    @time_it('Total processing')
+    @time_it('handle')
     def handle(self, *args, **options):
 
         while True:
