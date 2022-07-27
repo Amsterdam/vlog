@@ -6,7 +6,8 @@ from itertools import groupby
 @contextlib.contextmanager
 def profile_it():
     # When pyinstrument is not installed (because we are running in
-    # acceptance / production)
+    # acceptance / production) then this should not fail, just be a
+    # null context manager.
     try:
         from pyinstrument import Profiler
     except ImportError:
