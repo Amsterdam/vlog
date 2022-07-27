@@ -1,6 +1,11 @@
-version: '3.4'
+docker-compose.override.yml.sampleversion: '3.5'
 
 services:
+
+  database:
+    ports:
+      - "5432:5432"
+
   app: &app
     user: 1000:1000
     ports:
@@ -8,3 +13,12 @@ services:
 
   dev:
     <<: *app
+    ports:
+      - "8000:8000"
+      - "8888:8888"
+
+  test:
+    <<: *app
+    ports:
+      - "8000:8000"
+      - "8888:8888"
