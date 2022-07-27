@@ -16,40 +16,10 @@ from reistijden_v1.models import MeasurementSite
 @time_it('get_first_unprocessed_id')
 def get_first_unprocessed_id():
     with connection.cursor() as cursor:
-        # this faster method of determining the last processed id is used
-        # because selecting the min(id) where measurement_site_id is null
-        # gets progressively slower as junk builds up in the table (until
-        # vacuum is called)
         cursor.execute(
-            """
-            select  id
-            from    reistijden_v1_measurement
-            where   id > (
-                select id
-                from reistijden_v1_measurement
-                where measurement_site_id = (
-                    select max(id)
-                    from reistijden_v1_measurementsite
-                )
-            )
-            and measurement_site_id is null
-            limit 1
-        """
+            "select min(id) from reistijden_v1_measurement where measurement_site_id is null"
         )
-        if cursor.rowcount == 1:
-            return cursor.fetchone()[0]
-        else:
-            # measurement sites not created, or no foreign key relation yet
-            # made, rever to the slower method which starts out fast and
-            # gets slower as more junk collects up (until a vacuum is run)
-            cursor.execute(
-                """
-                select  min(id)
-                from    reistijden_v1_measurement
-                where   measurement_site_id is null
-            """
-            )
-            return cursor.fetchone()[0]
+        return cursor.fetchone()[0]
 
 
 SELECT_DATA_QUERY = """
@@ -232,6 +202,9 @@ class Command(BaseCommand):
                 where id=measurement_id;
             """
             )
+
+            with time_it('vacuum'):
+                cursor.execute('vacuum full reistijden_v1_measurement')
 
         if created_measurement_sites:
             print(f'Created {created_measurement_sites} measurement sites')
