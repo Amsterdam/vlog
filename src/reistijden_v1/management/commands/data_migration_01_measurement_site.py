@@ -1,179 +1,210 @@
-import itertools
-import time
+from collections import defaultdict, namedtuple
+from itertools import groupby
+from typing import List
 
 from django.core.management.base import BaseCommand
 from django.db import connection
 
+from reistijden_v1.management.commands.util import (
+    profile_it,
+    sort_and_group_by,
+    time_it,
+)
 from reistijden_v1.models import MeasurementSite
 
 
-def group_by(items, key):
-    """
-    Combine sorted and itertools.groupby since groupby assumes
-    that the items to be grouped are also already sorted, which
-    may not be the case.
-    """
-    return itertools.groupby(sorted(items, key=key), key=key)
+def get_first_unprocessed_id():
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "select min(id) from reistijden_v1_measurement where measurement_site_id is null"
+        )
+        return cursor.fetchone()[0]
 
 
-def fetch_all_dicts(cursor):
-    """
-    like fetchall, but yields a dict for each row using the cursor
-    description for the keys.
+SELECT_DATA_QUERY = """
+    select      measurement.id as measurement_id,
+                measurement.reference_id,
+                measurement.version,
+                measurement.name,
+                measurement.type,
+                measurement.length,
+                location.index,
+                lane.specific_lane,
+                lane.camera_id,
+                lane.latitude,
+                lane.longitude,
+                lane.lane_number,
+                lane.status,
+                lane.view_direction
+    from        reistijden_v1_measurement as measurement
+    left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
+    left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
+    and         measurement.measurement_site_id is null
+    where       measurement.id between %(first_id)s and %(last_id)s
+    order by    measurement_id,
+                index,
+                specific_lane,
+                camera_id,
+                latitude,
+                longitude,
+                lane_number,
+                status,
+                view_direction
+"""
 
-    NOTE: Column names must be unique.
+
+MeasurementSiteKeyRow = namedtuple(
+    'MeasurementSiteKeyRow',
+    (
+        'reference_id',
+        'version',
+        'name',
+        'type',
+        'length',
+        'index',
+        'specific_lane',
+        'camera_id',
+        'latitude',
+        'longitude',
+        'lane_number',
+        'status',
+        'view_direction',
+    ),
+)
+
+
+def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
     """
-    columns = [c[0] for c in cursor.description]
-    assert len(set(columns)) == len(cursor.description), "column names must be unique"
-    for row in cursor.fetchall():
-        yield dict(zip(columns, row))
+    Given a measurement site key (tuple of tuples containing the
+    data related to a particular measurement site) generate json
+    which can be used as a key for selecting in the database.
+    """
+    measurement_site_json = {
+        'reference_id': data[0].reference_id,
+        'version': data[0].version,
+        'name': data[0].name,
+        'type': data[0].type,
+        'length': data[0].length,
+        'measurement_locations': [],
+    }
+
+    # within a specific measurement site, locations are either all
+    # NULL, or all not-NULL so we can safely coalesce null values to
+    # -1 to allow for sorting.
+    for location_index, lanes in sort_and_group_by(
+        data,
+        lambda x: x.index or -1,
+    ):
+        location_json = {
+            'index': location_index,
+            'lanes': [],
+        }
+        measurement_site_json['measurement_locations'].append(location_json)
+
+        for specific_lane, cameras in sort_and_group_by(
+            lanes,
+            lambda x: x.specific_lane,
+        ):
+            lane_json = {'specific_lane': specific_lane, 'cameras': []}
+            location_json['lanes'].append(lane_json)
+
+            for camera in cameras:
+                camera_json = {
+                    'camera_id': camera.camera_id,
+                    'latitude': float(camera.latitude),
+                    'longitude': float(camera.longitude),
+                    'lane_number': camera.lane_number,
+                    'status': camera.status,
+                    'view_direction': camera.view_direction,
+                }
+                lane_json['cameras'].append(camera_json)
+
+    return measurement_site_json
 
 
 class Command(BaseCommand):
-    def add_arguments(self, parser):
-        parser.add_argument('batch_size', type=int)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.measurement_site_cache = {}
 
-    SELECT_DATA_QUERY = """
-        select      measurement.id as measurement_id,
-                    measurement.reference_id,
-                    measurement.version,
-                    measurement.name,
-                    measurement.type,
-                    measurement.length,
-                    location.id as location_id,
-                    location.index,
-                    lane.id as lane_id,
-                    lane.specific_lane,
-                    lane.camera_id,
-                    lane.latitude,
-                    lane.longitude,
-                    lane.lane_number,
-                    lane.status,
-                    lane.view_direction
-        from        reistijden_v1_measurement as measurement
-        left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
-        left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
-        where       measurement.id between %s and %s
-        and         measurement.measurement_site_id is null
-        order by    measurement.reference_id,
-                    measurement.version,
-                    measurement.name,
-                    measurement.type,
-                    measurement.length,
-                    location.index,
-                    lane.specific_lane,
-                    lane.camera_id,
-                    lane.latitude,
-                    lane.longitude,
-                    lane.lane_number,
-                    lane.status,
-                    lane.view_direction
-    """
+    @time_it('Process batch')
+    def process_batch(self, first_id, batch_size):
 
-    SELECT_MIN_ID_QUERY = """
-        select min(id)
-        from   reistijden_v1_measurement
-        where  measurement_site_id is null
-    """
-
-    def handle(self, *args, **options):
-
-        batch_size = options['batch_size']
-        start_time = time.time()
+        measurement_site_measurements = defaultdict(list)
+        created_measurement_sites = 0
 
         with connection.cursor() as cursor:
 
-            # get the id of the first measurement which has not yet been processed
-            cursor.execute(self.SELECT_MIN_ID_QUERY)
-            first_id = cursor.fetchone()[0]
+            # Get the measurement, location and lanes data for this batch
+            last_id = first_id + batch_size
+            cursor.execute(SELECT_DATA_QUERY, locals())
 
-            # get the data which will be inserted into measurement_site
-            cursor.execute(
-                self.SELECT_DATA_QUERY,
-                [
-                    first_id,
-                    first_id + batch_size,
-                ],
-            )
-
-            result = fetch_all_dicts(cursor)
-
-            measurement_sites = []
-            for measurement_id, locations in group_by(
-                result, lambda x: x['measurement_id']
+            for measurement_id, measurement_rows in groupby(
+                cursor.fetchall(),
+                key=lambda x: x[0],
             ):
+                # exclude the measurement_id from the key
+                key = tuple(x[1:] for x in measurement_rows)
 
-                locations = list(locations)
-                measurement_site = MeasurementSite(
-                    reference_id=locations[0]['reference_id'],
-                    version=locations[0]['version'],
-                    name=locations[0]['name'],
-                    type=locations[0]['type'],
-                    length=locations[0]['length'],
-                    measurement_site_json={
-                        'reference_id': locations[0]['reference_id'],
-                        'version': locations[0]['version'],
-                        'name': locations[0]['name'],
-                        'type': locations[0]['type'],
-                        'length': locations[0]['length'],
-                        'measurement_locations': [],
-                    },
+                # this is an unknown measurement site, but it might already exist it
+                # the database...
+                measurement_site = self.measurement_site_cache.get(key)
+                if measurement_site is None:
+
+                    # convert the tuple of tuples into something more usable, and
+                    # then get the json which represents this measurement_site
+                    data = [MeasurementSiteKeyRow(*row) for row in key]
+                    measurement_site_json = get_measurement_site_json(data)
+
+                    measurement_site, created = MeasurementSite.objects.get_or_create(
+                        reference_id=measurement_site_json['reference_id'],
+                        version=measurement_site_json['version'],
+                        name=measurement_site_json['name'],
+                        type=measurement_site_json['type'],
+                        length=measurement_site_json['length'],
+                        measurement_site_json=measurement_site_json,
+                    )
+
+                    created_measurement_sites += created
+
+                # collect the measurements which relate to this measurement site
+                measurement_site_measurements[measurement_site.id].append(
+                    measurement_id
                 )
-                measurement_sites.append(measurement_site)
+                self.measurement_site_cache[key] = measurement_site
 
-                # locations are either all NULL, or all not-NULL so we can safely
-                # coalesce null values to -1 to allow for sorting.
-                for location_index, lanes in group_by(
-                    locations, lambda x: x['index'] or -1
-                ):
-
-                    location_json = {
-                        'index': location_index,
-                        'lanes': [],
-                    }
-                    measurement_site.measurement_site_json[
-                        'measurement_locations'
-                    ].append(location_json)
-
-                    for specific_lane, cameras in group_by(
-                        lanes, lambda x: x['specific_lane']
-                    ):
-
-                        lane_json = {'specific_lane': specific_lane, 'cameras': []}
-                        location_json['lanes'].append(lane_json)
-
-                        for camera in cameras:
-                            camera_json = {
-                                'camera_id': camera['camera_id'],
-                                'latitude': None
-                                if camera['latitude'] is None
-                                else float(camera['latitude']),
-                                'longitude': None
-                                if camera['longitude'] is None
-                                else float(camera['longitude']),
-                                'lane_number': camera['lane_number'],
-                                'status': camera['status'],
-                                'view_direction': camera['view_direction'],
-                            }
-                            lane_json['cameras'].append(camera_json)
-
-            duration = time.time() - start_time
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f'{len(measurement_sites)} measurement site json blobs created in {duration} seconds'
-                )
+            # update all measurements with the appropriate measurement site id
+            values = ','.join(
+                f'({measurement_site_id}, {measurement_id})'
+                for measurement_site_id, measurement_ids in measurement_site_measurements.items()
+                for measurement_id in measurement_ids
+            )
+            cursor.execute(
+                f"""
+                update reistijden_v1_measurement
+                set measurement_site_id=t.measurement_site_id
+                from (values {values}) AS t (measurement_site_id, measurement_id)
+                where id=measurement_id;
+            """
             )
 
-            # There is a unique constraint on the column measurement_site_json
-            # by ignoring conflicts the data will be deduplicated.
-            start_time = time.time()
-            MeasurementSite.objects.bulk_create(
-                measurement_sites, ignore_conflicts=True
-            )
+        if created_measurement_sites:
+            print(f'Created {created_measurement_sites} measurement sites')
 
-            duration = time.time() - start_time
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f'{MeasurementSite.objects.count()} MeasurementSite instances created in {duration} seconds'
-                )
-            )
+    def add_arguments(self, parser):
+        parser.add_argument('batch_size', type=int)
+        parser.add_argument('--single', action='store_true')
+
+    @profile_it()
+    @time_it('Total processing')
+    def handle(self, *args, **options):
+
+        while True:
+
+            if (first_id := get_first_unprocessed_id()) is None:
+                break
+
+            self.process_batch(first_id, options['batch_size'])
+
+            if options['single']:
+                break
