@@ -25,7 +25,7 @@ def time_it(msg):
     start = time.time()
     yield
     duration = time.time() - start
-    print(f'{msg} took {duration} seconds')
+    print(f'{msg:<24} | {round(duration, 3)} seconds')
 
 
 def sort_and_group_by(items, key):
