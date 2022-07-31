@@ -43,6 +43,14 @@ services:
       target: dev
     command: python manage.py runserver_plus 0.0.0.0:8000
 
+  notebook:
+    <<: *base-app
+    build:
+      context: .
+      target: dev
+    ports:
+      - "8888:8888"
+
   app:
     <<: *base-app
     build:
