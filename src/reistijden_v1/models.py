@@ -62,18 +62,27 @@ class Publication(models.Model):
 class Measurement(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
+
+    NOTE: this model should be removed after the dedeuplication migration.
     """
 
     publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
-    measurement_site = models.ForeignKey(
-        'MeasurementSite', null=True, on_delete=models.SET_NULL
-    )
-    # to be removed after migration...
     reference_id = models.CharField(max_length=255)  # e.g. "SEC_0001"
     version = models.CharField(max_length=255)  # e.g. "1.0"
     name = models.CharField(max_length=255, null=True)
     type = models.CharField(max_length=255)  # e.g. "section"
     length = models.IntegerField(null=True)
+
+
+class Measurement2(models.Model):
+    """
+    A measurement for a specific MeasurementSite, published in a Publication.
+
+    NOTE: this model should be renamed to Measurement after the dedeuplication migration.
+    """
+
+    publication = models.ForeignKey('Publication', on_delete=models.CASCADE)
+    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
 
 
 class MeasurementSite(models.Model):
