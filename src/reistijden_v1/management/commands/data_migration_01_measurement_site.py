@@ -1,6 +1,6 @@
-from collections import defaultdict, namedtuple
+from decimal import Decimal
 from itertools import groupby
-from typing import List
+from typing import List, NamedTuple
 
 from django.core.management.base import BaseCommand
 from django.db import connection
@@ -13,102 +13,32 @@ from reistijden_v1.management.commands.util import (
 from reistijden_v1.models import MeasurementSite
 
 
-@time_it('get_first_unprocessed_id')
-def get_first_unprocessed_id():
-    with connection.cursor() as cursor:
-        # this faster method of determining the last processed id is used
-        # because selecting the min(id) where measurement_site_id is null
-        # gets progressively slower as junk builds up in the table (until
-        # vacuum is called)
-        cursor.execute(
-            """
-            select  id
-            from    reistijden_v1_measurement
-            where   id > (
-                select id
-                from reistijden_v1_measurement
-                where measurement_site_id = (
-                    select max(id)
-                    from reistijden_v1_measurementsite
-                )
-            )
-            and measurement_site_id is null
-            limit 1
-        """
-        )
-        if cursor.rowcount == 1:
-            return cursor.fetchone()[0]
-        else:
-            # measurement sites not created, or no foreign key relation yet
-            # made, rever to the slower method which starts out fast and
-            # gets slower as more junk collects up (until a vacuum is run)
-            cursor.execute(
-                """
-                select  min(id)
-                from    reistijden_v1_measurement
-                where   measurement_site_id is null
-            """
-            )
-            return cursor.fetchone()[0]
-
-
-SELECT_DATA_QUERY = """
-    select      measurement.id as measurement_id,
-                measurement.reference_id,
-                measurement.version,
-                measurement.name,
-                measurement.type,
-                measurement.length,
-                location.index,
-                lane.specific_lane,
-                lane.camera_id,
-                lane.latitude,
-                lane.longitude,
-                lane.lane_number,
-                lane.status,
-                lane.view_direction
-    from        reistijden_v1_measurement as measurement
-    left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
-    left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
-    and         measurement.measurement_site_id is null
-    where       measurement.id between %(next_id)s and %(last_id)s
-    order by    measurement_id,
-                index,
-                specific_lane,
-                camera_id,
-                latitude,
-                longitude,
-                lane_number,
-                status,
-                view_direction
-"""
-
-
-MeasurementSiteKeyRow = namedtuple(
-    'MeasurementSiteKeyRow',
-    (
-        'reference_id',
-        'version',
-        'name',
-        'type',
-        'length',
-        'index',
-        'specific_lane',
-        'camera_id',
-        'latitude',
-        'longitude',
-        'lane_number',
-        'status',
-        'view_direction',
-    ),
-)
+class MeasurementSiteKeyRow(NamedTuple):
+    reference_id: str
+    version: str
+    name: str
+    type: str
+    length: str
+    index: str
+    specific_lane: str
+    camera_id: str
+    latitude: Decimal
+    longitude: Decimal
+    lane_number: str
+    status: str
+    view_direction: str
 
 
 def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
     """
-    Given a measurement site key (tuple of tuples containing the
-    data related to a particular measurement site) generate json
-    which can be used as a key for selecting in the database.
+    Given data about a measurement site (measurement site meta data,
+    list of locations and lanes) generate json which can be used
+    as a key for selecting in the database. We only need to worry
+    about the ordering of lists since postgres will use JSONB type
+    and the order of keys are normalized, e.g.
+
+    {'a': 1, 'b': 2} == {'b': 1, 'a': 2}
+
     """
     measurement_site_json = {
         'reference_id': data[0].reference_id,
@@ -128,6 +58,7 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
         lambda x: x.index or -1,
     ):
         location_json = {
+            # convert -1 back to NULL
             'index': None if location_index == -1 else location_index,
             'lanes': [],
         }
@@ -158,99 +89,153 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
 
 
 class Command(BaseCommand):
+    """
+    Command which will create new Measurement2 and MeasurementSite rows based
+    on existing Measurement, MeasurementLocation and Lane data. This old model
+    is not denormalized, meaning the measurement site meta data (contained in
+    Measurement), locations and lanes are duplicated for each measurement
+    (currently at around 600M rows). This data migration is part of a larger
+    migration to normalize and deduplicate this model, so that each measurement
+    site is only stored once, and referenced by the various measurements.
+    A measurement site looks something like...
+
+        reference: Wibautstraat
+        ...
+        locations:
+            - index: 1,
+              lanes:
+                - specific_index: 'lane1'
+                  cameras: {...}
+
+    However it is important to note that measurements are linked to MeasurementSite
+    meaning that if anything changes in the underlying configuration an entirely
+    new measurement site must be created, otherwise it is not possible to link
+    historical records with the configuration at the time the publication was made.
+
+    The strategy applied here is to process the table in large chunks (e.g. 10000 rows
+    per batch). So that if the process fails, we can just restart the process and
+    continue from the previously processed record.
+
+    After some experimentation it seems that updating existing tables causes so much
+    junk to be created that the actual query which performs the migration becomes
+    slow. This could be solved with a VACUUM FULL ANALYSE, but given the size of the
+    table this makes the migration even slower. Therefore we insert into a new
+    measurement table, once the migration is complete we can remove the old table.
+    """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.measurement_site_cache = {}
 
     @time_it('process_batch')
-    def process_batch(self, next_id, batch_size):
+    def process_batch(self, cursor, next_id, batch_size, profiler):
 
-        measurement_site_measurements = defaultdict(list)
+        # Get the measurement, location and lanes data for this batch
+        SELECT_DATA_QUERY = """
+            select      measurement.id as measurement_id,
+                        measurement.publication_id as publication_id,
+                        measurement.reference_id,
+                        measurement.version,
+                        measurement.name,
+                        measurement.type,
+                        measurement.length,
+                        location.index,
+                        lane.specific_lane,
+                        lane.camera_id,
+                        lane.latitude,
+                        lane.longitude,
+                        lane.lane_number,
+                        lane.status,
+                        lane.view_direction
+            from        reistijden_v1_measurement as measurement
+            left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
+            left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
+            where       measurement.id between %(next_id)s and (%(next_id)s + %(batch_size)s)
+            order by    measurement_id, location.id, lane.id
+        """
+        cursor.execute(SELECT_DATA_QUERY, locals())
+
+        measurement_id = -1
         created_measurement_sites = 0
-        max_measurement_id = next_id
 
-        with connection.cursor() as cursor:
+        # collect the values to use in the insert statement for measurements
+        # and their associated publication id, and measurement site id
+        values = []
 
-            # Get the measurement, location and lanes data for this batch
-            last_id = next_id + batch_size
-            cursor.execute(SELECT_DATA_QUERY, locals())
+        # group the data so that for each measurement we have a list of the
+        # associated locations and lanes, convert this (already sorted in
+        # SQL) list to a tuple which is used to determine if we already saw
+        # this measurement site or not. Keeping a local cache like this means
+        # we can reduce the amount of work that needs to be done between runs
+        # (measurement sites are rarely added)
+        for (measurement_id, publication_id), measurement_rows in groupby(
+            cursor.fetchall(),
+            key=lambda x: x[:2],
+        ):
+            # exclude the measurement_id and publication_id from the key
+            key = tuple(x[2:] for x in measurement_rows)
 
-            if cursor.rowcount == 0:
-                return None
+            # this is an unknown measurement site, but it might already exist it
+            # the database...
+            if (measurement_site := self.measurement_site_cache.get(key)) is None:
 
-            for measurement_id, measurement_rows in groupby(
-                cursor.fetchall(),
-                key=lambda x: x[0],
-            ):
-                # exclude the measurement_id from the key
-                key = tuple(x[1:] for x in measurement_rows)
+                # This section of code should run very rarely, as such we are
+                # not interested in profiling here, the most bang the buck
+                # optimisations should happen outside of this if block which
+                # should only run a few hundred times, compared to outside the
+                # block which will run hundreds of millions of times.
+                profiler.stop()
 
-                # this is an unknown measurement site, but it might already exist it
-                # the database...
-                measurement_site = self.measurement_site_cache.get(key)
-                if measurement_site is None:
+                # convert the tuple of tuples into something more usable, and
+                # then get the json which represents this measurement_site
+                data = [MeasurementSiteKeyRow(*row) for row in key]
+                measurement_site_json = get_measurement_site_json(data)
 
-                    # convert the tuple of tuples into something more usable, and
-                    # then get the json which represents this measurement_site
-                    data = [MeasurementSiteKeyRow(*row) for row in key]
-                    measurement_site_json = get_measurement_site_json(data)
-
-                    measurement_site, created = MeasurementSite.objects.get_or_create(
-                        reference_id=measurement_site_json['reference_id'],
-                        version=measurement_site_json['version'],
-                        name=measurement_site_json['name'],
-                        type=measurement_site_json['type'],
-                        length=measurement_site_json['length'],
-                        measurement_site_json=measurement_site_json,
-                    )
-
-                    created_measurement_sites += created
-
-                # collect the measurements which relate to this measurement site
-                measurement_site_measurements[measurement_site.id].append(
-                    measurement_id
+                measurement_site, created = MeasurementSite.objects.get_or_create(
+                    reference_id=measurement_site_json['reference_id'],
+                    version=measurement_site_json['version'],
+                    name=measurement_site_json['name'],
+                    type=measurement_site_json['type'],
+                    length=measurement_site_json['length'],
+                    measurement_site_json=measurement_site_json,
                 )
+                created_measurement_sites += created
                 self.measurement_site_cache[key] = measurement_site
 
-            # update all measurements with the appropriate measurement site id
-            values = ''
-            for (
-                measurement_site_id,
-                measurement_ids,
-            ) in measurement_site_measurements.items():
-                for measurement_id in measurement_ids:
-                    values += f'({measurement_site_id}, {measurement_id}),'
-                    if measurement_id > max_measurement_id:
-                        max_measurement_id = measurement_id
-            values = values[:-1]  # remove trailing comma
+                profiler.start()
 
+            # collect the measurements which relate to this measurement site
+            values.append(f'({measurement_id},{publication_id},{measurement_site.id})')
+
+        # insert all measurements with the appropriate measurement site id
+        if values:
             cursor.execute(
-                f"""
-                update reistijden_v1_measurement
-                set measurement_site_id=t.measurement_site_id
-                from (values {values}) AS t (measurement_site_id, measurement_id)
-                where id=measurement_id;
-            """
+                "insert into reistijden_v1_measurement2"
+                " (id, publication_id, measurement_site_id)"
+                f" values {','.join(values)}"
             )
 
         if created_measurement_sites:
             print(f'Created {created_measurement_sites} measurement sites')
 
-        return max_measurement_id + 1
+        return measurement_id + 1
 
     def add_arguments(self, parser):
         parser.add_argument('batch_size', type=int)
         parser.add_argument('--single', action='store_true')
 
-    @profile_it()
     @time_it('handle')
     def handle(self, *args, **options):
 
-        if (next_id := get_first_unprocessed_id()) is not None:
+        with connection.cursor() as cursor:
 
-            while True:
-                if not (next_id := self.process_batch(next_id, options['batch_size'])):
-                    break
+            with time_it('get first unprocessed id'):
+                cursor.execute("select max(id) + 1 from reistijden_v1_measurement2")
+                next_id = cursor.fetchone()[0] or 1
 
-                if options['single']:
-                    break
+            with profile_it() as profiler:
+                while next_id := self.process_batch(
+                    cursor, next_id, options['batch_size'], profiler
+                ):
+                    if options['single']:
+                        break
