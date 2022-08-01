@@ -3,38 +3,38 @@ from io import StringIO
 import pytest
 from django.test import TestCase
 
-from reistijden_v1.models import MeasurementSite, MeasurementLocation2, Lane2, Camera
+from reistijden_v1.models import Camera, Lane2, MeasurementLocation2, MeasurementSite
 
 
 @pytest.mark.django_db
 class MeasurementSiteTest(TestCase):
 
     BASE_MEASUREMENT_SITE = {
-      'name': 'foobar',
-      'type': 'trajectory',
-      'length': 2736,
-      'version': '1.0',
-      'reference_id': 'foobar',
-      'measurement_locations': [
-        {
-          'index': 1,
-          'lanes': [
+        'name': 'foobar',
+        'type': 'trajectory',
+        'length': 2736,
+        'version': '1.0',
+        'reference_id': 'foobar',
+        'measurement_locations': [
             {
-              'cameras': [
-                {
-                  'status': 'on',
-                  'latitude': 52.372334,
-                  'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                  'longitude': 4.961688,
-                  'lane_number': -1,
-                  'view_direction': 112
-                }
-              ],
-              'specific_lane': '-1'
+                'index': 1,
+                'lanes': [
+                    {
+                        'cameras': [
+                            {
+                                'status': 'on',
+                                'latitude': 52.372334,
+                                'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
+                                'longitude': 4.961688,
+                                'lane_number': -1,
+                                'view_direction': 112,
+                            }
+                        ],
+                        'specific_lane': '-1',
+                    }
+                ],
             }
-          ]
-        }
-      ]
+        ],
     }
 
     def measurement_site_test(self, expected_count_after, measurement_site_json):
@@ -66,31 +66,31 @@ class MeasurementSiteTest(TestCase):
         self.measurement_site_test(
             2,
             {
-              'name': 'foobar',
-              'type': 'trajectory',
-              'length': 5000,     # different vs BASE_MEASUREMENT_SITE
-              'version': '1.0',
-              'reference_id': 'foobar',
-              'measurement_locations': [
-                {
-                  'index': 1,
-                  'lanes': [
+                'name': 'foobar',
+                'type': 'trajectory',
+                'length': 5000,  # different vs BASE_MEASUREMENT_SITE
+                'version': '1.0',
+                'reference_id': 'foobar',
+                'measurement_locations': [
                     {
-                      'cameras': [
-                        {
-                          'status': 'on',
-                          'latitude': 52.372334,
-                          'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                          'longitude': 4.961688,
-                          'lane_number': -1,
-                          'view_direction': 112
-                        }
-                      ],
-                      'specific_lane': '-1'
+                        'index': 1,
+                        'lanes': [
+                            {
+                                'cameras': [
+                                    {
+                                        'status': 'on',
+                                        'latitude': 52.372334,
+                                        'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
+                                        'longitude': 4.961688,
+                                        'lane_number': -1,
+                                        'view_direction': 112,
+                                    }
+                                ],
+                                'specific_lane': '-1',
+                            }
+                        ],
                     }
-                  ]
-                }
-              ]
+                ],
             },
         )
 
@@ -115,15 +115,15 @@ class MeasurementSiteTest(TestCase):
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
                                         'longitude': 4.961688,
                                         'lane_number': -1,
-                                        'view_direction': 112
+                                        'view_direction': 112,
                                     }
                                 ],
-                                'specific_lane': '-1'
+                                'specific_lane': '-1',
                             }
-                        ]
+                        ],
                     }
-                ]
-            }
+                ],
+            },
         )
 
     def test_changes_in_lanes_should_lead_to_new_measurement_site(self):
@@ -147,15 +147,15 @@ class MeasurementSiteTest(TestCase):
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
                                         'longitude': 4.961688,
                                         'lane_number': -1,
-                                        'view_direction': 112
+                                        'view_direction': 112,
                                     }
                                 ],
-                                'specific_lane': 'lane1'  # different vs BASE_MEASUREMENT_SITE
+                                'specific_lane': 'lane1',  # different vs BASE_MEASUREMENT_SITE
                             }
-                        ]
+                        ],
                     }
-                ]
-            }
+                ],
+            },
         )
 
     def test_changes_in_cameras_should_lead_to_new_measurement_site(self):
@@ -179,21 +179,21 @@ class MeasurementSiteTest(TestCase):
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
                                         'longitude': 4.961688,
                                         'lane_number': -1,
-                                        'view_direction': 200  # different vs BASE_MEASUREMENT_SITE
+                                        'view_direction': 200,  # different vs BASE_MEASUREMENT_SITE
                                     }
                                 ],
-                                'specific_lane': '-1'
+                                'specific_lane': '-1',
                             }
-                        ]
+                        ],
                     }
-                ]
-            }
+                ],
+            },
         )
 
-    def test_no_changes_should_lead_to_no_new_measurement_site(self):
+    def test_no_changes_should_not_lead_to_new_measurement_site(self):
         self.measurement_site_test(1, self.BASE_MEASUREMENT_SITE)
 
-    def test_order_of_keys_should_not_matter(self):
+    def test_different_ordering_of_keys_should_not_lead_to_new_measurement_site(self):
         self.measurement_site_test(
             1,
             {
@@ -215,13 +215,13 @@ class MeasurementSiteTest(TestCase):
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
                                         'longitude': 4.961688,
                                         'lane_number': -1,
-                                        'view_direction': 112
+                                        'view_direction': 112,
                                     }
                                 ],
-                                'specific_lane': '-1'
+                                'specific_lane': '-1',
                             }
-                        ]
+                        ],
                     }
-                ]
+                ],
             },
         )
