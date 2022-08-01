@@ -1,3 +1,4 @@
+import sys
 from decimal import Decimal
 from itertools import groupby
 from typing import List, NamedTuple
@@ -112,15 +113,19 @@ class Command(BaseCommand):
     new measurement site must be created, otherwise it is not possible to link
     historical records with the configuration at the time the publication was made.
 
-    The strategy applied here is to process the table in large chunks (e.g. 10000 rows
-    per batch). So that if the process fails, we can just restart the process and
-    continue from the previously processed record.
+    The strategy applied here is to process the table in a loop with each loop
+    processing a large batch (e.g. 10000 rows per batch). So that if the process fails
+    we can just restart the process and continue from the previously processed record.
 
     After some experimentation it seems that updating existing tables causes so much
     junk to be created that the actual query which performs the migration becomes
     slow. This could be solved with a VACUUM FULL ANALYSE, but given the size of the
-    table this makes the migration even slower. Therefore we insert into a new
+    table this makes the migration even slower. Therefore, we insert into a new
     measurement table, once the migration is complete we can remove the old table.
+    Since we are only storing the id, publication_id and measurent_site_id the
+    overhead of this extra table is acceptable, particularly since updating the
+    existing table will also be inefficient in terms of space until the vacuum is
+    run.
     """
 
     def __init__(self, *args, **kwargs):
@@ -180,10 +185,11 @@ class Command(BaseCommand):
             if (measurement_site := self.measurement_site_cache.get(key)) is None:
 
                 # This section of code should run very rarely, as such we are
-                # not interested in profiling here, the most bang the buck
-                # optimisations should happen outside of this if block which
-                # should only run a few hundred times, compared to outside the
-                # block which will run hundreds of millions of times.
+                # not interested in profiling here, the most bang for the buck
+                # optimisations should happen outside of this logic branch. which
+                # Compared to the rest of the loop we expect this to run at most
+                # a few thousand times, compared to hundreds of millions of times
+                # for the rest of the loop.
                 profiler.stop()
 
                 # convert the tuple of tuples into something more usable, and
@@ -210,9 +216,9 @@ class Command(BaseCommand):
         # insert all measurements with the appropriate measurement site id
         if values:
             cursor.execute(
-                "insert into reistijden_v1_measurement2"
-                " (id, publication_id, measurement_site_id)"
-                f" values {','.join(values)}"
+                "insert into reistijden_v1_measurement2 "
+                "(id, publication_id, measurement_site_id) values "
+                + ",".join(values)
             )
 
         if created_measurement_sites:
@@ -221,8 +227,8 @@ class Command(BaseCommand):
         return measurement_id + 1
 
     def add_arguments(self, parser):
-        parser.add_argument('batch_size', type=int)
-        parser.add_argument('--single', action='store_true')
+        parser.add_argument('--batch-size', type=int, default=10_000)
+        parser.add_argument('--num-batches', type=int, default=sys.maxsize)
 
     @time_it('handle')
     def handle(self, *args, **options):
@@ -234,8 +240,12 @@ class Command(BaseCommand):
                 next_id = cursor.fetchone()[0] or 1
 
             with profile_it() as profiler:
-                while next_id := self.process_batch(
-                    cursor, next_id, options['batch_size'], profiler
-                ):
-                    if options['single']:
+                for _ in range(options['num_batches']):
+                    if not (next_id := self.process_batch(
+                        cursor,
+                        next_id,
+                        options['batch_size'],
+                        profiler,
+                    )):
+                        # no more batches to process
                         break
