@@ -217,8 +217,7 @@ class Command(BaseCommand):
         if values:
             cursor.execute(
                 "insert into reistijden_v1_measurement2 "
-                "(id, publication_id, measurement_site_id) values "
-                + ",".join(values)
+                "(id, publication_id, measurement_site_id) values " + ",".join(values)
             )
 
         if created_measurement_sites:
@@ -241,11 +240,13 @@ class Command(BaseCommand):
 
             with profile_it() as profiler:
                 for _ in range(options['num_batches']):
-                    if not (next_id := self.process_batch(
-                        cursor,
-                        next_id,
-                        options['batch_size'],
-                        profiler,
-                    )):
+                    if not (
+                        next_id := self.process_batch(
+                            cursor,
+                            next_id,
+                            options['batch_size'],
+                            profiler,
+                        )
+                    ):
                         # no more batches to process
                         break
