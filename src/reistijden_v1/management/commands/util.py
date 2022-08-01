@@ -3,6 +3,14 @@ import time
 from itertools import groupby
 
 
+class DummyProfiler:
+    def start(self):
+        ...
+
+    def stop(self):
+        ...
+
+
 @contextlib.contextmanager
 def profile_it():
     # When pyinstrument is not installed (because we are running in
@@ -15,7 +23,7 @@ def profile_it():
     else:
         p = Profiler()
         p.start()
-        yield
+        yield p
         p.stop()
         p.print()
 
