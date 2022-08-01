@@ -1,3 +1,5 @@
+import copy
+
 from django.db import models
 
 
@@ -154,9 +156,19 @@ class MeasurementSite(models.Model):
     @classmethod
     def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
 
+        # we will modify measurement_site_json so best to perform a
+        # deep copy first so that we don't mutate an object from the caller
+        measurement_site_json = copy.deepcopy(measurement_site_json)
+
+        # measurement_locations is not a field, so we need to remove it
+        # from the values past to defaults, but we want to keep it in
+        # measurement_site_json
+        defaults = dict(measurement_site_json)
+        defaults.pop('measurement_locations')
+
         measurement_site, created = MeasurementSite.objects.get_or_create(
             measurement_site_json=measurement_site_json,
-            defaults=measurement_site_json,
+            defaults=defaults,
         )
 
         # If we created a new measurement site, then the underlying entities
