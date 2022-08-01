@@ -49,15 +49,21 @@ class ReistijdenParser:
 
     def measurement_src_to_dict(self, src_d):
         site_ref = src_d["measurement_site_reference"]
-        return {
+        measurement_site = {
             "reference_id": site_ref["@id"],
             "version": site_ref["@version"],
             "name": site_ref.get("measurement_site_name"),
             "type": site_ref["measurement_site_type"],
             "length": site_ref.get("length"),
-            "locations": self.get_location_from_site_ref(site_ref),
+            "measurement_locations": self.get_location_from_site_ref(site_ref),
+        }
+        measurement_site["measurement_locations"].sort(key=lambda x: x["index"])
+        measurement_site["measurement_site_json"] = measurement_site
+
+        return {
+            "measurement_site": measurement_site,
             "travel_times": self.get_travel_times_from_measurement(src_d),
-            "individual_travel_times": self.get_individual_travel_times_from_measurement(  # noqa: E501
+            "individual_travel_times": self.get_individual_travel_times_from_measurement(
                 src_d
             ),
             "traffic_flows": self.get_traffic_flows_from_measurement(src_d),
@@ -91,15 +97,30 @@ class ReistijdenParser:
             logger.error(e)
 
     def lane_src_to_dict(self, src_d):
-        return {
-            "specific_lane": src_d["@specific_lane"],
-            "camera_id": src_d["camera"]["@id"],
-            "latitude": src_d["camera"]["coordinates"]["@latitude"],
-            "longitude": src_d["camera"]["coordinates"]["@longitude"],
-            "lane_number": src_d["camera"]["lane_number"],
-            "status": src_d["camera"]["status"],
-            "view_direction": src_d["camera"]["view_direction"],
+        if type(src_d["camera"]) is list:
+            cameras = [self.camera_src_to_dict(camera) for camera in src_d["camera"]]
+        else:
+            cameras = [self.camera_src_to_dict(src_d["camera"])]
+
+        cameras.sort(key=lambda x: tuple(x.values()))
+        return {"specific_lane": src_d["@specific_lane"], "cameras": cameras}
+
+    def camera_src_to_dict(self, src_d):
+        camera_src = {
+            "reference_id": src_d["@id"],
+            "lane_number": src_d["lane_number"],
+            "status": src_d.get("status"),
+            "view_direction": src_d["view_direction"],
         }
+
+        if "coordinates" in src_d:
+            camera_src["latitude"] = float(src_d["coordinates"]["@latitude"])
+            camera_src["longitude"] = float(src_d["coordinates"]["@longitude"])
+        else:
+            camera_src["latitude"] = None
+            camera_src["longitude"] = None
+
+        return camera_src
 
     def location_src_to_dict(self, src_d):
         if type(src_d["lane"]) is list:
@@ -107,6 +128,7 @@ class ReistijdenParser:
         else:
             lanes = [self.lane_src_to_dict(src_d["lane"])]
 
+        lanes.sort(key=lambda x: x['specific_lane'])
         return {"index": src_d.get("@index"), "lanes": lanes}
 
     def travel_time_src_to_dict(self, src_d):
