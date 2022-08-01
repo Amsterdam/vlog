@@ -41,7 +41,6 @@ NOTEBOOK_ARGUMENTS = [
     "--port=8888",
     "--allow-root",
     "--no-browser",
-    "--NotebookApp.token=dev",
 ]
 
 MIDDLEWARE = [
