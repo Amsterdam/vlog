@@ -154,7 +154,6 @@ class MeasurementSite(models.Model):
     @classmethod
     def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
 
-        measurement_locations = measurement_site_json.pop('measurement_locations')
         measurement_site, created = MeasurementSite.objects.get_or_create(
             measurement_site_json=measurement_site_json,
             defaults=measurement_site_json,
@@ -162,7 +161,7 @@ class MeasurementSite(models.Model):
 
         # If we created a new measurement site, then the underlying entities
         # (locations, lanes and cameras) also need to be created.
-        for measurement_location_json in measurement_locations:
+        for measurement_location_json in measurement_site_json['measurement_locations']:
 
             lanes = measurement_location_json.pop('lanes')
             measurement_location, _ = MeasurementLocation2.objects.get_or_create(
