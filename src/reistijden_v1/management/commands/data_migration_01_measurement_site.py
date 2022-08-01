@@ -77,7 +77,7 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
 
                 for camera in cameras:
                     camera_json = {
-                        'camera_id': camera.camera_id,
+                        'reference_id': camera.camera_id,
                         'latitude': float(camera.latitude),
                         'longitude': float(camera.longitude),
                         'lane_number': camera.lane_number,
