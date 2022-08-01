@@ -19,7 +19,7 @@ def profile_it():
     try:
         from pyinstrument import Profiler
     except ImportError:
-        yield
+        yield DummyProfiler()
     else:
         p = Profiler()
         p.start()
