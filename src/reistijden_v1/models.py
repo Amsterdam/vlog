@@ -3,6 +3,25 @@ import copy
 from django.db import models
 
 
+class VehicleCategory(models.Model):
+    """
+    A category for vehicles, e.g. auto, aanhanger, motor.
+    Note that this could also be a vehicle code, such as 'M1'.
+    """
+
+    name = models.CharField(max_length=255, unique=True)
+
+    @classmethod
+    def get_or_create(cls, name):
+        if name is not None:
+            return cls.objects.get_or_create(name=name)
+        else:
+            return None, False
+
+    def __str__(self):
+        return self.name
+
+
 class Publication(models.Model):
     """
     A data publication posted to our api which contains Measurements for
@@ -370,7 +389,20 @@ class IndividualTravelTime(models.Model):
 
     measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
     license_plate = models.CharField(max_length=255)
-    vehicle_category = models.CharField(max_length=255)
+
+    # to be removed after data migrations_tests
+    old_vehicle_category = models.CharField(max_length=255, null=True, blank=True)
+
+    vehicle_category = models.ForeignKey(
+        'VehicleCategory',
+        on_delete=models.SET_NULL,
+        help_text=(
+            "The vehicle category. Reference: "
+            "https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring"
+        ),
+        null=True,
+        blank=True,
+    )
     detection_start_time = models.DateTimeField(
         help_text=(
             "The date time the vehicle was detected at the start location of the "
@@ -420,4 +452,9 @@ class TrafficFlow(models.Model):
 class TrafficFlowCategoryCount(models.Model):
     traffic_flow = models.ForeignKey('TrafficFlow', on_delete=models.CASCADE)
     count = models.IntegerField()
-    type = models.CharField(max_length=255, null=True)
+    vehicle_category = models.ForeignKey(
+        'VehicleCategory', on_delete=models.SET_NULL, null=True
+    )
+
+    # to be removed after data migrations
+    type = models.CharField(max_length=255, null=True, blank=True)
