@@ -23,8 +23,8 @@ class MeasurementSiteKeyRow(NamedTuple):
     index: str
     specific_lane: str
     camera_id: str
-    latitude: Decimal
-    longitude: Decimal
+    latitude: str
+    longitude: str
     lane_number: str
     status: str
     view_direction: str
@@ -78,8 +78,8 @@ def get_measurement_site_json(data: List[MeasurementSiteKeyRow]):
                 for camera in cameras:
                     camera_json = {
                         'reference_id': camera.camera_id,
-                        'latitude': float(camera.latitude),
-                        'longitude': float(camera.longitude),
+                        'latitude': str(camera.latitude),
+                        'longitude': str(camera.longitude),
                         'lane_number': camera.lane_number,
                         'status': camera.status,
                         'view_direction': camera.view_direction,

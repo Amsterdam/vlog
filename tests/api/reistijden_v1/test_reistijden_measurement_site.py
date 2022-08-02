@@ -21,9 +21,9 @@ class MeasurementSiteTest(TestCase):
                         'cameras': [
                             {
                                 'status': 'on',
-                                'latitude': 52.372334,
+                                'latitude': '52.372334',
                                 'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                'longitude': 4.961688,
+                                'longitude': '4.961688',
                                 'lane_number': -1,
                                 'view_direction': 112,
                             }
@@ -77,9 +77,9 @@ class MeasurementSiteTest(TestCase):
                                 'cameras': [
                                     {
                                         'status': 'on',
-                                        'latitude': 52.372334,
+                                        'latitude': '52.372334',
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                        'longitude': 4.961688,
+                                        'longitude': '4.961688',
                                         'lane_number': -1,
                                         'view_direction': 112,
                                     }
@@ -109,9 +109,9 @@ class MeasurementSiteTest(TestCase):
                                 'cameras': [
                                     {
                                         'status': 'on',
-                                        'latitude': 52.372334,
+                                        'latitude': '52.372334',
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                        'longitude': 4.961688,
+                                        'longitude': '4.961688',
                                         'lane_number': -1,
                                         'view_direction': 112,
                                     }
@@ -141,9 +141,9 @@ class MeasurementSiteTest(TestCase):
                                 'cameras': [
                                     {
                                         'status': 'on',
-                                        'latitude': 52.372334,
+                                        'latitude': '52.372334',
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                        'longitude': 4.961688,
+                                        'longitude': '4.961688',
                                         'lane_number': -1,
                                         'view_direction': 112,
                                     }
@@ -173,9 +173,9 @@ class MeasurementSiteTest(TestCase):
                                 'cameras': [
                                     {
                                         'status': 'on',
-                                        'latitude': 52.372334,
+                                        'latitude': '52.372334',
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                        'longitude': 4.961688,
+                                        'longitude': '4.961688',
                                         'lane_number': -1,
                                         'view_direction': 200,  # different vs BASE_MEASUREMENT_SITE
                                     }
@@ -209,9 +209,9 @@ class MeasurementSiteTest(TestCase):
                                 'cameras': [
                                     {
                                         'status': 'on',
-                                        'latitude': 52.372334,
+                                        'latitude': '52.372334',
                                         'reference_id': '322aac3d-62c2-495b-afee-7deded30f0e7',
-                                        'longitude': 4.961688,
+                                        'longitude': '4.961688',
                                         'lane_number': -1,
                                         'view_direction': 112,
                                     }
