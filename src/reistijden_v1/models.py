@@ -1,4 +1,5 @@
 import copy
+from typing import Tuple
 
 from django.db import models
 
@@ -161,11 +162,36 @@ class MeasurementSite(models.Model):
     )
 
     @classmethod
-    def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
+    def get_or_create(
+        cls, measurement_site_json: dict
+    ) -> Tuple[bool, 'MeasurementSite']:
+        """
+        Get an existing measurement, or create a new one if it does not exist
+        using the given json as an identifying key.
 
+        :return: Tuple where the first element denotes whether the measurement
+                 site was created or not (True == created, False == retrieved).
+                 The second element is the created or retrieved measurement site.
+        """
         # we will modify measurement_site_json so best to perform a
         # deep copy first so that we don't mutate an object from the caller
         measurement_site_json = copy.deepcopy(measurement_site_json)
+
+        # It is important that lists (locations, lanes, cameras) are sorted
+        # since we will use this json (actually jsonb in postgres) as an
+        # identifying key to match against existing measurement sites. If
+        # lists are not sorted in the same manner, we will end up unnecessarily
+        # creating new measurement sites.
+        measurement_locations = measurement_site_json['measurement_locations']
+        measurement_locations.sort(key=lambda x: x['index'])
+
+        for measurement_location in measurement_locations:
+            lanes = measurement_location['lanes']
+            lanes.sort(key=lambda x: x['specific_lane'])
+
+            for lane in lanes:
+                cameras = lane['cameras']
+                cameras.sort(key=lambda x: tuple(x.values()))
 
         # measurement_locations is not a field, so we need to remove it
         # from the values past to defaults, but we want to keep it in
@@ -202,7 +228,7 @@ class MeasurementSite(models.Model):
                         **camera_json,
                     )
 
-        return measurement_site
+        return measurement_site, created
 
 
 class MeasurementLocationOld(models.Model):
