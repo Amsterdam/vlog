@@ -57,7 +57,6 @@ class ReistijdenParser:
             "length": site_ref.get("length"),
             "measurement_locations": self.get_location_from_site_ref(site_ref),
         }
-        measurement_site["measurement_locations"].sort(key=lambda x: x["index"])
         measurement_site["measurement_site_json"] = measurement_site
 
         return {
@@ -102,7 +101,6 @@ class ReistijdenParser:
         else:
             cameras = [self.camera_src_to_dict(src_d["camera"])]
 
-        cameras.sort(key=lambda x: tuple(x.values()))
         return {"specific_lane": src_d["@specific_lane"], "cameras": cameras}
 
     def camera_src_to_dict(self, src_d):
@@ -128,7 +126,6 @@ class ReistijdenParser:
         else:
             lanes = [self.lane_src_to_dict(src_d["lane"])]
 
-        lanes.sort(key=lambda x: x['specific_lane'])
         return {"index": src_d.get("@index"), "lanes": lanes}
 
     def travel_time_src_to_dict(self, src_d):
