@@ -15,6 +15,9 @@ from reistijden_v1.models import (
 
 
 class CameraSerializer(serializers.ModelSerializer):
+    longitude = serializers.CharField()
+    latitude = serializers.CharField()
+
     class Meta:
         model = Camera
         exclude = ['lane']
