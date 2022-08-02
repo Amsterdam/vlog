@@ -17,6 +17,6 @@ class Command(BaseCommand):
                 UPDATE reistijden_v1_individualtraveltime
                 SET vehicle_category_id=reistijden_v1_vehiclecategory.id
                 FROM reistijden_v1_vehiclecategory
-                WHERE vehicle_category=name
+                WHERE old_vehicle_category=name
             """
             )

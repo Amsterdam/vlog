@@ -19,9 +19,9 @@ class Command(BaseCommand):
                 FROM reistijden_v1_trafficflowcategorycount
                 WHERE type IS NOT NULL
                 UNION
-                SELECT vehicle_category
+                SELECT old_vehicle_category
                 FROM reistijden_v1_individualtraveltime
-                WHERE vehicle_category IS NOT NULL
+                WHERE old_vehicle_category IS NOT NULL
                 ON CONFLICT DO NOTHING
             """
             )
