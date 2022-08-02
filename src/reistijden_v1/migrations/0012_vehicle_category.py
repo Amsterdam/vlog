@@ -18,10 +18,20 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=255, unique=True)),
             ],
         ),
-        migrations.AddField(
+        migrations.RenameField(
+            model_name='individualtraveltime',
+            old_name='vehicle_category',
+            new_name='old_vehicle_category',
+        ),
+        migrations.AlterField(
             model_name='individualtraveltime',
             name='old_vehicle_category',
             field=models.CharField(blank=True, max_length=255, null=True),
+        ),
+        migrations.AddField(
+            model_name='individualtraveltime',
+            name='vehicle_category',
+            field=models.ForeignKey(blank=True, help_text='The vehicle category. Reference: https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring', null=True, on_delete=django.db.models.deletion.SET_NULL, to='reistijden_v1.vehiclecategory'),
         ),
         migrations.AlterField(
             model_name='trafficflowcategorycount',
@@ -31,11 +41,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='trafficflowcategorycount',
             name='vehicle_category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='reistijden_v1.vehiclecategory'),
-        ),
-        migrations.AlterField(
-            model_name='individualtraveltime',
-            name='vehicle_category',
-            field=models.ForeignKey(blank=True, help_text='The vehicle category. Reference: https://www.rdw.nl/zakelijk/paginas/nationale-kleine-serie-typegoedkeuring', null=True, on_delete=django.db.models.deletion.CASCADE, to='reistijden_v1.vehiclecategory'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='reistijden_v1.vehiclecategory'),
         ),
     ]
