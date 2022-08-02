@@ -78,6 +78,13 @@ class Publication(models.Model):
             "in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]"
         ),
     )
+    measurement_duration = models.IntegerField(
+        null=True,
+        help_text=(
+            "The duration element provides the measurement frequency at which "
+            "the travel time values are calculated/exported."
+        ),
+    )
 
 
 class Measurement(models.Model):
@@ -378,6 +385,21 @@ class TravelTime(models.Model):
     )
     traffic_speed = models.IntegerField(
         help_text=("The computed driving speed in kmph.")
+    )
+    data_error = models.BooleanField(
+        max_length=255,
+        default=False,
+        help_text=(
+            "Optional elemnt to indicate whether there were errors in the "
+            "travel time computation or there are alarm reported against this site."
+        ),
+    )
+    num_input_values_used = models.IntegerField(
+        null=True,
+        help_text=(
+            "The total no: of samples (individual travel times) used to "
+            "compute the travel time."
+        ),
     )
 
 
