@@ -1,6 +1,7 @@
 import logging
 import os
 from datetime import datetime
+from distutils.util import strtobool
 
 import humps
 import xmltodict
@@ -40,6 +41,9 @@ class ReistijdenParser:
             "measurement_end_time": publication_src["measurement_period"][
                 "measurement_end_time"
             ],
+            "measurement_duration": publication_src["measurement_period"].get(
+                "duration"
+            ),
             "measurements": measurements,
         }
 
@@ -106,12 +110,18 @@ class ReistijdenParser:
         return {"index": src_d.get("@index"), "lanes": lanes}
 
     def travel_time_src_to_dict(self, src_d):
+
+        if (data_error := src_d.get("data_error")) is not None:
+            data_error = bool(strtobool(src_d["data_error"]))
+
         return {
             "type": src_d["@travel_time_type"],
             "data_quality": src_d.get("@data_quality"),
             "estimation_type": src_d.get("@estimation_type"),
             "travel_time": src_d["travel_time"],
             "traffic_speed": src_d["traffic_speed"],
+            "num_input_values_used": src_d.get("@number_of_input_values_used"),
+            "data_error": data_error,
         }
 
     def category_src_to_dict(self, src_d):
