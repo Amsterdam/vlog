@@ -1,3 +1,5 @@
+import copy
+
 from django.db import models
 
 
@@ -151,6 +153,50 @@ class MeasurementSite(models.Model):
         ),
     )
 
+    @classmethod
+    def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
+
+        # we will modify measurement_site_json so best to perform a
+        # deep copy first so that we don't mutate an object from the caller
+        measurement_site_json = copy.deepcopy(measurement_site_json)
+
+        # measurement_locations is not a field, so we need to remove it
+        # from the values past to defaults, but we want to keep it in
+        # measurement_site_json
+        defaults = dict(measurement_site_json)
+        defaults.pop('measurement_locations')
+
+        measurement_site, created = MeasurementSite.objects.get_or_create(
+            measurement_site_json=measurement_site_json,
+            defaults=defaults,
+        )
+
+        # If we created a new measurement site, then the underlying entities
+        # (locations, lanes and cameras) also need to be created.
+        for measurement_location_json in measurement_site_json['measurement_locations']:
+
+            lanes = measurement_location_json.pop('lanes')
+            measurement_location, _ = MeasurementLocation2.objects.get_or_create(
+                measurement_site=measurement_site,
+                **measurement_location_json,
+            )
+
+            for lane_json in lanes:
+
+                cameras = lane_json.pop('cameras')
+                lane, _ = Lane2.objects.get_or_create(
+                    measurement_location=measurement_location,
+                    **lane_json,
+                )
+
+                for camera_json in cameras:
+                    Camera.objects.get_or_create(
+                        lane=lane,
+                        **camera_json,
+                    )
+
+        return measurement_site
+
 
 class MeasurementLocation(models.Model):
     """
@@ -196,6 +242,94 @@ class Lane(models.Model):
     lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
     status = models.CharField(max_length=255)  # e.g. "on"
     view_direction = models.IntegerField()  # e.g. 225
+
+
+class MeasurementLocation2(models.Model):
+    """
+    A location that is part of the MeasurementSite.
+    At most one location exists if the measurement site is of type 'location.
+    A maximum of two locations should be present if the measurement site is of type
+    'section' (start and end location).
+    The number of locations is unbounded if the measurement site is of type
+    'trajectory' (start location, end location and all via locations)
+    """
+
+    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
+
+    index = models.IntegerField(
+        null=True,
+        help_text=(
+            "The index attribute indicates the order of measurement location in the "
+            "measurement site. Optional, if the measurement site is of type 'location'"
+        ),
+    )
+
+
+class Lane2(models.Model):
+    """
+    A road lane at a MeasurementLocation.
+    """
+
+    measurement_location = models.ForeignKey(
+        'MeasurementLocation2', on_delete=models.CASCADE
+    )
+    specific_lane = models.CharField(
+        max_length=255,
+        help_text=(
+            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
+            "used in the Amsterdam Travel Time system. The actual lane number is "
+            "available at Camera.lane_number with respect to the camera view direction "
+            "at the measurement location."
+        ),
+    )
+
+
+class Camera(models.Model):
+    """
+    A single camera at a measurement location.
+    """
+
+    reference_id = models.CharField(
+        max_length=255,
+        help_text=(
+            "The unique camera identifier (defined by the ANPR data supplier). "
+            "Format: UUIDv4"
+        ),
+    )
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    lane = models.ForeignKey('Lane2', on_delete=models.CASCADE)
+    lane_number = models.IntegerField(
+        help_text=(
+            "Lanenumber, calculated from the 'middle' of the road. "
+            "Lane direction is indicated by being "
+            "- positive (regular traffic should be moving away from the camera), or "
+            "- negative (regular traffic should be moving towards the camera). "
+            " For example: "
+            "- Left lane with regular traffic moving away from the camera is number: 1 "
+            "- Left lane with regular traffic moving towards the camera is number: -1"
+            "Rechts v/d middenberg positief (verkeer dat van je af gaat)"
+            "Links negatief (verkeer dat naar je toe komt)"
+        )
+    )
+    status = models.CharField(
+        max_length=255,
+        null=True,
+        help_text=(
+            "On, off or outage. "
+            "On: camera is active for travel-time system and functioning, "
+            "Off: camera is not active for travel-time system, "
+            "Outage: camera is active for travel-time system, but malfunctioning"
+        ),
+    )
+    view_direction = models.IntegerField(
+        help_text=(
+            "The direction the camera is looking in, expressed in degrees. "
+            "0 and every 22,5 degrees are valid values. "
+            "0 equals looking North,  180 degrees equals to South, "
+            "90 degrees to East, 270 degrees to West."
+        )
+    )
 
 
 class TravelTime(models.Model):
