@@ -110,6 +110,10 @@ class ReistijdenParser:
         return {"index": src_d.get("@index"), "lanes": lanes}
 
     def travel_time_src_to_dict(self, src_d):
+
+        if (data_error := src_d.get("data_error")) is not None:
+            data_error = bool(strtobool(src_d["data_error"]))
+
         return {
             "type": src_d["@travel_time_type"],
             "data_quality": src_d.get("@data_quality"),
@@ -117,7 +121,7 @@ class ReistijdenParser:
             "travel_time": src_d["travel_time"],
             "traffic_speed": src_d["traffic_speed"],
             "num_input_values_used": src_d.get("@number_of_input_values_used"),
-            "data_error": bool(strtobool(src_d.get("data_error", "false"))),
+            "data_error": data_error,
         }
 
     def category_src_to_dict(self, src_d):

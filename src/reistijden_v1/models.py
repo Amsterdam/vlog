@@ -388,9 +388,13 @@ class TravelTime(models.Model):
     )
     data_error = models.BooleanField(
         max_length=255,
-        default=False,
+        # make this field nullable, since there are a lots of old travel time
+        # instances where do not know anymore if there was a data error or not.
+        # By making this field nullable we can distinguish between no data error
+        # and "we don't know whether there was a data error or not"
+        null=True,
         help_text=(
-            "Optional elemnt to indicate whether there were errors in the "
+            "Optional element to indicate whether there were errors in the "
             "travel time computation or there are alarm reported against this site."
         ),
     )

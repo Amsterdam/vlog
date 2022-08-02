@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='traveltime',
             name='data_error',
-            field=models.BooleanField(default=False, help_text='Optional elemnt to indicate whether there were errors in the travel time computation or there are alarm reported against this site.', max_length=255),
+            field=models.BooleanField(null=True, help_text='Optional element to indicate whether there were errors in the travel time computation or there are alarm reported against this site.', max_length=255),
         ),
         migrations.AddField(
             model_name='traveltime',
