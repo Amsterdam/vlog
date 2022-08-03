@@ -6,8 +6,9 @@ from reistijden_v1.parser import ReistijdenParser
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        from reistijden_v1.serializers import PublicationSerializer
         from pathlib import Path
+
+        from reistijden_v1.serializers import PublicationSerializer
 
         raw_data = Path(f'data.xml').read_text()
         for chunk in raw_data.split('----'):

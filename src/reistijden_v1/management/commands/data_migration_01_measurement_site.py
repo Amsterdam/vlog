@@ -152,9 +152,9 @@ class Command(BaseCommand):
                         lane.lane_number,
                         lane.status,
                         lane.view_direction
-            from        reistijden_v1_measurement as measurement
-            left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
-            left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
+            from        reistijden_v1_measurementold as measurement
+            left join   reistijden_v1_measurementlocationold location on measurement.id = location.measurement_id
+            left join   reistijden_v1_laneold lane on location.id = lane.measurement_location_id
             where       measurement.id between %(next_id)s and (%(next_id)s + %(batch_size)s)
             order by    measurement_id, location.id, lane.id
         """
@@ -216,7 +216,7 @@ class Command(BaseCommand):
         # insert all measurements with the appropriate measurement site id
         if values:
             cursor.execute(
-                "insert into reistijden_v1_measurement2 "
+                "insert into reistijden_v1_measurement "
                 "(id, publication_id, measurement_site_id) values " + ",".join(values)
             )
 
@@ -240,7 +240,7 @@ class Command(BaseCommand):
         with connection.cursor() as cursor:
 
             with time_it('get first unprocessed id'):
-                cursor.execute("select max(id) + 1 from reistijden_v1_measurement2")
+                cursor.execute("select max(id) + 1 from reistijden_v1_measurement")
                 next_id = cursor.fetchone()[0] or 1
 
             with profile_it() as profiler:

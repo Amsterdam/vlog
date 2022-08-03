@@ -1,7 +1,7 @@
 import pytest
 from django.test import TestCase
 
-from reistijden_v1.models import Camera, Lane2, MeasurementLocation2, MeasurementSite
+from reistijden_v1.models import Camera, Lane, MeasurementLocation, MeasurementSite
 
 
 @pytest.mark.django_db
@@ -42,22 +42,22 @@ class MeasurementSiteTest(TestCase):
         the second call.
         """
         self.assertEqual(MeasurementSite.objects.count(), 0)
-        self.assertEqual(MeasurementLocation2.objects.count(), 0)
-        self.assertEqual(Lane2.objects.count(), 0)
+        self.assertEqual(MeasurementLocation.objects.count(), 0)
+        self.assertEqual(Lane.objects.count(), 0)
         self.assertEqual(Camera.objects.count(), 0)
 
         MeasurementSite.get_or_create(self.BASE_MEASUREMENT_SITE)
 
         self.assertEqual(MeasurementSite.objects.count(), 1)
-        self.assertEqual(MeasurementLocation2.objects.count(), 1)
-        self.assertEqual(Lane2.objects.count(), 1)
+        self.assertEqual(MeasurementLocation.objects.count(), 1)
+        self.assertEqual(Lane.objects.count(), 1)
         self.assertEqual(Camera.objects.count(), 1)
 
         MeasurementSite.get_or_create(measurement_site_json)
 
         self.assertEqual(MeasurementSite.objects.count(), expected_count_after)
-        self.assertEqual(MeasurementLocation2.objects.count(), expected_count_after)
-        self.assertEqual(Lane2.objects.count(), expected_count_after)
+        self.assertEqual(MeasurementLocation.objects.count(), expected_count_after)
+        self.assertEqual(Lane.objects.count(), expected_count_after)
         self.assertEqual(Camera.objects.count(), expected_count_after)
 
     def test_changes_in_measurement_site_should_lead_to_new_measurement_site(self):

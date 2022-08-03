@@ -68,7 +68,7 @@ class Publication(models.Model):
     )
 
 
-class Measurement(models.Model):
+class MeasurementOld(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
 
@@ -83,7 +83,7 @@ class Measurement(models.Model):
     length = models.IntegerField(null=True)
 
 
-class Measurement2(models.Model):
+class Measurement(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
 
@@ -183,7 +183,7 @@ class MeasurementSite(models.Model):
         for measurement_location_json in measurement_site_json['measurement_locations']:
 
             lanes = measurement_location_json.pop('lanes')
-            measurement_location, _ = MeasurementLocation2.objects.get_or_create(
+            measurement_location, _ = MeasurementLocation.objects.get_or_create(
                 measurement_site=measurement_site,
                 **measurement_location_json,
             )
@@ -191,7 +191,7 @@ class MeasurementSite(models.Model):
             for lane_json in lanes:
 
                 cameras = lane_json.pop('cameras')
-                lane, _ = Lane2.objects.get_or_create(
+                lane, _ = Lane.objects.get_or_create(
                     measurement_location=measurement_location,
                     **lane_json,
                 )
@@ -205,6 +205,52 @@ class MeasurementSite(models.Model):
         return measurement_site
 
 
+class MeasurementLocationOld(models.Model):
+    """
+    A location that is part of the MeasurementSite.
+    At most one location exists if the measurement site is of type 'location.
+    A maximum of two locations should be present if the measurement site is of type
+    'section' (start and end location).
+    The number of locations is unbounded if the measurement site is of type
+    'trajectory' (start location, end location and all via locations)
+    """
+
+    measurement = models.ForeignKey('MeasurementOld', on_delete=models.CASCADE)
+
+    index = models.IntegerField(
+        null=True,
+        help_text=(
+            "The index attribute indicates the order of measurement location in the "
+            "measurement site. Optional, if the measurement site is of type 'location'"
+        ),
+    )
+
+
+class LaneOld(models.Model):
+    """
+    A road lane at a MeasurementLocation.
+    """
+
+    measurement_location = models.ForeignKey(
+        'MeasurementLocationOld', on_delete=models.CASCADE
+    )
+    specific_lane = models.CharField(
+        max_length=255,
+        help_text=(
+            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
+            "used in the Amsterdam Travel Time system. The actual lane number is "
+            "available at Camera.lane_number with respect to the camera view direction "
+            "at the measurement location."
+        ),
+    )
+    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
+    status = models.CharField(max_length=255)  # e.g. "on"
+    view_direction = models.IntegerField()  # e.g. 225
+
+
 class MeasurementLocation(models.Model):
     """
     A location that is part of the MeasurementSite.
@@ -215,7 +261,7 @@ class MeasurementLocation(models.Model):
     'trajectory' (start location, end location and all via locations)
     """
 
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
+    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
 
     index = models.IntegerField(
         null=True,
@@ -243,52 +289,6 @@ class Lane(models.Model):
             "at the measurement location."
         ),
     )
-    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
-    status = models.CharField(max_length=255)  # e.g. "on"
-    view_direction = models.IntegerField()  # e.g. 225
-
-
-class MeasurementLocation2(models.Model):
-    """
-    A location that is part of the MeasurementSite.
-    At most one location exists if the measurement site is of type 'location.
-    A maximum of two locations should be present if the measurement site is of type
-    'section' (start and end location).
-    The number of locations is unbounded if the measurement site is of type
-    'trajectory' (start location, end location and all via locations)
-    """
-
-    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
-
-    index = models.IntegerField(
-        null=True,
-        help_text=(
-            "The index attribute indicates the order of measurement location in the "
-            "measurement site. Optional, if the measurement site is of type 'location'"
-        ),
-    )
-
-
-class Lane2(models.Model):
-    """
-    A road lane at a MeasurementLocation.
-    """
-
-    measurement_location = models.ForeignKey(
-        'MeasurementLocation2', on_delete=models.CASCADE
-    )
-    specific_lane = models.CharField(
-        max_length=255,
-        help_text=(
-            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
-            "used in the Amsterdam Travel Time system. The actual lane number is "
-            "available at Camera.lane_number with respect to the camera view direction "
-            "at the measurement location."
-        ),
-    )
 
 
 class Camera(models.Model):
@@ -305,7 +305,7 @@ class Camera(models.Model):
     )
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-    lane = models.ForeignKey('Lane2', on_delete=models.CASCADE)
+    lane = models.ForeignKey('Lane', on_delete=models.CASCADE)
     lane_number = models.IntegerField(
         help_text=(
             "Lanenumber, calculated from the 'middle' of the road. "
