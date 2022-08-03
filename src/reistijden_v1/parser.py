@@ -112,8 +112,8 @@ class ReistijdenParser:
         }
 
         if "coordinates" in src_d:
-            camera_src["latitude"] = float(src_d["coordinates"]["@latitude"])
-            camera_src["longitude"] = float(src_d["coordinates"]["@longitude"])
+            camera_src["latitude"] = src_d["coordinates"]["@latitude"]
+            camera_src["longitude"] = src_d["coordinates"]["@longitude"]
         else:
             camera_src["latitude"] = None
             camera_src["longitude"] = None
