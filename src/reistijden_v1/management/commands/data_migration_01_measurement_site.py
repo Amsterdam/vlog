@@ -223,6 +223,11 @@ class Command(BaseCommand):
         if created_measurement_sites:
             print(f'Created {created_measurement_sites} measurement sites')
 
+        if measurement_id != -1:
+            cursor.execute(
+                f"SELECT setval('reistijden_v1_measurement2_id_seq', {measurement_id})"
+            )
+
         return measurement_id + 1
 
     def add_arguments(self, parser):
