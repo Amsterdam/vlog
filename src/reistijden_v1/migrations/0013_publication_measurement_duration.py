@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reistijden_v1', '0013_travel_time_additional_fields'),
+        ('reistijden_v1', '0012_travel_time_additional_fields'),
     ]
 
     operations = [
