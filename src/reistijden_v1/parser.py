@@ -127,25 +127,25 @@ class ReistijdenParser:
     def category_src_to_dict(self, src_d):
         return {
             "count": src_d["@count"],
-            "vehicle_category": src_d["@type"] if src_d["@type"] else None
+            "type": src_d["@type"] if src_d["@type"] else None
             # Convert empty strings to Null
         }
 
     def traffic_flow_src_to_dict(self, src_d):
-        traffic_flow_category_counts = []
+        categories = []
         if "number_of_input_values_used" in src_d:
             category_src = src_d["number_of_input_values_used"]["category"]
             if type(category_src) is list:
-                traffic_flow_category_counts = [
+                categories = [
                     self.category_src_to_dict(category) for category in category_src
                 ]
             else:
-                traffic_flow_category_counts = [self.category_src_to_dict(category_src)]
+                categories = [self.category_src_to_dict(category_src)]
 
         return {
             "specific_lane": src_d["@specific_lane"],
             "vehicle_flow": src_d["vehicle_flow"],
-            "traffic_flow_category_counts": traffic_flow_category_counts,
+            "categories": categories,
         }
 
     def get_travel_times_from_measurement(self, src_d):
