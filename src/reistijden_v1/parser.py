@@ -41,7 +41,7 @@ class ReistijdenParser:
             "measurement_end_time": publication_src["measurement_period"][
                 "measurement_end_time"
             ],
-                "measurement_duration": publication_src["measurement_period"].get(
+            "measurement_duration": publication_src["measurement_period"].get(
                 "duration"
             ),
             "measurements": measurements,

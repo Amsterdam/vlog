@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-
     @time_it('insert_vehicle_categories')
     def insert_vehicle_categories(self):
         with connection.cursor() as cursor:
