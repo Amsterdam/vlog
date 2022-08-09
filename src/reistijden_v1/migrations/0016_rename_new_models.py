@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reistijden_v1', '0016_rename_old_models'),
+        ('reistijden_v1', '0015_rename_old_models'),
     ]
 
     operations = [
