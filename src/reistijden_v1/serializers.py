@@ -11,6 +11,7 @@ from reistijden_v1.models import (
     TrafficFlow,
     TrafficFlowCategoryCount,
     TravelTime,
+    VehicleCategory,
 )
 
 
@@ -46,19 +47,23 @@ class TravelTimeSerializer(serializers.ModelSerializer):
 
 
 class IndividualTravelTimeSerializer(serializers.ModelSerializer):
+    vehicle_category = serializers.CharField(max_length=255, allow_null=True)
+
     class Meta:
         model = IndividualTravelTime
         exclude = ['measurement']
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class TrafficFlowCategoryCountSerializer(serializers.ModelSerializer):
+    vehicle_category = serializers.CharField(max_length=255, allow_null=True)
+
     class Meta:
         model = TrafficFlowCategoryCount
         exclude = ['traffic_flow']
 
 
 class TrafficFlowSerializer(serializers.ModelSerializer):
-    categories = CategorySerializer(many=True)
+    traffic_flow_category_counts = TrafficFlowCategoryCountSerializer(many=True)
 
     class Meta:
         model = TrafficFlow
@@ -111,20 +116,34 @@ class PublicationSerializer(serializers.ModelSerializer):
 
             individual_travel_times = measurement_src.pop('individual_travel_times')
             for individual_travel_time_src in individual_travel_times:
+                (
+                    individual_travel_time_src['vehicle_category'],
+                    _,
+                ) = VehicleCategory.get_or_create(
+                    individual_travel_time_src['vehicle_category']
+                )
                 IndividualTravelTime.objects.create(
                     measurement=measurement, **individual_travel_time_src
                 )
 
             traffic_flows = measurement_src.pop('traffic_flows')
             for traffic_flow_src in traffic_flows:
-                categories = traffic_flow_src.pop('categories')
+                traffic_flow_category_counts = traffic_flow_src.pop(
+                    'traffic_flow_category_counts'
+                )
                 traffic_flow = TrafficFlow.objects.create(
                     measurement=measurement, **traffic_flow_src
                 )
 
-                for category_src in categories:
+                for traffic_flow_category_count_src in traffic_flow_category_counts:
+                    (
+                        traffic_flow_category_count_src['vehicle_category'],
+                        _,
+                    ) = VehicleCategory.get_or_create(
+                        traffic_flow_category_count_src['vehicle_category']
+                    )
                     TrafficFlowCategoryCount.objects.create(
-                        traffic_flow=traffic_flow, **category_src
+                        traffic_flow=traffic_flow, **traffic_flow_category_count_src
                     )
 
         return publication
