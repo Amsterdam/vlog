@@ -509,4 +509,4 @@ class TrafficFlowCategoryCount(models.Model):
     )
 
     # to be removed after data migrations
-    type = models.CharField(max_length=255, null=True)
+    type = models.CharField(max_length=255, null=True, blank=True)
