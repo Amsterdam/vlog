@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-
     @time_it('update_first_publication_timestamp')
     def update_first_publication_timestamp(self):
         with connection.cursor() as cursor:
