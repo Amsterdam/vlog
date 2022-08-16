@@ -81,7 +81,6 @@ class Measurement(models.Model):
     name = models.CharField(max_length=255, null=True)
     type = models.CharField(max_length=255)  # e.g. "section"
     length = models.IntegerField(null=True)
-    created_timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Measurement2(models.Model):
@@ -160,6 +159,7 @@ class MeasurementSite(models.Model):
             " in the json objects does not matter when using a native jsonb field."
         ),
     )
+    first_publication_timestamp = models.DateTimeField(null=True)
 
     @classmethod
     def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
