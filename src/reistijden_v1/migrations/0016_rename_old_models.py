@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reistijden_v1', '0014_alter_fk_references_to_new_measurement_table'),
+        ('reistijden_v1', '0015_alter_fk_references_to_new_measurement_table'),
     ]
 
     operations = [

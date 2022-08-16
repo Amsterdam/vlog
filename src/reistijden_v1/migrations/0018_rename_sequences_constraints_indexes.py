@@ -72,7 +72,7 @@ alter index reistijden_v1_lane_measurement_location_id_373ea3c2 rename to reisti
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('reistijden_v1', '0016_rename_new_models'),
+        ('reistijden_v1', '0017_rename_new_models'),
     ]
 
     operations = [

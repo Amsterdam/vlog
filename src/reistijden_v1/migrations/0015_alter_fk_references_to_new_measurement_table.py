@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('reistijden_v1', '0013_publication_measurement_duration'),
+        ('reistijden_v1', '0014_measurementsite_first_publication_timestamp'),
     ]
 
     operations = [
