@@ -81,6 +81,7 @@ class Measurement(models.Model):
     name = models.CharField(max_length=255, null=True)
     type = models.CharField(max_length=255)  # e.g. "section"
     length = models.IntegerField(null=True)
+    created_timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Measurement2(models.Model):
