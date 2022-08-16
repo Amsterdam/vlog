@@ -175,7 +175,11 @@ class Command(BaseCommand):
         # this measurement site or not. Keeping a local cache like this means
         # we can reduce the amount of work that needs to be done between runs
         # (measurement sites are rarely added)
-        for (measurement_id, publication_id, publication_timestamp), measurement_rows in groupby(
+        for (
+            measurement_id,
+            publication_id,
+            publication_timestamp,
+        ), measurement_rows in groupby(
             cursor.fetchall(),
             key=lambda x: x[:3],
         ):
@@ -208,7 +212,7 @@ class Command(BaseCommand):
                     measurement_site_json=measurement_site_json,
                     defaults={
                         'first_publication_timestamp': publication_timestamp,
-                    }
+                    },
                 )
                 created_measurement_sites += created
                 self.measurement_site_cache[key] = measurement_site
