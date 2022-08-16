@@ -164,7 +164,9 @@ class MeasurementSite(models.Model):
 
     @classmethod
     def get_or_create(
-        cls, measurement_site_json: dict
+        cls,
+        measurement_site_json: dict,
+        publication_timestamp: datetime,
     ) -> Tuple[bool, 'MeasurementSite']:
         """
         Get an existing measurement, or create a new one if it does not exist
@@ -199,6 +201,11 @@ class MeasurementSite(models.Model):
         # measurement_site_json
         defaults = dict(measurement_site_json)
         defaults.pop('measurement_locations')
+
+        # if we will create the measurement site then the first_publication_timestamp
+        # will be set to this publication timestamp (otherwise we leave it intact)
+        # this assumes that the publications are received in the correct order.
+        defaults['first_publication_timestamp'] = publication_timestamp
 
         measurement_site, created = MeasurementSite.objects.get_or_create(
             measurement_site_json=measurement_site_json,

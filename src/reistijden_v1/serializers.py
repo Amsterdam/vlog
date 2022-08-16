@@ -98,7 +98,10 @@ class PublicationSerializer(serializers.ModelSerializer):
         for measurement_src in measurements:
 
             measurement_site_json = measurement_src.pop('measurement_site')
-            measurement_site, _ = MeasurementSite.get_or_create(measurement_site_json)
+            measurement_site, _ = MeasurementSite.get_or_create(
+                measurement_site_json,
+                publication.measurement_start_time,
+            )
 
             measurement = Measurement.objects.create(
                 publication=publication,
