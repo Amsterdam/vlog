@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytest
 from django.test import TestCase
 
@@ -48,14 +50,14 @@ class MeasurementSiteTest(TestCase):
         self.assertEqual(Lane.objects.count(), 0)
         self.assertEqual(Camera.objects.count(), 0)
 
-        MeasurementSite.get_or_create(before)
+        MeasurementSite.get_or_create(before, datetime.now())
 
         measurement_site_count = MeasurementSite.objects.count()
         measurement_location_count = MeasurementLocation.objects.count()
         lane_count = Lane.objects.count()
         camera_count = Camera.objects.count()
 
-        MeasurementSite.get_or_create(after)
+        MeasurementSite.get_or_create(after, datetime.now())
 
         # The counts before and after the second call should not be equal if we
         # expect the second call to create a new measurement site, otherwise we
