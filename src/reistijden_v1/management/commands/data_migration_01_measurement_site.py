@@ -179,8 +179,8 @@ class Command(BaseCommand):
             cursor.fetchall(),
             key=lambda x: x[:3],
         ):
-            # exclude the measurement_id and publication_id from the key
-            key = tuple(x[2:] for x in measurement_rows)
+            # exclude the measurement_id and publication data from the key
+            key = tuple(x[3:] for x in measurement_rows)
 
             # this is an unknown measurement site, but it might already exist it
             # the database...
