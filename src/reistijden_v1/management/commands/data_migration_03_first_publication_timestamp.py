@@ -10,10 +10,9 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     @time_it('update_first_publication_timestamp')
-    def update_first_publication_timestamp(self):
+    def update_first_publication_timestamp(self, batch_size):
         with connection.cursor() as cursor:
-            cursor.execute(
-                """
+            query = """
                 with data as (
                     select id, measurement_start_time as first_publication_timestamp
                     from reistijden_v1_measurementsite, lateral (
@@ -25,17 +24,21 @@ class Command(BaseCommand):
                         limit 1
                     ) as s
                     where first_publication_timestamp is null
-                    limit 100
+                    limit %s
                 )
                 update reistijden_v1_measurementsite
                 set first_publication_timestamp=data.first_publication_timestamp
                 from data
                 where reistijden_v1_measurementsite.id=data.id
             """
-            )
+            cursor.execute(query, (batch_size,))
             return cursor.rowcount
+
+    def add_arguments(self, parser):
+        parser.add_argument('--batch-size', type=int, default=100)
 
     @time_it('handle')
     def handle(self, *args, **options):
-        while self.update_first_publication_timestamp():
+        batch_size = options['batch_size']
+        while self.update_first_publication_timestamp(batch_size):
             pass
