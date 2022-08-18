@@ -1,4 +1,6 @@
 import copy
+from datetime import datetime
+from typing import Tuple
 
 from django.db import models
 
@@ -68,7 +70,7 @@ class Publication(models.Model):
     )
 
 
-class Measurement(models.Model):
+class MeasurementOld(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
 
@@ -83,7 +85,7 @@ class Measurement(models.Model):
     length = models.IntegerField(null=True)
 
 
-class Measurement2(models.Model):
+class Measurement(models.Model):
     """
     A measurement for a specific MeasurementSite, published in a Publication.
 
@@ -162,17 +164,49 @@ class MeasurementSite(models.Model):
     first_publication_timestamp = models.DateTimeField(null=True)
 
     @classmethod
-    def get_or_create(cls, measurement_site_json: dict) -> 'MeasurementSite':
+    def get_or_create(
+        cls,
+        measurement_site_json: dict,
+        publication_timestamp: datetime,
+    ) -> Tuple[bool, 'MeasurementSite']:
+        """
+        Get an existing measurement, or create a new one if it does not exist
+        using the given json as an identifying key.
 
+        :return: Tuple where the first element denotes whether the measurement
+                 site was created or not (True == created, False == retrieved).
+                 The second element is the created or retrieved measurement site.
+        """
         # we will modify measurement_site_json so best to perform a
         # deep copy first so that we don't mutate an object from the caller
         measurement_site_json = copy.deepcopy(measurement_site_json)
+
+        # It is important that lists (locations, lanes, cameras) are sorted
+        # since we will use this json (actually jsonb in postgres) as an
+        # identifying key to match against existing measurement sites. If
+        # lists are not sorted in the same manner, we will end up unnecessarily
+        # creating new measurement sites.
+        measurement_locations = measurement_site_json['measurement_locations']
+        measurement_locations.sort(key=lambda x: x['index'])
+
+        for measurement_location in measurement_locations:
+            lanes = measurement_location['lanes']
+            lanes.sort(key=lambda x: x['specific_lane'])
+
+            for lane in lanes:
+                cameras = lane['cameras']
+                cameras.sort(key=lambda x: tuple(x.values()))
 
         # measurement_locations is not a field, so we need to remove it
         # from the values past to defaults, but we want to keep it in
         # measurement_site_json
         defaults = dict(measurement_site_json)
         defaults.pop('measurement_locations')
+
+        # if we will create the measurement site then the first_publication_timestamp
+        # will be set to this publication timestamp (otherwise we leave it intact)
+        # this assumes that the publications are received in the correct order.
+        defaults['first_publication_timestamp'] = publication_timestamp
 
         measurement_site, created = MeasurementSite.objects.get_or_create(
             measurement_site_json=measurement_site_json,
@@ -184,7 +218,7 @@ class MeasurementSite(models.Model):
         for measurement_location_json in measurement_site_json['measurement_locations']:
 
             lanes = measurement_location_json.pop('lanes')
-            measurement_location, _ = MeasurementLocation2.objects.get_or_create(
+            measurement_location, _ = MeasurementLocation.objects.get_or_create(
                 measurement_site=measurement_site,
                 **measurement_location_json,
             )
@@ -192,7 +226,7 @@ class MeasurementSite(models.Model):
             for lane_json in lanes:
 
                 cameras = lane_json.pop('cameras')
-                lane, _ = Lane2.objects.get_or_create(
+                lane, _ = Lane.objects.get_or_create(
                     measurement_location=measurement_location,
                     **lane_json,
                 )
@@ -203,7 +237,53 @@ class MeasurementSite(models.Model):
                         **camera_json,
                     )
 
-        return measurement_site
+        return measurement_site, created
+
+
+class MeasurementLocationOld(models.Model):
+    """
+    A location that is part of the MeasurementSite.
+    At most one location exists if the measurement site is of type 'location.
+    A maximum of two locations should be present if the measurement site is of type
+    'section' (start and end location).
+    The number of locations is unbounded if the measurement site is of type
+    'trajectory' (start location, end location and all via locations)
+    """
+
+    measurement = models.ForeignKey('MeasurementOld', on_delete=models.CASCADE)
+
+    index = models.IntegerField(
+        null=True,
+        help_text=(
+            "The index attribute indicates the order of measurement location in the "
+            "measurement site. Optional, if the measurement site is of type 'location'"
+        ),
+    )
+
+
+class LaneOld(models.Model):
+    """
+    A road lane at a MeasurementLocation.
+    """
+
+    measurement_location = models.ForeignKey(
+        'MeasurementLocationOld', on_delete=models.CASCADE
+    )
+    specific_lane = models.CharField(
+        max_length=255,
+        help_text=(
+            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
+            "used in the Amsterdam Travel Time system. The actual lane number is "
+            "available at Camera.lane_number with respect to the camera view direction "
+            "at the measurement location."
+        ),
+    )
+    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
+    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
+    status = models.CharField(max_length=255)  # e.g. "on"
+    view_direction = models.IntegerField()  # e.g. 225
 
 
 class MeasurementLocation(models.Model):
@@ -216,7 +296,7 @@ class MeasurementLocation(models.Model):
     'trajectory' (start location, end location and all via locations)
     """
 
-    measurement = models.ForeignKey('Measurement', on_delete=models.CASCADE)
+    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
 
     index = models.IntegerField(
         null=True,
@@ -244,52 +324,6 @@ class Lane(models.Model):
             "at the measurement location."
         ),
     )
-    camera_id = models.CharField(max_length=255)  # Are either UUIDs OR ints in strings
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)  # Decimal(9,6)
-    lane_number = models.IntegerField()  # e.g. 1, 2, 3, 4
-    status = models.CharField(max_length=255)  # e.g. "on"
-    view_direction = models.IntegerField()  # e.g. 225
-
-
-class MeasurementLocation2(models.Model):
-    """
-    A location that is part of the MeasurementSite.
-    At most one location exists if the measurement site is of type 'location.
-    A maximum of two locations should be present if the measurement site is of type
-    'section' (start and end location).
-    The number of locations is unbounded if the measurement site is of type
-    'trajectory' (start location, end location and all via locations)
-    """
-
-    measurement_site = models.ForeignKey('MeasurementSite', on_delete=models.CASCADE)
-
-    index = models.IntegerField(
-        null=True,
-        help_text=(
-            "The index attribute indicates the order of measurement location in the "
-            "measurement site. Optional, if the measurement site is of type 'location'"
-        ),
-    )
-
-
-class Lane2(models.Model):
-    """
-    A road lane at a MeasurementLocation.
-    """
-
-    measurement_location = models.ForeignKey(
-        'MeasurementLocation2', on_delete=models.CASCADE
-    )
-    specific_lane = models.CharField(
-        max_length=255,
-        help_text=(
-            "Indicative name for the lane (lane1, lane2, lane3 … lane9 etc) "
-            "used in the Amsterdam Travel Time system. The actual lane number is "
-            "available at Camera.lane_number with respect to the camera view direction "
-            "at the measurement location."
-        ),
-    )
 
 
 class Camera(models.Model):
@@ -306,7 +340,7 @@ class Camera(models.Model):
     )
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-    lane = models.ForeignKey('Lane2', on_delete=models.CASCADE)
+    lane = models.ForeignKey('Lane', on_delete=models.CASCADE)
     lane_number = models.IntegerField(
         help_text=(
             "Lanenumber, calculated from the 'middle' of the road. "

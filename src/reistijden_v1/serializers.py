@@ -1,10 +1,12 @@
 from rest_framework import serializers
 
 from reistijden_v1.models import (
+    Camera,
     IndividualTravelTime,
     Lane,
     Measurement,
     MeasurementLocation,
+    MeasurementSite,
     Publication,
     TrafficFlow,
     TrafficFlowCategoryCount,
@@ -12,7 +14,18 @@ from reistijden_v1.models import (
 )
 
 
+class CameraSerializer(serializers.ModelSerializer):
+    longitude = serializers.CharField()
+    latitude = serializers.CharField()
+
+    class Meta:
+        model = Camera
+        exclude = ['lane']
+
+
 class LaneSerializer(serializers.ModelSerializer):
+    cameras = CameraSerializer(many=True)
+
     class Meta:
         model = Lane
         exclude = ['measurement_location']
@@ -23,7 +36,7 @@ class MeasurementLocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MeasurementLocation
-        exclude = ['measurement']
+        exclude = ['measurement_site']
 
 
 class TravelTimeSerializer(serializers.ModelSerializer):
@@ -52,8 +65,16 @@ class TrafficFlowSerializer(serializers.ModelSerializer):
         exclude = ['measurement']
 
 
+class MeasurementSiteSerializer(serializers.ModelSerializer):
+    measurement_locations = MeasurementLocationSerializer(many=True)
+
+    class Meta:
+        model = MeasurementSite
+        exclude = ['measurement_site_json']
+
+
 class MeasurementSerializer(serializers.ModelSerializer):
-    locations = MeasurementLocationSerializer(many=True)
+    measurement_site = MeasurementSiteSerializer()
     travel_times = TravelTimeSerializer(many=True)
     individual_travel_times = IndividualTravelTimeSerializer(many=True)
     traffic_flows = TrafficFlowSerializer(many=True)
@@ -75,34 +96,29 @@ class PublicationSerializer(serializers.ModelSerializer):
         publication = Publication.objects.create(**validated_data)
 
         for measurement_src in measurements:
-            locations = measurement_src.pop('locations')
-            travel_times = measurement_src.pop('travel_times')
-            individual_travel_times = measurement_src.pop('individual_travel_times')
-            traffic_flows = measurement_src.pop('traffic_flows')
 
-            measurement = Measurement.objects.create(
-                publication=publication, **measurement_src
+            measurement_site_json = measurement_src.pop('measurement_site')
+            measurement_site, _ = MeasurementSite.get_or_create(
+                measurement_site_json,
+                publication.measurement_start_time,
             )
 
-            for location_src in locations:
-                lanes = location_src.pop('lanes')
-                measurement_location = MeasurementLocation.objects.create(
-                    measurement=measurement, **location_src
-                )
+            measurement = Measurement.objects.create(
+                publication=publication,
+                measurement_site=measurement_site,
+            )
 
-                for lane_src in lanes:
-                    Lane.objects.create(
-                        measurement_location=measurement_location, **lane_src
-                    )
-
+            travel_times = measurement_src.pop('travel_times')
             for travel_time_src in travel_times:
                 TravelTime.objects.create(measurement=measurement, **travel_time_src)
 
+            individual_travel_times = measurement_src.pop('individual_travel_times')
             for individual_travel_time_src in individual_travel_times:
                 IndividualTravelTime.objects.create(
                     measurement=measurement, **individual_travel_time_src
                 )
 
+            traffic_flows = measurement_src.pop('traffic_flows')
             for traffic_flow_src in traffic_flows:
                 categories = traffic_flow_src.pop('categories')
                 traffic_flow = TrafficFlow.objects.create(

@@ -225,7 +225,7 @@ class Command(BaseCommand):
         # insert all measurements with the appropriate measurement site id
         if values:
             cursor.execute(
-                "insert into reistijden_v1_measurement2 "
+                "insert into reistijden_v1_measurement "
                 "(id, publication_id, measurement_site_id) values " + ",".join(values)
             )
 
@@ -249,7 +249,7 @@ class Command(BaseCommand):
         with connection.cursor() as cursor:
 
             with time_it('get first unprocessed id'):
-                cursor.execute("select max(id) + 1 from reistijden_v1_measurement2")
+                cursor.execute("select max(id) + 1 from reistijden_v1_measurement")
                 next_id = cursor.fetchone()[0] or 1
 
             with profile_it() as profiler:
