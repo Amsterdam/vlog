@@ -139,6 +139,7 @@ class Command(BaseCommand):
         SELECT_DATA_QUERY = """
             select      measurement.id as measurement_id,
                         measurement.publication_id as publication_id,
+                        publication.measurement_start_time as publication_timestamp,
                         measurement.reference_id,
                         measurement.version,
                         measurement.name,
@@ -153,6 +154,7 @@ class Command(BaseCommand):
                         lane.status,
                         lane.view_direction
             from        reistijden_v1_measurement as measurement
+            join        reistijden_v1_publication as publication on measurement.publication_id=publication.id
             left join   reistijden_v1_measurementlocation location on measurement.id = location.measurement_id
             left join   reistijden_v1_lane lane on location.id = lane.measurement_location_id
             where       measurement.id between %(next_id)s and (%(next_id)s + %(batch_size)s)
@@ -173,12 +175,16 @@ class Command(BaseCommand):
         # this measurement site or not. Keeping a local cache like this means
         # we can reduce the amount of work that needs to be done between runs
         # (measurement sites are rarely added)
-        for (measurement_id, publication_id), measurement_rows in groupby(
+        for (
+            measurement_id,
+            publication_id,
+            publication_timestamp,
+        ), measurement_rows in groupby(
             cursor.fetchall(),
-            key=lambda x: x[:2],
+            key=lambda x: x[:3],
         ):
-            # exclude the measurement_id and publication_id from the key
-            key = tuple(x[2:] for x in measurement_rows)
+            # exclude the measurement_id and publication data from the key
+            key = tuple(x[3:] for x in measurement_rows)
 
             # this is an unknown measurement site, but it might already exist it
             # the database...
@@ -204,6 +210,9 @@ class Command(BaseCommand):
                     type=measurement_site_json['type'],
                     length=measurement_site_json['length'],
                     measurement_site_json=measurement_site_json,
+                    defaults={
+                        'first_publication_timestamp': publication_timestamp,
+                    },
                 )
                 created_measurement_sites += created
                 self.measurement_site_cache[key] = measurement_site
