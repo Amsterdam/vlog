@@ -16,9 +16,9 @@ def SLACK_MESSAGE = [
 pipeline {
     agent any
 
-    options {
-        timeout(time: 1, unit: 'HOURS')
-    }
+//     options {
+//         timeout(time: 1, unit: 'HOURS')
+//     }
 
     environment {
         SHORT_UUID = sh( script: "uuidgen | cut -d '-' -f1", returnStdout: true).trim()
