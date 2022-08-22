@@ -236,6 +236,11 @@ class Command(BaseCommand):
             cursor.execute(
                 f"SELECT setval('reistijden_v1_measurement2_id_seq', {measurement_id})"
             )
+        else:
+            cursor.execute(
+                f"SELECT min(id) - 1 FROM reistijden_v1_measurement WHERE id > {next_id}"
+            )
+            measurement_id = cursor.fetchone()[0] or -1
 
         return measurement_id + 1
 
@@ -248,25 +253,19 @@ class Command(BaseCommand):
 
         with connection.cursor() as cursor:
 
-            @time_it('max_measurement_id')
-            def max_measurement_id(*, version=''):
-                cursor.execute(
-                    f"select max(id) from reistijden_v1_measurement{version}"
-                )
-                return cursor.fetchone()[0] or 0
-
-            next_id = max_measurement_id(2)
+            with time_it('get first unprocessed id'):
+                cursor.execute("select max(id) + 1 from reistijden_v1_measurement2")
+                next_id = cursor.fetchone()[0] or 1
 
             with profile_it() as profiler:
                 for _ in range(options['num_batches']):
-
-                    next_id = self.process_batch(
-                        cursor,
-                        next_id,
-                        options['batch_size'],
-                        profiler,
-                    )
-
-                    # no more batches to process
-                    if max_measurement_id(version=2) == max_measurement_id():
+                    if not (
+                        next_id := self.process_batch(
+                            cursor,
+                            next_id,
+                            options['batch_size'],
+                            profiler,
+                        )
+                    ):
+                        # no more batches to process
                         break
