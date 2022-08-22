@@ -34,5 +34,6 @@ class Command(BaseCommand):
                     ),
                 },
                 indent=2,
+                default=str,
             )
         )
