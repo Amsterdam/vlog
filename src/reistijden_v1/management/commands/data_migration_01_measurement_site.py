@@ -248,19 +248,25 @@ class Command(BaseCommand):
 
         with connection.cursor() as cursor:
 
-            with time_it('get first unprocessed id'):
-                cursor.execute("select max(id) + 1 from reistijden_v1_measurement2")
-                next_id = cursor.fetchone()[0] or 1
+            @time_it('max_measurement_id')
+            def max_measurement_id(*, version=''):
+                cursor.execute(
+                    f"select max(id) from reistijden_v1_measurement{version}"
+                )
+                return cursor.fetchone()[0] or 0
+
+            next_id = max_measurement_id(2)
 
             with profile_it() as profiler:
                 for _ in range(options['num_batches']):
-                    if not (
-                        next_id := self.process_batch(
-                            cursor,
-                            next_id,
-                            options['batch_size'],
-                            profiler,
-                        )
-                    ):
-                        # no more batches to process
+
+                    next_id = self.process_batch(
+                        cursor,
+                        next_id,
+                        options['batch_size'],
+                        profiler,
+                    )
+
+                    # no more batches to process
+                    if max_measurement_id(version=2) == max_measurement_id():
                         break
