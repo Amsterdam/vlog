@@ -5,7 +5,7 @@ from django.core.management import BaseCommand
 from django.db import connection
 from ingress.models import FailedMessage, Message
 
-from reistijden_v1.models import MeasurementSite, Publication
+from reistijden_v1.models import MeasurementSite, Publication, Measurement, Measurement2
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +24,14 @@ class Command(BaseCommand):
                     'failed_message_count': FailedMessage.objects.count(),
                     'measurement_site_count': MeasurementSite.objects.count(),
                     'last_publication_timestamp': publication_timestamp,
+                    'measurements': (
+                        Measurement.objects.earliest('id').id,
+                        Measurement.objects.latest('id').id,
+                    ),
+                    'measurement2': (
+                        Measurement2.objects.earliest('id').id,
+                        Measurement2.objects.latest('id').id,
+                    ),
                 },
                 indent=2,
             )
