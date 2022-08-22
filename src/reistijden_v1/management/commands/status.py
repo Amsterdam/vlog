@@ -35,16 +35,18 @@ class Command(BaseCommand):
                         last_measurement2.id,
                     ),
                     'measurement2_next_batch': (
-                        Measurement.objects.filter(id__range=
-                            (
+                        Measurement.objects.filter(
+                            id__range=(
                                 last_measurement2.id + 1,
                                 last_measurement2.id + 10_001,
                             )
                         ).count()
                     ),
                     'first_measurement_after_last_measurement2': (
-                        Measurement.objects.filter(id__gt=last_measurement2.id).earliest('id').id
-                    )
+                        Measurement.objects.filter(id__gt=last_measurement2.id)
+                        .earliest('id')
+                        .id
+                    ),
                 },
                 indent=2,
                 default=str,
