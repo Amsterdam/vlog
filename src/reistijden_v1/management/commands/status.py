@@ -5,7 +5,7 @@ from django.core.management import BaseCommand
 from django.db import connection
 from ingress.models import FailedMessage, Message
 
-from reistijden_v1.models import MeasurementSite, Publication, Measurement, Measurement2
+from reistijden_v1.models import Measurement, Measurement2, MeasurementSite, Publication
 
 logger = logging.getLogger(__name__)
 
