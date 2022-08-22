@@ -17,6 +17,8 @@ class Command(BaseCommand):
         if publication := Publication.objects.last():
             publication_timestamp = publication.measurement_start_time
 
+        last_measurement2 = Measurement2.objects.latest('id')
+
         print(
             json.dumps(
                 {
@@ -30,8 +32,19 @@ class Command(BaseCommand):
                     ),
                     'measurement2': (
                         Measurement2.objects.earliest('id').id,
-                        Measurement2.objects.latest('id').id,
+                        last_measurement2.id,
                     ),
+                    'measurement2_next_batch': (
+                        Measurement.objects.filter(id__range=
+                            (
+                                last_measurement2.id + 1,
+                                last_measurement2.id + 10_001,
+                            )
+                        ).count()
+                    ),
+                    'first_measurement_after_last_measurement2': (
+                        Measurement.objects.filter(id__gt=last_measurement2.id).earliest('id').id
+                    )
                 },
                 indent=2,
                 default=str,
