@@ -7,10 +7,10 @@ from ingress.models import FailedMessage, Message
 
 from reistijden_v1.models import (
     Camera,
-    Lane2,
+    Lane,
     Measurement,
-    Measurement2,
-    MeasurementLocation2,
+    MeasurementLocation,
+    MeasurementOld,
     MeasurementSite,
     Publication,
 )
@@ -30,8 +30,8 @@ class Command(BaseCommand):
 
         if options['with_measurement_counts']:
             measurement_counts = {
+                'measurement_old_count': MeasurementOld.objects.count(),
                 'measurement_count': Measurement.objects.count(),
-                'measurement2_count': Measurement2.objects.count(),
             }
         else:
             measurement_counts = {}
@@ -42,17 +42,17 @@ class Command(BaseCommand):
                     'message_count': Message.objects.count(),
                     'failed_message_count': FailedMessage.objects.count(),
                     'measurement_site_count': MeasurementSite.objects.count(),
-                    'measurement_location_count': MeasurementLocation2.objects.count(),
-                    'lane_count': Lane2.objects.count(),
+                    'measurement_location_count': MeasurementLocation.objects.count(),
+                    'lane_count': Lane.objects.count(),
                     'camera_count': Camera.objects.count(),
                     'last_publication_timestamp': publication_timestamp,
+                    'measurements_old': (
+                        MeasurementOld.objects.earliest('id').id,
+                        MeasurementOld.objects.latest('id').id,
+                    ),
                     'measurements': (
                         Measurement.objects.earliest('id').id,
                         Measurement.objects.latest('id').id,
-                    ),
-                    'measurement2': (
-                        Measurement2.objects.earliest('id').id,
-                        Measurement2.objects.latest('id').id,
                     ),
                     **measurement_counts,
                 },
