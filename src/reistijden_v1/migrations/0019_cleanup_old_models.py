@@ -10,14 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='measurementlocationold',
-            name='measurement',
-        ),
-        migrations.RemoveField(
-            model_name='measurementold',
-            name='publication',
-        ),
         migrations.DeleteModel(
             name='LaneOld',
         ),
