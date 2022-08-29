@@ -132,6 +132,11 @@ class MeasurementSite(models.Model):
             "measurement site. Applicable only for sections and trajectories"
         ),
     )
+
+    # here we use the json representation as a unique key to identity measurement
+    # sites, it would be possible to use a hash of this json, however since the
+    # expectation is that this table will not be large, and storing the json is
+    # useful for debugging purposes.
     measurement_site_json = models.JSONField(
         null=False,
         unique=True,
