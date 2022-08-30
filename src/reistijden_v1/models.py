@@ -40,8 +40,7 @@ class Publication(models.Model):
             "The date time the latest version (refer attribute 'version') "
             "for this publication was published in UTC format: ISO 8601 "
             "[https://en.wikipedia.org/wiki/ISO_8601]"
-        ),
-        db_index=True,
+        )
     )
 
     # The following defines the period against which the statistics were reported.
@@ -53,7 +52,8 @@ class Publication(models.Model):
         help_text=(
             "The time recorded here is the starting time of the supply period "
             "in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]"
-        )
+        ),
+        db_index=True,
     )
     measurement_end_time = models.DateTimeField(
         null=True,
