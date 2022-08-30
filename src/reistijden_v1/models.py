@@ -52,7 +52,8 @@ class Publication(models.Model):
         help_text=(
             "The time recorded here is the starting time of the supply period "
             "in UTC format: ISO 8601 [https://en.wikipedia.org/wiki/ISO_8601]"
-        )
+        ),
+        db_index=True,
     )
     measurement_end_time = models.DateTimeField(
         null=True,
