@@ -10,7 +10,6 @@ from reistijden_v1.models import (
     Lane,
     Measurement,
     MeasurementLocation,
-    MeasurementOld,
     MeasurementSite,
     Publication,
 )
@@ -30,7 +29,6 @@ class Command(BaseCommand):
 
         if options['with_measurement_counts']:
             measurement_counts = {
-                'measurement_old_count': MeasurementOld.objects.count(),
                 'measurement_count': Measurement.objects.count(),
             }
         else:
@@ -46,10 +44,6 @@ class Command(BaseCommand):
                     'lane_count': Lane.objects.count(),
                     'camera_count': Camera.objects.count(),
                     'last_publication_timestamp': publication_timestamp,
-                    'measurements_old': (
-                        MeasurementOld.objects.earliest('id').id,
-                        MeasurementOld.objects.latest('id').id,
-                    ),
                     'measurements': (
                         Measurement.objects.earliest('id').id,
                         Measurement.objects.latest('id').id,
