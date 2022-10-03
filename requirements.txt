@@ -6,7 +6,7 @@
 #
 asgiref==3.5.2
     # via django
-certifi==2022.6.15.1
+certifi==2022.9.24
     # via sentry-sdk
 datapunt-data-ingress==2.3.0
     # via -r requirements.in
@@ -25,7 +25,7 @@ django-prometheus==2.2.0
     # via -r requirements.in
 django-sentry-400-middleware==0.3.0
     # via -r requirements.in
-djangorestframework==3.13.1
+djangorestframework==3.14.0
     # via
     #   datapunt-data-ingress
     #   djangorestframework-csv
@@ -49,19 +49,19 @@ pyhumps==3.7.3
     # via -r requirements.in
 python-dateutil==2.8.2
     # via -r requirements.in
-pytz==2022.2.1
+pytz==2022.4
     # via
     #   django
     #   djangorestframework
 raven==6.10.0
     # via django-sentry-400-middleware
-sentry-sdk==1.9.8
+sentry-sdk==1.9.9
     # via -r requirements.in
 six==1.16.0
     # via
     #   djangorestframework-csv
     #   python-dateutil
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via django
 unicodecsv==0.14.1
     # via djangorestframework-csv
