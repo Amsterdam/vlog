@@ -61,7 +61,9 @@ class ReistijdenParser:
         return {
             "measurement_site": measurement_site,
             "travel_times": self.get_travel_times_from_measurement(src_d),
-            "individual_travel_times": self.get_individual_travel_times_from_measurement(src_d),
+            "individual_travel_times": self.get_individual_travel_times_from_measurement(
+                src_d
+            ),
             "traffic_flows": self.get_traffic_flows_from_measurement(src_d),
         }
 
@@ -183,18 +185,26 @@ class ReistijdenParser:
         individual_travel_times = []
         if "individual_travel_time_data" in src_d:
             if type(src_d["individual_travel_time_data"]) is list:
-                for individual_travel_time in src_d["individual_travel_time_data"] :
+                for individual_travel_time in src_d["individual_travel_time_data"]:
                     if individual_travel_time['detection_start_time'].exists():
-                        individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
+                        individual_travel_time[
+                            'detection_start_time'
+                        ] = individual_travel_time.pop('start_detection_time')
                     if individual_travel_time['detection_end_time'].exists():
-                        individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
+                        individual_travel_time[
+                            'detection_end_time'
+                        ] = individual_travel_time.pop('end_detection_time')
                     individual_travel_times.append(individual_travel_time)
             else:
                 individual_travel_time = src_d["individual_travel_time_data"]
                 if individual_travel_time['detection_start_time'].exists():
-                    individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
+                    individual_travel_time[
+                        'detection_start_time'
+                    ] = individual_travel_time.pop('start_detection_time')
                 if individual_travel_time['detection_end_time'].exists():
-                    individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
+                    individual_travel_time[
+                        'detection_end_time'
+                    ] = individual_travel_time.pop('end_detection_time')
                 individual_travel_times = [individual_travel_time]
         return individual_travel_times
 
