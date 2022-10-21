@@ -176,18 +176,25 @@ class ReistijdenParser:
                 travel_times = [self.travel_time_src_to_dict(src_d["travel_time_data"])]
         return travel_times
 
+    ## In Xml for Individual Travel Time the timestamp label is (Camelized) detetection_start/end_time.
+    ## It has been renamed to be more consistent with the timestamp name in publication, used in the model.
+    ## This was decided together with end-user Leon Deckers
     def get_individual_travel_times_from_measurement(self, src_d):
         individual_travel_times = []
         if "individual_travel_time_data" in src_d:
             if type(src_d["individual_travel_time_data"]) is list:
                 for individual_travel_time in src_d["individual_travel_time_data"] :
-                    #individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
-                    #individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
+                    if individual_travel_time['detection_start_time'].exists():
+                        individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
+                    if individual_travel_time['detection_end_time'].exists():
+                        individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
                     individual_travel_times.append(individual_travel_time)
             else:
                 individual_travel_time = src_d["individual_travel_time_data"]
-                #individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
-                #individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
+                if individual_travel_time['detection_start_time'].exists():
+                    individual_travel_time['detection_start_time'] = individual_travel_time.pop('start_detection_time')
+                if individual_travel_time['detection_end_time'].exists():
+                    individual_travel_time['detection_end_time'] = individual_travel_time.pop('end_detection_time')
                 individual_travel_times = [individual_travel_time]
         return individual_travel_times
 
