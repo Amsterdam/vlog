@@ -183,29 +183,19 @@ class ReistijdenParser:
     ## This was decided together with end-user Leon Deckers
     def get_individual_travel_times_from_measurement(self, src_d):
         individual_travel_times = []
+        if not (isinstance(individual_travel_times, list)): 
+            individual_travel_times = [individual_travel_times]
         if "individual_travel_time_data" in src_d:
-            if type(src_d["individual_travel_time_data"]) is list:
-                for individual_travel_time in src_d["individual_travel_time_data"]:
-                    if individual_travel_time['detection_start_time'].exists():
-                        individual_travel_time[
-                            'detection_start_time'
-                        ] = individual_travel_time.pop('start_detection_time')
-                    if individual_travel_time['detection_end_time'].exists():
-                        individual_travel_time[
-                            'detection_end_time'
-                        ] = individual_travel_time.pop('end_detection_time')
-                    individual_travel_times.append(individual_travel_time)
-            else:
-                individual_travel_time = src_d["individual_travel_time_data"]
-                if individual_travel_time['detection_start_time'].exists():
+            for individual_travel_time in src_d["individual_travel_time_data"]:
+                if individual_travel_time.get('detection_start_time'):
                     individual_travel_time[
                         'detection_start_time'
                     ] = individual_travel_time.pop('start_detection_time')
-                if individual_travel_time['detection_end_time'].exists():
+                if individual_travel_time.get('detection_end_time'):
                     individual_travel_time[
                         'detection_end_time'
                     ] = individual_travel_time.pop('end_detection_time')
-                individual_travel_times = [individual_travel_time]
+                individual_travel_times.append(individual_travel_time)
         return individual_travel_times
 
     def get_individual_travel_time(self, src_d):
