@@ -15,7 +15,7 @@ from reistijden_v1.models import (
     TrafficFlowCategoryCount,
     TravelTime,
 )
-from tests.api.reistijden_v1.test_xml import (
+from tests.reistijden_v1.test_xml import (
     TEST_POST_EMPTY,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME,
     TEST_POST_INDIVIDUAL_TRAVEL_TIME_SINGLE_MEASUREMENT,
