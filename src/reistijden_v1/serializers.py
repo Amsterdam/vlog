@@ -46,6 +46,13 @@ class TravelTimeSerializer(serializers.ModelSerializer):
 
 
 class IndividualTravelTimeSerializer(serializers.ModelSerializer):
+    """
+    Overwrite the detection_start/end_time to be required in the validator
+    """
+
+    detection_start_time = serializers.DateTimeField(required=True)
+    detection_end_time = serializers.DateTimeField(required=True)
+
     class Meta:
         model = IndividualTravelTime
         exclude = ['measurement']
@@ -74,10 +81,10 @@ class MeasurementSiteSerializer(serializers.ModelSerializer):
 
 
 class MeasurementSerializer(serializers.ModelSerializer):
-    measurement_site = MeasurementSiteSerializer()
-    travel_times = TravelTimeSerializer(many=True)
-    individual_travel_times = IndividualTravelTimeSerializer(many=True)
-    traffic_flows = TrafficFlowSerializer(many=True)
+    measurement_site = MeasurementSiteSerializer(required=True)
+    travel_times = TravelTimeSerializer(many=True, required=True)
+    individual_travel_times = IndividualTravelTimeSerializer(many=True, required=True)
+    traffic_flows = TrafficFlowSerializer(many=True, required=True)
 
     class Meta:
         model = Measurement

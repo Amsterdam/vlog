@@ -17,7 +17,6 @@ class ReistijdenParser:
     def restructure_data(self):
         data_dict = humps.decamelize(xmltodict.parse(self.xml_str.strip()))
         publication_src = data_dict["amsterdam_travel_times"]["payload_publication"]
-
         measurements = []
         if "site_measurements" in publication_src:
             if type(publication_src["site_measurements"]) is list:
@@ -179,21 +178,30 @@ class ReistijdenParser:
                 travel_times = [self.travel_time_src_to_dict(src_d["travel_time_data"])]
         return travel_times
 
+    ## In Xml for Individual Travel Time the timestamp label is (Camelized) detetection_start/end_time.
+    ## It has been renamed to be more consistent with the timestamp name in publication, used in the model.
+    ## This was decided together with end-user Leon Deckers
     def get_individual_travel_times_from_measurement(self, src_d):
-        individual_travel_times = []
-        if "individual_travel_time_data" in src_d:
-            if type(src_d["individual_travel_time_data"]) is list:
-                individual_travel_times = [
-                    d for d in src_d["individual_travel_time_data"]
-                ]
-            else:
-                individual_travel_times = [src_d["individual_travel_time_data"]]
+
+        individual_travel_times = src_d.get("individual_travel_time_data", [])
+        if not (isinstance(individual_travel_times, list)):
+            individual_travel_times = [individual_travel_times]
+
+        for individual_travel_time in individual_travel_times:
+            self.convert_detection_key(individual_travel_time)
+
         return individual_travel_times
 
-    def get_individual_travel_time(self, src_d):
-        src_d['detection_start_time'] = src_d.pop('start_detection_time', None)
-        src_d['detection_end_time'] = src_d.pop('end_detection_time', None)
-        return src_d
+    def convert_detection_key(self, value):
+        """
+        Convert the names from the detection start/end times to the correct key values
+        detection_start_time -> start_detection_time
+        detection_end_time -> end_detection_time
+        """
+        value['detection_start_time'] = value.pop('start_detection_time', None)
+        value['detection_end_time'] = value.pop('end_detection_time', None)
+
+        return value
 
     def get_traffic_flows_from_measurement(self, src_d):
         traffic_flows = []
