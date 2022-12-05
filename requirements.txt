@@ -55,7 +55,7 @@ pytz==2022.6
     #   djangorestframework
 raven==6.10.0
     # via django-sentry-400-middleware
-sentry-sdk==1.10.1
+sentry-sdk==1.11.1
     # via -r requirements.in
 six==1.16.0
     # via
@@ -65,7 +65,7 @@ sqlparse==0.4.3
     # via django
 unicodecsv==0.14.1
     # via djangorestframework-csv
-urllib3==1.26.12
+urllib3==1.26.13
     # via sentry-sdk
 xmltodict==0.13.0
     # via -r requirements.in
