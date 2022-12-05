@@ -17,7 +17,7 @@ asgiref==3.5.2
     # via
     #   -r ./requirements.txt
     #   django
-asttokens==2.1.0
+asttokens==2.2.0
     # via stack-data
 attrs==22.1.0
     # via
@@ -47,7 +47,7 @@ coverage[toml]==6.5.0
     # via pytest-cov
 datapunt-data-ingress==2.3.0
     # via -r ./requirements.txt
-debugpy==1.6.3
+debugpy==1.6.4
     # via ipykernel
 decorator==5.1.1
     # via
@@ -96,7 +96,7 @@ drf-extensions==0.7.1
     #   drf-amsterdam
 entrypoints==0.4
     # via jupyter-client
-exceptiongroup==1.0.2
+exceptiongroup==1.0.4
     # via pytest
 executing==1.2.0
     # via stack-data
@@ -116,7 +116,7 @@ ipykernel==6.17.1
     #   nbclassic
     #   notebook
     #   qtconsole
-ipython==8.6.0
+ipython==8.7.0
     # via
     #   -r requirements_dev.in
     #   ipdb
@@ -132,7 +132,7 @@ ipywidgets==8.0.2
     # via jupyter
 isort==5.10.1
     # via -r requirements_dev.in
-jedi==0.18.1
+jedi==0.18.2
     # via
     #   -r requirements_dev.in
     #   ipython
@@ -142,11 +142,11 @@ jinja2==3.1.2
     #   nbclassic
     #   nbconvert
     #   notebook
-jsonschema==4.17.0
+jsonschema==4.17.3
     # via nbformat
 jupyter==1.0.0
     # via -r requirements_dev.in
-jupyter-client==7.4.5
+jupyter-client==7.4.7
     # via
     #   ipykernel
     #   jupyter-console
@@ -157,16 +157,17 @@ jupyter-client==7.4.5
     #   qtconsole
 jupyter-console==6.4.4
     # via jupyter
-jupyter-core==5.0.0
+jupyter-core==5.1.0
     # via
     #   jupyter-client
     #   jupyter-server
     #   nbclassic
+    #   nbclient
     #   nbconvert
     #   nbformat
     #   notebook
     #   qtconsole
-jupyter-server==1.23.1
+jupyter-server==1.23.3
     # via
     #   nbclassic
     #   notebook-shim
@@ -189,9 +190,9 @@ mypy-extensions==0.4.3
     # via black
 nbclassic==0.4.8
     # via notebook
-nbclient==0.7.0
+nbclient==0.7.2
     # via nbconvert
-nbconvert==7.2.4
+nbconvert==7.2.5
     # via
     #   jupyter
     #   jupyter-server
@@ -209,7 +210,6 @@ nest-asyncio==1.5.6
     #   ipykernel
     #   jupyter-client
     #   nbclassic
-    #   nbclient
     #   notebook
 notebook==6.5.2
     # via jupyter
@@ -235,7 +235,7 @@ pexpect==4.8.0
     # via ipython
 pickleshare==0.7.5
     # via ipython
-pip-tools==6.10.0
+pip-tools==6.11.0
     # via -r requirements_dev.in
 platformdirs==2.5.4
     # via
@@ -250,7 +250,7 @@ prometheus-client==0.15.0
     #   jupyter-server
     #   nbclassic
     #   notebook
-prompt-toolkit==3.0.32
+prompt-toolkit==3.0.33
     # via
     #   ipython
     #   jupyter-console
@@ -319,7 +319,7 @@ send2trash==1.8.0
     #   jupyter-server
     #   nbclassic
     #   notebook
-sentry-sdk==1.10.1
+sentry-sdk==1.11.1
     # via -r ./requirements.txt
 six==1.16.0
     # via
@@ -336,7 +336,7 @@ sqlparse==0.4.3
     # via
     #   -r ./requirements.txt
     #   django
-stack-data==0.6.1
+stack-data==0.6.2
     # via ipython
 terminado==0.17.0
     # via
@@ -362,7 +362,7 @@ tornado==6.2
     #   nbclassic
     #   notebook
     #   terminado
-traitlets==5.5.0
+traitlets==5.6.0
     # via
     #   ipykernel
     #   ipython
@@ -381,7 +381,7 @@ unicodecsv==0.14.1
     # via
     #   -r ./requirements.txt
     #   djangorestframework-csv
-urllib3==1.26.12
+urllib3==1.26.13
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
