@@ -33,7 +33,7 @@ bleach==5.0.1
     # via nbconvert
 build==0.9.0
     # via pip-tools
-certifi==2022.9.24
+certifi==2022.12.7
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
@@ -96,8 +96,6 @@ drf-extensions==0.7.1
     #   drf-amsterdam
 entrypoints==0.4
     # via jupyter-client
-exceptiongroup==1.0.4
-    # via pytest
 executing==1.2.0
     # via stack-data
 fastjsonschema==2.16.2
@@ -347,13 +345,6 @@ tinycss2==1.2.1
     # via nbconvert
 toml==0.10.2
     # via ipdb
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   coverage
-    #   pep517
-    #   pytest
 tornado==6.2
     # via
     #   ipykernel
