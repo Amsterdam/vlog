@@ -96,8 +96,6 @@ drf-extensions==0.7.1
     #   drf-amsterdam
 entrypoints==0.4
     # via jupyter-client
-exceptiongroup==1.0.4
-    # via pytest
 executing==1.2.0
     # via stack-data
 fastjsonschema==2.16.2
@@ -116,7 +114,7 @@ ipykernel==6.17.1
     #   nbclassic
     #   notebook
     #   qtconsole
-ipython==8.7.0
+ipython==8.10.0
     # via
     #   -r requirements_dev.in
     #   ipdb
@@ -347,13 +345,6 @@ tinycss2==1.2.1
     # via nbconvert
 toml==0.10.2
     # via ipdb
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   coverage
-    #   pep517
-    #   pytest
 tornado==6.2
     # via
     #   ipykernel
