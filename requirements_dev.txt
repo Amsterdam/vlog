@@ -96,8 +96,6 @@ drf-extensions==0.7.1
     #   drf-amsterdam
 entrypoints==0.4
     # via jupyter-client
-exceptiongroup==1.0.4
-    # via pytest
 executing==1.2.0
     # via stack-data
 fastjsonschema==2.16.2
@@ -347,13 +345,6 @@ tinycss2==1.2.1
     # via nbconvert
 toml==0.10.2
     # via ipdb
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   coverage
-    #   pep517
-    #   pytest
 tornado==6.2
     # via
     #   ipykernel
@@ -393,7 +384,7 @@ webencodings==0.5.1
     #   tinycss2
 websocket-client==1.4.2
     # via jupyter-server
-werkzeug==2.2.2
+werkzeug==2.2.3
     # via -r requirements_dev.in
 wheel==0.38.4
     # via pip-tools
