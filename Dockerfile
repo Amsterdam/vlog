@@ -1,4 +1,4 @@
-FROM amsterdam/python:3.8-buster as app
+FROM python:3.10-buster as app
 MAINTAINER datapunt@amsterdam.nl
 
 WORKDIR /app/install
@@ -26,6 +26,7 @@ WORKDIR /app/install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
 
+RUN adduser --system datapunt
 WORKDIR /app/src
 USER datapunt
 
