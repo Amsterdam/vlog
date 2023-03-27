@@ -1,9 +1,12 @@
-FROM amsterdam/python:3.8-buster as app
+FROM python:3.10-buster as app
 MAINTAINER datapunt@amsterdam.nl
 
 WORKDIR /app/install
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN apt update && apt install  -y gdal-bin
+RUN adduser --system datapunt
+
 
 COPY deploy /app/deploy
 

@@ -8,7 +8,6 @@ from reistijden_v1.models import Camera, Lane, MeasurementLocation, MeasurementS
 
 @pytest.mark.django_db
 class MeasurementSiteTest(TestCase):
-
     BASE_MEASUREMENT_SITE = {
         'name': 'foobar',
         'type': 'trajectory',

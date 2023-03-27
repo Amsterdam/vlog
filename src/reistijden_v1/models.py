@@ -207,7 +207,6 @@ class MeasurementSite(models.Model):
         # If we created a new measurement site, then the underlying entities
         # (locations, lanes and cameras) also need to be created.
         for measurement_location_json in measurement_site_json['measurement_locations']:
-
             lanes = measurement_location_json.pop('lanes')
             measurement_location, _ = MeasurementLocation.objects.get_or_create(
                 measurement_site=measurement_site,
@@ -215,7 +214,6 @@ class MeasurementSite(models.Model):
             )
 
             for lane_json in lanes:
-
                 cameras = lane_json.pop('cameras')
                 lane, _ = Lane.objects.get_or_create(
                     measurement_location=measurement_location,
