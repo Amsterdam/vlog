@@ -4,6 +4,7 @@ MAINTAINER datapunt@amsterdam.nl
 WORKDIR /app/install
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+RUN  apk add gdal
 
 COPY deploy /app/deploy
 
