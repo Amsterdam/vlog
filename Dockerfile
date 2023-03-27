@@ -4,7 +4,7 @@ MAINTAINER datapunt@amsterdam.nl
 WORKDIR /app/install
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-RUN  apk add gdal
+RUN apt update && apt install  -y gdal-bin
 
 COPY deploy /app/deploy
 
@@ -27,7 +27,6 @@ WORKDIR /app/install
 ADD requirements_dev.txt requirements_dev.txt
 RUN pip install -r requirements_dev.txt
 
-RUN adduser --system datapunt
 WORKDIR /app/src
 USER datapunt
 
