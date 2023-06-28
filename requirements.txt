@@ -67,5 +67,7 @@ unicodecsv==0.14.1
     # via djangorestframework-csv
 urllib3==2.0.3
     # via sentry-sdk
+uwsgi==2.0.21
+    # via -r requirements.in
 xmltodict==0.13.0
     # via -r requirements.in

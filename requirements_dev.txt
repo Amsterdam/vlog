@@ -417,6 +417,8 @@ urllib3==2.0.3
     # via
     #   -r ./requirements.txt
     #   sentry-sdk
+uwsgi==2.0.21
+    # via -r ./requirements.txt
 wcwidth==0.2.6
     # via prompt-toolkit
 webcolors==1.13
