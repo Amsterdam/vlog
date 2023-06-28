@@ -5,7 +5,7 @@ WORKDIR /app/install
 
 RUN apt update -y \
     && apt upgrade -y \
-    && apt install -y --no-install-recommends gdal-bin \
+    && apt install -y --no-install-recommends gdal-bin build-essential  libpcre3-dev\
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /var/lib/apt/lists/*
