@@ -128,7 +128,6 @@ class ReistijdenParser:
         return {"index": src_d.get("@index"), "lanes": lanes}
 
     def travel_time_src_to_dict(self, src_d):
-
         if (data_error := src_d.get("data_error")) is not None:
             data_error = bool(strtobool(src_d["data_error"]))
 
@@ -182,7 +181,6 @@ class ReistijdenParser:
     ## It has been renamed to be more consistent with the timestamp name in publication, used in the model.
     ## This was decided together with end-user Leon Deckers
     def get_individual_travel_times_from_measurement(self, src_d):
-
         individual_travel_times = src_d.get("individual_travel_time_data", [])
         if not (isinstance(individual_travel_times, list)):
             individual_travel_times = [individual_travel_times]

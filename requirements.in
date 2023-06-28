@@ -4,7 +4,7 @@ django_prometheus
 django-sentry-400-middleware
 drf_amsterdam
 prometheus_client
-psycopg2
+psycopg2-binary
 pyhumps
 python-dateutil
 sentry-sdk

@@ -22,7 +22,6 @@ class Command(BaseCommand):
         parser.add_argument('--with-measurement-counts', action='store_true')
 
     def handle(self, *args, **options):
-
         publication_timestamp = None
         if publication := Publication.objects.last():
             publication_timestamp = publication.measurement_start_time
