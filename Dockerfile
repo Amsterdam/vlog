@@ -1,7 +1,16 @@
-FROM amsterdam/python:3.8-buster as app
+FROM python:3.11.4-slim-bullseye as app
 MAINTAINER datapunt@amsterdam.nl
 
 WORKDIR /app/install
+
+RUN apt update -y \
+    && apt upgrade -y \
+    && apt install -y --no-install-recommends gdal-bin \
+    && apt autoremove -y \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists/*
+
+
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
@@ -14,6 +23,7 @@ COPY pyproject.toml /app
 ARG SECRET_KEY=not-used
 RUN DATABASE_ENABLED=false python manage.py collectstatic --no-input
 
+RUN groupadd -r datapunt && useradd -r -g datapunt datapunt
 USER datapunt
 
 CMD ["/app/deploy/docker-run.sh"]

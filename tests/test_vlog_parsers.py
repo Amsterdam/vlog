@@ -35,7 +35,6 @@ class TestVlogParser:
     @pytest.mark.parametrize("separator", [',', ' , ', ', ', ' ,'])
     @pytest.mark.parametrize("newlines", ['\n', '\r', '\r\n'])
     def test_multiple_lines(self, newlines, separator):
-
         dates = (
             "2020-01-23 14:00:00.399",
             "2020-01-24 14:00:02.220",
